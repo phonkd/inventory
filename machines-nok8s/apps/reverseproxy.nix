@@ -17,5 +17,4 @@ in
       acme_dns cloudflare ${cfapikeytemp}
     '';
   };
-  };
 }
