@@ -17,4 +17,11 @@
   #programs.ssh.startAgent = true; #ssh-agent
   networking.firewall.allowedTCPPorts = [80 443];
   networking.firewall.allowedUDPPorts = [51820 51821];
+  networking.interfaces.ens18.ipv4.routes = [
+    {
+        address = "192.168.90.0";
+        prefixLength = 24;
+        via = "192.168.1.3";
+    }
+    ];
 }
