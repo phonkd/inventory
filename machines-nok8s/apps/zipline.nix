@@ -11,8 +11,8 @@ let
                           "default_auth_token_placeholder";
 in
 {
-  sops.secrets.fireshareauthtemp = {};
-  sops.secrets.fireshareauthtemp2 = {};
+  sops.secrets.fireshare = {};
+  sops.secrets.firesharesec = {};
   # Runtime
   virtualisation.podman = {
     enable = true;
