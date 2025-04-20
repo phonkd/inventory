@@ -14,5 +14,6 @@
       ../../machine-base/base.nix
       ../../machine-base/base-hardware-configuration.nix
       ./wgez.nix
+      ../apps/reverseproxy.nix
     ];
 }

@@ -17,6 +17,6 @@
       ../apps/vaultwarden.nix
       ../apps/teleport.nix
       ../apps/immich.nix
-      ../apps/zipline.nix
+      ../apps/share.nix
     ];
 }
