@@ -2,13 +2,13 @@
 { config, pkgs, lib, ... }:
 let
   fireshareauthtemp = if builtins.pathExists config.sops.secrets."fireshare".path then
-                    builtins.readFile config.sops.secrets."fireshare".path
-                  else
-                    "default_auth_token_placeholder";
+                      builtins.readFile config.sops.secrets."fireshare".path
+                        else
+                          "default_auth_token_placeholder";
   fireshareauthtemp2 = if builtins.pathExists config.sops.secrets."firesharesec".path then
-                    builtins.readFile config.sops.secrets."firesharesec".path
-                  else
-                    "default_auth_token_placeholder";
+                          builtins.readFile config.sops.secrets."firesharesec".path
+                        else
+                          "default_auth_token_placeholder";
 in
 {
   # Runtime
