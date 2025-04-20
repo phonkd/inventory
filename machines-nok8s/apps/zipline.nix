@@ -44,9 +44,9 @@ in
       "THUMBNAIL_VIDEO_LOCATION" = "0";
     };
     volumes = [
-      "/var/dev_root/fireshare_data:/data:rw"
-      "/var/dev_root/fireshare_processed:/processed:rw"
-      "/var/dev_root/fireshare_videos:/videos:rw"
+      "fireshare_data:/data:rw"
+      "fireshare_processed:/processed:rw"
+      "fireshare_videos:/videos:rw"
     ];
     ports = [
       "8080:80/tcp"
