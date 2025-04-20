@@ -101,7 +101,7 @@ in
   };
   services.caddy = {
     virtualHosts."share.nix-services.phonkd.net".extraConfig = ''
-      reverse_proxy :8080
+      reverse_proxy :5000
     '';
   };
 }
