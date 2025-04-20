@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports =
@@ -19,4 +19,10 @@
       ../apps/immich.nix
       ../apps/share.nix
     ];
+    services.caddy = {
+      package = pkgs.unstable.caddy.withPlugins {
+        plugins = lib.mkForce [ "github.com/caddy-dns/cloudflare@v0.0.0-20250228175314-1fb64108d4de" ];
+        hash = lib.mkForce "sha256-YYpsf8HMONR1teMiSymo2y+HrKoxuJMKIea5/NEykGc=";
+      };
+    };
 }
