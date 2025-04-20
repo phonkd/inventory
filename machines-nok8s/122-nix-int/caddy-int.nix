@@ -19,4 +19,5 @@ services.caddy = {
       }
     }
   '';
+  };
 }
