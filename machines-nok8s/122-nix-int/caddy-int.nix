@@ -10,7 +10,7 @@ services.caddy = {
       }
     }
   '';
-  virtualHosts."pve.nix-services.phonkd.net".extraConfig = ''
+  virtualHosts."pve.int.phonkd.net".extraConfig = ''
     reverse_proxy {
       to 192.168.1.46:8006
       transport http {
