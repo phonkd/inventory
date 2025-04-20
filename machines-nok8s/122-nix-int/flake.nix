@@ -15,7 +15,7 @@
         };
       };
     in {
-      nixosConfigurations."nixos-services" = nixpkgs.lib.nixosSystem {
+      nixosConfigurations."nixos-int" = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
           # Overlays-module makes "pkgs.unstable" available in configuration.nix
