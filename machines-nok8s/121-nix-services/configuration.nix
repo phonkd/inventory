@@ -25,7 +25,7 @@ in
       ../apps/share.nix
     ];
   services.caddy = {
-    package = lib.mkForce pkgs.unstable.caddy.withPlugins {
+    package =  pkgs.unstable.caddy.withPlugins {
       hash = "sha256-Nwm4kzAmmu+UZTJB5npWdwfgoj3giHIEWIgDF6ff+dY=";
       plugins = [ "github.com/caddy-dns/cloudflare@v0.2.1" ];
     };
