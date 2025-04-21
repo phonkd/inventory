@@ -3,7 +3,12 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, lib, ... }:
-
+let
+  cfapikeytemp = if builtins.pathExists config.sops.secrets."cfapikey".path then
+                    builtins.readFile config.sops.secrets."cfapikey".path
+                  else
+                    "default_auth_token_placeholder";
+in
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -19,9 +24,14 @@
       ../apps/immich.nix
       ../apps/share.nix
     ];
-    services.caddy = {
-      package = pkgs.unstable.caddy.withPlugins {
-        hash = lib.mkForce "sha256-YYpsf8HMONR1teMiSymo2y+HrKoxuJMKIea5/NEykGc=";
+  services.caddy = {
+    package = pkgs.unstable.caddy.withPlugins {
+      hash = lib.mkForce "sha256-YYpsf8HMONR1teMiSymo2y+HrKoxuJMKIea5/NEykGc=";
+      plugins = [ "github.com/caddy-dns/cloudflare@v0.0.0-20250228175314-1fb64108d4de" ];
       };
     };
+    enable = true;
+    globalConfig = ''
+      acme_dns cloudflare ${cfapikeytemp}
+    '';
 }
