@@ -12,7 +12,7 @@
   services.ocis = {
     enable = true;
     #address = "127.0.0.1";
-    url = "https://ocis.nix-services.phonkd.net";
+    url = "https://ocis.w.phonkd.net";
     configDir = "/run/secrets";
     environment = {
       OCIS_INSECURE = "true";
@@ -24,7 +24,7 @@
   };
   #
   services.caddy = {
-    virtualHosts."ocis.nix-services.phonkd.net".extraConfig = ''
+    virtualHosts."ocis.w.phonkd.net".extraConfig = ''
       reverse_proxy {
         to localhost:9200
         transport http {

@@ -100,7 +100,7 @@ in
     wantedBy = [ "multi-user.target" ];
   };
   services.caddy = {
-    virtualHosts."share.nix-services.phonkd.net".extraConfig = ''
+    virtualHosts."share.w.phonkd.net".extraConfig = ''
       reverse_proxy :8080
     '';
   };

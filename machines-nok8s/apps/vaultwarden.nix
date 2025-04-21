@@ -3,11 +3,11 @@
   services.vaultwarden = {
     enable = true;
     config = {
-      DOMAIN = "https://vw.nix-services.phonkd.net/";
+      DOMAIN = "https://vw.w.phonkd.net/";
     };
   };
   services.caddy = {
-    virtualHosts."vw.nix-services.phonkd.net".extraConfig = ''
+    virtualHosts."vw.wphonkd.net".extraConfig = ''
       reverse_proxy :8000
     '';
   };
