@@ -16,5 +16,6 @@
       ./wgez.nix
       ../apps/reverseproxy.nix
       ./caddy-int.nix
+      ../apps/paperless.nix
     ];
 }
