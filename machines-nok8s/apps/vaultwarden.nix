@@ -7,7 +7,7 @@
     };
   };
   services.caddy = {
-    virtualHosts."vw.wphonkd.net".extraConfig = ''
+    virtualHosts."vw.w.phonkd.net".extraConfig = ''
       reverse_proxy :8000
     '';
   };
