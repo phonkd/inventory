@@ -24,10 +24,10 @@ in
       ../apps/immich.nix
       ../apps/share.nix
     ];
-  # services.caddy = {
-  #   package = lib.mkForce pkgs.unstable.caddy.withPlugins {
-  #     hash = "sha256-YYpsf8HMONR1teMiSymo2y+HrKoxuJMKIea5/NEykGc=";
-  #     plugins = [ "github.com/caddy-dns/cloudflare@v0.0.0-20250228175314-1fb64108d4de" ];
-  #   };
-  # };
+  services.caddy = {
+    package = lib.mkForce pkgs.unstable.caddy.withPlugins {
+      hash = "sha256-Nwm4kzAmmu+UZTJB5npWdwfgoj3giHIEWIgDF6ff+dY=";
+      plugins = [ "github.com/caddy-dns/cloudflare@v0.2.1" ];
+    };
+  };
 }
