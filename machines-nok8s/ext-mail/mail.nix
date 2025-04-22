@@ -27,7 +27,7 @@ in
     loginAccounts = {
       "phonkd@phonkd.net" = {
         hashedPasswordFile = hashpwtmp;
-        aliases = ["test@phonkd.net"];
+        aliases = ["test@phonkd.net" "spam@phonkd.net" "elis@phonkd.net" "info@phonkd.net"];
       };
     };
     certificateScheme = 3;
