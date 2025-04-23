@@ -82,9 +82,9 @@ in
     volumes = [
       "flowtime_postgres_data:/var/lib/postgresql/data:rw"
     ];
-    ports = [
-      "5432:5432/tcp"
-    ];
+    # ports = [
+    #   "5432:5432/tcp"
+    # ];
     cmd = [ "postgres" "-c" "max_connections=100" "-c" "shared_buffers=256MB" "-c" "effective_cache_size=1GB" "-c" "maintenance_work_mem=64MB" "-c" "checkpoint_completion_target=0.9" "-c" "wal_buffers=16MB" "-c" "default_statistics_target=100" "-c" "random_page_cost=1.1" "-c" "effective_io_concurrency=200" "-c" "work_mem=4MB" "-c" "min_wal_size=1GB" "-c" "max_wal_size=4GB" "-c" "listen_addresses=*" "-c" "log_connections=on" "-c" "log_disconnections=on" ];
     log-driver = "journald";
     extraOptions = [
