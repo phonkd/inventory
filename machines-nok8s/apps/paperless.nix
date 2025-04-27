@@ -5,7 +5,7 @@
     enable = true;
     port = 28981;
     #consumptionDirIsPublic = true;
-    address = "paperless.int.phonkd.net";
+    address = "paperless.int.phonkd.net:28981";
     settings = {
       PAPERLESS_CONSUMER_IGNORE_PATTERN = [
         ".DS_STORE/*"
