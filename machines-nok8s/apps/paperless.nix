@@ -3,6 +3,7 @@
 {
   services.paperless = {
     enable = true;
+    port = 28981;
     #consumptionDirIsPublic = true;
     address = "paperless.int.phonkd.net";
     settings = {
