@@ -10,4 +10,16 @@
       reverse_proxy :28981
     '';
   };
+  services.teleport.settings = {
+    app_service = {
+      enabled = true;
+      apps = [
+        {
+          name = "paperless";
+          uri = "http://localhost:28981";
+          insecure_skip_verify = true;
+        }
+      ];
+    };
+  };
 }

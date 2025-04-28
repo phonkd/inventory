@@ -13,8 +13,6 @@
           insecure_skip_verify = true;
         }
       ];
-
-
     };
   };
 }
