@@ -2,7 +2,9 @@
 { config, pkgs, lib, ... }:
 {
   networking.extraHosts = [
-    "127.0.0.1 paperless.teleport.phonkd.net"
+    ''
+      127.0.0.1 paperless.teleport.phonkd.net
+    ''
   ];
   services.paperless = {
     enable = true;
