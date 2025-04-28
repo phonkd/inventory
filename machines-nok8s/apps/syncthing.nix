@@ -2,14 +2,14 @@
 { config, pkgs, lib, ... }:
 {
   services.syncthing.enable = true;
-  services.syncthing.guiAddress = "syncthing.teleport.phonkd.net";
+  #services.syncthing.guiAddress = "syncthing.teleport.phonkd.net";
   services.teleport.settings = {
     app_service = {
       enabled = true;
       apps = [
         {
           name = "syncthing";
-          uri = "localhost:8384";
+          uri = "http://localhost:8384";
           insecure_skip_verify = true;
         }
       ];
