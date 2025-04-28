@@ -9,6 +9,7 @@
         {
           name = "syncthing";
           uri = "localhost:8384";
+          insecure_skip_verify = true;s
         }
       ];
 
