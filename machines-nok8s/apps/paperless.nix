@@ -7,13 +7,17 @@
     settings = {
       PAPERLESS_CSRF_TRUSTED_ORIGINS = [
         "http://localhost:28981"
-      "https://paperless.teleport.phonkd.net"
+        "https://paperless.teleport.phonkd.net"
       ] ;
       PAPERLESS_ALLOWED_HOSTS = [
         "http://localhost:28981"
         "https://paperless.teleport.phonkd.net"
       ] ;
       PAPERLESS_CORS_ALLOWED_ORIGINS = [
+        "http://localhost:28981"
+        "https://paperless.teleport.phonkd.net"
+      ] ;
+      PAPERLESS_CORS_ALLOWED_HOSTS = [
         "http://localhost:28981"
         "https://paperless.teleport.phonkd.net"
       ] ;
