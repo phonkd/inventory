@@ -3,12 +3,7 @@
 {
   services.paperless = {
     enable = true;
-    address= "0.0.0.0";
-  };
-  services.caddy = {
-    virtualHosts."paperless.int.phonkd.net".extraConfig = ''
-      reverse_proxy :28981
-    '';
+    address= "paperless.teleport.phonkd.net";
   };
   services.teleport.settings = {
     app_service = {
@@ -16,7 +11,7 @@
       apps = [
         {
           name = "paperless";
-          uri = "http://localhost:28981";
+          uri = "http://127.0.0.1:28981";
           insecure_skip_verify = true;
         }
       ];
