@@ -16,7 +16,6 @@
       ../apps/reverseproxy.nix
       ./caddy-int.nix
       ../apps/paperless.nix
-      ../apps/teleport.nix
       ../apps/syncthing.nix
     ];
 }

@@ -19,7 +19,6 @@ in
       ../../machine-base/base-hardware-configuration.nix
       ../apps/reverseproxy.nix
       ../apps/vaultwarden.nix
-      ../apps/teleport.nix
       ../apps/immich.nix
       ../apps/share.nix
       ../apps/flowtime.nix
