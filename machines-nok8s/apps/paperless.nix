@@ -3,7 +3,7 @@
 {
   services.paperless = {
     enable = true;
-    address= "paperless.teleport.phonkd.net";
+    address= "0.0.0.0";
   };
   services.teleport.settings = {
     app_service = {
@@ -11,7 +11,7 @@
       apps = [
         {
           name = "paperless";
-          uri = "http://127.0.0.1:28981";
+          uri = "http://localhost:28981";
           insecure_skip_verify = true;
         }
       ];
