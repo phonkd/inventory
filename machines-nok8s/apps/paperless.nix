@@ -9,18 +9,9 @@
         "http://localhost:28981"
         "https://paperless.teleport.phonkd.net"
       ] ;
-      PAPERLESS_ALLOWED_HOSTS = [
-        "localhost:28981"
-        "paperless.teleport.phonkd.net"
-      ] ;
-      PAPERLESS_CORS_ALLOWED_ORIGINS = [
-        "http://localhost:28981"
-        "https://paperless.teleport.phonkd.net"
-      ] ;
-      PAPERLESS_CORS_ALLOWED_HOSTS = [
-        "http://localhost:28981"
-        "https://paperless.teleport.phonkd.net"
-      ] ;
+      PAPERLESS_ALLOWED_HOSTS ="paperless.teleport.phonkd.net";
+      PAPERLESS_CORS_ALLOWED_ORIGINS = "https://paperless.teleport.phonkd.net";
+      PAPERLESS_CORS_ALLOWED_HOSTS = "https://paperless.teleport.phonkd.net";
     };
   };
   services.teleport.settings = {
