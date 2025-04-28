@@ -23,11 +23,11 @@
           insecure_skip_verify = true;
           rewrite = {
             headers = [
-                "X-Forwarded-Proto: https"
-                "Host: paperless.teleport.phonkd.net"
+              "X-Forwarded-Proto: https"
+              "Host: paperless.teleport.phonkd.net"
             ];
           };
-        };
+        }
       ];
     };
   };
