@@ -6,8 +6,7 @@
     address= "0.0.0.0";
     settings = {
       PAPERLESS_CSRF_TRUSTED_ORIGINS = [
-        "http://localhost:28981"
-        "https://paperless.teleport.phonkd.net"
+        "http://localhost:28981, https://paperless.teleport.phonkd.net"
       ] ;
       PAPERLESS_ALLOWED_HOSTS ="paperless.teleport.phonkd.net";
       PAPERLESS_CORS_ALLOWED_ORIGINS = "https://paperless.teleport.phonkd.net";
