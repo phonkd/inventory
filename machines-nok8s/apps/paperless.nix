@@ -3,7 +3,7 @@
 {
   services.paperless = {
     enable = true;
-    address= "paperless.teleport.phonkd.net";
+    address= "0.0.0.0";
   };
   services.teleport.settings = {
     app_service = {
