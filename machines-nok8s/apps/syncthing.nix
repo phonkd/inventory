@@ -2,12 +2,7 @@
 { config, pkgs, lib, ... }:
 {
   services.syncthing.enable = true;
-  options = {
-    listenAddresses = [
-      "0.0.0.0:8384"
-      "syncthing.teleport.phonkd.net"
-    ];
-  };
+  services.syncthing.guiAddress = "syncthing.teleport.phonkd.net";
   services.teleport.settings = {
     app_service = {
       enabled = true;
