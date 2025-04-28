@@ -3,7 +3,7 @@
 {
   services.paperless = {
     enable = true;
-    address= "https://paperless.teleport.phonkd.net";
+    address= "0.0.0.0";
     settings = {
       PAPERLESS_CSRF_TRUSTED_ORIGINS = [
         "http://localhost:28981"
