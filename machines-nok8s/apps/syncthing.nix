@@ -6,7 +6,7 @@
     app_service = {
       enabled = true;
       name = "syncthing";
-      uri: "localhost:8384";
+      uri = "localhost:8384";
     };
   };
 }

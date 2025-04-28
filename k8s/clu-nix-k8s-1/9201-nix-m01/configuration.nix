@@ -16,7 +16,6 @@
       ../../../machine-base/base-hardware-configuration.nix
       ./network.nix
       ../csi-and-cilium-fixes.nix
-      ./rebuildah.nix
     ];
 
 }

@@ -1,9 +1,7 @@
 { lib, ... }: {
   imports = [
     /etc/nixos/configuration.nix
-    ./rebuildah.nix
     ../apps/sops.nix
-    ../apps/rebuildah/rebuildah.nix
     ./mail.nix
   ];
   users.users."phonkd".openssh.authorizedKeys.keys = [

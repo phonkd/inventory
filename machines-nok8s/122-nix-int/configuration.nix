@@ -7,7 +7,6 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./rebuildah.nix
       ./network.nix
       ./vm.nix
       ../../machine-base/ssh.nix

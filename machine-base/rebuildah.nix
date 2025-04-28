@@ -8,7 +8,6 @@ let
 in
 {
   imports = [
-    ../apps/rebuildah/rebuildah.nix
   ];
 
   services.cron.systemCronJobs = [

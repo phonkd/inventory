@@ -12,7 +12,6 @@ in
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./rebuildah.nix
       ./network.nix
       ./vm.nix
       ./ssh.nix
