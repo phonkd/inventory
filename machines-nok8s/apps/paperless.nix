@@ -3,7 +3,7 @@
 {
   services.paperless = {
     enable = true;
-    address= "0.0.0.0";
+    address= "localhost";
   };
   services.teleport.settings = {
     app_service = {
