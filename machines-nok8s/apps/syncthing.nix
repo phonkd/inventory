@@ -8,7 +8,7 @@
       apps = {
         name = "syncthing";
         uri = "localhost:8384";
-      }
+      };
 
     };
   };
