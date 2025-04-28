@@ -6,7 +6,7 @@
     address= "localhost";
     settings = {
       PAPERLESS_CSRF_TRUSTED_ORIGINS = [
-        "https://paperless.teleport.phonkd.net"
+        "*"
       ] ;
     };
   };
