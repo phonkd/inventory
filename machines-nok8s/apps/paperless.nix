@@ -21,7 +21,14 @@
           name = "paperless";
           uri = "http://localhost:28981";
           insecure_skip_verify = true;
-        }
+          cors = {
+            rewrite = {
+                headers = [
+                "X-Forwarded-Proto: https"
+                "Host: paperless.teleport.phonkd.net"
+                ];
+          };
+        };
       ];
     };
   };
