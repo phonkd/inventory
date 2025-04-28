@@ -6,7 +6,7 @@
     listenAddresses = [
       "0.0.0.0:8384"
       "syncthing.teleport.phonkd.net"
-    ]
+    ];
   };
   services.teleport.settings = {
     app_service = {
