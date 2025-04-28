@@ -27,6 +27,7 @@
                   "X-Forwarded-Proto: https"
                   "Host: paperless.teleport.phonkd.net"
                 ];
+            };
           };
         };
       ];
