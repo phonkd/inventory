@@ -5,10 +5,13 @@
   services.teleport.settings = {
     app_service = {
       enabled = true;
-      apps = {
-        name = "syncthing";
-        uri = "localhost:8384";
-      };
+      apps = [
+        {
+          name = "syncthing";
+          uri = "localhost:8384";
+        }
+      ];
+
 
     };
   };
