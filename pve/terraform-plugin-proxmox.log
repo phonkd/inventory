@@ -1,0 +1,604 @@
+[90mWed, 30 Apr 2025 16:17:17 +0200[0m [32mINF[0m [1mgithub.com/Telmate/terraform-provider-proxmox/v2/proxmox/util.go:156[0m[36m >[0m [1mEnabling the capture of log-library logs as ithe _capturelog flag was detected[0m
+[90mWed, 30 Apr 2025 16:17:17 +0200[0m [32mINF[0m [1mgithub.com/Telmate/terraform-provider-proxmox/v2/proxmox/util.go:189[0m[36m >[0m [1mLogging Started. Root Logger Set to level debug[0m
+[90mWed, 30 Apr 2025 16:17:36 +0200[0m [32mINF[0m [1mgithub.com/Telmate/terraform-provider-proxmox/v2/proxmox/util.go:156[0m[36m >[0m [1mEnabling the capture of log-library logs as ithe _capturelog flag was detected[0m
+[90mWed, 30 Apr 2025 16:17:36 +0200[0m [32mINF[0m [1mgithub.com/Telmate/terraform-provider-proxmox/v2/proxmox/util.go:189[0m[36m >[0m [1mLogging Started. Root Logger Set to level debug[0m
+[90mWed, 30 Apr 2025 16:17:40 +0200[0m [32mINF[0m [1mgithub.com/Telmate/terraform-provider-proxmox/v2/proxmox/util.go:156[0m[36m >[0m [1mEnabling the capture of log-library logs as ithe _capturelog flag was detected[0m
+[90mWed, 30 Apr 2025 16:17:40 +0200[0m [32mINF[0m [1mgithub.com/Telmate/terraform-provider-proxmox/v2/proxmox/util.go:189[0m[36m >[0m [1mLogging Started. Root Logger Set to level debug[0m
+2025/04/30 16:17:40 [DEBUG] setting computed for "smbios" from ComputedKeys
+2025/04/30 16:17:40 [DEBUG] setting computed for "unused_disk" from ComputedKeys
+[90mWed, 30 Apr 2025 16:17:40 +0200[0m [32mINF[0m [1mgithub.com/Telmate/terraform-provider-proxmox/v2/proxmox/resource_vm_qemu.go:670[0m[36m >[0m [1mVM creation[0m [36mloggerName=[0mresource_vm_create [36mvmid=[0m
+[90mWed, 30 Apr 2025 16:17:40 +0200[0m DBG [1mgithub.com/Telmate/terraform-provider-proxmox/v2/proxmox/resource_vm_qemu.go:671[0m[36m >[0m VM creation resource data: '' [36mloggerName=[0mresource_vm_create [36mvmid=[0m
+2025/04/30 16:17:40 [DEBUG][QemuVmCreate] checking for duplicate name: kek
+2025/04/30 16:17:40 >>>>>>>>>> REQUEST:
+GET /api2/json/cluster/resources?type=vm HTTP/1.1
+Host: pve.int.phonkd.net
+User-Agent: Go-http-client/1.1
+Accept: application/json
+Authorization: PVEAPIToken=terraform-prov@pve!mytoken=d16d812b-5a19-4410-80a7-96562d8e3646
+Accept-Encoding: gzip
+
+2025/04/30 16:17:40 <<<<<<<<<< RESULT:
+HTTP/2.0 200 OK
+Connection: close
+Alt-Svc: h3=":443"; ma=2592000
+Cache-Control: max-age=0
+Content-Type: application/json;charset=UTF-8
+Date: Wed, 30 Apr 2025 14:17:40 GMT
+Expires: Wed, 30 Apr 2025 14:17:40 GMT
+Pragma: no-cache
+Server: Caddy
+Server: pve-api-daemon/3.0
+
+{"data":[{"diskread":15060992,"cpu":0.00418423774276184,"maxcpu":6,"type":"qemu","uptime":26069,"netin":889392398,"maxdisk":0,"mem":67813376,"template":0,"netout":851748779,"status":"running","vmid":100,"node":"wamluck","maxmem":4294967296,"diskwrite":12288,"disk":0,"name":"101-OPENWRT","id":"qemu/100"},{"vmid":10111,"status":"stopped","netout":0,"template":0,"maxdisk":85899345920,"mem":0,"netin":0,"maxcpu":8,"type":"qemu","uptime":0,"cpu":0,"diskread":0,"id":"qemu/10111","name":"win-testbench","disk":0,"diskwrite":0,"maxmem":17179869184,"node":"wamluck"},{"cpu":0.0198036593787859,"diskread":868026368,"netin":10606018,"type":"qemu","uptime":26041,"maxcpu":14,"mem":1469591552,"maxdisk":68719476736,"vmid":10112,"netout":7242784,"status":"running","template":0,"node":"wamluck","maxmem":19075694592,"diskwrite":77488128,"disk":0,"id":"qemu/10112","name":"NIX-dev-vm"},{"name":"sean","id":"qemu/11000","diskwrite":0,"maxmem":34359738368,"disk":0,"node":"wamluck","netout":0,"status":"stopped","vmid":11000,"template":0,"maxdisk":107374182400,"mem":0,"netin":0,"type":"qemu","uptime":0,"maxcpu":8,"cpu":0,"diskread":0},{"id":"qemu/121","name":"121-nix-services","maxmem":17179869184,"diskwrite":2913059840,"disk":0,"node":"wamluck","status":"running","netout":165339070,"vmid":121,"template":0,"mem":3218005267,"maxdisk":431644213248,"netin":11796498,"maxcpu":12,"type":"qemu","uptime":26061,"cpu":0.00964193914636425,"diskread":1577788416},{"maxdisk":0,"mem":5548144758,"status":"running","netout":311217014,"vmid":122,"template":0,"cpu":0.173918751394797,"diskread":1523975168,"netin":286126999,"uptime":26056,"type":"qemu","maxcpu":6,"id":"qemu/122","name":"nix-int","node":"wamluck","diskwrite":1684362240,"disk":0,"maxmem":17179869184},{"disk":0,"diskwrite":0,"maxmem":17179869184,"tags":"docker","node":"wamluck","name":"201-docker-host","id":"qemu/201","type":"qemu","maxcpu":6,"uptime":0,"netin":0,"diskread":0,"cpu":0,"template":0,"status":"stopped","netout":0,"vmid":201,"maxdisk":0,"mem":0},{"name":"8000-talos-teplate","id":"qemu/8000","diskwrite":0,"maxmem":8589934592,"disk":0,"node":"wamluck","vmid":8000,"netout":0,"status":"stopped","template":1,"maxdisk":0,"mem":0,"netin":0,"type":"qemu","uptime":0,"maxcpu":4,"cpu":0,"diskread":0},{"node":"wamluck","diskwrite":0,"disk":0,"maxmem":8589934592,"id":"qemu/8001","name":"8001-nixtemplate","diskread":0,"cpu":0,"type":"qemu","uptime":0,"maxcpu":4,"netin":0,"mem":0,"maxdisk":12884901888,"template":1,"vmid":8001,"netout":0,"status":"stopped"},{"mem":8071872268,"maxdisk":64424509440,"vmid":9201,"status":"running","netout":10174461225,"template":0,"cpu":0.0502108529131421,"diskread":3477057536,"netin":718298603,"uptime":26051,"maxcpu":6,"type":"qemu","name":"nix-m01","id":"qemu/9201","node":"wamluck","disk":0,"diskwrite":12425757696,"maxmem":17190354944},{"type":"qemu","maxcpu":12,"uptime":26046,"netin":10037043572,"diskread":2767972352,"cpu":0.0753162793697132,"template":0,"vmid":9210,"status":"running","netout":369112732,"maxdisk":64424509440,"mem":6074874562,"disk":0,"diskwrite":3990979584,"maxmem":25769803776,"node":"wamluck","name":"nix-k8s-w01","id":"qemu/9210"}]}
+2025/04/30 16:17:40 >>>>>>>>>> REQUEST:
+GET /api2/json/cluster/resources?type=vm HTTP/1.1
+Host: pve.int.phonkd.net
+User-Agent: Go-http-client/1.1
+Accept: application/json
+Authorization: PVEAPIToken=terraform-prov@pve!mytoken=d16d812b-5a19-4410-80a7-96562d8e3646
+Accept-Encoding: gzip
+
+2025/04/30 16:17:40 <<<<<<<<<< RESULT:
+HTTP/2.0 200 OK
+Connection: close
+Alt-Svc: h3=":443"; ma=2592000
+Cache-Control: max-age=0
+Content-Type: application/json;charset=UTF-8
+Date: Wed, 30 Apr 2025 14:17:40 GMT
+Expires: Wed, 30 Apr 2025 14:17:40 GMT
+Pragma: no-cache
+Server: Caddy
+Server: pve-api-daemon/3.0
+
+{"data":[{"maxmem":4294967296,"diskwrite":12288,"disk":0,"node":"wamluck","name":"101-OPENWRT","id":"qemu/100","netin":889392398,"type":"qemu","maxcpu":6,"uptime":26069,"cpu":0.00418423774276184,"diskread":15060992,"vmid":100,"netout":851748779,"status":"running","template":0,"mem":67813376,"maxdisk":0},{"id":"qemu/10111","name":"win-testbench","node":"wamluck","disk":0,"diskwrite":0,"maxmem":17179869184,"maxdisk":85899345920,"mem":0,"template":0,"vmid":10111,"netout":0,"status":"stopped","diskread":0,"cpu":0,"uptime":0,"maxcpu":8,"type":"qemu","netin":0},{"diskread":868026368,"cpu":0.0198036593787859,"uptime":26041,"type":"qemu","maxcpu":14,"netin":10606018,"mem":1469591552,"maxdisk":68719476736,"template":0,"vmid":10112,"status":"running","netout":7242784,"node":"wamluck","disk":0,"diskwrite":77488128,"maxmem":19075694592,"name":"NIX-dev-vm","id":"qemu/10112"},{"name":"sean","id":"qemu/11000","node":"wamluck","diskwrite":0,"maxmem":34359738368,"disk":0,"mem":0,"maxdisk":107374182400,"netout":0,"status":"stopped","vmid":11000,"template":0,"cpu":0,"diskread":0,"netin":0,"maxcpu":8,"uptime":0,"type":"qemu"},{"cpu":0.00964193914636425,"diskread":1577788416,"netin":11796498,"type":"qemu","maxcpu":12,"uptime":26061,"mem":3218005267,"maxdisk":431644213248,"status":"running","netout":165339070,"vmid":121,"template":0,"node":"wamluck","maxmem":17179869184,"diskwrite":2913059840,"disk":0,"id":"qemu/121","name":"121-nix-services"},{"diskwrite":1684362240,"maxmem":17179869184,"disk":0,"node":"wamluck","id":"qemu/122","name":"nix-int","maxcpu":6,"type":"qemu","uptime":26056,"netin":286126999,"diskread":1523975168,"cpu":0.173918751394797,"template":0,"vmid":122,"status":"running","netout":311217014,"mem":5548144758,"maxdisk":0},{"type":"qemu","maxcpu":6,"uptime":0,"netin":0,"diskread":0,"cpu":0,"template":0,"vmid":201,"status":"stopped","netout":0,"mem":0,"maxdisk":0,"disk":0,"diskwrite":0,"maxmem":17179869184,"node":"wamluck","tags":"docker","name":"201-docker-host","id":"qemu/201"},{"maxmem":8589934592,"diskwrite":0,"disk":0,"node":"wamluck","name":"8000-talos-teplate","id":"qemu/8000","netin":0,"type":"qemu","uptime":0,"maxcpu":4,"cpu":0,"diskread":0,"netout":0,"status":"stopped","vmid":8000,"template":1,"maxdisk":0,"mem":0},{"id":"qemu/8001","name":"8001-nixtemplate","node":"wamluck","disk":0,"diskwrite":0,"maxmem":8589934592,"maxdisk":12884901888,"mem":0,"vmid":8001,"status":"stopped","netout":0,"template":1,"cpu":0,"diskread":0,"netin":0,"maxcpu":4,"type":"qemu","uptime":0},{"netout":10174461225,"status":"running","vmid":9201,"template":0,"mem":8071872268,"maxdisk":64424509440,"netin":718298603,"type":"qemu","maxcpu":6,"uptime":26051,"cpu":0.0502108529131421,"diskread":3477057536,"name":"nix-m01","id":"qemu/9201","disk":0,"diskwrite":12425757696,"maxmem":17190354944,"node":"wamluck"},{"diskread":2767972352,"cpu":0.0753162793697132,"maxcpu":12,"type":"qemu","uptime":26046,"netin":10037043572,"mem":6074874562,"maxdisk":64424509440,"template":0,"vmid":9210,"status":"running","netout":369112732,"node":"wamluck","maxmem":25769803776,"diskwrite":3990979584,"disk":0,"id":"qemu/9210","name":"nix-k8s-w01"}]}
+2025/04/30 16:17:40 [DEBUG][QemuVmCreate] cloning VM
+[90mWed, 30 Apr 2025 16:17:40 +0200[0m DBG [1mgithub.com/Telmate/terraform-provider-proxmox/v2/proxmox/resource_vm_qemu.go:796[0m[36m >[0m Cloning VM [36mloggerName=[0mresource_vm_create [36mvmid=[0m
+2025/04/30 16:17:40 >>>>>>>>>> REQUEST:
+GET /api2/json/cluster/nextid HTTP/1.1
+Host: pve.int.phonkd.net
+User-Agent: Go-http-client/1.1
+Accept: application/json
+Authorization: PVEAPIToken=terraform-prov@pve!mytoken=d16d812b-5a19-4410-80a7-96562d8e3646
+Accept-Encoding: gzip
+
+2025/04/30 16:17:40 <<<<<<<<<< RESULT:
+HTTP/2.0 200 OK
+Content-Length: 14
+Alt-Svc: h3=":443"; ma=2592000
+Cache-Control: max-age=0
+Content-Type: application/json;charset=UTF-8
+Date: Wed, 30 Apr 2025 14:17:40 GMT
+Expires: Wed, 30 Apr 2025 14:17:40 GMT
+Pragma: no-cache
+Server: Caddy
+Server: pve-api-daemon/3.0
+
+{"data":"101"}
+2025/04/30 16:17:40 >>>>>>>>>> REQUEST:
+POST /api2/json/nodes/wamluck/qemu/8001/clone HTTP/1.1
+Host: pve.int.phonkd.net
+User-Agent: Go-http-client/1.1
+Content-Length: 40
+Accept: application/json
+Authorization: PVEAPIToken=terraform-prov@pve!mytoken=d16d812b-5a19-4410-80a7-96562d8e3646
+Content-Type: application/x-www-form-urlencoded
+Accept-Encoding: gzip
+
+full=1&name=kek&newid=101&target=wamluck
+2025/04/30 16:17:40 <<<<<<<<<< RESULT:
+HTTP/2.0 200 OK
+Content-Length: 91
+Alt-Svc: h3=":443"; ma=2592000
+Cache-Control: max-age=0
+Content-Type: application/json;charset=UTF-8
+Date: Wed, 30 Apr 2025 14:17:40 GMT
+Expires: Wed, 30 Apr 2025 14:17:40 GMT
+Pragma: no-cache
+Server: Caddy
+Server: pve-api-daemon/3.0
+
+{"data":"UPID:wamluck:002093E3:0027F5AD:68123104:qmclone:8001:terraform-prov@pve!mytoken:"}
+2025/04/30 16:17:40 >>>>>>>>>> REQUEST:
+GET /api2/json/nodes/wamluck/tasks/UPID:wamluck:002093E3:0027F5AD:68123104:qmclone:8001:terraform-prov@pve!mytoken:/status HTTP/1.1
+Host: pve.int.phonkd.net
+User-Agent: Go-http-client/1.1
+Accept: application/json
+Authorization: PVEAPIToken=terraform-prov@pve!mytoken=d16d812b-5a19-4410-80a7-96562d8e3646
+Accept-Encoding: gzip
+
+2025/04/30 16:17:40 <<<<<<<<<< RESULT:
+HTTP/2.0 200 OK
+Content-Length: 267
+Alt-Svc: h3=":443"; ma=2592000
+Cache-Control: max-age=0
+Content-Type: application/json;charset=UTF-8
+Date: Wed, 30 Apr 2025 14:17:40 GMT
+Expires: Wed, 30 Apr 2025 14:17:40 GMT
+Pragma: no-cache
+Server: Caddy
+Server: pve-api-daemon/3.0
+
+{"data":{"upid":"UPID:wamluck:002093E3:0027F5AD:68123104:qmclone:8001:terraform-prov@pve!mytoken:","id":"8001","status":"running","type":"qmclone","tokenid":"mytoken","node":"wamluck","pid":2135011,"pstart":2618797,"user":"terraform-prov@pve","starttime":1746022660}}
+2025/04/30 16:17:42 >>>>>>>>>> REQUEST:
+GET /api2/json/nodes/wamluck/tasks/UPID:wamluck:002093E3:0027F5AD:68123104:qmclone:8001:terraform-prov@pve!mytoken:/status HTTP/1.1
+Host: pve.int.phonkd.net
+User-Agent: Go-http-client/1.1
+Accept: application/json
+Authorization: PVEAPIToken=terraform-prov@pve!mytoken=d16d812b-5a19-4410-80a7-96562d8e3646
+Accept-Encoding: gzip
+
+2025/04/30 16:17:42 <<<<<<<<<< RESULT:
+HTTP/2.0 200 OK
+Content-Length: 267
+Alt-Svc: h3=":443"; ma=2592000
+Cache-Control: max-age=0
+Content-Type: application/json;charset=UTF-8
+Date: Wed, 30 Apr 2025 14:17:42 GMT
+Expires: Wed, 30 Apr 2025 14:17:42 GMT
+Pragma: no-cache
+Server: Caddy
+Server: pve-api-daemon/3.0
+
+{"data":{"type":"qmclone","tokenid":"mytoken","status":"running","user":"terraform-prov@pve","starttime":1746022660,"node":"wamluck","pid":2135011,"pstart":2618797,"upid":"UPID:wamluck:002093E3:0027F5AD:68123104:qmclone:8001:terraform-prov@pve!mytoken:","id":"8001"}}
+2025/04/30 16:17:44 >>>>>>>>>> REQUEST:
+GET /api2/json/nodes/wamluck/tasks/UPID:wamluck:002093E3:0027F5AD:68123104:qmclone:8001:terraform-prov@pve!mytoken:/status HTTP/1.1
+Host: pve.int.phonkd.net
+User-Agent: Go-http-client/1.1
+Accept: application/json
+Authorization: PVEAPIToken=terraform-prov@pve!mytoken=d16d812b-5a19-4410-80a7-96562d8e3646
+Accept-Encoding: gzip
+
+2025/04/30 16:17:45 <<<<<<<<<< RESULT:
+HTTP/2.0 200 OK
+Content-Length: 267
+Alt-Svc: h3=":443"; ma=2592000
+Cache-Control: max-age=0
+Content-Type: application/json;charset=UTF-8
+Date: Wed, 30 Apr 2025 14:17:45 GMT
+Expires: Wed, 30 Apr 2025 14:17:45 GMT
+Pragma: no-cache
+Server: Caddy
+Server: pve-api-daemon/3.0
+
+{"data":{"id":"8001","upid":"UPID:wamluck:002093E3:0027F5AD:68123104:qmclone:8001:terraform-prov@pve!mytoken:","pid":2135011,"pstart":2618797,"node":"wamluck","starttime":1746022660,"user":"terraform-prov@pve","status":"running","tokenid":"mytoken","type":"qmclone"}}
+2025/04/30 16:17:47 >>>>>>>>>> REQUEST:
+GET /api2/json/nodes/wamluck/tasks/UPID:wamluck:002093E3:0027F5AD:68123104:qmclone:8001:terraform-prov@pve!mytoken:/status HTTP/1.1
+Host: pve.int.phonkd.net
+User-Agent: Go-http-client/1.1
+Accept: application/json
+Authorization: PVEAPIToken=terraform-prov@pve!mytoken=d16d812b-5a19-4410-80a7-96562d8e3646
+Accept-Encoding: gzip
+
+2025/04/30 16:17:47 <<<<<<<<<< RESULT:
+HTTP/2.0 200 OK
+Content-Length: 267
+Alt-Svc: h3=":443"; ma=2592000
+Cache-Control: max-age=0
+Content-Type: application/json;charset=UTF-8
+Date: Wed, 30 Apr 2025 14:17:47 GMT
+Expires: Wed, 30 Apr 2025 14:17:47 GMT
+Pragma: no-cache
+Server: Caddy
+Server: pve-api-daemon/3.0
+
+{"data":{"id":"8001","upid":"UPID:wamluck:002093E3:0027F5AD:68123104:qmclone:8001:terraform-prov@pve!mytoken:","starttime":1746022660,"user":"terraform-prov@pve","pid":2135011,"pstart":2618797,"node":"wamluck","tokenid":"mytoken","type":"qmclone","status":"running"}}
+2025/04/30 16:17:49 >>>>>>>>>> REQUEST:
+GET /api2/json/nodes/wamluck/tasks/UPID:wamluck:002093E3:0027F5AD:68123104:qmclone:8001:terraform-prov@pve!mytoken:/status HTTP/1.1
+Host: pve.int.phonkd.net
+User-Agent: Go-http-client/1.1
+Accept: application/json
+Authorization: PVEAPIToken=terraform-prov@pve!mytoken=d16d812b-5a19-4410-80a7-96562d8e3646
+Accept-Encoding: gzip
+
+2025/04/30 16:17:49 <<<<<<<<<< RESULT:
+HTTP/2.0 200 OK
+Content-Length: 285
+Alt-Svc: h3=":443"; ma=2592000
+Cache-Control: max-age=0
+Content-Type: application/json;charset=UTF-8
+Date: Wed, 30 Apr 2025 14:17:49 GMT
+Expires: Wed, 30 Apr 2025 14:17:49 GMT
+Pragma: no-cache
+Server: Caddy
+Server: pve-api-daemon/3.0
+
+{"data":{"exitstatus":"OK","id":"8001","tokenid":"mytoken","starttime":1746022660,"user":"terraform-prov@pve","pid":2135011,"pstart":2618797,"upid":"UPID:wamluck:002093E3:0027F5AD:68123104:qmclone:8001:terraform-prov@pve!mytoken:","type":"qmclone","status":"stopped","node":"wamluck"}}
+2025/04/30 16:17:59 [DEBUG][QemuVmCreate] update VM after clone
+2025/04/30 16:17:59 >>>>>>>>>> REQUEST:
+GET /api2/json/nodes/wamluck/qemu/101/config HTTP/1.1
+Host: pve.int.phonkd.net
+User-Agent: Go-http-client/1.1
+Accept: application/json
+Authorization: PVEAPIToken=terraform-prov@pve!mytoken=d16d812b-5a19-4410-80a7-96562d8e3646
+Accept-Encoding: gzip
+
+2025/04/30 16:17:59 <<<<<<<<<< RESULT:
+HTTP/2.0 200 OK
+Content-Length: 482
+Alt-Svc: h3=":443"; ma=2592000
+Cache-Control: max-age=0
+Content-Type: application/json;charset=UTF-8
+Date: Wed, 30 Apr 2025 14:17:59 GMT
+Expires: Wed, 30 Apr 2025 14:17:59 GMT
+Pragma: no-cache
+Server: Caddy
+Server: pve-api-daemon/3.0
+
+{"data":{"memory":"8192","cpu":"x86-64-v2-AES","scsihw":"virtio-scsi-single","digest":"8b747207038d6dfac3316e979ffd31bb99b61206","smbios1":"uuid=dc9a6016-2ad5-4603-8f8a-0bfed0e4fe0d","vmgenid":"96a52c82-57d9-46fb-b5d8-0f205f93ddf2","ostype":"l26","scsi0":"nvme-zfs:vm-101-disk-0,discard=on,iothread=1,size=12G","meta":"creation-qemu=9.0.2,ctime=1740337056","boot":"order=scsi0","sockets":1,"agent":"1","net0":"virtio=BC:24:11:49:44:A2,bridge=vmbr1","numa":0,"name":"kek","cores":4}}
+2025/04/30 16:17:59 >>>>>>>>>> REQUEST:
+GET /api2/json/cluster/resources?type=vm HTTP/1.1
+Host: pve.int.phonkd.net
+User-Agent: Go-http-client/1.1
+Accept: application/json
+Authorization: PVEAPIToken=terraform-prov@pve!mytoken=d16d812b-5a19-4410-80a7-96562d8e3646
+Accept-Encoding: gzip
+
+2025/04/30 16:17:59 <<<<<<<<<< RESULT:
+HTTP/2.0 200 OK
+Connection: close
+Alt-Svc: h3=":443"; ma=2592000
+Cache-Control: max-age=0
+Content-Type: application/json;charset=UTF-8
+Date: Wed, 30 Apr 2025 14:17:59 GMT
+Expires: Wed, 30 Apr 2025 14:17:59 GMT
+Pragma: no-cache
+Server: Caddy
+Server: pve-api-daemon/3.0
+
+{"data":[{"name":"101-OPENWRT","id":"qemu/100","diskwrite":12288,"maxmem":4294967296,"disk":0,"node":"wamluck","template":0,"vmid":100,"status":"running","netout":852269964,"maxdisk":0,"mem":66883584,"type":"qemu","maxcpu":6,"uptime":26090,"netin":889942317,"diskread":15060992,"cpu":0.00525746597679962},{"mem":0,"maxdisk":12884901888,"template":0,"status":"stopped","netout":0,"vmid":101,"diskread":0,"cpu":0,"type":"qemu","maxcpu":4,"uptime":0,"netin":0,"id":"qemu/101","name":"kek","node":"wamluck","diskwrite":0,"disk":0,"maxmem":8589934592},{"name":"win-testbench","id":"qemu/10111","diskwrite":0,"disk":0,"maxmem":17179869184,"node":"wamluck","template":0,"vmid":10111,"netout":0,"status":"stopped","mem":0,"maxdisk":85899345920,"type":"qemu","uptime":0,"maxcpu":8,"netin":0,"diskread":0,"cpu":0},{"node":"wamluck","diskwrite":77537280,"disk":0,"maxmem":19075694592,"id":"qemu/10112","name":"NIX-dev-vm","diskread":868026368,"cpu":0.0252780841830946,"type":"qemu","maxcpu":14,"uptime":26062,"netin":10614841,"maxdisk":68719476736,"mem":1469591552,"template":0,"status":"running","netout":7257602,"vmid":10112},{"node":"wamluck","diskwrite":0,"disk":0,"maxmem":34359738368,"id":"qemu/11000","name":"sean","cpu":0,"diskread":0,"netin":0,"type":"qemu","uptime":0,"maxcpu":8,"mem":0,"maxdisk":107374182400,"netout":0,"status":"stopped","vmid":11000,"template":0},{"node":"wamluck","diskwrite":2915271680,"maxmem":17179869184,"disk":0,"name":"121-nix-services","id":"qemu/121","cpu":0.00952915708294931,"diskread":1577788416,"netin":11804816,"uptime":26081,"type":"qemu","maxcpu":12,"maxdisk":431644213248,"mem":3218005267,"status":"running","netout":165339744,"vmid":121,"template":0},{"cpu":0.180725392952487,"diskread":1523975168,"netin":286603957,"type":"qemu","maxcpu":6,"uptime":26076,"mem":5548144758,"maxdisk":0,"status":"running","netout":311788867,"vmid":122,"template":0,"node":"wamluck","diskwrite":1685058560,"disk":0,"maxmem":17179869184,"name":"nix-int","id":"qemu/122"},{"template":0,"status":"stopped","netout":0,"vmid":201,"mem":0,"maxdisk":0,"maxcpu":6,"type":"qemu","uptime":0,"netin":0,"diskread":0,"cpu":0,"id":"qemu/201","name":"201-docker-host","disk":0,"diskwrite":0,"maxmem":17179869184,"tags":"docker","node":"wamluck"},{"node":"wamluck","disk":0,"diskwrite":0,"maxmem":8589934592,"name":"8000-talos-teplate","id":"qemu/8000","cpu":0,"diskread":0,"netin":0,"maxcpu":4,"type":"qemu","uptime":0,"maxdisk":0,"mem":0,"vmid":8000,"netout":0,"status":"stopped","template":1},{"id":"qemu/8001","name":"8001-nixtemplate","node":"wamluck","diskwrite":0,"maxmem":8589934592,"disk":0,"mem":0,"maxdisk":12884901888,"status":"stopped","netout":0,"vmid":8001,"template":1,"cpu":0,"diskread":0,"netin":0,"type":"qemu","maxcpu":4,"uptime":0},{"id":"qemu/9201","name":"nix-m01","disk":0,"diskwrite":12426404864,"maxmem":17190354944,"node":"wamluck","template":0,"netout":10175542361,"status":"running","vmid":9201,"mem":8071872268,"maxdisk":64424509440,"uptime":26072,"type":"qemu","maxcpu":6,"netin":718805636,"diskread":3477057536,"cpu":0.0581607173683458},{"disk":0,"diskwrite":3996591104,"maxmem":25769803776,"node":"wamluck","id":"qemu/9210","name":"nix-k8s-w01","netin":10037989588,"type":"qemu","maxcpu":12,"uptime":26067,"cpu":0.0440312775556968,"diskread":2768177152,"vmid":9210,"netout":369320744,"status":"running","template":0,"maxdisk":64424509440,"mem":6074874562}]}
+2025/04/30 16:17:59 >>>>>>>>>> REQUEST:
+GET /api2/json/cluster/ha/resources/101 HTTP/1.1
+Host: pve.int.phonkd.net
+User-Agent: Go-http-client/1.1
+Accept: application/json
+Authorization: PVEAPIToken=terraform-prov@pve!mytoken=d16d812b-5a19-4410-80a7-96562d8e3646
+Accept-Encoding: gzip
+
+2025/04/30 16:17:59 <<<<<<<<<< RESULT:
+HTTP/2.0 500 Internal Server Error
+Content-Length: 53
+Alt-Svc: h3=":443"; ma=2592000
+Cache-Control: max-age=0
+Content-Type: application/json;charset=UTF-8
+Date: Wed, 30 Apr 2025 14:17:59 GMT
+Expires: Wed, 30 Apr 2025 14:17:59 GMT
+Pragma: no-cache
+Server: Caddy
+Server: pve-api-daemon/3.0
+
+{"data":null,"message":"no such resource 'vm:101'\n"}
+2025/04/30 16:18:00 >>>>>>>>>> REQUEST:
+GET /api2/json/cluster/ha/resources/101 HTTP/1.1
+Host: pve.int.phonkd.net
+User-Agent: Go-http-client/1.1
+Accept: application/json
+Authorization: PVEAPIToken=terraform-prov@pve!mytoken=d16d812b-5a19-4410-80a7-96562d8e3646
+Accept-Encoding: gzip
+
+2025/04/30 16:18:00 <<<<<<<<<< RESULT:
+HTTP/2.0 500 Internal Server Error
+Content-Length: 53
+Alt-Svc: h3=":443"; ma=2592000
+Cache-Control: max-age=0
+Content-Type: application/json;charset=UTF-8
+Date: Wed, 30 Apr 2025 14:18:00 GMT
+Expires: Wed, 30 Apr 2025 14:18:00 GMT
+Pragma: no-cache
+Server: Caddy
+Server: pve-api-daemon/3.0
+
+{"message":"no such resource 'vm:101'\n","data":null}
+2025/04/30 16:18:02 >>>>>>>>>> REQUEST:
+GET /api2/json/cluster/ha/resources/101 HTTP/1.1
+Host: pve.int.phonkd.net
+User-Agent: Go-http-client/1.1
+Accept: application/json
+Authorization: PVEAPIToken=terraform-prov@pve!mytoken=d16d812b-5a19-4410-80a7-96562d8e3646
+Accept-Encoding: gzip
+
+2025/04/30 16:18:02 <<<<<<<<<< RESULT:
+HTTP/2.0 500 Internal Server Error
+Content-Length: 53
+Alt-Svc: h3=":443"; ma=2592000
+Cache-Control: max-age=0
+Content-Type: application/json;charset=UTF-8
+Date: Wed, 30 Apr 2025 14:18:02 GMT
+Expires: Wed, 30 Apr 2025 14:18:02 GMT
+Pragma: no-cache
+Server: Caddy
+Server: pve-api-daemon/3.0
+
+{"message":"no such resource 'vm:101'\n","data":null}
+2025/04/30 16:18:05 >>>>>>>>>> REQUEST:
+GET /api2/json/version HTTP/1.1
+Host: pve.int.phonkd.net
+User-Agent: Go-http-client/1.1
+Accept: application/json
+Authorization: PVEAPIToken=terraform-prov@pve!mytoken=d16d812b-5a19-4410-80a7-96562d8e3646
+Accept-Encoding: gzip
+
+2025/04/30 16:18:05 <<<<<<<<<< RESULT:
+HTTP/2.0 200 OK
+Content-Length: 72
+Alt-Svc: h3=":443"; ma=2592000
+Cache-Control: max-age=0
+Content-Type: application/json;charset=UTF-8
+Date: Wed, 30 Apr 2025 14:18:05 GMT
+Expires: Wed, 30 Apr 2025 14:18:05 GMT
+Pragma: no-cache
+Server: Caddy
+Server: pve-api-daemon/3.0
+
+{"data":{"release":"8.3","repoid":"dac3aa88bac3f300","version":"8.3.5"}}
+2025/04/30 16:18:05 >>>>>>>>>> REQUEST:
+PUT /api2/json/nodes/wamluck/qemu/101/config HTTP/1.1
+Host: pve.int.phonkd.net
+User-Agent: Go-http-client/1.1
+Content-Length: 246
+Accept: application/json
+Authorization: PVEAPIToken=terraform-prov@pve!mytoken=d16d812b-5a19-4410-80a7-96562d8e3646
+Content-Type: application/x-www-form-urlencoded
+Accept-Encoding: gzip
+
+agent=0&balloon=0&bios=seabios&cicustom=&ciupgrade=0&cores=1&cpu=host&delete=scsi0%2Cshares%2Cnet0&description=Managed+by+Terraform.&hotplug=network%2Cdisk%2Cusb&kvm=1&memory=512&name=kek&numa=0&onboot=0&protection=0&scsihw=lsi&sockets=1&tablet=1
+2025/04/30 16:18:05 <<<<<<<<<< RESULT:
+HTTP/2.0 200 OK
+Content-Length: 13
+Alt-Svc: h3=":443"; ma=2592000
+Cache-Control: max-age=0
+Content-Type: application/json;charset=UTF-8
+Date: Wed, 30 Apr 2025 14:18:05 GMT
+Expires: Wed, 30 Apr 2025 14:18:05 GMT
+Pragma: no-cache
+Server: Caddy
+Server: pve-api-daemon/3.0
+
+{"data":null}
+2025/04/30 16:18:05 >>>>>>>>>> REQUEST:
+GET /api2/json/nodes/wamluck/qemu/101/pending HTTP/1.1
+Host: pve.int.phonkd.net
+User-Agent: Go-http-client/1.1
+Accept: application/json
+Authorization: PVEAPIToken=terraform-prov@pve!mytoken=d16d812b-5a19-4410-80a7-96562d8e3646
+Accept-Encoding: gzip
+
+2025/04/30 16:18:05 <<<<<<<<<< RESULT:
+HTTP/2.0 200 OK
+Content-Length: 941
+Alt-Svc: h3=":443"; ma=2592000
+Cache-Control: max-age=0
+Content-Type: application/json;charset=UTF-8
+Date: Wed, 30 Apr 2025 14:18:05 GMT
+Expires: Wed, 30 Apr 2025 14:18:05 GMT
+Pragma: no-cache
+Server: Caddy
+Server: pve-api-daemon/3.0
+
+{"data":[{"value":"kek","key":"name"},{"value":1,"key":"tablet"},{"key":"kvm","value":1},{"value":"seabios","key":"bios"},{"value":0,"key":"protection"},{"value":0,"key":"numa"},{"key":"agent","value":"0"},{"value":0,"key":"ciupgrade"},{"key":"meta","value":"creation-qemu=9.0.2,ctime=1740337056"},{"value":0,"key":"onboot"},{"value":"96a52c82-57d9-46fb-b5d8-0f205f93ddf2","key":"vmgenid"},{"value":"lsi","key":"scsihw"},{"value":"512","key":"memory"},{"key":"cpu","value":"host"},{"key":"cores","value":1},{"key":"balloon","value":0},{"key":"description","value":"Managed by Terraform."},{"key":"sockets","value":1},{"value":" ","key":"boot"},{"key":"ostype","value":"l26"},{"value":"nvme-zfs:vm-101-disk-0","key":"unused0"},{"key":"smbios1","value":"uuid=dc9a6016-2ad5-4603-8f8a-0bfed0e4fe0d"},{"key":"digest","value":"a7cdd476a7317a2751969b8a0cc64080368a995f"},{"key":"hotplug","value":"network,disk,usb"},{"value":" ","key":"cicustom"}]}
+[90mWed, 30 Apr 2025 16:18:05 +0200[0m DBG [1mgithub.com/Telmate/terraform-provider-proxmox/v2/proxmox/resource_vm_qemu.go:863[0m[36m >[0m Set this vm (resource Id) to 'wamluck/qemu/101' [36mloggerName=[0mresource_vm_create [36mvmid=[0m101
+2025/04/30 16:18:10 [DEBUG][QemuVmCreate] starting VM
+2025/04/30 16:18:10 >>>>>>>>>> REQUEST:
+POST /api2/json/nodes/wamluck/qemu/101/status/start HTTP/1.1
+Host: pve.int.phonkd.net
+User-Agent: Go-http-client/1.1
+Content-Length: 0
+Accept: application/json
+Authorization: PVEAPIToken=terraform-prov@pve!mytoken=d16d812b-5a19-4410-80a7-96562d8e3646
+Content-Type: application/x-www-form-urlencoded
+Accept-Encoding: gzip
+
+2025/04/30 16:18:10 <<<<<<<<<< RESULT:
+HTTP/2.0 200 OK
+Content-Length: 90
+Alt-Svc: h3=":443"; ma=2592000
+Cache-Control: max-age=0
+Content-Type: application/json;charset=UTF-8
+Date: Wed, 30 Apr 2025 14:18:10 GMT
+Expires: Wed, 30 Apr 2025 14:18:10 GMT
+Pragma: no-cache
+Server: Caddy
+Server: pve-api-daemon/3.0
+
+{"data":"UPID:wamluck:00209C75:00280113:68123122:qmstart:101:terraform-prov@pve!mytoken:"}
+2025/04/30 16:18:10 >>>>>>>>>> REQUEST:
+GET /api2/json/nodes/wamluck/tasks/UPID:wamluck:00209C75:00280113:68123122:qmstart:101:terraform-prov@pve!mytoken:/status HTTP/1.1
+Host: pve.int.phonkd.net
+User-Agent: Go-http-client/1.1
+Accept: application/json
+Authorization: PVEAPIToken=terraform-prov@pve!mytoken=d16d812b-5a19-4410-80a7-96562d8e3646
+Accept-Encoding: gzip
+
+2025/04/30 16:18:10 <<<<<<<<<< RESULT:
+HTTP/2.0 200 OK
+Content-Length: 265
+Alt-Svc: h3=":443"; ma=2592000
+Cache-Control: max-age=0
+Content-Type: application/json;charset=UTF-8
+Date: Wed, 30 Apr 2025 14:18:10 GMT
+Expires: Wed, 30 Apr 2025 14:18:10 GMT
+Pragma: no-cache
+Server: Caddy
+Server: pve-api-daemon/3.0
+
+{"data":{"pstart":2621715,"pid":2137205,"node":"wamluck","user":"terraform-prov@pve","starttime":1746022690,"status":"running","tokenid":"mytoken","type":"qmstart","id":"101","upid":"UPID:wamluck:00209C75:00280113:68123122:qmstart:101:terraform-prov@pve!mytoken:"}}
+2025/04/30 16:18:12 >>>>>>>>>> REQUEST:
+GET /api2/json/nodes/wamluck/tasks/UPID:wamluck:00209C75:00280113:68123122:qmstart:101:terraform-prov@pve!mytoken:/status HTTP/1.1
+Host: pve.int.phonkd.net
+User-Agent: Go-http-client/1.1
+Accept: application/json
+Authorization: PVEAPIToken=terraform-prov@pve!mytoken=d16d812b-5a19-4410-80a7-96562d8e3646
+Accept-Encoding: gzip
+
+2025/04/30 16:18:12 <<<<<<<<<< RESULT:
+HTTP/2.0 200 OK
+Content-Length: 283
+Alt-Svc: h3=":443"; ma=2592000
+Cache-Control: max-age=0
+Content-Type: application/json;charset=UTF-8
+Date: Wed, 30 Apr 2025 14:18:12 GMT
+Expires: Wed, 30 Apr 2025 14:18:12 GMT
+Pragma: no-cache
+Server: Caddy
+Server: pve-api-daemon/3.0
+
+{"data":{"status":"stopped","type":"qmstart","node":"wamluck","upid":"UPID:wamluck:00209C75:00280113:68123122:qmstart:101:terraform-prov@pve!mytoken:","tokenid":"mytoken","pid":2137205,"pstart":2621715,"user":"terraform-prov@pve","starttime":1746022690,"id":"101","exitstatus":"OK"}}
+2025/04/30 16:18:12 [DEBUG][QemuVmCreate] vm creation done!
+[90mWed, 30 Apr 2025 16:18:12 +0200[0m [32mINF[0m [1mgithub.com/Telmate/terraform-provider-proxmox/v2/proxmox/resource_vm_qemu.go:1143[0m[36m >[0m [1mReading configuration for vmid[0m [36mloggerName=[0mresource_vm_read [36mvmid=[0m101
+2025/04/30 16:18:12 >>>>>>>>>> REQUEST:
+GET /api2/json/cluster/resources?type=vm HTTP/1.1
+Host: pve.int.phonkd.net
+User-Agent: Go-http-client/1.1
+Accept: application/json
+Authorization: PVEAPIToken=terraform-prov@pve!mytoken=d16d812b-5a19-4410-80a7-96562d8e3646
+Accept-Encoding: gzip
+
+2025/04/30 16:18:12 <<<<<<<<<< RESULT:
+HTTP/2.0 200 OK
+Connection: close
+Alt-Svc: h3=":443"; ma=2592000
+Cache-Control: max-age=0
+Content-Type: application/json;charset=UTF-8
+Date: Wed, 30 Apr 2025 14:18:12 GMT
+Expires: Wed, 30 Apr 2025 14:18:12 GMT
+Pragma: no-cache
+Server: Caddy
+Server: pve-api-daemon/3.0
+
+{"data":[{"vmid":100,"netout":852979121,"status":"running","template":0,"maxdisk":0,"mem":65687552,"netin":890690392,"uptime":26110,"maxcpu":6,"type":"qemu","cpu":0.00410796502582028,"diskread":15060992,"name":"101-OPENWRT","id":"qemu/100","disk":0,"diskwrite":12288,"maxmem":4294967296,"node":"wamluck"},{"name":"kek","id":"qemu/101","node":"wamluck","maxmem":536870912,"diskwrite":0,"disk":0,"mem":20459899,"maxdisk":0,"vmid":101,"status":"running","netout":0,"template":0,"cpu":0,"diskread":0,"netin":0,"maxcpu":1,"type":"qemu","uptime":1},{"status":"stopped","netout":0,"vmid":10111,"template":0,"mem":0,"maxdisk":85899345920,"netin":0,"uptime":0,"type":"qemu","maxcpu":8,"cpu":0,"diskread":0,"id":"qemu/10111","name":"win-testbench","diskwrite":0,"maxmem":17179869184,"disk":0,"node":"wamluck"},{"maxdisk":68719476736,"mem":1469591552,"template":0,"netout":7257976,"status":"running","vmid":10112,"diskread":868026368,"cpu":0.0205632992149632,"uptime":26082,"type":"qemu","maxcpu":14,"netin":10624987,"name":"NIX-dev-vm","id":"qemu/10112","node":"wamluck","maxmem":19075694592,"diskwrite":77582336,"disk":0},{"id":"qemu/11000","name":"sean","maxmem":34359738368,"diskwrite":0,"disk":0,"node":"wamluck","template":0,"vmid":11000,"status":"stopped","netout":0,"maxdisk":107374182400,"mem":0,"type":"qemu","maxcpu":8,"uptime":0,"netin":0,"diskread":0,"cpu":0},{"maxmem":17179869184,"diskwrite":2917544960,"disk":0,"node":"wamluck","name":"121-nix-services","id":"qemu/121","netin":11815064,"type":"qemu","uptime":26102,"maxcpu":12,"cpu":0.00854456725370619,"diskread":1577788416,"vmid":121,"netout":165340202,"status":"running","template":0,"mem":3218005267,"maxdisk":431644213248},{"id":"qemu/122","name":"nix-int","diskwrite":1686823936,"maxmem":17179869184,"disk":0,"node":"wamluck","vmid":122,"status":"running","netout":312001683,"template":0,"mem":5548144758,"maxdisk":0,"netin":286799875,"uptime":26097,"type":"qemu","maxcpu":6,"cpu":0.176313858908207,"diskread":1523975168},{"mem":0,"maxdisk":0,"template":0,"status":"stopped","netout":0,"vmid":201,"diskread":0,"cpu":0,"uptime":0,"type":"qemu","maxcpu":6,"netin":0,"id":"qemu/201","name":"201-docker-host","tags":"docker","node":"wamluck","diskwrite":0,"disk":0,"maxmem":17179869184},{"diskwrite":0,"maxmem":8589934592,"disk":0,"node":"wamluck","id":"qemu/8000","name":"8000-talos-teplate","type":"qemu","uptime":0,"maxcpu":4,"netin":0,"diskread":0,"cpu":0,"template":1,"vmid":8000,"netout":0,"status":"stopped","maxdisk":0,"mem":0},{"cpu":0,"diskread":0,"netin":0,"uptime":0,"type":"qemu","maxcpu":4,"maxdisk":12884901888,"mem":0,"netout":0,"status":"stopped","vmid":8001,"template":1,"node":"wamluck","disk":0,"diskwrite":0,"maxmem":8589934592,"id":"qemu/8001","name":"8001-nixtemplate"},{"uptime":26092,"type":"qemu","maxcpu":6,"netin":719297513,"diskread":3477151744,"cpu":0.0468308012943512,"template":0,"vmid":9201,"status":"running","netout":10176628160,"maxdisk":64424509440,"mem":8071872268,"diskwrite":12427703296,"maxmem":17190354944,"disk":0,"node":"wamluck","name":"nix-m01","id":"qemu/9201"},{"diskwrite":4002849792,"maxmem":25769803776,"disk":0,"node":"wamluck","name":"nix-k8s-w01","id":"qemu/9210","maxcpu":12,"type":"qemu","uptime":26087,"netin":10038958730,"diskread":2768177152,"cpu":0.0350820213205052,"template":0,"status":"running","netout":369503711,"vmid":9210,"mem":6074874562,"maxdisk":64424509440}]}
+2025/04/30 16:18:12 >>>>>>>>>> REQUEST:
+GET /api2/json/nodes/wamluck/qemu/101/config HTTP/1.1
+Host: pve.int.phonkd.net
+User-Agent: Go-http-client/1.1
+Accept: application/json
+Authorization: PVEAPIToken=terraform-prov@pve!mytoken=d16d812b-5a19-4410-80a7-96562d8e3646
+Accept-Encoding: gzip
+
+2025/04/30 16:18:12 <<<<<<<<<< RESULT:
+HTTP/2.0 200 OK
+Content-Length: 541
+Alt-Svc: h3=":443"; ma=2592000
+Cache-Control: max-age=0
+Content-Type: application/json;charset=UTF-8
+Date: Wed, 30 Apr 2025 14:18:12 GMT
+Expires: Wed, 30 Apr 2025 14:18:12 GMT
+Pragma: no-cache
+Server: Caddy
+Server: pve-api-daemon/3.0
+
+{"data":{"digest":"a7cdd476a7317a2751969b8a0cc64080368a995f","smbios1":"uuid=dc9a6016-2ad5-4603-8f8a-0bfed0e4fe0d","cicustom":" ","hotplug":"network,disk,usb","ostype":"l26","unused0":"nvme-zfs:vm-101-disk-0","sockets":1,"description":"Managed by Terraform.","boot":" ","cores":1,"balloon":0,"vmgenid":"96a52c82-57d9-46fb-b5d8-0f205f93ddf2","cpu":"host","memory":"512","scsihw":"lsi","onboot":0,"ciupgrade":0,"agent":"0","numa":0,"meta":"creation-qemu=9.0.2,ctime=1740337056","bios":"seabios","kvm":1,"tablet":1,"name":"kek","protection":0}}
+2025/04/30 16:18:12 >>>>>>>>>> REQUEST:
+GET /api2/json/cluster/resources?type=vm HTTP/1.1
+Host: pve.int.phonkd.net
+User-Agent: Go-http-client/1.1
+Accept: application/json
+Authorization: PVEAPIToken=terraform-prov@pve!mytoken=d16d812b-5a19-4410-80a7-96562d8e3646
+Accept-Encoding: gzip
+
+2025/04/30 16:18:12 <<<<<<<<<< RESULT:
+HTTP/2.0 200 OK
+Connection: close
+Alt-Svc: h3=":443"; ma=2592000
+Cache-Control: max-age=0
+Content-Type: application/json;charset=UTF-8
+Date: Wed, 30 Apr 2025 14:18:12 GMT
+Expires: Wed, 30 Apr 2025 14:18:12 GMT
+Pragma: no-cache
+Server: Caddy
+Server: pve-api-daemon/3.0
+
+{"data":[{"id":"qemu/100","name":"101-OPENWRT","disk":0,"diskwrite":12288,"maxmem":4294967296,"node":"wamluck","template":0,"vmid":100,"status":"running","netout":852979121,"mem":65687552,"maxdisk":0,"uptime":26110,"type":"qemu","maxcpu":6,"netin":890690392,"diskread":15060992,"cpu":0.00410796502582028},{"diskread":0,"cpu":0,"maxcpu":1,"type":"qemu","uptime":1,"netin":0,"maxdisk":0,"mem":20459899,"template":0,"vmid":101,"status":"running","netout":0,"node":"wamluck","disk":0,"diskwrite":0,"maxmem":536870912,"id":"qemu/101","name":"kek"},{"template":0,"netout":0,"status":"stopped","vmid":10111,"mem":0,"maxdisk":85899345920,"type":"qemu","uptime":0,"maxcpu":8,"netin":0,"diskread":0,"cpu":0,"name":"win-testbench","id":"qemu/10111","disk":0,"diskwrite":0,"maxmem":17179869184,"node":"wamluck"},{"id":"qemu/10112","name":"NIX-dev-vm","node":"wamluck","disk":0,"diskwrite":77582336,"maxmem":19075694592,"mem":1469591552,"maxdisk":68719476736,"vmid":10112,"status":"running","netout":7257976,"template":0,"cpu":0.0205632992149632,"diskread":868026368,"netin":10624987,"maxcpu":14,"type":"qemu","uptime":26082},{"vmid":11000,"status":"stopped","netout":0,"template":0,"maxdisk":107374182400,"mem":0,"netin":0,"maxcpu":8,"type":"qemu","uptime":0,"cpu":0,"diskread":0,"name":"sean","id":"qemu/11000","diskwrite":0,"maxmem":34359738368,"disk":0,"node":"wamluck"},{"cpu":0.00854456725370619,"diskread":1577788416,"netin":11815064,"uptime":26102,"type":"qemu","maxcpu":12,"mem":3218005267,"maxdisk":431644213248,"vmid":121,"status":"running","netout":165340202,"template":0,"node":"wamluck","disk":0,"diskwrite":2917544960,"maxmem":17179869184,"id":"qemu/121","name":"121-nix-services"},{"maxdisk":0,"mem":5548144758,"netout":312001683,"status":"running","vmid":122,"template":0,"cpu":0.176313858908207,"diskread":1523975168,"netin":286799875,"maxcpu":6,"type":"qemu","uptime":26097,"name":"nix-int","id":"qemu/122","node":"wamluck","diskwrite":1686823936,"maxmem":17179869184,"disk":0},{"template":0,"vmid":201,"netout":0,"status":"stopped","mem":0,"maxdisk":0,"maxcpu":6,"type":"qemu","uptime":0,"netin":0,"diskread":0,"cpu":0,"id":"qemu/201","name":"201-docker-host","diskwrite":0,"disk":0,"maxmem":17179869184,"node":"wamluck","tags":"docker"},{"diskwrite":0,"disk":0,"maxmem":8589934592,"node":"wamluck","id":"qemu/8000","name":"8000-talos-teplate","type":"qemu","uptime":0,"maxcpu":4,"netin":0,"diskread":0,"cpu":0,"template":1,"vmid":8000,"netout":0,"status":"stopped","mem":0,"maxdisk":0},{"uptime":0,"type":"qemu","maxcpu":4,"netin":0,"diskread":0,"cpu":0,"template":1,"vmid":8001,"netout":0,"status":"stopped","maxdisk":12884901888,"mem":0,"diskwrite":0,"maxmem":8589934592,"disk":0,"node":"wamluck","name":"8001-nixtemplate","id":"qemu/8001"},{"netin":719297513,"type":"qemu","uptime":26092,"maxcpu":6,"cpu":0.0468308012943512,"diskread":3477151744,"netout":10176628160,"status":"running","vmid":9201,"template":0,"mem":8071872268,"maxdisk":64424509440,"diskwrite":12427703296,"maxmem":17190354944,"disk":0,"node":"wamluck","name":"nix-m01","id":"qemu/9201"},{"node":"wamluck","maxmem":25769803776,"diskwrite":4002849792,"disk":0,"name":"nix-k8s-w01","id":"qemu/9210","diskread":2768177152,"cpu":0.0350820213205052,"uptime":26087,"type":"qemu","maxcpu":12,"netin":10038958730,"mem":6074874562,"maxdisk":64424509440,"template":0,"netout":369503711,"status":"running","vmid":9210}]}
+2025/04/30 16:18:12 >>>>>>>>>> REQUEST:
+GET /api2/json/cluster/ha/resources/101 HTTP/1.1
+Host: pve.int.phonkd.net
+User-Agent: Go-http-client/1.1
+Accept: application/json
+Authorization: PVEAPIToken=terraform-prov@pve!mytoken=d16d812b-5a19-4410-80a7-96562d8e3646
+Accept-Encoding: gzip
+
+2025/04/30 16:18:12 <<<<<<<<<< RESULT:
+HTTP/2.0 500 Internal Server Error
+Content-Length: 53
+Alt-Svc: h3=":443"; ma=2592000
+Cache-Control: max-age=0
+Content-Type: application/json;charset=UTF-8
+Date: Wed, 30 Apr 2025 14:18:12 GMT
+Expires: Wed, 30 Apr 2025 14:18:12 GMT
+Pragma: no-cache
+Server: Caddy
+Server: pve-api-daemon/3.0
+
+{"data":null,"message":"no such resource 'vm:101'\n"}
+2025/04/30 16:18:13 >>>>>>>>>> REQUEST:
+GET /api2/json/cluster/ha/resources/101 HTTP/1.1
+Host: pve.int.phonkd.net
+User-Agent: Go-http-client/1.1
+Accept: application/json
+Authorization: PVEAPIToken=terraform-prov@pve!mytoken=d16d812b-5a19-4410-80a7-96562d8e3646
+Accept-Encoding: gzip
+
+2025/04/30 16:18:13 <<<<<<<<<< RESULT:
+HTTP/2.0 500 Internal Server Error
+Content-Length: 53
+Alt-Svc: h3=":443"; ma=2592000
+Cache-Control: max-age=0
+Content-Type: application/json;charset=UTF-8
+Date: Wed, 30 Apr 2025 14:18:13 GMT
+Expires: Wed, 30 Apr 2025 14:18:13 GMT
+Pragma: no-cache
+Server: Caddy
+Server: pve-api-daemon/3.0
+
+{"data":null,"message":"no such resource 'vm:101'\n"}
+2025/04/30 16:18:15 >>>>>>>>>> REQUEST:
+GET /api2/json/cluster/ha/resources/101 HTTP/1.1
+Host: pve.int.phonkd.net
+User-Agent: Go-http-client/1.1
+Accept: application/json
+Authorization: PVEAPIToken=terraform-prov@pve!mytoken=d16d812b-5a19-4410-80a7-96562d8e3646
+Accept-Encoding: gzip
+
+2025/04/30 16:18:15 <<<<<<<<<< RESULT:
+HTTP/2.0 500 Internal Server Error
+Content-Length: 53
+Alt-Svc: h3=":443"; ma=2592000
+Cache-Control: max-age=0
+Content-Type: application/json;charset=UTF-8
+Date: Wed, 30 Apr 2025 14:18:15 GMT
+Expires: Wed, 30 Apr 2025 14:18:15 GMT
+Pragma: no-cache
+Server: Caddy
+Server: pve-api-daemon/3.0
+
+{"message":"no such resource 'vm:101'\n","data":null}
+2025/04/30 16:18:18 >>>>>>>>>> REQUEST:
+GET /api2/json/nodes/wamluck/qemu/101/status/current HTTP/1.1
+Host: pve.int.phonkd.net
+User-Agent: Go-http-client/1.1
+Accept: application/json
+Authorization: PVEAPIToken=terraform-prov@pve!mytoken=d16d812b-5a19-4410-80a7-96562d8e3646
+Accept-Encoding: gzip
+
+2025/04/30 16:18:18 <<<<<<<<<< RESULT:
+HTTP/2.0 200 OK
+Content-Length: 545
+Alt-Svc: h3=":443"; ma=2592000
+Cache-Control: max-age=0
+Content-Type: application/json;charset=UTF-8
+Date: Wed, 30 Apr 2025 14:18:18 GMT
+Expires: Wed, 30 Apr 2025 14:18:18 GMT
+Pragma: no-cache
+Server: Caddy
+Server: pve-api-daemon/3.0
+
+{"data":{"mem":20776977,"netin":0,"running-qemu":"9.2.0","netout":0,"name":"kek","proxmox-support":{"pbs-dirty-bitmap":true,"pbs-masterkey":true,"pbs-dirty-bitmap-migration":true,"backup-max-workers":true,"pbs-library-version":"1.5.1 (UNKNOWN)","pbs-dirty-bitmap-savevm":true,"backup-fleecing":true,"query-bitmap-info":true},"pid":2137215,"disk":0,"ha":{"managed":0},"maxdisk":0,"diskwrite":0,"cpu":0,"uptime":7,"cpus":1,"running-machine":"pc-i440fx-9.2+pve0","qmpstatus":"running","status":"running","diskread":0,"vmid":101,"maxmem":536870912}}
+2025/04/30 16:18:18 [DEBUG] VM status: running
+2025/04/30 16:18:18 [DEBUG] VM is running, checking the IP
+2025/04/30 16:18:18 [INFO][initConnInfo] trying to get vm ip address for provisioner
+[90mWed, 30 Apr 2025 16:18:18 +0200[0m [32mINF[0m [1mgithub.com/Telmate/terraform-provider-proxmox/v2/proxmox/resource_vm_qemu.go:1534[0m[36m >[0m [1mtrying to get vm ip address for provisioner[0m [36mloggerName=[0minitConnInfo [36mvmid=[0m101
+2025/04/30 16:18:18 [DEBUG][initConnInfo] this is the vm configuration:  22
+[90mWed, 30 Apr 2025 16:18:18 +0200[0m DBG [1mgithub.com/Telmate/terraform-provider-proxmox/v2/proxmox/resource_vm_qemu.go:1560[0m[36m >[0m this is the vm configuration:  22 [36mloggerName=[0minitConnInfo [36mvmid=[0m101
+[90mWed, 30 Apr 2025 16:18:18 +0200[0m DBG [1mgithub.com/Telmate/terraform-provider-proxmox/v2/proxmox/resource_vm_qemu.go:1195[0m[36m >[0m [READ] Received Config from Proxmox API: {"id":101,"node":"wamluck","agent":{"enable":false},"bios":"seabios","boot":" ","cpu":{"cores":1,"numa":false,"sockets":1,"type":"host"},"cloudinit":{"ciupgrade":false},"description":"Managed by Terraform.","hotplug":"network,disk,usb","memory":{"capacity":512,"balloon":0},"name":"kek","onboot":false,"protection":false,"kvm":true,"ostype":"l26","unused":{"0":{"file":"vm-101-disk-0","slot":0,"storage":"nvme-zfs"}},"scsihw":"lsi","smbios1":"uuid=dc9a6016-2ad5-4603-8f8a-0bfed0e4fe0d","tablet":true} [36mloggerName=[0mresource_vm_read [36mvmid=[0m101
+[90mWed, 30 Apr 2025 16:18:18 +0200[0m DBG [1mgithub.com/Telmate/terraform-provider-proxmox/v2/proxmox/resource_vm_qemu.go:1245[0m[36m >[0m key 'force_create' is set to false [36mloggerName=[0mresource_vm_read [36mvmid=[0m101
+[90mWed, 30 Apr 2025 16:18:18 +0200[0m DBG [1mgithub.com/Telmate/terraform-provider-proxmox/v2/proxmox/resource_vm_qemu.go:1245[0m[36m >[0m key 'define_connection_info' is set to true [36mloggerName=[0mresource_vm_read [36mvmid=[0m101
+[90mWed, 30 Apr 2025 16:18:18 +0200[0m DBG [1mgithub.com/Telmate/terraform-provider-proxmox/v2/proxmox/resource_vm_qemu.go:1255[0m[36m >[0m Unused Disk Block Processed 'map[0:map[file:vm-101-disk-0 slot:0 storage:nvme-zfs]]' [36mloggerName=[0mresource_vm_read [36mvmid=[0m101
+[90mWed, 30 Apr 2025 16:18:18 +0200[0m DBG [1mgithub.com/Telmate/terraform-provider-proxmox/v2/proxmox/resource_vm_qemu.go:1274[0m[36m >[0m Finished VM read resulting in data: '' [36mloggerName=[0mresource_vm_read [36mvmid=[0m101
