@@ -14,6 +14,11 @@
       PAPERLESS_CORS_ALLOWED_HOSTS = "https://paperless.teleport.phonkd.net";
     };
   };
+  services.caddy = {
+    virtualHosts."paperless.int.phonkd.net".extraConfig = ''
+      reverse_proxy :28981
+    '';
+  };
   services.teleport.settings = {
     app_service = {
       enabled = true;
