@@ -16,7 +16,12 @@
   };
   services.caddy = {
     virtualHosts."paperless.int.phonkd.net".extraConfig = ''
-      reverse_proxy :28981
+      reverse_proxy {
+        to localhost:28981
+        transport http {
+          header_up Host "paperless.int.phonkd.net"
+        }
+      }
     '';
   };
   services.teleport.settings = {
