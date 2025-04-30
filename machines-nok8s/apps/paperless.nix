@@ -18,9 +18,7 @@
     virtualHosts."paperless.int.phonkd.net".extraConfig = ''
       reverse_proxy {
         to localhost:28981
-        transport http {
-          header_up Host "paperless.int.phonkd.net"
-        }
+        header_up Host "paperless.int.phonkd.net"
       }
     '';
   };
