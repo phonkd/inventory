@@ -9,7 +9,7 @@
         "https://paperless.teleport.phonkd.net"
         "https://paperless.int.phonkd.net"
       ];
-      PAPERLESS_ALLOWED_HOSTS = [
+      ALLOWED_HOSTS = [
         "paperless.teleport.phonkd.net"
         "paperless.int.phonkd.net"
       ];
