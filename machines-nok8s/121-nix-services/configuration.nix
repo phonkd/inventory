@@ -22,6 +22,7 @@ in
       ../apps/immich.nix
       ../apps/share.nix
       ../apps/flowtime.nix
+      ../apps/mc.nix
     ];
   services.caddy = {
     package =  pkgs.unstable.caddy.withPlugins {
