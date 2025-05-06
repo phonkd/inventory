@@ -17,4 +17,5 @@
   };
   services.minecraft-server.eula = true;
   services.minecraft-server.openFirewall = true;
+  services.minecraft-server.jvmOpts = "-Xmx16384M -Xms2048M";
 }
