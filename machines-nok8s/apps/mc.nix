@@ -10,7 +10,7 @@
       levelName = "world";
       maxPlayers = 20;
       motd = "Nu uh";
-      difficulty = "Hard";
+      difficulty = 3;
       gamemode = "survival";
       white-list = true;
       enable-rcon = true;
