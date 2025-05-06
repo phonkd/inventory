@@ -1,6 +1,7 @@
 { config, pkgs, lib, ... }:
 {
   services.minecraft-server = {
+    enabled = true;
     declarative = true;
     eula = true;
     openFirewall = true;
