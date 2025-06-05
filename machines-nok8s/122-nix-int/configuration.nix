@@ -17,5 +17,6 @@
       ./caddy-int.nix
       ../apps/paperless.nix
       ../apps/syncthing.nix
+      ../apps/board.nix
     ];
 }
