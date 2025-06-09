@@ -34,7 +34,7 @@ in
         aliases = ["test@phonkd.net" "spam@phonkd.net" "elis@phonkd.net" "info@phonkd.net" "spam2@phonkd.net" "spam3@phonkd.net"];
       };
       "sofia@phonkd.net" = {
-        hashedPasswordFile = "sofiatmp";
+        hashedPasswordFile = sofiatmp;
         aliases = [""];
       };
     };
