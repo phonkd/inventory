@@ -5,6 +5,10 @@ let
                     config.sops.secrets."mail-secret".path
                   else
                     "/dev/null";
+  sofiatmp = if builtins.pathExists config.sops.secrets."sofia".path then
+                    config.sops.secrets."sofia".path
+                  else
+                    "/dev/null";
 in
 {
   sops.secrets."mail-secret" = {
