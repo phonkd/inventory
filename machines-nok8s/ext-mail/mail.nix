@@ -14,6 +14,9 @@ in
   sops.secrets."mail-secret" = {
     sopsFile = secrets/mail-secret.yaml;
   };
+  sops.secrets."sofia" = {
+    sopsFile = secrets/mail-secret.yaml;
+  };
 
   imports = [
     (builtins.fetchTarball {
