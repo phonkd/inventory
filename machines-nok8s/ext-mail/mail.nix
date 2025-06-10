@@ -5,16 +5,6 @@ let
                     config.sops.secrets."mail-secret".path
                   else
                     "/dev/null";
-  sofiatmp = if builtins.pathExists config.sops.secrets."sofia".path then
-                    config.sops.secrets."sofia".path
-                  else
-                    "/dev/null";
-  mailAccounts = config.mailserver.loginAccounts;
-  htpasswd = pkgs.writeText "radicale.users" (lib.concatStrings
-    (lib.flip lib.mapAttrsToList mailAccounts (mail: user:
-      mail + ":" + user.hashedPassword + "\n"
-    ))
-  );
 in
 {
   sops.secrets."mail-secret" = {

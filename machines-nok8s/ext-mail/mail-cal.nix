@@ -2,11 +2,9 @@
 { config, pkgs, lib, ... }:
 let
   mailAccounts = config.mailserver.loginAccounts;
-  htpasswd = pkgs.writeText "radicale.users" (lib.concatStrings
-    (lib.flip lib.mapAttrsToList mailAccounts (mail: user:
-      mail + ":" + user.hashedPassword + "\n"
-    ))
-  );
+  mailAccounts = config.mailserver.loginAccounts;
+  htpasswd = pkgs.writeText "radicale.users"
+     "phonkd@phonkd.net:${builtins.readFile hashpwtmp}\n";
 in
 {
   # calendar config:
