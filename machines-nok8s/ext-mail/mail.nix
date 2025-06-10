@@ -5,6 +5,10 @@ let
                     config.sops.secrets."mail-secret".path
                   else
                     "/dev/null";
+  # for calendar
+  mailAccounts = config.mailserver.loginAccounts;
+  htpasswd = pkgs.writeText "radicale.users"
+     "phonkd@phonkd.net:${builtins.readFile hashpwtmp}\n";
 in
 {
   sops.secrets."mail-secret" = {
@@ -34,4 +38,35 @@ in
   };
   security.acme.acceptTerms = true;
   security.acme.defaults.email = "bhonk123@gmail.com";
+
+  # calendar config:
+  services.radicale = {
+    enable = true;
+    settings = {
+      auth = {
+        type = "htpasswd";
+        htpasswd_filename = "${htpasswd}";
+        htpasswd_encryption = "bcrypt";
+      };
+    };
+  };
+
+  services.nginx = {
+    enable = true;
+    virtualHosts = {
+      "cal.phonkd.net" = {
+        forceSSL = true;
+        enableACME = true;
+        locations."/" = {
+          proxyPass = "http://localhost:5232/";
+          extraConfig = ''
+            proxy_set_header  X-Script-Name /;
+            proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_pass_header Authorization;
+          '';
+        };
+      };
+    };
+  };
+  networking.firewall.allowedTCPPorts = [ 80 443 ];
 }
