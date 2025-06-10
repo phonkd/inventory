@@ -2,7 +2,6 @@
 { config, pkgs, lib, ... }:
 let
   mailAccounts = config.mailserver.loginAccounts;
-  mailAccounts = config.mailserver.loginAccounts;
   htpasswd = pkgs.writeText "radicale.users"
      "phonkd@phonkd.net:${builtins.readFile hashpwtmp}\n";
 in
