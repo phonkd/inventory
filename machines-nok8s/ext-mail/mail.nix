@@ -10,17 +10,14 @@ let
                   else
                     "/dev/null";
   mailAccounts = config.mailserver.loginAccounts;
-  htpasswd = pkgs.writeText "radicale.users" (concatStrings
-    (flip mapAttrsToList mailAccounts (mail: user:
+  htpasswd = pkgs.writeText "radicale.users" (lib.concatStrings
+    (lib.flip mapAttrsToList mailAccounts (mail: user:
       mail + ":" + user.hashedPassword + "\n"
     ))
   );
 in
 {
   sops.secrets."mail-secret" = {
-    sopsFile = secrets/mail-secret.yaml;
-  };
-  sops.secrets."sofia" = {
     sopsFile = secrets/mail-secret.yaml;
   };
 
@@ -41,10 +38,6 @@ in
       "phonkd@phonkd.net" = {
         hashedPasswordFile = hashpwtmp;
         aliases = ["test@phonkd.net" "spam@phonkd.net" "elis@phonkd.net" "info@phonkd.net" "spam2@phonkd.net" "spam3@phonkd.net"];
-      };
-      "sofia@phonkd.net" = {
-        hashedPasswordFile = sofiatmp;
-        aliases = [""];
       };
     };
     certificateScheme = 3;
