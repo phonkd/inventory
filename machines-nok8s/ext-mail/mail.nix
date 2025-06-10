@@ -11,7 +11,7 @@ let
                     "/dev/null";
   mailAccounts = config.mailserver.loginAccounts;
   htpasswd = pkgs.writeText "radicale.users" (lib.concatStrings
-    (lib.flip mapAttrsToList mailAccounts (mail: user:
+    (lib.flip lib.mapAttrsToList mailAccounts (mail: user:
       mail + ":" + user.hashedPassword + "\n"
     ))
   );
