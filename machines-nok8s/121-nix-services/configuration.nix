@@ -23,10 +23,9 @@ in
       ../apps/share.nix
       ../apps/flowtime.nix
       ../apps/mc.nix
-      ../apps/sops.nix
     ];
   services.caddy = {
-    package =  pkgs.unstable.caddy.withPlugins {
+    package =  pkgs.caddy.withPlugins {
       hash = "sha256-Nwm4kzAmmu+UZTJB5npWdwfgoj3giHIEWIgDF6ff+dY=";
       plugins = [ "github.com/caddy-dns/cloudflare@v0.2.1" ];
     };

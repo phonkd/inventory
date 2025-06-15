@@ -18,8 +18,8 @@
         "https://paperless.int.phonkd.net"
       ];
       PAPERLESS_CORS_ALLOWED_HOSTS = [
-        "paperless.teleport.phonkd.net"
-        "paperless.int.phonkd.net"
+        "https://paperless.teleport.phonkd.net"
+        "https://paperless.int.phonkd.net"
       ];
     };
   };
