@@ -19,4 +19,16 @@
       ../apps/syncthing.nix
       ../apps/board.nix
     ];
+    services.teleport.settings = {
+      app_service = {
+        enabled = true;
+        apps = [
+          {
+            name = "wg";
+            uri = "http://localhost:51821";
+            insecure_skip_verify = true;
+          }
+        ];
+      };
+    };
 }
