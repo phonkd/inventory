@@ -3,7 +3,7 @@
 services.caddy = {
   package = pkgs.caddy.withPlugins {
     plugins = [ "github.com/caddy-dns/cloudflare@v0.2.1" ];
-    hash = "sha256-UwrkarDwfb6u+WGwkAq+8c+nbsFt7sVdxVAV9av0DLo=";
+    hash = "sha256-Gsuo+ripJSgKSYOM9/yl6Kt/6BFCA6BuTDvPdteinAI=";
   };
   virtualHosts."*.nixk8s.phonkd.net".extraConfig = ''
     reverse_proxy {
