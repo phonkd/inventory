@@ -12,6 +12,7 @@
       ../../machine-base/base.nix
       ../../machine-base/ssh.nix
       ../../machine-base/base-hardware-configuration.nix
+      ../apps/sops.nix
     ];
   sops.secrets.teleport_authkey = {};
   users.users."phonkd".openssh.authorizedKeys.keys = [

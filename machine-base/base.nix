@@ -6,7 +6,7 @@
 {
   imports = [
     ../machines-nok8s/apps/rebuildah/rebuildah.nix
-    ../machines-nok8s/apps/sops.nix
+    #../machines-nok8s/apps/sops.nix
     ../machines-nok8s/apps/alloy.nix
     ../machines-nok8s/apps/teleport.nix
   ];
