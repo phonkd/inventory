@@ -15,9 +15,7 @@
       ];
       PAPERLESS_CORS_ALLOWED_ORIGINS = "https://paperless.teleport.phonkd.net,https://paperless.int.phonkd.net";
 
-      PAPERLESS_CORS_ALLOWED_HOSTS = [
-        "https://paperless.teleport.phonkd.net"
-        "https://paperless.int.phonkd.net"
+      PAPERLESS_CORS_ALLOWED_HOSTS = "https://paperless.teleport.phonkd.net, https://paperless.int.phonkd.net"
       ];
     };
   };
