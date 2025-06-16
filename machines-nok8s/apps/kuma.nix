@@ -8,7 +8,7 @@
       apps = [
         {
           name = "kuma";
-          uri = "http://localhost:4000";
+          uri = "http://localhost:3001";
         }
       ];
     };
