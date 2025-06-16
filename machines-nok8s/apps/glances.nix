@@ -20,14 +20,25 @@
                   {
                     type = "monitor";
                     cache = "1m";
-                    title = "Services";
+                    title = "Public";
+                    sites = [
+                      { title = "Bitwarden"; url = "https://vw.w.phonkd.net/"; icon = "si:vaultwarden"; }
+                      { title = "Grafana"; url = "https://teleport.phonkd.net/web/launch/kube-prom-stack-grafana-monit-nix-k8s.teleport.phonkd.net/teleport.phonkd.net/kube-prom-stack-grafana-monit-nix-k8s.teleport.phonkd.net"; icon = "si:grafana"; }
+                      { title = "Cloudflare";url = "https://dash.cloudflare.com/"; icon = "si:cloudflare"; }
+                      { title = "hetzner"; url = "https://accounts.hetzner.com/login/"; icon = "si:hetzner"; }
+                      { title = "Clips";   url = "https://share.w.phonkd.net/"; icon = "si:airplayvideo"; }
+                    ];
+                  }
+                  {
+                    type = "monitor";
+                    cache = "1m";
+                    title = "Private";
                     sites = [
                       { title = "Proxmox";    url = "https://pve.int.phonkd.net/"; icon = "si:proxmox"; }
                       { title = "OpenWrt";       url = "http://192.168.1.3"; icon = "si:openwrt"; }
-                      { title = "Bitwarden"; url = "https://vw.w.phonkd.net/"; icon = "si:vaultwarden"; }
                       { title = "Paperless";      url = "https://paperless.teleport.phonkd.net"; icon = "si:paperlessngx"; }
-                      { title = "Cloudflare";url = "https://dash.cloudflare.com/"; icon = "si:cloudflare"; }
-                      { title = "hetzner"; url = "https://accounts.hetzner.com/login/"; icon = "si:hetzner"; }
+                      { title = "ArgoCD"; url = "https://teleport.phonkd.net/web/launch/argocd-server-http-argocd-nix-k8s.teleport.phonkd.net/teleport.phonkd.net/argocd-server-http-argocd-nix-k8s.teleport.phonkd.net"; icon = "si:argo"; }
+                      { title = "Grafana"; url = "https://teleport.phonkd.net/web/launch/kube-prom-stack-grafana-monit-nix-k8s.teleport.phonkd.net/teleport.phonkd.net/kube-prom-stack-grafana-monit-nix-k8s.teleport.phonkd.net"; icon = "si:grafana"; }
                     ];
                   }
                   {
@@ -36,7 +47,7 @@
                       {
                         title = "General";
                         links = [
-                          { title = "Gmail"; url = "https://mail.google.com/mail/u/0/"; }
+                          { title = "Nixos"; url = "https://search.nixos.org/options?channel=unstable&size=50&sort=relevance&type=packages&query="; }
                           { title = "Chatgpt"; url = "https://chatgpt.com/"; }
                           { title = "GitHub"; url = "https://github.com/phonkd/"; }
                         ];
@@ -46,7 +57,7 @@
                         links = [
                           { title = "YouTube";      url = "https://www.youtube.com/"; }
                           { title = "News";         url = "https://news.ycombinator.com/"; }
-                          { title = "Disney+";      url = "https://www.disneyplus.com/"; }
+                          { title = "Monkeytype";   url = "https://monkeytype.com/"; }
                         ];
                       }
                       {
