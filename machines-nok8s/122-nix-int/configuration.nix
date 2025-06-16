@@ -18,6 +18,7 @@
       ../apps/paperless.nix
       ../apps/syncthing.nix
       ../apps/glances.nix
+      ../apps/kuma.nix
     ];
     services.teleport.settings = {
       app_service = {
