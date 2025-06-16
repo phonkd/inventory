@@ -17,7 +17,7 @@
       ./caddy-int.nix
       ../apps/paperless.nix
       ../apps/syncthing.nix
-      ../apps/board.nix
+      ../apps/glances.nix
     ];
     services.teleport.settings = {
       app_service = {
