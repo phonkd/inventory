@@ -5,6 +5,7 @@
     enable = true;
     settings = {
         # This expects the YAML structure directly in Nix—see next step
+        server.port = 61208;
         pages = [
           {
             name = "Startpage";
@@ -71,7 +72,7 @@
       apps = [
         {
           name = "dashboard";
-          uri = "http://localhost:61208";
+          uri = "http://localhost:";
           # insecure_skip_verify = true;
           # rewrite = {
           #   headers = [
