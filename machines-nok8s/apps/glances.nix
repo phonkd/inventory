@@ -41,6 +41,7 @@
                       { title = "ArgoCD"; url = "https://teleport.phonkd.net/web/launch/argocd-server-http-argocd-nix-k8s.teleport.phonkd.net/teleport.phonkd.net/argocd-server-http-argocd-nix-k8s.teleport.phonkd.net"; icon = "si:argo"; }
                       { title = "Grafana"; url = "https://teleport.phonkd.net/web/launch/kube-prom-stack-grafana-monit-nix-k8s.teleport.phonkd.net/teleport.phonkd.net/kube-prom-stack-grafana-monit-nix-k8s.teleport.phonkd.net"; icon = "si:grafana"; }
                       { title = "Syncthing"; url = "https://teleport.phonkd.net/web/launch/syncthing.teleport.phonkd.net/teleport.phonkd.net/syncthing.teleport.phonkd.net"; icon = "si:syncthing"; }
+                    ];
                   }
                   {
                     type = "bookmarks";
