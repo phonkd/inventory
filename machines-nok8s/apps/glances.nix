@@ -72,7 +72,7 @@
       apps = [
         {
           name = "dashboard";
-          uri = "http://localhost:";
+          uri = "http://localhost:61208";
           # insecure_skip_verify = true;
           # rewrite = {
           #   headers = [
