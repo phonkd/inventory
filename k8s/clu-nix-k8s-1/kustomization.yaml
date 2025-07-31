@@ -5,4 +5,4 @@ resources:
   - ../apps/ssecrets
   - ../apps/bladman-apps
   - ../apps/teleport-kubeagent
-  - ../apps/ing-lb
+  - ../apps/metallb-ing-lb
