@@ -23,4 +23,7 @@
   services.qemuGuest.enable = true;
   sops.age.keyFile = /home/phonkd/.config/sops/age/keys.txt;
   sops.defaultSopsFile = ../machines-nok8s/apps/ocis/secrets/secret.yaml;
+  environment.systemPackages = [
+      pkgs.git
+  ];
 }
