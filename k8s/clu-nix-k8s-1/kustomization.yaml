@@ -5,4 +5,5 @@ resources:
   - ../apps/ssecrets
   - ../apps/bladman-apps
   - ../apps/teleport-kubeagent
-  - ../apps/metallb-ing-lb
+  - ../apps/ingress-and-cert-manager
+  - ../apps/metallb
