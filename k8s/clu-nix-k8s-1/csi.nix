@@ -5,11 +5,9 @@
 { config, pkgs, lib, ... }:
 
 {
-   # Proxmox CSI + Cilium stuff
+   # Proxmox CSI
   services.kubernetes = {
     kubelet.extraOpts = "--fail-swap-on=false --node-labels=topology.kubernetes.io/region=idk --node-labels=topology.kubernetes.io/zone=wamluck";
-    flannel.enable = false;
-    kubelet.cni.configDir = "/var/lib/kubernetes/cni/net.d"; # unsure if this is needed
   };
   # packages for administration tasks
   environment.systemPackages = with pkgs; [
@@ -19,10 +17,6 @@
     openiscsi
   ];
   services.kubernetes.proxy.enable = false;
-  services.kubernetes.kubelet.cni.packages = lib.mkForce [
-    pkgs.cni-plugins
-    #pkgs.cni-plugin-flannel
-  ];
   #networking.usePredictableInterfaceNames = false;
   # systemd.tmpfiles.rules = [
   #     "D /opt/cni/bin 0755 root root -"

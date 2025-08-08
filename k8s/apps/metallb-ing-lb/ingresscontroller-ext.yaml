@@ -1,0 +1,35 @@
+#helm install --create-namespace ingress-nginx-ext ingress-nginx/ingress-nginx --namespace ingress-ext --set controller.ingressClassResource.name=nginx-ingress-ext --set controller.ingressClass=nginx-ingress-ext --set controller.ingressClassResource.controllerValue="k8s.io/ingress-nginx-ingress-ext" --set controller.ingressClassResource.enabled=true --set controller.ingressClassByName=true
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ingress-nginx
+spec:
+  destination:
+    name: ""
+    namespace: ingress-nginx
+    server: https://kubernetes.default.svc
+  source:
+    path: ""
+    repoURL: https://kubernetes.github.io/ingress-nginx
+    targetRevision: 4.12.1
+    chart: ingress-nginx
+    helm:
+      parameters:
+        - name: controller.ingressClassResource.name
+          value: nginx-ingress
+        - name: controller.ingressClass
+          value: nginx-ingress
+        - name: controller.ingressClassResource.controllerValue
+          value: k8s.io/ingress-nginx-ingress
+        - name: controller.ingressClassByName
+          value: "true"
+        - name: controller.allowSnippetAnnotations
+          value: "true"
+        - name: controller.service.loadBalancerIP
+          value: "192.168.90.231"
+  sources: []
+  project: default
+  syncPolicy:
+    automated: null
+    syncOptions:
+      - CreateNamespace=true
