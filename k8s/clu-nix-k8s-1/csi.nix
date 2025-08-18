@@ -16,7 +16,7 @@
     kubernetes
     openiscsi
   ];
-  services.kubernetes.proxy.enable = false;
+  #services.kubernetes.proxy.enable = false;
   #networking.usePredictableInterfaceNames = false;
   # systemd.tmpfiles.rules = [
   #     "D /opt/cni/bin 0755 root root -"
