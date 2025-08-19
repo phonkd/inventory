@@ -1,6 +1,0 @@
-FROM alpine:latest
-EXPOSE 25565 25575
-RUN apk add openjdk17 screen
-WORKDIR /mc
-ENTRYPOINT ["/bin/sh", "/mc/start.sh"]
-

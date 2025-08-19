@@ -1,1 +1,0 @@
-#k create secret generic cloudflare-ddns-secret --from-literal=ZONE_ID=XXXXXXX --from-literal=RECORD_ID=XXXXX --from-literal=API_TOKEN=XXXXXXXXX --from-literal=AUTH_EMAIL=XXXXXX --from-literal=NAME=XXXXXX --from-literal=PROXIED=false --dry-run=client -o yaml

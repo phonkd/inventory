@@ -1,9 +1,0 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  creationTimestamp: null
-  name: metallb-system
-  annotations:
-    argocd.argoproj.io/sync-wave: "1"
-spec: {}
-status: {}

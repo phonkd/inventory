@@ -1,5 +1,0 @@
-FROM alpine:latest
-WORKDIR /scripts
-COPY ddns.sh .
-RUN apk add curl
-ENTRYPOINT ["sh", "ddns.sh"]

@@ -1,8 +1,0 @@
-apiVersion: v1
-data:
-  scrapeconfig.yml: c3RhdGljQ29uZmlnczoKICAtIGpvYl9uYW1lOiAncHZlJwogICAgc3RhdGljX2NvbmZpZ3M6CiAgICAgIC0gdGFyZ2V0czoKICAgICAgICAtIDEwLjAuMC40Njo5MjIxICAjIFByb3htb3ggVkUgbm9kZSB3aXRoIFBWRSBleHBvcnRlci4KICAgIG1ldHJpY3NfcGF0aDogL3B2ZQogICAgcGFyYW1zOgogICAgICBtb2R1bGU6IFtkZWZhdWx0XQogICAgICBjbHVzdGVyOiBbJzEnXQogICAgICBub2RlOiBbJzEnXQogCg==
-kind: Secret
-metadata:
-  creationTimestamp: null
-  name: additional-scrape-configs
-  namespace: monitoring
