@@ -5,8 +5,12 @@
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-25.05";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
     sops-nix.url = "github:Mic92/sops-nix";
+    home-manager = {
+          url = "github:nix-community/home-manager";
+          inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
-  outputs = { self, nixpkgs, nixpkgs-unstable, sops-nix }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, sops-nix, home-manager, ... }:
     let
       system = "x86_64-linux";
       overlay-unstable = final: prev: {
@@ -14,6 +18,9 @@
           inherit system;
           config.allowUnfree = true;
         };
+      };
+      pkgs = import nixpkgs {
+        inherit system;
       };
     in {
       nixosConfigurations = {
@@ -43,6 +50,22 @@
             ./10112-dev-vm/configuration.nix
             sops-nix.nixosModules.sops
           ];
+        };
+        "blac".nixpkgs.lib.nixosSystem = {
+          inherit system;
+          modules = [
+            # Overlays-module makes "pkgs.unstable" available in configuration.nix
+            ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
+            ./blac/configuration.nix
+            ./blac/hardware-configuration.nix
+            ./blac/packages.nix
+          ];
+        };
+      };
+      homeConfigurations = {
+        "phonkd@blac" = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [ ./blac/home.nix ];
         };
       };
     };
