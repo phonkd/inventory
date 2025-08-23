@@ -2,12 +2,15 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
-
+      ./hardware-configuration.nix
+      ./packages.nix
+      ../../modules/00-global-config.nix
+      ./secret-fix.nix
     ];
 
   # Bootloader.
@@ -64,6 +67,8 @@
   programs.ssh = {
     extraConfig = ''
       AddKeysToAgent yes
+      Host *
+        IdentityFile ~/.ssh/id_ed25519
     '';
   };
   programs.ssh.startAgent = true; #ssh-agent

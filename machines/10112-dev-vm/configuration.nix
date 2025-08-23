@@ -9,9 +9,9 @@
     [ # Include the results of the hardware scan.
       ./network.nix
       ./vm.nix
-      ../../modules/sops.nix
+      ../../modules/02-global-ssh.nix
+      ../../modules/01-vm-config.nix
       ../../modules/00-global-config.nix
-      ../../modules/00-global-ssh.nix
     ];
   sops.secrets.teleport_authkey = {};
   users.users."phonkd".openssh.authorizedKeys.keys = [

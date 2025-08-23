@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
 
@@ -26,12 +26,13 @@
       syncthing
       obsidian
       rofi-obsidian
-      wdisplays
+      nwg-displays
       cliphist
       hyprcursor
       xdg-desktop-portal-hyprland
       xdg-desktop-portal
       xdg-desktop-portal-wlr
+      xdg-desktop-portal-gtk
       obs-studio
       vlc
       wireguard-tools
@@ -60,6 +61,7 @@
       zsh
       fzf
       playerctl
+      vesktop
     ];
   services.flatpak.enable = true;
   # Install firefox.

@@ -15,7 +15,7 @@
   networking.networkmanager.dhcp = "internal";
   # Groups:
   programs.ssh.startAgent = true; #ssh-agent
-  networking.firewall.allowedTCPPorts = [80 443 6443];
+  networking.firewall.allowedTCPPorts = [80 443 6443 9000];
   networking.interfaces.ens19.ipv4.addresses = [ {
       address = "192.168.1.187";
       prefixLength = 24;

@@ -58,8 +58,7 @@
           modules = [
             ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
             ./blac/configuration.nix
-            ./blac/hardware-configuration.nix
-            ./blac/packages.nix
+            sops-nix.nixosModules.sops
           ];
         };
       };

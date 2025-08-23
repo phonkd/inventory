@@ -13,17 +13,19 @@ in
   imports =
     [ # Include the results of the hardware scan.
       ./network.nix
-      ../../modules/00-global-ssh.nix
+      ../../modules/02-global-ssh.nix
       ../../modules/00-global-config.nix
+      ../../modules/01-vm-config.nix
       ../../modules/reverseproxy.nix
       ../../modules/vaultwarden.nix
       ../../modules/immich.nix
       ../../modules/share.nix
       ../../modules/flowtime.nix
+      ../../modules/rustfs.nix
     ];
   services.caddy = {
     package =  pkgs.caddy.withPlugins {
-      hash = "sha256-Gsuo+ripJSgKSYOM9/yl6Kt/6BFCA6BuTDvPdteinAI=";
+      hash = "sha256-S1JN7brvH2KIu7DaDOH1zij3j8hWLLc0HdnUc+L89uU=";
       plugins = [ "github.com/caddy-dns/cloudflare@v0.2.1" ];
     };
   };
