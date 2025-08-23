@@ -9,7 +9,7 @@
     serverProperties = {
       levelName = "world";
       maxPlayers = 20;
-      motd = "2025";
+      motd = "Nu uh";
       difficulty = 3;
       gamemode = "survival";
       white-list = true;
