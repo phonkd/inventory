@@ -20,7 +20,6 @@ in
       ../../modules/immich.nix
       ../../modules/share.nix
       ../../modules/flowtime.nix
-      ../../modules/mc.nix
     ];
   services.caddy = {
     package =  pkgs.caddy.withPlugins {
