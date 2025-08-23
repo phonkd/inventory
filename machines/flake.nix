@@ -6,10 +6,11 @@
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
     sops-nix.url = "github:Mic92/sops-nix";
     home-manager = {
-          url = "github:nix-community/home-manager";
-          inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
+
   outputs = { self, nixpkgs, nixpkgs-unstable, sops-nix, home-manager, ... }:
     let
       system = "x86_64-linux";
@@ -25,37 +26,36 @@
       };
     in {
       nixosConfigurations = {
-        "nixos-int".nixpkgs.lib.nixosSystem = {
+        nixos-int = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
-            # Overlays-module makes "pkgs.unstable" available in configuration.nix
             ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
             ./122-nix-int/configuration.nix
             sops-nix.nixosModules.sops
           ];
         };
-        "nixos-services".nixpkgs.lib.nixosSystem = {
+
+        nixos-services = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
-            # Overlays-module makes "pkgs.unstable" available in configuration.nix
             ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
             ./121-nix-services/configuration.nix
             sops-nix.nixosModules.sops
           ];
         };
-        "dev-vm".nixpkgs.lib.nixosSystem = {
+
+        dev-vm = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
-            # Overlays-module makes "pkgs.unstable" available in configuration.nix
             ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
             ./10112-dev-vm/configuration.nix
             sops-nix.nixosModules.sops
           ];
         };
-        "blac".nixpkgs.lib.nixosSystem = {
+
+        blac = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
-            # Overlays-module makes "pkgs.unstable" available in configuration.nix
             ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
             ./blac/configuration.nix
             ./blac/hardware-configuration.nix

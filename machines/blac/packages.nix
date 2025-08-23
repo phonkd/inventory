@@ -12,14 +12,12 @@
       neovim
       git
       zed-editor
-      unlauncher
       grimblast
       easyeffects
       cool-retro-term
       waybar
       btop
       cava
-      lxqt.lxqt.policykit
       waypaper
       swaybg
       scrcpy
@@ -44,7 +42,6 @@
       wl-clipboard
       jq
       nwg-look
-      usbutlis
       yubikey-manager
       sshpass
       hyprlock
@@ -54,12 +51,17 @@
       virt-viewer
       home-manager
       sops
+      pulseaudio
       dnsutils
       bibata-cursors
       nordic
+      ulauncher
+      discord
+      zsh
+      fzf
+      playerctl
     ];
-  };
-
+  services.flatpak.enable = true;
   # Install firefox.
   programs.firefox.enable = true;
 
@@ -69,8 +71,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+    lxqt.lxqt-policykit
   ];
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.graphics.enable = true;
