@@ -42,6 +42,7 @@
   users.users.phonkd = {
     isNormalUser = true;
     description = "phonkd";
+    group = "phonkd"
     extraGroups = [ "networkmanager" "wheel" ];
     password = "sml12345";
   };
