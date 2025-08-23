@@ -21,6 +21,7 @@
       };
       pkgs = import nixpkgs {
         inherit system;
+        config.allowUnfree = true;
       };
     in {
       nixosConfigurations = {
@@ -60,12 +61,6 @@
             ./blac/hardware-configuration.nix
             ./blac/packages.nix
           ];
-        };
-      };
-      homeConfigurations = {
-        "phonkd@blac" = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          modules = [ ./blac/home.nix ];
         };
       };
     };
