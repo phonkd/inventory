@@ -39,10 +39,11 @@
     variant = "";
   };
   console.keyMap = "sg";
+  users.groups.phonkd = {};
   users.users.phonkd = {
     isNormalUser = true;
     description = "phonkd";
-    group = "phonkd"
+    group = "phonkd";
     extraGroups = [ "networkmanager" "wheel" ];
     password = "sml12345";
   };

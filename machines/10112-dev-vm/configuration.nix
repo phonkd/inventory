@@ -10,6 +10,8 @@
       ./network.nix
       ./vm.nix
       ../../modules/sops.nix
+      ../../modules/00-global-config.nix
+      ../../modules/00-global-ssh.nix
     ];
   sops.secrets.teleport_authkey = {};
   users.users."phonkd".openssh.authorizedKeys.keys = [
