@@ -21,7 +21,7 @@
   services.grafana = {
     enable = true;
     openFirewall = true;
-    settings.server.http_addr = "0.0.0.0"
+    settings.server.http_addr = "0.0.0.0";
     provision = {
       datasources.settings.datasources = [
         {
@@ -32,7 +32,7 @@
         {
           name = "Loki";
           type = "loki";
-          url = "http://localhost:3101";
+          url = "http://localhost:9428";
         }
       ];
     };
@@ -45,12 +45,5 @@
     enable = true;
     retentionTime = "14d";
   };
-  services.loki = {
-    enable = true;
-    configuration = {
-      limits_config = {
-        retention_period = "336h";
-      };
-    };
-  };
+  services.victorialogs.enable = true;
 }
