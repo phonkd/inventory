@@ -21,7 +21,8 @@ in
       ../../modules/immich.nix
       ../../modules/share.nix
       ../../modules/flowtime.nix
-      ../../modules/rustfs.nix
+      #../../modules/rustfs.nix
+      ../../modules/o11y.nix
     ];
   services.caddy = {
     package =  pkgs.caddy.withPlugins {

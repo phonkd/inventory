@@ -13,4 +13,7 @@
       owner = "phonkd";
       key = "rustfssecretkeytmp";
   };
+  sops.secrets.cfapikey = {
+    owner = "phonkd";
+  };
 }

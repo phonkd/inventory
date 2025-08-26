@@ -7,6 +7,18 @@ let
         "default_auth_token_placeholder";
 in
 {
+  # services.caddy = {
+  #   virtualHosts."ihateS5.w.phonkd.net".extraConfig = ''
+  #     reverse_proxy :9000
+  #   '';
+  # };
+  services.caddy = {
+    virtualHosts."ihateS5.w.phonkd.net".extraConfig = ''
+      reverse_proxy :9000 {
+        buffer_size 0
+      }
+    '';
+  };
   # Runtime
   virtualisation.podman = {
     enable = true;

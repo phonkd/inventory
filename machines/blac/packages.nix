@@ -62,6 +62,7 @@
       fzf
       playerctl
       vesktop
+      pavucontrol
     ];
   services.flatpak.enable = true;
   # Install firefox.
