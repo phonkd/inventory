@@ -26,7 +26,7 @@
   home.sessionVariables = {
     # EDITOR = "emacs";
   };
-wayland.windowManager.hyprland = {
+  wayland.windowManager.hyprland = {
     enable = true;
     # package = null;
     # portalPackage = null;
