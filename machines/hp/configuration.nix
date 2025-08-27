@@ -10,7 +10,8 @@
       ./hardware-configuration.nix
       ./packages.nix
       ../../modules/00-global-config.nix
-      /etc/nixos/hardware-configuration.nix
+      ../../modules/02-global-ssh.nix
+      ./hardware-configuration.nix
     ];
 
   # Bootloader.

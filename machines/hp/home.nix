@@ -28,26 +28,63 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-  # wayland.windowManager.hyprland.enable = true; will probably never do this cuz lazy to convert config.
-  # wayland.windowManager.hyprland.settings = {
-  #   "$mod" = "SUPER";
-  #   bind =
-  #     [
-  #       "$mod, W, exec, firefox"
-  #       "$mod, SHIFT, 2, exec, grimblast copy area"
-  #       "$mod, Q, "
-  #     ]
-  #     ++ (
-  #       # workspaces
-  #       # binds $mod + [shift +] {1..9} to [move to] workspace {1..9}
-  #       builtins.concatLists (builtins.genList (i:
-  #           let ws = i + 1;
-  #           in [
-  #             "$mod, code:1${toString i}, workspace, ${toString ws}"
-  #             "$mod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
-  #           ]
-  #         )
-  #         9)
-  #     );
-  # };
+  {
+    wayland.windowManager.hyprland = {
+      enable = true;
+      package = null;
+      portalPackage = null;
+      settings = {
+        # Keybindings
+        bind = [
+          "SUPER SHIFT,h, movewindow, l"
+          "SUPER SHIFT,l, movewindow, r"
+          "SUPER SHIFT,k, movewindow, u"
+          "SUPER SHIFT,j, movewindow, d"
+          # Workspaces
+          "$mainMod, 1, workspace, 1"
+          "$mainMod, 2, workspace, 2"
+          "$mainMod, 3, workspace, 3"
+          "$mainMod, 4, workspace, 4"
+          "$mainMod, 5, workspace, 5"
+          "$mainMod, 6, workspace, 6"
+          "$mainMod, 7, workspace, 7"
+          "$mainMod, 8, workspace, 8"
+          "$mainMod, 9, workspace, 9"
+          # "$mainMod, 0, workspace, 10"
+          # Move window to workspace
+          "$mainMod SHIFT, 1, movetoworkspace, 1"
+          "$mainMod SHIFT, 2, movetoworkspace, 2"
+          "$mainMod SHIFT, 3, movetoworkspace, 3"
+          "$mainMod SHIFT, 4, movetoworkspace, 4"
+          "$mainMod SHIFT, 5, movetoworkspace, 5"
+          "$mainMod SHIFT, 6, movetoworkspace, 6"
+          "$mainMod SHIFT, 7, movetoworkspace, 7"
+          "$mainMod SHIFT, 8, movetoworkspace, 8"
+          "$mainMod SHIFT, 9, movetoworkspace, 9"
+          "$mainMod SHIFT, 0, movetoworkspace, 10"
+          # Groups
+          "$mainMod SHIFT, w, togglegroup"
+          "$mainMod, right, changegroupactive, f"
+          "$mainMod, left, changegroupactive, b"
+          # Scroll through workspaces
+          "$mainMod, mouse_down, workspace, e+1"
+          "$mainMod, mouse_up, workspace, e-1"
+        ];
+        # Mouse binds
+        bindm = [
+          "$mainMod, mouse:272, movewindow"
+          "$mainMod, mouse:273, resizewindow"
+        ];
+        # Window rules
+        windowrulev2 = [
+          "bordercolor rgba(F40009AA) rgba(40009AA),floating:1"
+          "suppressevent maximize, class:.*"
+          "float,title:(Authentication Required)"
+          "stayfocused,title:(Authentication Required)"
+          "stayfocused,class:(ulauncher)"
+        ];
+      };
+    };
+  }
+
 }
