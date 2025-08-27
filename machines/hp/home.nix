@@ -18,6 +18,7 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
+    hyprland
   ];
 
   home.file = {
