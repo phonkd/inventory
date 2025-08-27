@@ -227,7 +227,5 @@
             "stayfocused,class:(ulauncher)"
         ];
     };
-    };
-  }
-
+  };
 }
