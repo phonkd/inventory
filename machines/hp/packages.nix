@@ -78,7 +78,7 @@
   ];
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.graphics.enable = true;
-  programs.hyprland.enable = true;
+  programs.hyprland.enable = false;
   hardware.nvidia.open = false;
 
   ## file manager and usb mount
