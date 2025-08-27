@@ -23,6 +23,7 @@ in
       ../../modules/flowtime.nix
       #../../modules/rustfs.nix
       ../../modules/o11y.nix
+      ../../modules/alloy.nix
     ];
   services.caddy = {
     package =  pkgs.caddy.withPlugins {

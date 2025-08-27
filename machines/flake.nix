@@ -61,6 +61,14 @@
             sops-nix.nixosModules.sops
           ];
         };
+        hp = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
+            ./hp/configuration.nix
+            sops-nix.nixosModules.sops
+          ];
+        };
       };
     };
 }
