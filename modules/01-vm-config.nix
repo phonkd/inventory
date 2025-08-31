@@ -2,7 +2,7 @@
 {
   imports = [
     #../machines-nok8s/apps/sops.nix
-    ./alloy.nix
+    ./o11y/alloy.nix
     #(modulesPath + "/profiles/qemu-guest.nix")
   ];
   boot.loader.grub.enable = true;

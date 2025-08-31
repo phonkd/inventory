@@ -22,8 +22,8 @@ in
       ../../modules/share.nix
       ../../modules/flowtime.nix
       #../../modules/rustfs.nix
-      ../../modules/o11y.nix
-      ../../modules/alloy.nix
+      ../../modules/o11y/o11y.nix
+      ../../modules/011y/alloy.nix
     ];
   services.caddy = {
     package =  pkgs.caddy.withPlugins {

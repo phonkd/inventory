@@ -7,7 +7,7 @@
       apps = [
         {
           name = "grafana";
-          uri = "http://localhost:8686";
+          uri = "http://localhost:3000";
           insecure_skip_verify = true;
           rewrite = {
             headers = [
@@ -26,6 +26,14 @@
         victoriametrics-logs-datasource
     ];
     provision = {
+      enable = true;
+      dashboards.settings.providers = [{
+        name = "dashboards";
+        options = {
+          path = "/etc/grafana-dashboards";
+          foldersFromFilesStructure = true;
+        };
+      }];
       datasources.settings.datasources = [
         {
           name = "Prometheus";
@@ -40,6 +48,7 @@
       ];
     };
   };
+  environment.etc."grafana-dashboards/mystrom.json".source = ./mystrom.json;
   # services.mimir = {
   #   enable = true;
   #   extraFlags = ["--compactor.blocks-retention-period 14d"];
