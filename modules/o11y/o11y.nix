@@ -48,7 +48,7 @@
       ];
     };
   };
-  environment.etc."grafana-dashboards/mystrom.json".source = ./mystrom.json;
+  #environment.etc."grafana-dashboards/mystrom.json".source = ./mystrom.json;
   # services.mimir = {
   #   enable = true;
   #   extraFlags = ["--compactor.blocks-retention-period 14d"];
