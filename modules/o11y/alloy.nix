@@ -7,13 +7,13 @@
   #   Group = lib.mkForce "root";  # optional, but usually pair with User
   # };
   services.prometheus.exporters.node = {
-    enabledCollectors = ["node"];
+    enabledCollectors = ["arp" "bcache" "bonding" "buddyinfo" "conntrack" "cpu" "diskstats" "edac" "entropy" "filefd" "filesystem" "hwmon" "infiniband" "ipvs" "loadavg" "mdadm" "meminfo" "netclass" "netdev" "netstat" "nfs" "nfsd" "pressure" "rapl" "schedstat" "sockstat" "softnet" "stat" "textfile" "time" "timex" "uname" "vmstat" "xfs" "zfs"];
     enable = true;
   };
   environment.etc."alloy/config.alloy" = {
     text = ''
       prometheus.scrape "nixvms" {
-        targets    = http://localhost:9100
+        targets    = [ {"__address__" = "localhost:9100/metrics"} ]
         forward_to = [prometheus.remote_write.nixvms.receiver]
       }
       prometheus.remote_write "nixvms" {

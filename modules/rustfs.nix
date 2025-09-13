@@ -13,7 +13,7 @@ in
   #   '';
   # };
   services.caddy = {
-    virtualHosts."s5.w.phonkd.net".extraConfig = ''
+    virtualHosts."s5.int.phonkd.net".extraConfig = ''
       reverse_proxy :9000 {
         buffer_size 0
       }

@@ -23,5 +23,14 @@ services.caddy = {
       }
     }
   '';
+  # virtualHosts."segglaecloud.int.phonkd.net".extraConfig = ''
+  #   reverse_proxy {
+  #     to 192.168.1.123:80
+  #     header_up X-Forwarded-Proto {scheme}
+  #     header_up X-Forwarded-Host {host}
+  #     header_up X-Forwarded-For {remote_host}
+  #     header_down Server ""
+  #   }
+  # '';
   };
 }

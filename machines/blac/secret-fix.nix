@@ -16,4 +16,8 @@
   sops.secrets.cfapikey = {
     owner = "phonkd";
   };
+  sops.secrets.traefikcfapikey = {
+    sopsFile = ../../modules/global-secrets/traefik-secret.txt;
+    format = "binary";
+  };
 }

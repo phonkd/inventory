@@ -52,6 +52,14 @@
             sops-nix.nixosModules.sops
           ];
         };
+        "123-segglaecloud" = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
+            ./123-segglaecloud/configuration.nix
+            sops-nix.nixosModules.sops
+          ];
+        };
 
         blac = nixpkgs.lib.nixosSystem {
           inherit system;
