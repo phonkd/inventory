@@ -8,7 +8,7 @@
       http-enabled = true;
       hostname-strict-https = false;
       proxy-headers = "xforwarded";
-      proxy-trusted-addresses = "192.168.1.122";
+      proxy-trusted-addresses = "192.168.1.123";
       http-port = 8123;
     };
     initialAdminPassword = "sml12345";

@@ -4,19 +4,21 @@
 
 { config, pkgs, lib, ... }:
 let
-  traefikcfapikeytemp = if builtins.pathExists config.sops.secrets."traefikcfapikey".path then
-                    config.sops.secrets."traefikcfapikey".path
+  traefikcfapikeytemp = if builtins.pathExists config.sops.secrets."CF_DNS_API_TOKEN".path then
+                    config.sops.secrets."CF_DNS_API_TOKEN".path
                   else
                     "/tmp/default_auth_token_placeholder";
 in
 {
-  sops.secrets.traefikcfapikey = {
+  systemd.services.traefik.environment = {
+    CF_DNS_API_TOKEN = "${traefikcfapikeytemp}";
+  };
+  sops.secrets.CF_DNS_API_TOKEN = {
     sopsFile = ../../modules/global-secrets/traefik-secret.txt;
     format = "binary";
+    owner = "traefik";
   };
   services.traefik = {
-    environmentFiles = ["${traefikcfapikeytemp}"];
-
     enable = true;
 
     staticConfigOptions = {
@@ -26,7 +28,10 @@ in
         };
         websecure = {
           address = ":443";
-          http.tls.certResolver = "letsencrypt";
+          http.tls = {
+            certResolver = "cloudflare";
+            domains = "*.segglaecloud.phonkd.net";
+          };
         };
       };
 
@@ -36,13 +41,16 @@ in
         format = "json";
       };
 
-      certificatesResolvers.letsencrypt.acme = {
-        email = "bhonk123@gmail.com";
-        storage = "${config.services.traefik.dataDir}/acme.json";
-        # Use DNS challenge with Cloudflare
-        dnsChallenge = {
-          provider = "cloudflare";
-          delayBeforeCheck = 0; # optional
+      certificatesResolvers = {
+        cloudflare = {
+          acme = {
+            email = "***";
+            storage = "${config.services.traefik.dataDir}/acme.json";
+            dnsChallenge = {
+              provider = "cloudflare";
+              resolvers = [ "1.1.1.1:53" "1.0.0.1:53" ];
+            };
+          };
         };
       };
       api.dashboard = true;
