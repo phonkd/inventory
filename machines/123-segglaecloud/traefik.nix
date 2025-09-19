@@ -30,7 +30,7 @@ in
           address = ":443";
           http.tls = {
             certResolver = "cloudflare";
-            domains = "*.segglaecloud.phonkd.net";
+            # domains = "*.segglaecloud.phonkd.net";
           };
         };
       };
@@ -44,7 +44,7 @@ in
       certificatesResolvers = {
         cloudflare = {
           acme = {
-            email = "***";
+            email = "bhonk123@gmail.com";
             storage = "${config.services.traefik.dataDir}/acme.json";
             dnsChallenge = {
               provider = "cloudflare";

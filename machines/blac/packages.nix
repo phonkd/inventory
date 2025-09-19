@@ -65,6 +65,7 @@
       pavucontrol
       vesktop
     ];
+  programs.steam.enable = true;
   services.flatpak.enable = true;
   # Install firefox.
   programs.firefox.enable = true;
