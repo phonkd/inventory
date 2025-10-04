@@ -5,7 +5,7 @@
     enable = true;
     settings = {
       hostname = "auth.segglaecloud.phonkd.net";
-      http-enabled = true;
+      http-enabled = false;
       hostname-strict-https = false;
       proxy-headers = "xforwarded";
       proxy-trusted-addresses = "192.168.1.123";
