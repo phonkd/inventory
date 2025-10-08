@@ -77,7 +77,7 @@ in
         };
         keycloak-service = {
           loadBalancer = {
-            servers = [{url = "http://127.0.0.1:8123";}];
+            servers = [{url = "https://127.0.0.1:443";}];
           };
         };
       };
