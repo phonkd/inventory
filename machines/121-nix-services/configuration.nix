@@ -18,7 +18,7 @@ in
       ../../modules/01-vm-config.nix
       ../../modules/reverseproxy.nix
       ../../modules/vaultwarden.nix
-      #../../modules/immich.nix
+      ../../modules/immich.nix
       ../../modules/share.nix
       ../../modules/flowtime.nix
       #../../modules/rustfs.nix
