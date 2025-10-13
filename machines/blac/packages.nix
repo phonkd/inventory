@@ -25,7 +25,12 @@
       bat
       syncthing
       obsidian
+      rofi
       rofi-obsidian
+      rofi-systemd
+      rofi-pulse-select
+      rofi-rbw
+      ponymix
       nwg-displays
       cliphist
       hyprcursor
