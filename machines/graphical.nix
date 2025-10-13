@@ -10,7 +10,7 @@
     #  thunderbird
       kitty
       neovim
-      unstable.zed-editor
+      unstable.zed-editor-fhs
       unstable.zed-discord-presence
       nixd
       nil
@@ -72,6 +72,9 @@
       vesktop
       pavucontrol
       vesktop
+      yt-dlp
+      ffmpeg
+      wget
     ];
   programs.steam.enable = true;
   services.flatpak.enable = true;
@@ -80,7 +83,7 @@
   programs.zoxide.enable = true;
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  services.gnome.gnome-keyring.enable = true;
+  #services.gnome.gnome-keyring.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
