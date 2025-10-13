@@ -9,9 +9,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    rofi-zed-recent.url = "github:phonkd/rofi-zed-editor-projects";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, sops-nix, home-manager, ... }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, sops-nix, home-manager, rofi-zed-recent,... }:
     let
       system = "x86_64-linux";
       overlay-unstable = final: prev: {
@@ -64,10 +65,15 @@
         blac = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
-            ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
-            ./blac/configuration.nix
-            sops-nix.nixosModules.sops
-          ];
+                      ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
+                      ./blac/configuration.nix
+                      sops-nix.nixosModules.sops
+                      ({ config, pkgs, ... }: {
+                        environment.systemPackages = [
+                          rofi-zed-recent.packages.x86_64-linux.default
+                        ];
+                      })
+                    ];
         };
         hp = nixpkgs.lib.nixosSystem {
           inherit system;

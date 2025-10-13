@@ -10,8 +10,8 @@
     #  thunderbird
       kitty
       neovim
-      git
       unstable.zed-editor
+      unstable.zed-discord-presence
       nixd
       nil
       grimblast
@@ -32,6 +32,7 @@
       rofi-systemd
       rofi-pulse-select
       rofi-rbw
+      sqlite
       ponymix
       nwg-displays
       cliphist
@@ -79,6 +80,7 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  services.gnome.gnome-keyring.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
