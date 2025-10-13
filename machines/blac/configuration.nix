@@ -8,7 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./packages.nix
+      ../graphical.nix
       ../../modules/00-global-config.nix
       ./secret-fix.nix
     ];
@@ -23,7 +23,7 @@
   time.timeZone = "Europe/Zurich";
   i18n.defaultLocale = "en_US.UTF-8";
   services.xserver.enable = true;
-  services.xserver.displayManager.sddm.enable = true;
+  services.displayManager.sddm.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -77,4 +77,8 @@
     NIXOS_OZONE_WL=1;
   };
   networking.nameservers = [ "192.168.1.3" "192.168.1.1" ];
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.graphics.enable = true;
+  programs.hyprland.enable = true;
+  hardware.nvidia.open = false;
 }

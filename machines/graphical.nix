@@ -11,7 +11,9 @@
       kitty
       neovim
       git
-      zed-editor
+      unstable.zed-editor
+      nixd
+      nil
       grimblast
       easyeffects
       cool-retro-term
@@ -25,7 +27,7 @@
       bat
       syncthing
       obsidian
-      rofi
+      rofi-wayland
       rofi-obsidian
       rofi-systemd
       rofi-pulse-select
@@ -83,10 +85,6 @@
   environment.systemPackages = with pkgs; [
     lxqt.lxqt-policykit
   ];
-  services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.graphics.enable = true;
-  programs.hyprland.enable = true;
-  hardware.nvidia.open = false;
 
   ## file manager and usb mount
 
