@@ -77,7 +77,7 @@
   services.flatpak.enable = true;
   # Install firefox.
   programs.firefox.enable = true;
-
+  programs.zoxide.enable = true;
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   services.gnome.gnome-keyring.enable = true;
