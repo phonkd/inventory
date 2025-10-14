@@ -75,6 +75,7 @@
       yt-dlp
       ffmpeg
       wget
+      nautilus
     ];
   programs.steam.enable = true;
   services.flatpak.enable = true;
@@ -83,6 +84,7 @@
   programs.zoxide.enable = true;
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  services.gnome.sushi.enable = true;
   #services.gnome.gnome-keyring.enable = true;
 
   # List packages installed in system profile. To search, run:
@@ -100,11 +102,11 @@
   #wireguard need this:
   services.resolved.enable = false;
   programs.xfconf.enable = true;
-  programs.thunar.enable = true;
-  programs.thunar.plugins = with pkgs.xfce; [
-      thunar-archive-plugin
-      thunar-volman
-  ];
+  # programs.thunar.enable = true;
+  # programs.thunar.plugins = with pkgs.xfce; [
+  #     thunar-archive-plugin
+  #     thunar-volman
+  # ];
   services.syncthing = {
     enable = true;
     user = "phonkd";
