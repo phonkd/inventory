@@ -11,7 +11,7 @@
       ../../modules/02-global-ssh.nix
       ../../modules/00-global-config.nix
       ../../modules/01-vm-config.nix
-      ./wgez.nix
+      ./wgnotez.nix
       ../../modules/reverseproxy.nix
       ./caddy-int.nix
       ../../modules/paperless.nix

@@ -9,14 +9,21 @@
       address = "192.168.1.122";
       prefixLength = 24;
   } ];
+  networking.nat = {
+    externalInterface = "ens18";
+    internalInterfaces = [ "wg0" ];
+  };
   networking.defaultGateway = "192.168.1.1";
   networking.nameservers = [ "192.168.1.3" "192.168.1.1" ];
   networking.hostName = "nixos-int"; # Define your hostname.
   networking.networkmanager.dhcp = "internal";
   # Groups:
   #programs.ssh.startAgent = true; #ssh-agent
-  networking.firewall.allowedTCPPorts = [80 443];
-  networking.firewall.allowedUDPPorts = [51820 51821];
+  networking.firewall = {
+    trustedInterfaces = [ "wg0" ];
+    allowedUDPPorts = [51820 51821];
+    allowedTCPPorts = [80 443];
+  };
   networking.interfaces.ens18.ipv4.routes = [
     {
         address = "192.168.90.0";
