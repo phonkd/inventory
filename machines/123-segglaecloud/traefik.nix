@@ -10,9 +10,6 @@ let
                     "/tmp/default_auth_token_placeholder";
 in
 {
-  systemd.services.traefik.environment = {
-    CF_DNS_API_TOKEN = "${traefikcfapikeytemp}";
-  };
   sops.secrets.CF_DNS_API_TOKEN = {
     sopsFile = ../../modules/global-secrets/traefik-secret.txt;
     format = "binary";
@@ -45,10 +42,11 @@ in
         cloudflare = {
           acme = {
             email = "bhonk123@gmail.com";
-            storage = "${config.services.traefik.dataDir}/acme.json";
+            storage = "/var/lib/traefik/acme.json";
             dnsChallenge = {
               provider = "cloudflare";
               resolvers = [ "1.1.1.1:53" "1.0.0.1:53" ];
+              propagation.delayBeforeChecks = 60;
             };
           };
         };
@@ -82,5 +80,8 @@ in
         };
       };
     };
+  };
+  systemd.services.traefik.serviceConfig = {
+    EnvironmentFile = ["${traefikcfapikeytemp}"];
   };
 }
