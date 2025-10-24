@@ -1,48 +1,52 @@
-services.samba = {
-  enable = true;
-  securityType = "user";
-  openFirewall = true;
-  settings = {
-    global = {
-      "workgroup" = "WORKGROUP";
-      "server string" = "baaaalright";
-      "netbios name" = "smbnix";
-      "security" = "baaaalright";
-      #"use sendfile" = "yes";
-      #"max protocol" = "smb2";
-      # note: localhost is the ipv6 localhost ::1
-      "hosts allow" = "192.168.0. 127.0.0.1 localhost";
-      "hosts deny" = "0.0.0.0/0";
-      "guest account" = "nobody";
-      "map to guest" = "bad user";
-    };
-    "public" = {
-      "path" = "/mnt/Shares/Public";
-      "browseable" = "yes";
-      "read only" = "no";
-      "guest ok" = "yes";
-      "create mask" = "0644";
-      "directory mask" = "0755";
-      "force user" = "username";
-      "force group" = "groupname";
-    };
-    "private" = {
-      "path" = "/mnt/Shares/this-is-my-own-private-property-and-you-are-not-welcome-here";
-      "browseable" = "yes";
-      "read only" = "no";
-      "guest ok" = "no";
-      "create mask" = "0644";
-      "directory mask" = "0755";
-      "force user" = "phonkd";
-      "force group" = "phonkd";
+{ config, pkgs, ... }:
+
+{
+  services.samba = {
+    enable = true;
+    securityType = "user";
+    openFirewall = true;
+    settings = {
+      global = {
+        "workgroup" = "WORKGROUP";
+        "server string" = "baaaalright";
+        "netbios name" = "smbnix";
+        "security" = "baaaalright";
+        #"use sendfile" = "yes";
+        #"max protocol" = "smb2";
+        # note: localhost is the ipv6 localhost ::1
+        "hosts allow" = "192.168.0. 127.0.0.1 localhost";
+        "hosts deny" = "0.0.0.0/0";
+        "guest account" = "nobody";
+        "map to guest" = "bad user";
+      };
+      "public" = {
+        "path" = "/mnt/Shares/Public";
+        "browseable" = "yes";
+        "read only" = "no";
+        "guest ok" = "yes";
+        "create mask" = "0644";
+        "directory mask" = "0755";
+        "force user" = "username";
+        "force group" = "groupname";
+      };
+      "private" = {
+        "path" = "/mnt/Shares/this-is-my-own-private-property-and-you-are-not-welcome-here";
+        "browseable" = "yes";
+        "read only" = "no";
+        "guest ok" = "no";
+        "create mask" = "0644";
+        "directory mask" = "0755";
+        "force user" = "phonkd";
+        "force group" = "phonkd";
+      };
     };
   };
-};
 
-services.samba-wsdd = {
-  enable = true;
-  openFirewall = true;
-};
+  services.samba-wsdd = {
+    enable = true;
+    openFirewall = true;
+  };
 
-networking.firewall.enable = true;
-networking.firewall.allowPing = true;
+  networking.firewall.enable = true;
+  networking.firewall.allowPing = true;
+}
