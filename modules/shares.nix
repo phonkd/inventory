@@ -2,12 +2,12 @@
 
 {
   users.users.smbpublic = {
-      isSystemUser = true;
-      description = "Samba guest share user";
-      group = "smbpublic";
-      home = "/var/empty";   # locked, no real home
-      shell = pkgs.util-linux.nologin;
-    };
+    isSystemUser = true;
+    description = "Samba guest share user";
+    group = "smbpublic";
+    home = "/var/empty";   # locked, no real home
+    #shell = pkgs.util-linux.nologin;
+  };
 
   users.groups.smbpublic = { };
   services.samba = {
