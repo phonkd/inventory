@@ -1,6 +1,13 @@
 { config, pkgs, ... }:
 
 {
+  systemd.tmpfiles.rules = [
+    "d /mnt/Shares 0755 root root -"
+    "d /mnt/Shares/Public 2775 smbpublic smbpublic -"
+    "d /mnt/Shares/SemiPublic 2770 phonkd phonkd -"
+    "d /mnt/Shares/this-is-my-own-private-property-and-you-are-not-welcome-here 0700 phonkd phonkd -"
+  ];
+
   users.users.smbpublic = {
     isSystemUser = true;
     description = "Samba guest share user";
@@ -38,6 +45,17 @@
         "directory mask" = "2775";
         "force user" = "smbpublic";
         "force group" = "smbpublic";
+      };
+      "semipublic" = {
+        "path" = "/mnt/Shares/SemiPublic";
+        "browseable" = "yes";
+        "read only" = "yes";
+        "guest ok" = "no";
+        "create mask" = "0664";
+        "directory mask" = "2775";
+        "write list" = "@phonkd phonkd";
+        "force create mode" = "0660";
+        "force directory mode" = "2770";
       };
       "private" = {
         "path" = "/mnt/Shares/this-is-my-own-private-property-and-you-are-not-welcome-here";
