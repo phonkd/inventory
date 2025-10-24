@@ -10,7 +10,7 @@
         "workgroup" = "WORKGROUP";
         "server string" = "baaaalright";
         "netbios name" = "smbnix";
-        "security" = "baaaalright";
+        "security" = "user";
         #"use sendfile" = "yes";
         #"max protocol" = "smb2";
         # note: localhost is the ipv6 localhost ::1
