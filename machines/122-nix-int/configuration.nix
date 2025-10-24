@@ -18,6 +18,7 @@
       ../../modules/syncthing.nix
       ../../modules/glances.nix
       ../../modules/kuma.nix
+      ../../modules/shares.nix
     ];
     services.teleport.settings = {
       app_service = {
