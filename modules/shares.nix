@@ -62,4 +62,14 @@
       workstation = true;
     };
   };
+  fileSystems."/mnt/Shares" = {
+     device = "/dev/disk/by-partuuid/64480145-031b-48af-8ad6-6bea4acc37b7";
+     fsType = "ext4";
+     options = [ # If you don't have this options attribute, it'll default to "defaults"
+       # boot options for fstab. Search up fstab mount options you can use
+       "users" # Allows any user to mount and unmount
+       "nofail" # Prevent system from failing if this drive doesn't mount
+
+     ];
+   };
 }
