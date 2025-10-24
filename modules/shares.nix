@@ -32,7 +32,7 @@
         # note: localhost is the ipv6 localhost ::1
         "hosts allow" = "192.168.1.0/24 127.0.0.1 localhost";
         "hosts deny" = "0.0.0.0/0";
-        "guest account" = "nobody";
+        "guest account" = "smbpublic";
         "map to guest" = "bad user";
         "host msdfs" = "no";
       };
@@ -50,12 +50,13 @@
         "path" = "/mnt/Shares/SemiPublic";
         "browseable" = "yes";
         "read only" = "yes";
-        "guest ok" = "no";
+        "guest ok" = "yes";
         "create mask" = "0664";
         "directory mask" = "2775";
         "write list" = "@phonkd phonkd";
         "force create mode" = "0660";
         "force directory mode" = "2770";
+        "guest account" = "smbpublic";
       };
       "private" = {
         "path" = "/mnt/Shares/this-is-my-own-private-property-and-you-are-not-welcome-here";
