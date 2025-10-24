@@ -6,7 +6,7 @@
       description = "Samba guest share user";
       group = "smbpublic";
       home = "/var/empty";   # locked, no real home
-      shell = pkgs.shadow.nologin;
+      shell = pkgs.util-linux.nologin;
     };
 
   users.groups.smbpublic = { };
