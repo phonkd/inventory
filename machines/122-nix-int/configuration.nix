@@ -32,4 +32,5 @@
         ];
       };
     };
+    programs.fzf.fuzzyCompletion = true;
 }
