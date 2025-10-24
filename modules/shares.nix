@@ -1,6 +1,15 @@
 { config, pkgs, ... }:
 
 {
+  users.users.smbpublic = {
+      isSystemUser = true;
+      description = "Samba guest share user";
+      group = "smbpublic";
+      home = "/var/empty";   # locked, no real home
+      shell = pkgs.shadow.nologin;
+    };
+
+  users.groups.smbpublic = { };
   services.samba = {
     enable = true;
     securityType = "user";
@@ -25,10 +34,10 @@
         "browseable" = "yes";
         "read only" = "no";
         "guest ok" = "yes";
-        "create mask" = "0644";
-        "directory mask" = "0755";
-        "force user" = "username";
-        "force group" = "groupname";
+        "create mask" = "0664";
+        "directory mask" = "2775";
+        "force user" = "smbpublic";
+        "force group" = "smbpublic";
       };
       "private" = {
         "path" = "/mnt/Shares/this-is-my-own-private-property-and-you-are-not-welcome-here";
