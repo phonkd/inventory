@@ -6,5 +6,7 @@
     payload-dumper-go
     unzip
     peazip
+    file
+    zip
   ];
 }
