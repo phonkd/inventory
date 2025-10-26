@@ -18,7 +18,7 @@
       prometheus.scrape "nixvms" {
         targets = [
           {
-            "__address__" = "127.0.0.1:9100"
+            "__address__" = "127.0.0.1:9100",
           }
         ]
         forward_to = [prometheus.remote_write.nixvms.receiver]
