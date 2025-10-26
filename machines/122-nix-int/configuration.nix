@@ -19,7 +19,7 @@
       ../../modules/glances.nix
       ../../modules/kuma.nix
       ../../modules/shares.nix
-      ../../modules/technitium.nix
+      ../../modules/adguard.nix
     ];
     services.teleport.settings = {
       app_service = {
