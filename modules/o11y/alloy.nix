@@ -12,6 +12,9 @@
   };
   environment.etc."alloy/config.alloy" = {
     text = ''
+      livedebugging {
+        enabled = true
+      }
       prometheus.scrape "nixvms" {
         targets = [
           {
