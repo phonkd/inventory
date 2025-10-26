@@ -26,7 +26,7 @@
       syncthing
       obsidian
       rofi-obsidian
-      nwg-displays
+      wdisplayd
       cliphist
       hyprcursor
       xdg-desktop-portal-hyprland

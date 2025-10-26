@@ -68,6 +68,16 @@
         "force user" = "phonkd";
         "force group" = "phonkd";
       };
+      # "tm_share" = {
+      #   "path" = "/mnt/Shares/GD-leve8";
+      #   "valid users" = "username";
+      #   "public" = "no";
+      #   "writeable" = "yes";
+      #   "force user" = "username";
+      #   "fruit:aapl" = "yes";
+      #   "fruit:time machine" = "yes";
+      #   "vfs objects" = "catia fruit streams_xattr";
+      # };
     };
   };
 

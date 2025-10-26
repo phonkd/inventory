@@ -19,6 +19,7 @@
       prometheus.remote_write "nixvms" {
         endpoint {
           url = "http://192.168.1.121:9090/api/v1/write"
+          timeout = "10s"
         }
       }
       loki.relabel "journal" {

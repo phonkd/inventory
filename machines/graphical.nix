@@ -34,7 +34,7 @@
       rofi-rbw
       sqlite
       ponymix
-      nwg-displays
+      wdisplays
       cliphist
       hyprcursor
       xdg-desktop-portal-hyprland
