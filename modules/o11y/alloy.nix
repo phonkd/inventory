@@ -13,7 +13,9 @@
   environment.etc."alloy/config.alloy" = {
     text = ''
       prometheus.scrape "nixvms" {
-        targets    = [ {"__address__" = "localhost:9100/metrics"} ]
+        targets    = [ {
+          "__address__" = "127.0.0.1:9100/metrics",
+        } ]
         forward_to = [prometheus.remote_write.nixvms.receiver]
       }
       prometheus.remote_write "nixvms" {
