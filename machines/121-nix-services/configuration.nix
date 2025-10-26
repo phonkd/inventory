@@ -20,7 +20,7 @@ in
       ../../modules/vaultwarden.nix
       ../../modules/immich.nix
       ../../modules/share.nix
-      ../../modules/flowtime.nix
+      #../../modules/flowtime.nix
       #../../modules/rustfs.nix
       ../../modules/o11y/o11y.nix
       ../../modules/o11y/alloy.nix
