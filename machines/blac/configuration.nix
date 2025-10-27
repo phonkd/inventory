@@ -77,7 +77,7 @@
   environment.variables = {
     NIXOS_OZONE_WL=1;
   };
-  networking.nameservers = [ "192.168.1.3" "192.168.1.1" ];
+  networking.nameservers = [ "192.168.1.122" ];
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.graphics.enable = true;
   programs.hyprland.enable = true;

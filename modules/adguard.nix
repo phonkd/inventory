@@ -2,6 +2,10 @@
 {
   services.adguardhome = {
     enable = true;
+    openFirewall = true;
+    allowDHCP = true;
+    host = "127.0.0.1";
+    port = 4040;
     settings = {
       http = {
         # You can select any ip and port, just make sure to open firewalls where needed
@@ -35,6 +39,8 @@
       ];
     };
   };
+  networking.firewall.allowedTCPPorts = [ 53 ];
+  networking.firewall.allowedUDPPorts = [ 53 ];
   services.teleport.settings = {
     app_service = {
       enabled = true;

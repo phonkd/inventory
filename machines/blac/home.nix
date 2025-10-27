@@ -1,32 +1,55 @@
 { config, pkgs, ... }:
 
+let
+  unstable = import (fetchTarball {
+    url = "https://github.com/nixos/nixpkgs/archive/nixos-unstable.tar.gz";
+  }) { };
+in
 {
-  home.username = "phonkd";
-  home.homeDirectory = "/home/phonkd";
-  qt.enable = false;
-  gtk.enable = true;
-  qt.platformTheme.name = "gtk";
-  qt.style.name = "Nordic-darker";
-  qt.style.package = pkgs.nordic;
+  home = {
+    username = "phonkd";
+    homeDirectory = "/home/phonkd";
+    stateVersion = "25.05";
 
-  gtk.theme.package = pkgs.nordic;
-  gtk.theme.name = "Nordic-darker";
-  gtk.iconTheme.package = pkgs.kora-icon-theme;
-  gtk.iconTheme.name = "kora-pgrey";
-  home.stateVersion = "24.05"; # Please read the comment before changing.
-  home.packages = [
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
-  ];
+    file.".config" = {
+      source = ./dotconfig;
+      recursive = true;
+      force = true;
+    };
 
-  home.file.".config" = {
-    source = ./dotconfig;
-    recursive = true;
-    force = true;
+    sessionVariables = {
+      # EDITOR = "emacs";
+    };
+
+    packages = [
+      # (pkgs.writeShellScriptBin "my-hello" ''
+      #   echo "Hello, ${config.home.username}!"
+      # '')
+      unstable.waybar-lyric
+    ];
   };
-  home.sessionVariables = {
-    # EDITOR = "emacs";
+
+  # Qt configuration
+  qt = {
+    enable = false;
+    platformTheme.name = "gtk";
+    style = {
+      name = "Nordic-darker";
+      package = pkgs.nordic;
+    };
+  };
+
+  # GTK configuration
+  gtk = {
+    enable = true;
+    theme = {
+      package = pkgs.nordic;
+      name = "Nordic-darker";
+    };
+    iconTheme = {
+      package = pkgs.kora-icon-theme;
+      name = "kora-pgrey";
+    };
   };
 
   # Let Home Manager install and manage itself.

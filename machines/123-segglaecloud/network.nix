@@ -10,7 +10,7 @@
       prefixLength = 24;
   } ];
   networking.defaultGateway = "192.168.1.1";
-  networking.nameservers = [ "192.168.1.3" "192.168.1.1" ];
+  networking.nameservers = [ "192.168.1.122" "192.168.1.1" ];
   networking.hostName = "123-segglaecloud"; # Define your hostname.
   networking.networkmanager.dhcp = "internal";
   # Groups:

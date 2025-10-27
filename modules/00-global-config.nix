@@ -10,6 +10,7 @@
   sops.defaultSopsFile = ./global-secrets/secret.yaml;
   environment.systemPackages = [
     pkgs.git
+    pkgs.killall
   ];
   time.timeZone = "Europe/Zurich";
   i18n.defaultLocale = "en_US.UTF-8";

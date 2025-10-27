@@ -10,7 +10,7 @@
       prefixLength = 24;
   } ];
   networking.defaultGateway = "192.168.1.1";
-  networking.nameservers = [ "192.168.1.3" ];
+  networking.nameservers = [ "192.168.1.122" ];
   networking.hostName = "dev-vm"; # Define your hostname.
   networking.networkmanager.dhcp = "internal";
   # Groups:

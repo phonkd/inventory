@@ -7,10 +7,10 @@
 window#waybar {
     background-color: rgba(43, 48, 59, 0);
     /*border-bottom: 3px solid rgba(100, 114, 125, 0.5);
-*/    
-color: #fff;
+*/
+    color: #fff;
     transition-property: background-color;
-    transition-duration: .5s;
+    transition-duration: 0.5s;
 }
 
 window#waybar.hidden {
@@ -27,7 +27,7 @@ window#waybar.solo {
 */
 
 window#waybar.termite {
-    background-color: #3F3F3F;
+    background-color: #3f3f3f;
 }
 
 window#waybar.chromium {
@@ -60,7 +60,7 @@ button:hover {
 }
 
 #workspaces button.focused {
-    background-color: #64727D;
+    background-color: #64727d;
     box-shadow: inset 0 -3px #ffffff;
 }
 
@@ -69,7 +69,7 @@ button:hover {
 }
 
 #mode {
-    background-color: #64727D;
+    background-color: #64727d;
     border-bottom: 3px solid #ffffff;
 }
 
@@ -91,22 +91,37 @@ button:hover {
 #mpd,
 #user,
 #bluetooth,
-#custom-spotify-metadata{
+#custom-spotify-metadata {
     padding: 0 10px;
     color: #f3d08c;
-border-radius: 1rem 1rem;
-        background-color: rgba(29,31,33,0.5);
-font-size: 18px;
-font-family: sans-serif;
-letter-spacing: 0.1rem;
-font-weight: bold;
-padding-left: 1.25rem;
-padding-right: 1.25rem;
-padding-top: 0.25rem;
-padding-bottom: 0.25rem;
+    border-radius: 1rem 1rem;
+    background-color: rgba(29, 31, 33, 0.5);
+    font-size: 18px;
+    font-family: sans-serif;
+    letter-spacing: 0.1rem;
+    font-weight: bold;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+}
+
+#custom-lyrics {
+    padding: 0 10px;
+    color: #f9f9f9;
+    border-radius: 1rem 1rem;
+    background-color: rgba(29, 31, 33, 0.5);
+    font-size: 18px;
+    font-family: "Dancing Script", "Segoe Script", "Comic Sans MS", cursive;
+    font-style: italic;
+    letter-spacing: 0.1rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
 }
 #user {
-font-style: italic;
+    font-style: italic;
 }
 #window,
 #workspaces {
@@ -126,7 +141,8 @@ font-style: italic;
 #clock {
 }
 
-#battery.charging, #battery.plugged {
+#battery.charging,
+#battery.plugged {
     color: green;
 }
 

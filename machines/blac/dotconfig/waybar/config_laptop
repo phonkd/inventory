@@ -1,11 +1,11 @@
 {
     "output": "",
-    
+
     "height": 35, // Waybar height (to be removed for auto height)
     "spacing": 4, // Gaps between modules (4px)
     "modules-left": ["network", "bluetooth", "pulseaudio", "backlight"],
-    "modules-center": ["clock"],
-    "modules-right": ["custom/spotify-metadata", "cpu", "memory", "battery"],
+    "modules-center": ["custom/lyrics"],
+    "modules-right": ["custom/spotify-metadata", "cpu", "memory", "battery", "clock"],
     "margin-top": 6,
     "margin-left": 12,
     "margin-right": 12,
@@ -177,6 +177,21 @@
         "signal": 5,
         "smooth-scrolling-threshold": 1.0,
     },
+"custom/lyrics": {
+    "return-type": "json",
+    "format": "{icon} {0}",
+    "hide-empty-text": true,
+    "format-icons": {
+      "playing": "󰎇",
+      "paused": "󰏤",
+      "lyric": "󰎇",
+      "music": "󰎈",
+      "no_lyric": "󰝛",
+      "getting": "󰇚"
+    },
+    "exec-if": "which waybar-lyric",
+    "exec": "waybar-lyric --quiet",
+    "on-click": "waybar-lyric play-pause",
+  }
 
 }
-

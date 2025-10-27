@@ -18,6 +18,7 @@
       easyeffects
       cool-retro-term
       waybar
+      #unstable.waybar-lyric
       btop
       cava
       waypaper
@@ -76,6 +77,7 @@
       ffmpeg
       wget
       nautilus
+      compose2nix
     ];
   programs.steam.enable = true;
   services.flatpak.enable = true;
@@ -122,4 +124,8 @@
        user.email = "enst18.12@gmail.com";
      };
   };
+  fonts.packages = with pkgs; [
+    nerd-fonts.fira-code
+    nerd-fonts.droid-sans-mono
+  ];
 }
