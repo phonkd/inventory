@@ -47,7 +47,10 @@
       loki.source.journal "read"  {
         forward_to    = [loki.write.endpoint.receiver]
         relabel_rules = loki.relabel.journal.rules
-        labels        = {component = "loki.source.journal"}
+        labels        = {
+          component = "loki.source.journal"
+          hostname = "${hostname}"
+        }
       }
 
       loki.write "endpoint" {
