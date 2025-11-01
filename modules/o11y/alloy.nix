@@ -49,11 +49,13 @@
         relabel_rules = loki.relabel.journal.rules
         labels        = {
           component = "loki.source.journal"
-          hostname = "${hostname}"
         }
       }
 
       loki.write "endpoint" {
+        external_labels = {
+          hostname = "${hostname}"
+        }
         endpoint {
           url ="http://192.168.1.121:9428/insert/loki/api/v1/push"
         }
