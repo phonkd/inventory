@@ -24,6 +24,7 @@
     settings.server.http_addr = "0.0.0.0";
     declarativePlugins = with pkgs.grafanaPlugins; [
         victoriametrics-logs-datasource
+        grafana-metricsdrilldown-app
     ];
     provision = {
       enable = true;

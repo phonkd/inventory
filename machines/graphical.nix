@@ -78,6 +78,12 @@
       wget
       nautilus
       compose2nix
+      protonvpn-gui
+      unstable.codex
+      kubectl
+      kubectx
+      kubectl-view-secret
+      kube-capacity
     ];
   programs.steam.enable = true;
   services.flatpak.enable = true;

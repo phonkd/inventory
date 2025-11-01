@@ -11,7 +11,7 @@
     clang
     llvm
     lld
-
+    gnirehtet
     # Cross compilers
     gcc-arm-embedded      # for arm-linux-gnueabihf-
     libgcc # for aarch64-linux-gnu-
@@ -34,6 +34,15 @@
     pkg-config
     distrobox
     distrobox-tui
+    heimdall
+    heimdall-gui
   ];
   #virtualisation.waydroid.enable = true;
+  # programs.zsh = {
+  #
+  programs.zsh = {
+    shellAliases = {
+      android-ssh = "adb forward tcp:8022 tcp:8022 && ssh -luser -p 8022 localhost";
+    };
+  };
 }
