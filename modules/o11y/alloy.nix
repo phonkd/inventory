@@ -11,7 +11,9 @@
     enable = true;
   };
   environment.etc."alloy/config.alloy" = {
-    text = ''
+    text = let
+      hostname = config.networking.hostName;
+    in ''
       livedebugging {
         enabled = true
       }
@@ -19,6 +21,8 @@
         targets = [
           {
             "__address__" = "127.0.0.1:9100",
+            "instance" = "${hostname}",
+            "hostname" = "${hostname}",
           },
         ]
         forward_to = [prometheus.remote_write.nixvms.receiver]
