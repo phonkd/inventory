@@ -22,9 +22,12 @@
     enable = true;
     openFirewall = true;
     settings.server.http_addr = "0.0.0.0";
-    declarativePlugins = with pkgs.grafanaPlugins; [
+    declarativePlugins = with pkgs.unstable.grafanaPlugins; [
         victoriametrics-logs-datasource
         grafana-metricsdrilldown-app
+        grafana-lokiexplore-app
+        grafana-exploretraces-app
+        grafana-pyroscope-app
     ];
     provision = {
       enable = true;
