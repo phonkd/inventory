@@ -21,13 +21,15 @@
         targets = [
           {
             "__address__" = "127.0.0.1:9100",
-            "instance" = "${hostname}",
-            "hostname" = "${hostname}",
           },
         ]
         forward_to = [prometheus.remote_write.nixvms.receiver]
       }
       prometheus.remote_write "nixvms" {
+        external_labels = {
+          hostname = "${hostname}"
+          instance = "${hostname}"
+        }
         endpoint {
           url = "http://192.168.1.121:9090/api/v1/write"
           remote_timeout = "10s"
