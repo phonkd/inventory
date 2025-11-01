@@ -20,6 +20,7 @@
   };
   services.grafana = {
     enable = true;
+    package = pkgs.unstable.grafana;
     openFirewall = true;
     settings.server.http_addr = "0.0.0.0";
     declarativePlugins = with pkgs.unstable.grafanaPlugins; [
