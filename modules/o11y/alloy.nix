@@ -1,4 +1,9 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 {
   services.alloy.enable = true;
   # systemd.services.alloy.serviceConfig = {
@@ -7,56 +12,62 @@
   #   Group = lib.mkForce "root";  # optional, but usually pair with User
   # };
   services.prometheus.exporters.node = {
-    enabledCollectors = ["arp" "bcache" "bonding" "buddyinfo" "conntrack" "cpu" "diskstats" "edac" "entropy" "filefd" "filesystem" "hwmon" "infiniband" "ipvs" "loadavg" "mdadm" "meminfo" "netclass" "netdev" "netstat" "nfs" "nfsd" "pressure" "rapl" "schedstat" "sockstat" "softnet" "stat" "textfile" "time" "timex" "uname" "vmstat" "xfs" "zfs"];
+    # enabledCollectors = [
+    #   "node"
+    #   "postgres"
+    # ];
     enable = true;
   };
+
   environment.etc."alloy/config.alloy" = {
-    text = let
-      hostname = config.networking.hostName;
-    in ''
-      prometheus.scrape "nixvms" {
-        targets = [
-          {
-            "__address__" = "127.0.0.1:9100",
-          },
-        ]
-        forward_to = [prometheus.remote_write.nixvms.receiver]
-      }
-      prometheus.remote_write "nixvms" {
-        external_labels = {
-          hostname = "${hostname}",
-          instance = "${hostname}",
-        }
-        endpoint {
-          url = "http://192.168.1.121:9090/api/v1/write"
-          remote_timeout = "10s"
-        }
-      }
-      loki.relabel "journal" {
-        forward_to = []
+    text =
+      let
+        hostname = config.networking.hostName;
+      in
+      ''
+        prometheus.exporter.unix "gagu" { }
 
-        rule {
-          source_labels = ["__journal__systemd_unit"]
-          target_label  = "unit"
+        // Configure a prometheus.scrape component to collect unix metrics.
+        prometheus.scrape "gagu" {
+          targets    = prometheus.exporter.unix.gagu.targets
+          forward_to = [prometheus.remote_write.nixvms.receiver]
         }
-      }
 
-      loki.source.journal "read"  {
-        forward_to    = [loki.write.endpoint.receiver]
-        relabel_rules = loki.relabel.journal.rules
-        labels        = {
-          component = "loki.source.journal",
+        prometheus.remote_write "nixvms" {
+          external_labels = {
+            hostname = "${hostname}",
+            instance = "${hostname}",
+          }
+          endpoint {
+            url = "http://192.168.1.121:9090/api/v1/write"
+            remote_timeout = "10s"
+          }
         }
-      }
+        loki.relabel "journal" {
+          forward_to = []
 
-      loki.write "endpoint" {
-        external_labels = {
-          hostname = "${hostname}",
+          rule {
+            source_labels = ["__journal__systemd_unit"]
+            target_label  = "unit"
+          }
         }
-        endpoint {
-          url ="http://192.168.1.121:9428/insert/loki/api/v1/push"
+
+        loki.source.journal "read"  {
+          forward_to    = [loki.write.endpoint.receiver]
+          relabel_rules = loki.relabel.journal.rules
+          labels        = {
+            component = "loki.source.journal",
+          }
         }
-      }
-    '';
+
+        loki.write "endpoint" {
+          external_labels = {
+            hostname = "${hostname}",
+          }
+          endpoint {
+            url ="http://192.168.1.121:9428/insert/loki/api/v1/push"
+          }
+        }
+      '';
   };
 }
