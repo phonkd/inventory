@@ -15703,29 +15703,6 @@
         },
         {
           "current": {
-            "text": "nixos-int",
-            "value": "nixos-int"
-          },
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${ds_prometheus}"
-          },
-          "definition": "label_values(node_uname_info{job=\"$job\"}, nodename)",
-          "includeAll": false,
-          "label": "Nodename",
-          "name": "nodename",
-          "options": [],
-          "query": {
-            "query": "label_values(node_uname_info{job=\"$job\"}, nodename)",
-            "refId": "Prometheus-nodename-Variable-Query"
-          },
-          "refresh": 1,
-          "regex": "",
-          "sort": 1,
-          "type": "query"
-        },
-        {
-          "current": {
             "text": "",
             "value": ""
           },
@@ -15747,11 +15724,34 @@
           "regex": "",
           "sort": 1,
           "type": "query"
+        },
+        {
+          "current": {
+            "text": "nixos-services",
+            "value": "nixos-services"
+          },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds_prometheus}"
+          },
+          "definition": "label_values(node_uname_info{job=\"$job\"}, nodename)",
+          "includeAll": false,
+          "label": "Nodename",
+          "name": "nodename",
+          "options": [],
+          "query": {
+            "query": "label_values(node_uname_info{job=\"$job\"}, nodename)",
+            "refId": "Prometheus-nodename-Variable-Query"
+          },
+          "refresh": 1,
+          "regex": "",
+          "sort": 1,
+          "type": "query"
         }
       ]
     },
     "time": {
-      "from": "now-24h",
+      "from": "now-5m",
       "to": "now"
     },
     "timepicker": {},
