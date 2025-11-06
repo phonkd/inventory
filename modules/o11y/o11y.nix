@@ -1,5 +1,10 @@
 # Auto-generated using compose2nix v0.3.1.
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   services.teleport.settings = {
     app_service = {
@@ -22,7 +27,12 @@
     enable = true;
     package = pkgs.unstable.grafana;
     openFirewall = true;
-    settings.server.http_addr = "0.0.0.0";
+    settings = {
+      server.http_addr = "0.0.0.0";
+      feature_toggles = {
+        enable = "provisioning kubernetesDashboards";
+      };
+    };
     # declarativePlugins = with pkgs.unstable.grafanaPlugins; [
     #     victoriametrics-logs-datasource
     #     grafana-metricsdrilldown-app
@@ -32,13 +42,15 @@
     # ];
     provision = {
       enable = true;
-      dashboards.settings.providers = [{
-        name = "dashboards";
-        options = {
-          path = "/etc/grafana-dashboards";
-          foldersFromFilesStructure = true;
-        };
-      }];
+      dashboards.settings.providers = [
+        {
+          name = "dashboards";
+          options = {
+            path = "/etc/grafana-dashboards";
+            foldersFromFilesStructure = true;
+          };
+        }
+      ];
       datasources.settings.datasources = [
         {
           name = "Prometheus";
@@ -61,8 +73,11 @@
   services.prometheus = {
     enable = true;
     retentionTime = "10y";
-    extraFlags = ["--web.enable-remote-write-receiver"];
+    extraFlags = [ "--web.enable-remote-write-receiver" ];
   };
   services.victorialogs.enable = true;
-  networking.firewall.allowedTCPPorts = [9090 9428];
+  networking.firewall.allowedTCPPorts = [
+    9090
+    9428
+  ];
 }

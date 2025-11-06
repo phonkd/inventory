@@ -14,9 +14,6 @@
     text = let
       hostname = config.networking.hostName;
     in ''
-      livedebugging {
-        enabled = true
-      }
       prometheus.scrape "nixvms" {
         targets = [
           {
@@ -27,8 +24,8 @@
       }
       prometheus.remote_write "nixvms" {
         external_labels = {
-          hostname = "${hostname}"
-          instance = "${hostname}"
+          hostname = "${hostname}",
+          instance = "${hostname}",
         }
         endpoint {
           url = "http://192.168.1.121:9090/api/v1/write"
@@ -48,13 +45,13 @@
         forward_to    = [loki.write.endpoint.receiver]
         relabel_rules = loki.relabel.journal.rules
         labels        = {
-          component = "loki.source.journal"
+          component = "loki.source.journal",
         }
       }
 
       loki.write "endpoint" {
         external_labels = {
-          hostname = "${hostname}"
+          hostname = "${hostname}",
         }
         endpoint {
           url ="http://192.168.1.121:9428/insert/loki/api/v1/push"

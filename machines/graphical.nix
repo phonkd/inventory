@@ -2,89 +2,95 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
 
   users.users.phonkd.packages = with pkgs; [
     #  thunderbird
-      kitty
-      neovim
-      unstable.zed-editor-fhs
-      unstable.zed-discord-presence
-      nixd
-      nil
-      grimblast
-      easyeffects
-      cool-retro-term
-      waybar
-      #unstable.waybar-lyric
-      btop
-      cava
-      waypaper
-      swaybg
-      scrcpy
-      google-chrome
-      bat
-      syncthing
-      obsidian
-      rofi-wayland
-      rofi-obsidian
-      rofi-systemd
-      rofi-pulse-select
-      rofi-rbw
-      sqlite
-      ponymix
-      wdisplays
-      cliphist
-      hyprcursor
-      xdg-desktop-portal-hyprland
-      xdg-desktop-portal
-      xdg-desktop-portal-wlr
-      xdg-desktop-portal-gtk
-      obs-studio
-      vlc
-      wireguard-tools
-      exfat
-      dracula-theme
-      swappy
-      slurp
-      wl-clipboard
-      jq
-      nwg-look
-      yubikey-manager
-      sshpass
-      hyprlock
-      spotify
-      tree
-      ipcalc
-      virt-viewer
-      home-manager
-      sops
-      pulseaudio
-      dnsutils
-      bibata-cursors
-      nordic
-      ulauncher
-      discord
-      zsh
-      fzf
-      playerctl
-      vesktop
-      pavucontrol
-      vesktop
-      yt-dlp
-      ffmpeg
-      wget
-      nautilus
-      compose2nix
-      protonvpn-gui
-      unstable.codex
-      kubectl
-      kubectx
-      kubectl-view-secret
-      kube-capacity
-    ];
+    kitty
+    neovim
+    zed-editor-fhs
+    zed-discord-presence
+    nixd
+    nil
+    grimblast
+    easyeffects
+    cool-retro-term
+    waybar
+    #unstable.waybar-lyric
+    btop
+    cava
+    waypaper
+    swaybg
+    scrcpy
+    google-chrome
+    bat
+    syncthing
+    obsidian
+    rofi
+    rofi-obsidian
+    rofi-systemd
+    rofi-pulse-select
+    rofi-rbw
+    sqlite
+    ponymix
+    wdisplays
+    cliphist
+    hyprcursor
+    xdg-desktop-portal-hyprland
+    xdg-desktop-portal
+    xdg-desktop-portal-wlr
+    xdg-desktop-portal-gtk
+    obs-studio
+    vlc
+    wireguard-tools
+    exfat
+    dracula-theme
+    swappy
+    slurp
+    wl-clipboard
+    jq
+    nwg-look
+    yubikey-manager
+    sshpass
+    hyprlock
+    spotify
+    tree
+    ipcalc
+    virt-viewer
+    home-manager
+    sops
+    pulseaudio
+    dnsutils
+    bibata-cursors
+    nordic
+    ulauncher
+    discord
+    zsh
+    fzf
+    playerctl
+    vesktop
+    pavucontrol
+    vesktop
+    yt-dlp
+    ffmpeg
+    wget
+    nautilus
+    compose2nix
+    protonvpn-gui
+    codex
+    kubectl
+    kubectx
+    kubectl-view-secret
+    kube-capacity
+    nwg-displays
+  ];
   programs.steam.enable = true;
   services.flatpak.enable = true;
   # Install firefox.
@@ -125,11 +131,11 @@
   #virtualisation.podman.enable = true;
   virtualisation.docker.enable = true;
   programs.git = {
-     enable = true;
-     config = {
-       user.name  = "Elis";
-       user.email = "enst18.12@gmail.com";
-     };
+    enable = true;
+    config = {
+      user.name = "Elis";
+      user.email = "enst18.12@gmail.com";
+    };
   };
   fonts.packages = with pkgs; [
     nerd-fonts.fira-code

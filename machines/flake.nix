@@ -62,10 +62,9 @@
           ];
         };
 
-        blac = nixpkgs.lib.nixosSystem {
+        blac = nixpkgs-unstable.lib.nixosSystem {
           inherit system;
           modules = [
-                      ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
                       ./blac/configuration.nix
                       sops-nix.nixosModules.sops
                       ({ config, pkgs, ... }: {
