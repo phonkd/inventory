@@ -92,7 +92,7 @@
             "refId": "A"
           }
         ],
-        "title": "Memory Usage %",
+        "title": "Memory Usage",
         "type": "gauge"
       },
       {
@@ -160,7 +160,7 @@
           "overrides": []
         },
         "gridPos": {
-          "h": 8,
+          "h": 24,
           "w": 12,
           "x": 12,
           "y": 0
