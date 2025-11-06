@@ -92,7 +92,7 @@
             "refId": "A"
           }
         ],
-        "title": "Memory Usage",
+        "title": "Memory Usage %",
         "type": "gauge"
       },
       {
@@ -195,7 +195,7 @@
             "refId": "A"
           }
         ],
-        "title": "Cpu Usage",
+        "title": "Disk Usage %",
         "type": "timeseries"
       },
       {
@@ -233,7 +233,7 @@
                 "fill": "solid"
               },
               "lineWidth": 4,
-              "pointSize": 1,
+              "pointSize": 5,
               "scaleDistribution": {
                 "type": "linear"
               },
