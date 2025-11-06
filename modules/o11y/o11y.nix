@@ -60,7 +60,7 @@
   # };
   services.prometheus = {
     enable = true;
-    retentionTime = "14d";
+    retentionTime = "10y";
     extraFlags = ["--web.enable-remote-write-receiver"];
   };
   services.victorialogs.enable = true;

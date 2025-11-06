@@ -28,5 +28,21 @@
     proxy_service.enabled = false;
     auth_service.enabled = false;
     ## sops key cant  be used with remote build atm
+    app_service = {
+      enabled = true;
+      apps = [
+        {
+          name = "pve";
+          uri = "http://192.168.1.46:8006";
+          insecure_skip_verify = true;
+          rewrite = {
+            headers = [
+              "Host: pve.teleport.phonkd.net"
+            ];
+          };
+        }
+      ];
+    };
   };
+
 }

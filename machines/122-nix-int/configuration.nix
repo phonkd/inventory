@@ -20,7 +20,6 @@
       ../../modules/kuma.nix
       ../../modules/shares.nix
       ../../modules/adguard.nix
-      ../../modules/dockge.nix
     ];
     services.teleport.settings = {
       app_service = {
