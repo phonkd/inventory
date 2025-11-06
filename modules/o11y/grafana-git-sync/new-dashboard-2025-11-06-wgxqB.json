@@ -195,7 +195,7 @@
             "refId": "A"
           }
         ],
-        "title": "Cpu Usage",
+        "title": "Disk Usage",
         "type": "timeseries"
       },
       {
