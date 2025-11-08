@@ -1,5 +1,10 @@
 # Auto-generated using compose2nix v0.3.1.
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   programs.adb.enable = true;
   environment.systemPackages = with pkgs; [
@@ -13,7 +18,7 @@
     lld
     gnirehtet
     # Cross compilers
-    gcc-arm-embedded      # for arm-linux-gnueabihf-
+    gcc-arm-embedded # for arm-linux-gnueabihf-
     libgcc # for aarch64-linux-gnu-
 
     # Kernel build dependencies
@@ -36,6 +41,8 @@
     distrobox-tui
     heimdall
     heimdall-gui
+    android-studio
+    sdkmanager
   ];
   #virtualisation.waydroid.enable = true;
   # programs.zsh = {

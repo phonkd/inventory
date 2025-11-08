@@ -10,9 +10,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     rofi-zed-recent.url = "github:phonkd/rofi-zed-editor-projects";
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v0.4.3";
+
+      # Optional but recommended to limit the size of your system closure.
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, sops-nix, home-manager, rofi-zed-recent,... }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, sops-nix, home-manager, rofi-zed-recent, lanzaboote, ... }:
     let
       system = "x86_64-linux";
       overlay-unstable = final: prev: {
@@ -65,14 +71,32 @@
         blac = nixpkgs-unstable.lib.nixosSystem {
           inherit system;
           modules = [
-                      ./blac/configuration.nix
-                      sops-nix.nixosModules.sops
-                      ({ config, pkgs, ... }: {
-                        environment.systemPackages = [
-                          rofi-zed-recent.packages.x86_64-linux.default
-                        ];
-                      })
-                    ];
+            ./blac/configuration.nix
+            sops-nix.nixosModules.sops
+            ({ config, pkgs, ... }: {
+              environment.systemPackages = [
+                rofi-zed-recent.packages.x86_64-linux.default
+              ];
+            })
+            lanzaboote.nixosModules.lanzaboote
+            ({ pkgs, lib, ... }: {
+              environment.systemPackages = [
+                # For debugging and troubleshooting Secure Boot.
+                pkgs.sbctl
+              ];
+
+              # Lanzaboote currently replaces the systemd-boot module.
+              # This setting is usually set to true in configuration.nix
+              # generated at installation time. So we force it to false
+              # for now.
+              boot.loader.systemd-boot.enable = lib.mkForce false;
+
+              boot.lanzaboote = {
+                enable = true;
+                pkiBundle = "/var/lib/sbctl";
+              };
+            })
+          ];
         };
         hp = nixpkgs.lib.nixosSystem {
           inherit system;

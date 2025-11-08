@@ -57,10 +57,6 @@
   };
   programs.firefox.enable = true;
   nixpkgs.config.allowUnfree = true;
-  environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
-  ];
   system.stateVersion = "25.05"; # Did you read the comment?
   systemd.tmpfiles.rules = [
       "d /home/phonkd/tmp 0755 phonkd phonkd -"
@@ -79,7 +75,22 @@
   };
   networking.nameservers = [ "192.168.1.1" ];
   services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.graphics.enable = true;
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      nvidia-vaapi-driver
+      libvdpau-va-gl
+      libvdpau
+    ];
+  };
   programs.hyprland.enable = true;
   hardware.nvidia.open = false;
+  environment.systemPackages = with pkgs; [
+    nvidia-vaapi-driver
+    sbctl
+  ];
+  environment.variables = {
+    LIBVA_DRIVER_NAME = "nvidia";
+  };
+
 }

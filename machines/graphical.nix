@@ -90,6 +90,7 @@
     kubectl-view-secret
     kube-capacity
     nwg-displays
+    nvtopPackages.full
   ];
   programs.steam.enable = true;
   services.flatpak.enable = true;
@@ -128,8 +129,8 @@
     configDir = "/home/phonkd/.config/syncthing";
   };
   security.polkit.enable = true;
-  #virtualisation.podman.enable = true;
-  virtualisation.docker.enable = true;
+  virtualisation.podman.enable = true;
+  #virtualisation.docker.enable = true;
   programs.git = {
     enable = true;
     config = {
