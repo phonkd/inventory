@@ -160,7 +160,7 @@
           "overrides": []
         },
         "gridPos": {
-          "h": 24,
+          "h": 8,
           "w": 12,
           "x": 12,
           "y": 0
@@ -195,7 +195,7 @@
             "refId": "A"
           }
         ],
-        "title": "Disk Usage %",
+        "title": "Disk Usage",
         "type": "timeseries"
       },
       {
@@ -207,46 +207,6 @@
           "defaults": {
             "color": {
               "mode": "continuous-GrYlRd"
-            },
-            "custom": {
-              "axisBorderShow": false,
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisGridShow": true,
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "axisSoftMax": 800,
-              "axisSoftMin": 0,
-              "barAlignment": 0,
-              "barWidthFactor": 0.6,
-              "drawStyle": "line",
-              "fillOpacity": 44,
-              "gradientMode": "scheme",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "insertNulls": false,
-              "lineInterpolation": "smooth",
-              "lineStyle": {
-                "fill": "solid"
-              },
-              "lineWidth": 4,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "auto",
-              "showValues": false,
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
             },
             "mappings": [],
             "max": 1000,
@@ -272,19 +232,21 @@
         },
         "id": 1,
         "options": {
-          "legend": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
             "calcs": [
-              "last"
+              "lastNotNull"
             ],
-            "displayMode": "list",
-            "placement": "bottom",
-            "showLegend": true
+            "fields": "",
+            "values": false
           },
-          "tooltip": {
-            "hideZeros": false,
-            "mode": "single",
-            "sort": "none"
-          }
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
         },
         "pluginVersion": "12.2.0",
         "targets": [
@@ -303,7 +265,7 @@
           }
         ],
         "title": "Power consumption",
-        "type": "timeseries"
+        "type": "stat"
       }
     ],
     "preload": false,
