@@ -1,4 +1,11 @@
-# ideas
-- k8s
-  - Nodes Anywhere (wireguard or similar)
-- terraform vms
+# todo / grübler
+- jürgen clustergebährer
+  - move away from talos because of poor cloudinit support with capmox
+  - fix k3s autodeploy charts for mgmt cluster
+- pong
+  - CPU LEDs
+  - Teleport agent IPMI
+- integrate nix-darwin flake into main flake
+- tidy flake
+- setup kuma on pong with cloudflare tunnel
+- try cloudflare tunnel ingresscontroller
