@@ -5,33 +5,33 @@
 { ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./network.nix
-      ../../modules/02-global-ssh.nix
-      ../../modules/00-global-config.nix
-      ../../modules/01-vm-config.nix
-      ./wgnotez.nix
-      ../../modules/reverseproxy.nix
-      ./caddy-int.nix
-      ../../modules/paperless.nix
-      ../../modules/syncthing.nix
-      ../../modules/glances.nix
-      ../../modules/kuma.nix
-      ../../modules/shares.nix
-      ../../modules/adguard.nix
-    ];
-    services.teleport.settings = {
-      app_service = {
-        enabled = true;
-        apps = [
-          {
-            name = "wg";
-            uri = "http://localhost:51821";
-            insecure_skip_verify = true;
-          }
-        ];
-      };
+  imports = [
+    # Include the results of the hardware scan.
+    ./network.nix
+    ../../modules/02-global-ssh.nix
+    ../../modules/00-global-config.nix
+    ../../modules/01-vm-config.nix
+    ./wgnotez.nix
+    ../../modules/reverseproxy.nix
+    ./caddy-int.nix
+    ../../modules/paperless.nix
+    ../../modules/syncthing.nix
+    ../../modules/glances.nix
+    ../../modules/kuma.nix
+    ../../modules/shares.nix
+    ../../modules/pihole.nix
+  ];
+  services.teleport.settings = {
+    app_service = {
+      enabled = true;
+      apps = [
+        {
+          name = "wg";
+          uri = "http://localhost:51821";
+          insecure_skip_verify = true;
+        }
+      ];
     };
-    programs.fzf.fuzzyCompletion = true;
+  };
+  programs.fzf.fuzzyCompletion = true;
 }

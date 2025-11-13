@@ -18,7 +18,17 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, sops-nix, home-manager, rofi-zed-recent, lanzaboote, ... }:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      nixpkgs-unstable,
+      sops-nix,
+      home-manager,
+      rofi-zed-recent,
+      lanzaboote,
+      ...
+    }:
     let
       system = "x86_64-linux";
       overlay-unstable = final: prev: {
@@ -31,12 +41,12 @@
         inherit system;
         config.allowUnfree = true;
       };
-    in {
+    in
+    {
       nixosConfigurations = {
-        nixos-int = nixpkgs.lib.nixosSystem {
+        nixos-int = nixpkgs-unstable.lib.nixosSystem {
           inherit system;
           modules = [
-            ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
             ./122-nix-int/configuration.nix
             sops-nix.nixosModules.sops
           ];
@@ -45,7 +55,12 @@
         nixos-services = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
-            ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
+            (
+              { config, pkgs, ... }:
+              {
+                nixpkgs.overlays = [ overlay-unstable ];
+              }
+            )
             ./121-nix-services/configuration.nix
             sops-nix.nixosModules.sops
           ];
@@ -54,7 +69,12 @@
         dev-vm = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
-            ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
+            (
+              { config, pkgs, ... }:
+              {
+                nixpkgs.overlays = [ overlay-unstable ];
+              }
+            )
             ./10112-dev-vm/configuration.nix
             sops-nix.nixosModules.sops
           ];
@@ -62,7 +82,12 @@
         "123-segglaecloud" = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
-            ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
+            (
+              { config, pkgs, ... }:
+              {
+                nixpkgs.overlays = [ overlay-unstable ];
+              }
+            )
             ./123-segglaecloud/configuration.nix
             sops-nix.nixosModules.sops
           ];
@@ -73,35 +98,46 @@
           modules = [
             ./blac/configuration.nix
             sops-nix.nixosModules.sops
-            ({ config, pkgs, ... }: {
-              environment.systemPackages = [
-                rofi-zed-recent.packages.x86_64-linux.default
-              ];
-            })
+            (
+              { config, pkgs, ... }:
+              {
+                environment.systemPackages = [
+                  rofi-zed-recent.packages.x86_64-linux.default
+                ];
+              }
+            )
             lanzaboote.nixosModules.lanzaboote
-            ({ pkgs, lib, ... }: {
-              environment.systemPackages = [
-                # For debugging and troubleshooting Secure Boot.
-                pkgs.sbctl
-              ];
+            (
+              { pkgs, lib, ... }:
+              {
+                environment.systemPackages = [
+                  # For debugging and troubleshooting Secure Boot.
+                  pkgs.sbctl
+                ];
 
-              # Lanzaboote currently replaces the systemd-boot module.
-              # This setting is usually set to true in configuration.nix
-              # generated at installation time. So we force it to false
-              # for now.
-              boot.loader.systemd-boot.enable = lib.mkForce false;
+                # Lanzaboote currently replaces the systemd-boot module.
+                # This setting is usually set to true in configuration.nix
+                # generated at installation time. So we force it to false
+                # for now.
+                boot.loader.systemd-boot.enable = lib.mkForce false;
 
-              boot.lanzaboote = {
-                enable = true;
-                pkiBundle = "/var/lib/sbctl";
-              };
-            })
+                boot.lanzaboote = {
+                  enable = true;
+                  pkiBundle = "/var/lib/sbctl";
+                };
+              }
+            )
           ];
         };
         hp = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
-            ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
+            (
+              { config, pkgs, ... }:
+              {
+                nixpkgs.overlays = [ overlay-unstable ];
+              }
+            )
             ./hp/configuration.nix
             sops-nix.nixosModules.sops
           ];
