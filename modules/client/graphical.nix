@@ -91,6 +91,10 @@
     kube-capacity
     nwg-displays
     nvtopPackages.full
+    talosctl
+    kubernetes-helm
+    clusterctl
+    kubectx
   ];
   programs.steam.enable = true;
   services.flatpak.enable = true;
@@ -141,5 +145,8 @@
   fonts.packages = with pkgs; [
     nerd-fonts.fira-code
     nerd-fonts.droid-sans-mono
+  ];
+  programs.zsh.ohMyZsh.plugins = [
+    "kube-ps1"
   ];
 }

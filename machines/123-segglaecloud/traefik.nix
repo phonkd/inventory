@@ -64,7 +64,12 @@ in
         keycloak-router = {
           rule = "Host(`auth.segglaecloud.phonkd.net`)";
           service = "keycloak-service";
-          entryPoints = ["websecure"];
+          entryPoints = [ "websecure" ];
+        };
+        pve-router = {
+          rule = "Host(`pve.segglaecloud.phonkd.net`)";
+          service = "pve-service";
+          entryPoints = [ "websecure" ];
         };
       };
       http.services = {

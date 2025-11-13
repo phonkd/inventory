@@ -1,0 +1,8 @@
+customization:
+  systemExtensions:
+    officialExtensions:
+      - siderolabs/iscsi-tools
+      - siderolabs/mdadm
+      - siderolabs/nvme-cli
+      - siderolabs/qemu-guest-agent
+      - siderolabs/util-linux-tools

@@ -2,25 +2,33 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ../graphical.nix
-      ../../modules/00-global-config.nix
-      ./secret-fix.nix
-      ../../modules/android.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./network.nix
+    ../../modules/client/graphical.nix
+    ../../modules/00-global-config.nix
+    ./secret-fix.nix
+    ../../modules/client/android.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
-  networking.hostName = "blac"; # Define your hostname.
-  networking.networkmanager.enable = true;
+  # Network configuration moved to network.nix
   time.timeZone = "Europe/Zurich";
   i18n.defaultLocale = "en_US.UTF-8";
   services.xserver.enable = true;
@@ -53,13 +61,15 @@
   users.users.phonkd = {
     isNormalUser = true;
     description = "phonkd";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "wheel"
+    ];
   };
   programs.firefox.enable = true;
   nixpkgs.config.allowUnfree = true;
   system.stateVersion = "25.05"; # Did you read the comment?
   systemd.tmpfiles.rules = [
-      "d /home/phonkd/tmp 0755 phonkd phonkd -"
+    "d /home/phonkd/tmp 0755 phonkd phonkd -"
   ];
   programs.ssh = {
     extraConfig = ''
@@ -68,12 +78,11 @@
         IdentityFile ~/.ssh/id_ed25519
     '';
   };
-  programs.ssh.startAgent = true; #ssh-agent
+  programs.ssh.startAgent = true; # ssh-agent
   security.polkit.enable = true;
   environment.variables = {
-    NIXOS_OZONE_WL=1;
+    NIXOS_OZONE_WL = 1;
   };
-  networking.nameservers = [ "192.168.1.1" ];
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.graphics = {
     enable = true;
