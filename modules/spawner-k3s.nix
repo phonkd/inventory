@@ -18,37 +18,38 @@
     enable = true;
     role = "server";
     extraFlags = toString [
+      "--disable=traefik" # Disable built-in Traefik to avoid conflicts with system Traefik
       # "--debug" # Optionally add additional args to k3s
     ];
   };
-  services.k3s.autoDeployCharts = {
-    cluster-api-operator = {
-      name = "cluster-api-operator";
-      repo = "https://kubernetes-sigs.github.io/cluster-api-operator";
-      version = "0.24.0";
-      hash = "sha256-0000000000000000000000000";
-      createNamespace = true;
-      targetNamespace = "capi-operator-system";
-      values = {
-        configSecret = {
-          name = "cluster-api-operator-config";
-          namespace = "capi-operator-system";
-        };
-      };
-      # extraDeploy = [
-      #   ../k8s-capi-pve-provider.yaml
-      # ];
-    };
-    cert-manager = {
-      name = "cert-manager";
-      repo = "oci://quay.io/jetstack/charts/cert-manager";
-      version = "v1.19.1";
-      hash = "sha256-0000000000000000000000000";
-      values = {
-        installCRDs = true;
-      };
-      createNamespace = true;
-      targetNamespace = "cert-manager";
-    };
-  };
+  # services.k3s.autoDeployCharts = {
+  #   cluster-api-operator = {
+  #     name = "cluster-api-operator";
+  #     repo = "https://kubernetes-sigs.github.io/cluster-api-operator";
+  #     version = "0.24.0";
+  #     hash = "sha256-0000000000000000000000000";
+  #     createNamespace = true;
+  #     targetNamespace = "capi-operator-system";
+  #     values = {
+  #       configSecret = {
+  #         name = "cluster-api-operator-config";
+  #         namespace = "capi-operator-system";
+  #       };
+  #     };
+  #     # extraDeploy = [
+  #     #   ../k8s-capi-pve-provider.yaml
+  #     # ];
+  #   };
+  #   cert-manager = {
+  #     name = "cert-manager";
+  #     repo = "oci://quay.io/jetstack/charts/cert-manager";
+  #     version = "v1.19.1";
+  #     hash = "sha256-0000000000000000000000000";
+  #     values = {
+  #       installCRDs = true;
+  #     };
+  #     createNamespace = true;
+  #     targetNamespace = "cert-manager";
+  #   };
+  # };
 }

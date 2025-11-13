@@ -19,5 +19,5 @@
   };
 
   networking.hostName = "blac";
-  networking.nameservers = [ "1.1.1.1" ];
+  networking.nameservers = [ "192.168.1.3" ];
 }
