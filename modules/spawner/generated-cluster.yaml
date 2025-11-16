@@ -1,4 +1,4 @@
-# Talos-based cluster using CAPI with Proxmox
+# Flatcar-based cluster using CAPI with Proxmox
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: Cluster
 metadata:
@@ -13,8 +13,8 @@ spec:
       cidrBlocks:
         - 10.96.0.0/12
   controlPlaneRef:
-    apiVersion: controlplane.cluster.x-k8s.io/v1alpha3
-    kind: TalosControlPlane
+    apiVersion: controlplane.cluster.x-k8s.io/v1beta1
+    kind: KubeadmControlPlane
     name: phonkd-test-01-control-plane
   infrastructureRef:
     apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
@@ -30,7 +30,7 @@ spec:
   allowedNodes:
     - wamluck
   controlPlaneEndpoint:
-    host: 192.168.1.200
+    host: 192.168.1.201
     port: 6443
   dnsServers:
     - 8.8.8.8
@@ -43,55 +43,46 @@ spec:
   schedulerHints:
     memoryAdjustment: 0
 ---
-apiVersion: controlplane.cluster.x-k8s.io/v1alpha3
-kind: TalosControlPlane
+apiVersion: controlplane.cluster.x-k8s.io/v1beta1
+kind: KubeadmControlPlane
 metadata:
   name: phonkd-test-01-control-plane
   namespace: kube-system
 spec:
-  controlPlaneConfig:
-    controlplane:
-      generateType: controlplane
-      talosVersion: v1.8
-      configPatches:
-        - op: add
-          path: /machine/network
-          value:
-            interfaces:
-              - interface: eth0
-                dhcp: true
-                vip:
-                  ip: 192.168.1.200
-            nameservers:
-              - 8.8.8.8
-              - 8.8.4.4
-        - op: add
-          path: /machine/time
-          value:
-            disabled: false
-            servers:
-              - time.cloudflare.com
-        - op: add
-          path: /cluster/network/cni
-          value:
-            name: none
-        - op: add
-          path: /cluster/proxy
-          value:
-            disabled: true
-        - op: add
-          path: /cluster/apiServer/extraArgs
-          value:
-            cloud-provider: external
-        - op: add
-          path: /cluster/controllerManager/extraArgs
-          value:
-            cloud-provider: external
-  infrastructureTemplate:
-    apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
-    kind: ProxmoxMachineTemplate
-    name: phonkd-test-01-control-plane
-    namespace: kube-system
+  kubeadmConfigSpec:
+    clusterConfiguration:
+      apiServer:
+        extraArgs:
+          cloud-provider: external
+      controllerManager:
+        extraArgs:
+          cloud-provider: external
+      networking:
+        podSubnet: 10.244.0.0/16
+        serviceSubnet: 10.96.0.0/12
+    initConfiguration:
+      nodeRegistration:
+        kubeletExtraArgs:
+          cloud-provider: external
+    joinConfiguration:
+      nodeRegistration:
+        kubeletExtraArgs:
+          cloud-provider: external
+    preKubeadmCommands:
+      - systemctl restart systemd-networkd
+    postKubeadmCommands:
+      - |
+        mkdir -p /etc/kubernetes/manifests
+    users:
+      - name: core
+        sshAuthorizedKeys:
+          - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINlfQKdDHjPToqS5Ui0oAGAdgbh7B+NICMP7eYMrrska phonkd@nixos
+        sudo: ALL=(ALL) NOPASSWD:ALL
+  machineTemplate:
+    infrastructureRef:
+      apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
+      kind: ProxmoxMachineTemplate
+      name: phonkd-test-01-control-plane
   replicas: 1
   version: v1.31.0
 ---
@@ -103,8 +94,6 @@ metadata:
 spec:
   template:
     spec:
-      checks:
-        skipCloudInitStatus: true
       vmIDRange:
         start: 800
         end: 899
@@ -122,7 +111,7 @@ spec:
       numCores: 4
       numSockets: 1
       sourceNode: wamluck
-      templateID: 210
+      templateID: 211
 ---
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: MachineDeployment
@@ -144,8 +133,8 @@ spec:
     spec:
       bootstrap:
         configRef:
-          apiVersion: bootstrap.cluster.x-k8s.io/v1alpha3
-          kind: TalosConfigTemplate
+          apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
+          kind: KubeadmConfigTemplate
           name: phonkd-test-01-worker
       clusterName: phonkd-test-01
       infrastructureRef:
@@ -162,11 +151,9 @@ metadata:
 spec:
   template:
     spec:
-      checks:
-        skipCloudInitStatus: true
       vmIDRange:
-        start: 900
-        end: 999
+        start: 800
+        end: 899
       disks:
         bootVolume:
           disk: scsi0
@@ -181,31 +168,24 @@ spec:
       numCores: 4
       numSockets: 1
       sourceNode: wamluck
-      templateID: 210
+      templateID: 211
 ---
-apiVersion: bootstrap.cluster.x-k8s.io/v1alpha3
-kind: TalosConfigTemplate
+apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
+kind: KubeadmConfigTemplate
 metadata:
   name: phonkd-test-01-worker
   namespace: kube-system
 spec:
   template:
     spec:
-      generateType: worker
-      talosVersion: v1.8
-      configPatches:
-        - op: add
-          path: /machine/network
-          value:
-            interfaces:
-              - interface: eth0
-                dhcp: true
-            nameservers:
-              - 8.8.8.8
-              - 8.8.4.4
-        - op: add
-          path: /machine/time
-          value:
-            disabled: false
-            servers:
-              - time.cloudflare.com
+      joinConfiguration:
+        nodeRegistration:
+          kubeletExtraArgs:
+            cloud-provider: external
+      preKubeadmCommands:
+        - systemctl restart systemd-networkd
+      users:
+        - name: core
+          sshAuthorizedKeys:
+            - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINlfQKdDHjPToqS5Ui0oAGAdgbh7B+NICMP7eYMrrska phonkd@nixos
+          sudo: ALL=(ALL) NOPASSWD:ALL

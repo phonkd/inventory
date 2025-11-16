@@ -1,0 +1,33 @@
+# Flatcar Container Linux Configuration Notes
+
+# Flatcar uses Ignition for provisioning instead of cloud-init
+# The CAPI Kubeadm provider can generate Ignition configs for Flatcar
+
+# Useful Flatcar features:
+# - Automatic updates with update_engine
+# - Docker/containerd pre-installed
+# - Minimal, immutable OS designed for containers
+# - No package manager (uses containers for everything)
+
+# For Proxmox template preparation:
+# 1. Download Flatcar image: https://stable.release.flatcar-linux.net/amd64-usr/current/flatcar_production_qemu_image.img
+# 2. Convert to qcow2 if needed: qcow2-img convert -f qcow2 -O qcow2 flatcar_production_qemu_image.img flatcar.qcow2
+# 3. Import to Proxmox as VM template
+# 4. Add cloud-init drive (even though Flatcar uses Ignition, CAPI may need it)
+# 5. Configure:
+#    - Network device (virtio)
+#    - SCSI controller (VirtIO SCSI)
+#    - QEMU Guest Agent support
+#    - Serial console
+
+# The Kubeadm bootstrap provider will handle:
+# - Generating Ignition configs
+# - Installing Kubernetes components
+# - Configuring kubelet
+# - Setting up the cluster
+
+# Network configuration is handled via DHCP by default
+# Static IPs can be configured via Ignition if needed
+
+# Default user: core
+# SSH keys are injected via the KubeadmConfig users section

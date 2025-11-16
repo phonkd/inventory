@@ -95,6 +95,8 @@
     kubernetes-helm
     clusterctl
     kubectx
+    prismlauncher
+    rcon-cli
   ];
   programs.steam.enable = true;
   services.flatpak.enable = true;

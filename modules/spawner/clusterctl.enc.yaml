@@ -9,22 +9,22 @@ PROXMOX_SECRET: ENC[AES256_GCM,data:lKx9X+zBdLkrZDwRVpiMi/lyscfd0pFwIbathI63FJui
 # The node that hosts the VM template to be used to provision VMs
 PROXMOX_SOURCENODE: wamluck
 # The template VM ID used for cloning VMs
-TEMPLATE_VMID: "210"
+TEMPLATE_VMID: "211"
 # The Proxmox VE nodes used for VM deployments
-ALLOWED_NODES: '[wamluck]'
+ALLOWED_NODES: "[wamluck]"
 # The ssh authorized keys used to ssh to the machines.
 VM_SSH_KEYS: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINlfQKdDHjPToqS5Ui0oAGAdgbh7B+NICMP7eYMrrska phonkd@nixos
 ## -- networking configuration-- ##
 # The IP that kube-vip is going to use as a control plane endpoint
 CONTROL_PLANE_ENDPOINT_IP: 192.168.1.201
 # The IP ranges for Cluster nodes
-NODE_IP_RANGES: '[192.168.1.210-192.168.1.225]'
+NODE_IP_RANGES: "[192.168.1.210-192.168.1.225]"
 # The gateway for the machines network-config.
 GATEWAY: 192.168.1.1
 # Subnet Mask in CIDR notation for your node IP ranges
 IP_PREFIX: "25"
 # The dns nameservers for the machines network-config.
-DNS_SERVERS: '[8.8.8.8,8.8.4.4]'
+DNS_SERVERS: "[8.8.8.8,8.8.4.4]"
 # The network bridge device for Proxmox VE VMs
 BRIDGE: vmbr1
 ## -- xl nodes -- ##
@@ -42,28 +42,19 @@ MEMORY_MIB: "16384"
 EXP_CLUSTER_RESOURCE_SET: "true"
 # This enables experimental ClusterClass templating
 CLUSTER_TOPOLOGY: "true"
-providers:
-    - name: talos
-      url: https://github.com/siderolabs/cluster-api-bootstrap-provider-talos/releases/latest/bootstrap-components.yaml
-      type: BootstrapProvider
-    - name: talos
-      url: https://github.com/siderolabs/cluster-api-control-plane-provider-talos/releases/latest/control-plane-components.yaml
-      type: ControlPlaneProvider
-    - name: sidero
-      url: https://github.com/siderolabs/sidero/releases/latest/infrastructure-components.yaml
-      type: InfrastructureProvider
+
 sops:
-    age:
-        - recipient: age1jsnygd7gl62hzt06khdqkkjwa66v3snttmkep4wa5kl33luelfksdzytc6
-          enc: |
-            -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBjcHZVVXJTekVvNFlCckRG
-            czhKUEZYSGMzSlRWNnFRVnA4NGw4ZTBUNWlBCnIwMUJOZDRlSWpXdnUrSm9DS3F1
-            R1N1TTlZVjEwWjRCb0NXRzJJY0FvNVUKLS0tIHJJL09uTVRGNFVJOWhaT2pnckJn
-            SGdxYUp2dDEwYkJDSzIxUk9xc1BMTTQKGHfOeRtfX05AeQTQcAnbR0HqkmVUxn2g
-            VMLFoc6gW8pSA4dPf4727fOfkjKcbD/DCJirCMcv45p4uoBxP1NBiw==
-            -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-11-13T22:47:29Z"
-    mac: ENC[AES256_GCM,data:rvNekp5ok4ICRZyHqLVWqvaoEdBKDKr30Ir1rOmb0Oe0wcXJHrtTrICBURfVMsbIHiuzUldnh0anbjRM4djU03GSA4w8zZQkNsYoacAb7/VoifRbL4dNCPnfPhxdMPG3eJ2vvie7rySH6QexCl3pYJZXz6hV8qcAJdIg0XKjpcw=,iv:DpYHyD13UEIJAG5OEwOSVssJFGL8t1PzbReW0ppBMNE=,tag:SXpmXapXVGRN/FV3s+oNIw==,type:str]
-    encrypted_regex: ^(PROXMOX_SECRET)$
-    version: 3.11.0
+  age:
+    - recipient: age1jsnygd7gl62hzt06khdqkkjwa66v3snttmkep4wa5kl33luelfksdzytc6
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBjcHZVVXJTekVvNFlCckRG
+        czhKUEZYSGMzSlRWNnFRVnA4NGw4ZTBUNWlBCnIwMUJOZDRlSWpXdnUrSm9DS3F1
+        R1N1TTlZVjEwWjRCb0NXRzJJY0FvNVUKLS0tIHJJL09uTVRGNFVJOWhaT2pnckJn
+        SGdxYUp2dDEwYkJDSzIxUk9xc1BMTTQKGHfOeRtfX05AeQTQcAnbR0HqkmVUxn2g
+        VMLFoc6gW8pSA4dPf4727fOfkjKcbD/DCJirCMcv45p4uoBxP1NBiw==
+        -----END AGE ENCRYPTED FILE-----
+  lastmodified: "2025-11-13T22:47:29Z"
+  mac: ENC[AES256_GCM,data:rvNekp5ok4ICRZyHqLVWqvaoEdBKDKr30Ir1rOmb0Oe0wcXJHrtTrICBURfVMsbIHiuzUldnh0anbjRM4djU03GSA4w8zZQkNsYoacAb7/VoifRbL4dNCPnfPhxdMPG3eJ2vvie7rySH6QexCl3pYJZXz6hV8qcAJdIg0XKjpcw=,iv:DpYHyD13UEIJAG5OEwOSVssJFGL8t1PzbReW0ppBMNE=,tag:SXpmXapXVGRN/FV3s+oNIw==,type:str]
+  encrypted_regex: ^(PROXMOX_SECRET)$
+  version: 3.11.0
