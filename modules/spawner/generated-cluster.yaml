@@ -94,6 +94,8 @@ metadata:
 spec:
   template:
     spec:
+      checks:
+        skipCloudInitStatus: true
       vmIDRange:
         start: 800
         end: 899
@@ -151,6 +153,8 @@ metadata:
 spec:
   template:
     spec:
+      checks:
+        skipCloudInitStatus: true
       vmIDRange:
         start: 800
         end: 899
