@@ -95,6 +95,8 @@
     kubernetes-helm
     clusterctl
     kubectx
+    kconf
+    kustomize
   ];
   programs.steam.enable = true;
   services.flatpak.enable = true;

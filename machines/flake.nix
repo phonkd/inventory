@@ -79,7 +79,7 @@
             sops-nix.nixosModules.sops
           ];
         };
-        "123-segglaecloud" = nixpkgs.lib.nixosSystem {
+        "123-segglaecloud" =  nixpkgs-unstable.lib.nixosSystem {
           inherit system;
           modules = [
             (

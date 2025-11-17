@@ -4,12 +4,12 @@ PROXMOX_URL: https://pve.segglaecloud.phonkd.net
 # The Proxmox VE TokenID for authentication
 PROXMOX_TOKEN: capmox@pam!capi
 # The secret associated with the TokenID
-PROXMOX_SECRET: ENC[AES256_GCM,data:lKx9X+zBdLkrZDwRVpiMi/lyscfd0pFwIbathI63FJuiNiUM,iv:CzUXkuDzYG9guHIUwBPxEhoq8szY/FdbRaMsMopXUak=,tag:0LmTi1lM2NlASL77A+IkXw==,type:str]
+PROXMOX_SECRET: ENC[AES256_GCM,data:0GRi/qBdQeJQ8NUczCIGfqfbiYgdtqDAIcaHZlTVh2rRITAd,iv:BIjz90J5bbyhB9qnzjH6UgM5JWePhmUMllcP46nTOnc=,tag:kIboiARDDpOFmKivhkjH6w==,type:str]
 ## -- Required workload cluster default settings -- ##
 # The node that hosts the VM template to be used to provision VMs
 PROXMOX_SOURCENODE: wamluck
 # The template VM ID used for cloning VMs
-TEMPLATE_VMID: "210"
+TEMPLATE_VMID: "211"
 # The Proxmox VE nodes used for VM deployments
 ALLOWED_NODES: '[wamluck]'
 # The ssh authorized keys used to ssh to the machines.
@@ -42,28 +42,18 @@ MEMORY_MIB: "16384"
 EXP_CLUSTER_RESOURCE_SET: "true"
 # This enables experimental ClusterClass templating
 CLUSTER_TOPOLOGY: "true"
-providers:
-    - name: talos
-      url: https://github.com/siderolabs/cluster-api-bootstrap-provider-talos/releases/latest/bootstrap-components.yaml
-      type: BootstrapProvider
-    - name: talos
-      url: https://github.com/siderolabs/cluster-api-control-plane-provider-talos/releases/latest/control-plane-components.yaml
-      type: ControlPlaneProvider
-    - name: sidero
-      url: https://github.com/siderolabs/sidero/releases/latest/infrastructure-components.yaml
-      type: InfrastructureProvider
 sops:
     age:
         - recipient: age1jsnygd7gl62hzt06khdqkkjwa66v3snttmkep4wa5kl33luelfksdzytc6
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBjcHZVVXJTekVvNFlCckRG
-            czhKUEZYSGMzSlRWNnFRVnA4NGw4ZTBUNWlBCnIwMUJOZDRlSWpXdnUrSm9DS3F1
-            R1N1TTlZVjEwWjRCb0NXRzJJY0FvNVUKLS0tIHJJL09uTVRGNFVJOWhaT2pnckJn
-            SGdxYUp2dDEwYkJDSzIxUk9xc1BMTTQKGHfOeRtfX05AeQTQcAnbR0HqkmVUxn2g
-            VMLFoc6gW8pSA4dPf4727fOfkjKcbD/DCJirCMcv45p4uoBxP1NBiw==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBtMlkzczNHZUlScnM2VEZI
+            U3k5L1ViTDJsYUlkVEtsaXpQa01lN3dnK0hNCkthdjVaSWZXRDRIQVVCSmJVNDZq
+            YUNzZGo0WnYwUmVPRUdrOVhranhiMzgKLS0tIGFnM3lFSVZ2d3RUV1hhLzZHdkRL
+            MHIvb0lTNkZRaGFrS0xwK2VUeUpVdHMKVDGrBQpAgYHk3RFRmq9jHN41LuXG9mgu
+            S6sh7PspyFgkSCAbcUPK+SPwHqEnyjSjeXXEgjoECPjraQyU7x8e6Q==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-11-13T22:47:29Z"
-    mac: ENC[AES256_GCM,data:rvNekp5ok4ICRZyHqLVWqvaoEdBKDKr30Ir1rOmb0Oe0wcXJHrtTrICBURfVMsbIHiuzUldnh0anbjRM4djU03GSA4w8zZQkNsYoacAb7/VoifRbL4dNCPnfPhxdMPG3eJ2vvie7rySH6QexCl3pYJZXz6hV8qcAJdIg0XKjpcw=,iv:DpYHyD13UEIJAG5OEwOSVssJFGL8t1PzbReW0ppBMNE=,tag:SXpmXapXVGRN/FV3s+oNIw==,type:str]
+    lastmodified: "2025-11-17T22:53:13Z"
+    mac: ENC[AES256_GCM,data:4YxPxHLiAklVw0g0DAD4LW5yFQ7jGcuq/izDRho5vIkQQ6z7tycLqlzFo7K83uM+QoDo9z9nFqhJTSGNeRSpp19Rx1ljibmhtale0WyjUkZIUEs6vAFrtqWMXfWRmWLlcjqKkaZ/G1RPiRwRCdCLpusxuCCei5njST8a7ugvO4M=,iv:Gol/YYfYh2+b0tGIIW+SWNiQLMTLVdVDkgNcopgBd1A=,tag:bLrJ5IpWedQP90ttA0FYzg==,type:str]
     encrypted_regex: ^(PROXMOX_SECRET)$
     version: 3.11.0

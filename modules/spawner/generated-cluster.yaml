@@ -4,6 +4,8 @@ kind: Cluster
 metadata:
   name: phonkd-test-01
   namespace: kube-system
+  labels:
+    cni: cilium
 spec:
   clusterNetwork:
     pods:
@@ -79,14 +81,14 @@ spec:
           path: /cluster/proxy
           value:
             disabled: true
-        - op: add
-          path: /cluster/apiServer/extraArgs
-          value:
-            cloud-provider: external
-        - op: add
-          path: /cluster/controllerManager/extraArgs
-          value:
-            cloud-provider: external
+        # - op: add
+        #   path: /cluster/apiServer/extraArgs
+        #   value:
+        #     cloud-provider: external
+        # - op: add add when installed ccm
+        #   path: /cluster/controllerManager/extraArgs
+        #   value:
+        #     cloud-provider: external
   infrastructureTemplate:
     apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
     kind: ProxmoxMachineTemplate
@@ -131,7 +133,7 @@ metadata:
   namespace: kube-system
 spec:
   clusterName: phonkd-test-01
-  replicas: 1
+  replicas: 5
   selector:
     matchLabels:
       cluster.x-k8s.io/cluster-name: phonkd-test-01
@@ -170,7 +172,7 @@ spec:
       disks:
         bootVolume:
           disk: scsi0
-          sizeGb: 100
+          sizeGb: 80
       format: qcow2
       full: true
       memoryMiB: 16384
@@ -178,7 +180,7 @@ spec:
         default:
           bridge: vmbr1
           model: virtio
-      numCores: 4
+      numCores: 6
       numSockets: 1
       sourceNode: wamluck
       templateID: 210
