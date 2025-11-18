@@ -36,9 +36,9 @@
             namespace = "capi-operator-system2";
           };
         };
-        extraDeploy = [
-          ./spawner/generated-cluster.yaml
-        ];
+        # extraDeploy = [
+        #   ./spawner/generated-cluster.yaml
+        # ];
       };
       cert-manager = {
         name = "cert-manager";
