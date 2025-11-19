@@ -1,0 +1,19 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - providers.yaml
+  - "https://github.com/ionos-cloud/cluster-api-provider-proxmox/releases/download/v0.7.5/infrastructure-components.yaml"
+#namespace: default
+#
+
+patches:
+  - path: patch-capmox-deployment.yaml #because of bug in default manifest
+    target:
+      kind: Deployment
+      name: capmox-controller-manager
+      namespace: capmox-system
+  - path: capmox-creds.secret.yaml # must use a patch since the upstream manifest creates an empty secret
+    target:
+      kind: Secret
+      name: capmox-manager-credentials
+      namespace: capmox-system

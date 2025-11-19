@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   imports = [
     #../machines-nok8s/apps/sops.nix
@@ -19,30 +24,43 @@
     variant = "";
   };
   console.keyMap = "sg";
-  users.groups.phonkd = {};
+  users.groups.phonkd = { };
   users.users.phonkd = {
     isNormalUser = true;
     description = "phonkd";
     group = "phonkd";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     password = "sml12345";
   };
   users.mutableUsers = true;
   security.sudo.wheelNeedsPassword = false;
   programs.git = {
-     enable = true;
-     config = {
-       user.name  = "Elis";
-       user.email = "enst18.12@gmail.com";
-     };
+    enable = true;
+    config = {
+      user.name = "Elis";
+      user.email = "enst18.12@gmail.com";
+    };
   };
   programs.zsh = {
     enable = true;
-    ohMyZsh = { # "ohMyZsh" without Home Manager
+    ohMyZsh = {
+      # "ohMyZsh" without Home Manager
       enable = true;
-      plugins = [ "git" "kubectl" "fzf" ];
+      plugins = [
+        "git"
+        "kubectl"
+        "fzf"
+      ];
       theme = "robbyrussell";
     };
   };
   users.defaultUserShell = pkgs.zsh;
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 30d";
+  };
 }

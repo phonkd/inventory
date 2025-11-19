@@ -13,7 +13,7 @@
     ../../modules/01-vm-config.nix
     #./keycloak.nix
     #../../modules/rustfs.nix
-    #./traefik.nix
-    ../../modules/spawner-k3s.nix
+    ./traefik.nix
+    ../../modules/spawner/spawner-k3s.nix
   ];
 }

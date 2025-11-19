@@ -36,9 +36,6 @@
             namespace = "capi-operator-system2";
           };
         };
-        # extraDeploy = [
-        #   ./spawner/generated-cluster.yaml
-        # ];
       };
       cert-manager = {
         name = "cert-manager";
@@ -52,6 +49,44 @@
         createNamespace = true;
         targetNamespace = "cert-manager";
       };
+      argocd = {
+        name = "argo-cd";
+        repo = "https://argoproj.github.io/argo-helm";
+        version = "9.1.3";
+        hash = "sha256-OG74wEZuXyqT5S98lhj/E+t+KScJZycVWeLORPs8J7I=";
+        createNamespace = true;
+        values = {
+          server = {
+            service = {
+              type = "NodePort";
+              nodePortHttp = 30080;
+            };
+            insecure = true;
+          };
+          # configs = {
+          #   cm = {
+          #     url = "https://spawner-argo.teleport.phonkd.net";
+          #   };
+          # };
+        };
+      };
+    };
+  };
+  services.teleport.settings = {
+    app_service = {
+      enabled = true;
+      apps = [
+        {
+          name = "spawner-argo";
+          uri = "http://localhost:30080";
+          insecure_skip_verify = true;
+          rewrite = {
+            headers = [
+              "Host: spawner-argo.teleport.phonkd.net"
+            ];
+          };
+        }
+      ];
     };
   };
 }

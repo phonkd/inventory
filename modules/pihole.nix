@@ -10,8 +10,8 @@
     enable = true;
     openFirewallDHCP = true;
     openFirewallDNS = true;
-    #openFirewallWebserver = true;
-    #settings.webserver.port = "8001";
+    openFirewallWebserver = true;
+    settings.webserver.port = "8001";
     settings.misc.readOnly = false;
   };
   services.pihole-web = {
