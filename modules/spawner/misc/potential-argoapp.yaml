@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cluster-01
+spec:
+  destination:
+    namespace: kube-system
+    server: https://kubernetes.default.svc
+  source:
+    path: modules/spawner/sel-001
+    repoURL: https://github.com/phonkd/inventory.git
+    targetRevision: HEAD
+  sources: []
+  project: default
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
+      enabled: true
