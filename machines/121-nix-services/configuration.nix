@@ -15,7 +15,7 @@
     ../../modules/02-global-ssh.nix
     ../../modules/00-global-config.nix
     ../../modules/01-vm-config.nix
-    ../../modules/reverseproxy.nix
+    #../../modules/reverseproxy.nix
     ../../modules/vaultwarden.nix
     ../../modules/immich.nix
     ../../modules/share.nix
@@ -30,4 +30,5 @@
       plugins = [ "github.com/caddy-dns/cloudflare@v0.2.1" ];
     };
   };
+  networking.firewall.allowedTCPPorts = [ 22 ];
 }

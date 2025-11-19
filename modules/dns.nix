@@ -16,7 +16,7 @@
         "/.int.phonkd.net/::"
         "/.segglaecloud.phonkd.net/192.168.1.123"
         "/.segglaecloud.phonkd.net/::"
-        "/.w.phonkd.net/192.168.1.121"
+        "/.w.phonkd.net/192.168.1.123"
         "/.w.phonkd.net/::"
       ];
       #filter-aaaa = true;

@@ -68,15 +68,11 @@
             middlewares = [ "pve-redirect-https" ];
             service = "pve-service";
           };
-
-          # Main HTTPS router for PVE
           pve-router = {
             rule = "Host(`pve.segglaecloud.phonkd.net`)";
             service = "pve-service";
             entryPoints = [ "websecure" ];
             middlewares = [ "pve-headers" ];
-
-            # <-- This makes Traefik actually use the ACME certs for this host
             tls = {
               certResolver = "cloudflare";
               domains = [
@@ -85,6 +81,24 @@
                 }
               ];
             };
+          };
+          vaultwarden-https = {
+            rule = "Host(`vw.w.phonkd.net`)";
+            entryPoints = [ "websecure" ];
+            service = "vaultwarden";
+            tls = {
+              certResolver = "cloudflare";
+              domains = [
+                {
+                  main = "vw.w.phonkd.net";
+                }
+              ];
+            };
+          };
+          immich-https = {
+            rule = "Host(`immich.w.phonkd.net`)";
+            entryPoints = [ "websecure" ];
+            service = "immich-service";
           };
         };
 
@@ -101,9 +115,21 @@
               servers = [
                 { url = "https://192.168.1.46:8006"; }
               ];
-
-              # Keep the original Host header (pve.segglaecloud.phonkd.net)
               passHostHeader = true;
+            };
+          };
+          vaultwarden = {
+            loadBalancer = {
+              servers = [
+                { url = "http://192.168.1.121:8000"; }
+              ];
+            };
+          };
+          immich-service = {
+            loadBalancer = {
+              servers = [
+                { url = "https://192.168.1.121:2283"; }
+              ];
             };
           };
         };
