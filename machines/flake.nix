@@ -49,6 +49,8 @@
           modules = [
             ./122-nix-int/configuration.nix
             sops-nix.nixosModules.sops
+            ./options.nix
+            { label.labels = [ "vm" ]; }
           ];
         };
 
@@ -63,6 +65,8 @@
             )
             ./121-nix-services/configuration.nix
             sops-nix.nixosModules.sops
+            ./options.nix
+            { label.labels = [ "vm" ]; }
           ];
         };
 
@@ -77,6 +81,8 @@
             )
             ./10112-dev-vm/configuration.nix
             sops-nix.nixosModules.sops
+            ./options.nix
+            { label.labels = [ "vm" ]; }
           ];
         };
         "123-segglaecloud" =  nixpkgs-unstable.lib.nixosSystem {
@@ -90,6 +96,8 @@
             )
             ./123-segglaecloud/configuration.nix
             sops-nix.nixosModules.sops
+            ./options.nix
+            { label.labels = [ "vm" ]; }
           ];
         };
 

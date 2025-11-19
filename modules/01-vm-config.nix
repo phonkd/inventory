@@ -1,4 +1,7 @@
 { config, pkgs, lib, ... }:
+let
+  isVM = lib.elem "vm" config.label.labels;
+in
 {
   imports = [
     #../machines-nok8s/apps/sops.nix
@@ -12,7 +15,9 @@
   networking.firewall.enable = true;
   system.stateVersion = "25.05"; # Did you read the comment?
   services.qemuGuest.enable = true;
-  sops.age.keyFile = /home/phonkd/.config/sops/age/keys.txt;
+  sops.age = lib.mkIf isVM {
+    keyFile = "/home/phonkd/.config/sops/age/keys.txt";
+  };
   sops.defaultSopsFile = ./global-secrets/secret.yaml;
   boot.initrd.availableKernelModules = [ "ata_piix" "uhci_hcd" "virtio_pci" "virtio_scsi" "sd_mod" "sr_mod" ];
   boot.initrd.kernelModules = [ ];

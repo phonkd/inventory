@@ -3,3 +3,4 @@
 **clusterctl.yaml
 **cilium
 **.secret.yaml
+**flake.lock

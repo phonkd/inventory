@@ -4,14 +4,6 @@
   lib,
   ...
 }:
-
-let
-  traefikcfapikeytemp =
-    if builtins.pathExists config.sops.secrets.CF_DNS_API_TOKEN.path then
-      config.sops.secrets.CF_DNS_API_TOKEN.path
-    else
-      "/tmp/default_auth_token_placeholder";
-in
 {
   sops.secrets.CF_DNS_API_TOKEN = {
     sopsFile = ../../modules/global-secrets/traefik-secret.txt;

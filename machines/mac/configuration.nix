@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   # List packages installed in system profile
@@ -6,26 +6,46 @@
     pkgs.vim
     pkgs.devbox
   ];
-
+  imports = [
+    ./builder.nix
+    #../../modules/secret-fix.nix
+  ];
   # Necessary for using flakes on this system
   nix.settings.experimental-features = "nix-command flakes";
 
   # Used for backwards compatibility
   system.stateVersion = 6;
+  # sops = {
+  #   age = {
+  #     sshKeyPaths = [];
+  #     keyFile =
+  #       if pkgs.stdenv.isDarwin then
+  #         "/Users/phonkd/.config/sops/age/keys.txt"
+  #       else
+  #         "/home/phonkd/.config/sops/age/keys.txt";
+
+  #   };
+  #   gnupg.sshKeyPaths = [];
+  # };
 
   # The platform the configuration will be used on
   nixpkgs.hostPlatform = "aarch64-darwin";
 
-  # Auto upgrade nix package and the daemon service
-  # services.nix-daemon.enable = true;
-
-  # Create /etc/zshrc that loads the nix-darwin environment
-  # programs.zsh.enable = true;
-
-  # Allow unfree packages
-  # nixpkgs.config.allowUnfree = true;
-
-  # # Clear Downloads and ~/tmp folders on boot
+  security.pam.services.sudo_local = {
+    enable = true;
+    touchIdAuth = true;
+  };
+  system.defaults = {
+    NSGlobalDomain = {
+      NSWindowShouldDragOnGesture = true;
+      NSAutomaticQuoteSubstitutionEnabled = false;
+    };
+  };
+  system.primaryUser = "phonkd";
+  # Enable alternative shell support in nix-darwin.
+  # programs.fish.enable = true;
+  # Set Git commit hash for darwin-version.
+  # The platform the configuration will be used on.
   # launchd.daemons.cleanup-downloads = {
   #   command = "/bin/rm -rf /Users/*/Downloads/*";
   #   serviceConfig = {

@@ -4,6 +4,9 @@
   lib,
   ...
 }:
+let
+  isVM = lib.elem "vm" config.label.labels;
+in
 {
   imports = [
     #../machines-nok8s/apps/sops.nix
@@ -11,7 +14,9 @@
     ./sops.nix
     #(modulesPath + "/profiles/qemu-guest.nix")
   ];
-  sops.age.keyFile = /home/phonkd/.config/sops/age/keys.txt;
+  sops.age = lib.mkIf isVM {
+    keyFile = "/home/phonkd/.config/sops/age/keys.txt";
+  };
   sops.defaultSopsFile = ./global-secrets/secret.yaml;
   environment.systemPackages = [
     pkgs.git

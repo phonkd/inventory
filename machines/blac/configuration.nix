@@ -16,7 +16,7 @@
     ./network.nix
     ../../modules/client/graphical.nix
     ../../modules/00-global-config.nix
-    ./secret-fix.nix
+    ../../modules/secret-fix.nix
     ../../modules/client/android.nix
   ];
 

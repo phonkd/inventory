@@ -8,13 +8,6 @@
   lib,
   ...
 }:
-let
-  cfapikeytemp =
-    if builtins.pathExists config.sops.secrets."cfapikey".path then
-      builtins.readFile config.sops.secrets."cfapikey".path
-    else
-      "default_auth_token_placeholder";
-in
 {
   imports = [
     # Include the results of the hardware scan.
@@ -26,7 +19,6 @@ in
     ../../modules/vaultwarden.nix
     ../../modules/immich.nix
     ../../modules/share.nix
-    #../../modules/flowtime.nix
     #../../modules/rustfs.nix
     ../../modules/o11y/o11y.nix
     ../../modules/o11y/alloy.nix
