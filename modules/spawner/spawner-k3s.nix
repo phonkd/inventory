@@ -63,11 +63,14 @@
             };
             insecure = true;
           };
-          # configs = {
-          #   cm = {
-          #     url = "https://spawner-argo.teleport.phonkd.net";
-          #   };
-          # };
+          configs = {
+            cm = {
+              url = "https://spawner-argo.teleport.phonkd.net";
+            };
+            params = {
+              "server.insecure" = "true";
+            };
+          };
         };
       };
     };
