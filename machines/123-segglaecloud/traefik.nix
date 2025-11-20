@@ -13,7 +13,7 @@
 
   services.traefik = {
     enable = true;
-
+    environmentFiles = [ "${config.sops.secrets.CF_DNS_API_TOKEN.path}" ];
     staticConfigOptions = {
       entryPoints = {
         web = {
@@ -97,6 +97,7 @@
           };
           immich-https = {
             rule = "Host(`immich.w.phonkd.net`)";
+            tls.certResolver = "cloudflare";
             entryPoints = [ "websecure" ];
             service = "immich-service";
           };
@@ -128,7 +129,7 @@
           immich-service = {
             loadBalancer = {
               servers = [
-                { url = "https://192.168.1.121:2283"; }
+                { url = "http://192.168.1.121:2283"; }
               ];
             };
           };

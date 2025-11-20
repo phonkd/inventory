@@ -2,9 +2,10 @@
 
 {
   # List packages installed in system profile
-  environment.systemPackages = [
-    pkgs.vim
-    pkgs.devbox
+  environment.systemPackages = with pkgs; [
+    vim
+    devbox
+    kconf
   ];
   imports = [
     ./builder.nix
