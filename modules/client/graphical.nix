@@ -99,6 +99,7 @@
     kustomize
     kustomize-sops
     k9s
+    stern
   ];
   programs.steam.enable = true;
   services.flatpak.enable = true;

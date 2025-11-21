@@ -18,5 +18,8 @@ spec:
       prune: true
       selfHeal: true
       enabled: true
+    timeout: 300
     syncOptions:
       - CreateNamespace=true
+  retry:
+    limit: 10
