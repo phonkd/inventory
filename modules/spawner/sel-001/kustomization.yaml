@@ -13,7 +13,7 @@ patches:
       kind: Deployment
       name: capmox-controller-manager
       namespace: capmox-system
-  - path: capmox-creds.secret.yaml # must use a patch since the upstream manifest creates an empty secret
+  - path: capmox-creds.enc.yaml # must use a patch since the upstream manifest creates an empty secret
     target:
       kind: Secret
       name: capmox-manager-credentials

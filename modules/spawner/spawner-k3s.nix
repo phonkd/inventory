@@ -4,7 +4,8 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   networking.firewall.allowedTCPPorts = [
     6443 # k3s: required so that pods can reach the API server (running on port 6443 by default)
     # 2379 # k3s, etcd clients: required if using a "High Availability Embedded etcd" configuration
@@ -21,7 +22,7 @@
       apiVersion: v1
       kind: Secret
       metadata:
-        name: sops-age
+        name: argocd-sops-age-key
         namespace: argocd
       type: Opaque
       data:
@@ -127,7 +128,10 @@
               {
                 name = "install-ksops";
                 image = "viaductoss/ksops:v4.3.3";
-                command = [ "/bin/sh" "-c" ];
+                command = [
+                  "/bin/sh"
+                  "-c"
+                ];
                 args = [
                   ''
                     echo "Installing KSOPS...";
