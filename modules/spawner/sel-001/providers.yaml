@@ -1,3 +1,8 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: capi-system
+---
 apiVersion: operator.cluster.x-k8s.io/v1alpha2
 kind: CoreProvider
 metadata:
@@ -17,9 +22,9 @@ kind: ControlPlaneProvider
 metadata:
   name: talos
   namespace: capi-system
-spec:
-  fetchConfig:
-    url: "https://github.com/siderolabs/cluster-api-control-plane-provider-talos/releases/latest/control-plane-components.yaml"
+# spec:
+#   fetchConfig:
+#     url: "https://github.com/siderolabs/cluster-api-control-plane-provider-talos/releases/latest/control-plane-components.yam"
 ---
 apiVersion: operator.cluster.x-k8s.io/v1alpha2
 kind: BootstrapProvider
