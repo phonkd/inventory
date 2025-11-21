@@ -12,6 +12,12 @@ patches:
       kind: Deployment
       name: capmox-controller-manager
       namespace: capmox-system
+  - target:
+      group: operator.cluster.x-k8s.io
+    patch: |-
+      - op: add
+        path: /metadata/annotations/argocd.argoproj.io~1sync-wave
+        value: "-42069"
 
 generators:
   - capmox-generator.yaml
