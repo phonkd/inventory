@@ -11,11 +11,18 @@
     # 2379 # k3s, etcd clients: required if using a "High Availability Embedded etcd" configuration
     # 2380 # k3s, etcd peers: required if using a "High Availability Embedded etcd" configuration
   ];
-  sops.secrets."data/keys.txt" = {
-    sopsFile = ./ksops-secret.enc.yaml;
-    format = "yaml";
-    owner = "root";
-    #key = "data";
+  sops.secrets = {
+    "data/keys.txt" = {
+      sopsFile = ./ksops-secret.enc.yaml;
+      format = "yaml";
+      owner = "root";
+      #key = "data";
+    };
+    "stringData" = {
+      sopsFile = ./capmox-secret.enc.yaml;
+      format = "yaml";
+      owner = "root";
+    };
   };
   sops.templates = {
     "juan" = {
@@ -28,6 +35,18 @@
         type: Opaque
         data:
           keys.txt: ${config.sops.placeholder."data/keys.txt"}
+      '';
+    };
+    "capmox-secret" = {
+      content = ''
+        apiVersion: v1
+        kind: Secret
+        metadata:
+          name: capmox-manager-credentials-2
+          namespace: capmox-system
+        type: Opaque
+        stringData:
+          ${config.sops.placeholder."stringData"}
       '';
     };
   };
