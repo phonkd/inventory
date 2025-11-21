@@ -19,7 +19,8 @@ patches:
       name: capmox-manager-credentials
       namespace: capmox-system
   - target:
-      apiVersion: operator.cluster.x-k8s.io/v1alpha2
+      group: operator.cluster.x-k8s.io
+      version: v1alpha2
     patch: |-
       - op: add
         path: /metadata/annotations/argocd.argoproj.io~1sync-wave
