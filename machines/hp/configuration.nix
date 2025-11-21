@@ -2,22 +2,33 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./packages.nix
-      ../../modules/00-global-config.nix
-      ../../modules/02-global-ssh.nix
-      ./hardware-configuration.nix
-    ];
-
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./packages.nix
+    ../../modules/00-global-config.nix
+    ../../modules/02-global-ssh.nix
+    ./hardware-configuration.nix
+    ../options.nix
+  ];
+  sops.age = {
+    keyFile = "/home/phonkd/.config/sops/age/keys.txt";
+  };
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   networking.hostName = "hp"; # Define your hostname.
   networking.networkmanager.enable = true;
@@ -53,17 +64,20 @@
   users.users.phonkd = {
     isNormalUser = true;
     description = "phonkd";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
   };
   programs.firefox.enable = true;
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    #  wget
   ];
   system.stateVersion = "25.05"; # Did you read the comment?
   systemd.tmpfiles.rules = [
-      "d /home/phonkd/tmp 0755 phonkd phonkd -"
+    "d /home/phonkd/tmp 0755 phonkd phonkd -"
   ];
   programs.ssh = {
     extraConfig = ''
@@ -72,9 +86,9 @@
         IdentityFile ~/.ssh/id_ed25519
     '';
   };
-  programs.ssh.startAgent = true; #ssh-agent
+  programs.ssh.startAgent = true; # ssh-agent
   security.polkit.enable = true;
   environment.variables = {
-    NIXOS_OZONE_WL=1;
+    NIXOS_OZONE_WL = 1;
   };
 }

@@ -17,17 +17,19 @@
     owner = "root";
     #key = "data";
   };
-  sops.templates."juan" = {
-    content = ''
-      apiVersion: v1
-      kind: Secret
-      metadata:
-        name: argocd-sops-age-key
-        namespace: argocd
-      type: Opaque
-      data:
-        keys.txt: ${config.sops.placeholder."data/keys.txt"}
-    '';
+  sops.templates = {
+    "juan" = {
+      content = ''
+        apiVersion: v1
+        kind: Secret
+        metadata:
+          name: argocd-sops-age-key
+          namespace: argocd
+        type: Opaque
+        data:
+          keys.txt: ${config.sops.placeholder."data/keys.txt"}
+      '';
+    };
   };
 
   services.k3s = {

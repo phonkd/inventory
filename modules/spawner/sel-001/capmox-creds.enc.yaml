@@ -1,27 +1,27 @@
 apiVersion: v1
 kind: Secret
 metadata:
-  name: capmox-manager-credentials
-  namespace: capmox-system
+    name: capmox-manager-credentials-2
+    namespace: capmox-system
 type: Opaque
 stringData:
-  secret: ENC[AES256_GCM,data:1l9TFtVlk2+bBtXQaqy+/uxpCTCDzBEHGHaqM/dIFKMtqrPv,iv:ZfDoKdJwtA0UucDkPPvKSUZDva084WnjFt3ddIutJzA=,tag:otqw5ZEHkhYccbQukVzfIg==,type:str]
-  url: https://pve.segglaecloud.phonkd.net
-  # The Proxmox VE TokenID for authentication
-  token: capmox@pam!capi
-  # The secret associated with the TokenID
+    secret: ENC[AES256_GCM,data:1l9TFtVlk2+bBtXQaqy+/uxpCTCDzBEHGHaqM/dIFKMtqrPv,iv:ZfDoKdJwtA0UucDkPPvKSUZDva084WnjFt3ddIutJzA=,tag:otqw5ZEHkhYccbQukVzfIg==,type:str]
+    url: https://pve.segglaecloud.phonkd.net
+    # The Proxmox VE TokenID for authentication
+    token: capmox@pam!capi
+    # The secret associated with the TokenID
 sops:
-  age:
-    - recipient: age1jsnygd7gl62hzt06khdqkkjwa66v3snttmkep4wa5kl33luelfksdzytc6
-      enc: |
-        -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBFNDlWVEhBMFFiZkgvb3p1
-        L1FXVUI0aldWT3V6eFhMUTZ4bTRvYkFhWXdZCmM2SjFrdnd4UFFtWDBaMjNaOGNa
-        MngzM0t1Q1IydGw2WVdHRjVHYmVreVkKLS0tIGN6UVJCUmx2ZWRTQ24rUldsQkYw
-        VllNRWp6a216RmErUU9ReVMwbnNhT3MK7x8ZzacbmCUk8KYi5/7Yyi6qZd8h4XHe
-        Qgenq7xhqLCAcf6v/VrHt0iMn/6fDnHezS1PrsKwnsZnX1BuuW7YQA==
-        -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-11-18T23:30:18Z"
-  mac: ENC[AES256_GCM,data:yOHnekjLsBGQIutmWne5xma4zDISf7IdFo38aCnTn2nsVK+Z3j6V+Curk4ofoQwZe+mEblPSOZk1UttIxVNjNVKWO2WSvkT/dKRvbRw14D+A/7xEILRUejMPAFG2CdkElD30+ttJOuLyOuZ++3hbW35iWsqROFzNnk4CMNXIcQM=,iv:lIFNFUsfLawq5Njx4gze9D5HJZajqwB1gLkA3/yK21E=,tag:si/8mlCTTmd1WIz2AOsiyA==,type:str]
-  encrypted_regex: ^(secret)$
-  version: 3.11.0
+    age:
+        - recipient: age1jsnygd7gl62hzt06khdqkkjwa66v3snttmkep4wa5kl33luelfksdzytc6
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBFNDlWVEhBMFFiZkgvb3p1
+            L1FXVUI0aldWT3V6eFhMUTZ4bTRvYkFhWXdZCmM2SjFrdnd4UFFtWDBaMjNaOGNa
+            MngzM0t1Q1IydGw2WVdHRjVHYmVreVkKLS0tIGN6UVJCUmx2ZWRTQ24rUldsQkYw
+            VllNRWp6a216RmErUU9ReVMwbnNhT3MK7x8ZzacbmCUk8KYi5/7Yyi6qZd8h4XHe
+            Qgenq7xhqLCAcf6v/VrHt0iMn/6fDnHezS1PrsKwnsZnX1BuuW7YQA==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2025-11-21T20:22:18Z"
+    mac: ENC[AES256_GCM,data:RnuSOPLjnSh1YRpnXYhBpIiGB0inzphMxYEreWIQxT4oKksszT1c0oiH2KEdx73rIRa6EsKuIC5YHYpb4V6zIiowWydScXeAjnrSutipaqCMiWA+NZVslzrZJE8yIZBrXTIIZhS7UsagHWFY9Nd8Axcqe86s7H1aBlkSApl74vA=,iv:KG1EBO0OXGjLbWWzx4zNjdc6llKFdQa6CUSRl1zsfug=,tag:3o4FKReMpU5ni5ebBecCxw==,type:str]
+    encrypted_regex: ^(secret)$
+    version: 3.11.0

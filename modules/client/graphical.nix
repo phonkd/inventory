@@ -98,6 +98,7 @@
     kconf
     kustomize
     kustomize-sops
+    k9s
   ];
   programs.steam.enable = true;
   services.flatpak.enable = true;
