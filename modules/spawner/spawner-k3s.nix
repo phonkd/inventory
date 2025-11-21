@@ -94,7 +94,8 @@
           configs = {
             cm = {
               url = "https://spawner-argo.teleport.phonkd.net";
-              kustomize.buildOptions = "--enable-alpha-plugins --enable-exec";
+              "kustomize.buildOptions" = "--enable-alpha-plugins --enable-exec";
+              "exec.enabled" = true;
             };
             params = {
               "server.insecure" = "true";
@@ -137,8 +138,8 @@
                 args = [
                   ''
                     echo "Installing KSOPS...";
-                    mv ksops /custom-tools/;
-                    mv kustomize /custom-tools/;
+                    cp ksops /custom-tools/;
+                    cp kustomize /custom-tools/;
                     echo "Done.";
                   ''
                 ];
@@ -183,6 +184,10 @@
       ksops-secret-manifest = {
         enable = true;
         source = config.sops.templates."juan".path;
+      };
+      cluster-01-app = {
+        enable = true;
+        source = ./sel-001/argoapp.yaml;
       };
     };
 
