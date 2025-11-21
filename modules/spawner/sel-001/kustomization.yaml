@@ -21,6 +21,6 @@ patches:
   - target:
       kind: CustomResourceDefinition
     patch: |-
-      metadata:
-        annotations:
-          argocd.argoproj.io/sync-wave: "0"
+      - op: add
+        path: /metadata/annotations/argocd.argoproj.io~1sync-wave
+        value: "0"
