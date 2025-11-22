@@ -12,7 +12,6 @@
     ../../modules/00-global-config.nix
     ../../modules/01-vm-config.nix
     #./keycloak.nix
-    #../../modules/rustfs.nix
     ./traefik.nix
     ../../modules/spawner/spawner-k3s.nix
   ];

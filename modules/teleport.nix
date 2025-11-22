@@ -1,9 +1,14 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   services.teleport.enable = true;
   sops.secrets.teleport_authkey = {
-      owner = "root";
-      key = "teleport_authkey";
+    owner = "root";
+    key = "teleport_authkey";
   };
   services.teleport.settings = {
     version = "v3";
@@ -30,7 +35,7 @@
       apps = [
         {
           name = "pve";
-          uri = "http://192.168.1.46:8006";
+          uri = "https://192.168.1.46:8006";
           insecure_skip_verify = true;
           rewrite = {
             headers = [

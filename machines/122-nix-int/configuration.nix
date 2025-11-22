@@ -19,7 +19,6 @@
     ../../modules/glances.nix
     ../../modules/kuma.nix
     ../../modules/shares.nix
-    #../../modules/pihole.nix
     ../../modules/dns.nix
   ];
   services.teleport.settings = {

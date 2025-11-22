@@ -19,7 +19,6 @@
     ../../modules/vaultwarden.nix
     ../../modules/immich.nix
     ../../modules/share.nix
-    #../../modules/rustfs.nix
     ../../modules/o11y/o11y.nix
     ../../modules/o11y/alloy.nix
     ../../modules/ddns.nix
