@@ -23,12 +23,11 @@ patches:
 
 generators:
   - capmox-generator.yaml
-
-vars:
-  - name: VIP_IP
-    objref:
-      kind: TalosControlPlane
-      apiVersion: controlplane.cluster.x-k8s.io/v1alpha3
-      name: phonkd-test-01-control-plane
-    fieldref:
-      fieldpath: spec.controlPlaneConfig.controlplane.configPatches.0.value.interfaces.0.vip.ip
+# vars:
+#   - name: VIP_IP
+#     objref:
+#       kind: TalosControlPlane
+#       apiVersion: controlplane.cluster.x-k8s.io/v1alpha3
+#       name: phonkd-test-01-control-plane
+#     fieldref:
+#       fieldpath: spec.controlPlaneConfig.controlplane.configPatches.0.value.interfaces.0.vip.ip
