@@ -18,6 +18,7 @@ spec:
       prune: true
       selfHeal: true
       enabled: true
+    skipDryRunOnMissingResource: true
     timeout: 300
     syncOptions:
       - CreateNamespace=true
