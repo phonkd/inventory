@@ -11,7 +11,7 @@ spec:
   resources:
     - kind: ConfigMap
       name: cilium-install
-  strategy: ApplyOnce
+  strategy: Reconcile
 ---
 # ConfigMap with SA + RBAC + Job that installs Cilium via Helm
 apiVersion: v1
