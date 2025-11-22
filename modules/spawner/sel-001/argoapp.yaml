@@ -10,7 +10,7 @@ spec:
   source:
     path: modules/spawner/sel-001
     repoURL: https://github.com/phonkd/inventory.git
-    targetRevision: HEAD
+    targetRevision: main
   sources: []
   project: default
   syncPolicy:
