@@ -1,3 +1,36 @@
+# cilium values
+apiVersion: v1
+data:
+  cilium-values.yaml: |
+    ipam:
+      mode: kubernetes
+    kubeProxyReplacement: false
+    securityContext:
+      capabilities:
+        ciliumAgent:
+          - CHOWN
+          - KILL
+          - NET_ADMIN
+          - NET_RAW
+          - IPC_LOCK
+          - SYS_ADMIN
+          - SYS_RESOURCE
+          - DAC_OVERRIDE
+          - FOWNER
+          - SETGID
+          - SETUID
+        cleanCilumState:
+          - NET_ADMIN
+          - SYS_ADMIN
+          - SYS_RESOURCE
+    cgroup:
+      autoMount:
+        enabled: false
+      hostRoot: /sys/fs/cgroup
+kind: ConfigMap
+metadata:
+  name: cilium-config
+---
 # ClusterResourceSet to automatically install Cilium
 apiVersion: addons.cluster.x-k8s.io/v1beta1
 kind: ClusterResourceSet
@@ -48,6 +81,12 @@ data:
     spec:
       template:
         spec:
+          volumes:
+            - name: cilium-values
+              configMap:
+                name: cilium-config
+                items:
+                  - key: cilium-values.yaml
           serviceAccountName: cilium-installer
           restartPolicy: OnFailure
           hostNetwork: true
@@ -63,6 +102,10 @@ data:
               operator: Exists
           containers:
             - name: install-cilium
+              volumeMounts:
+                - name: cilium-values
+                  mountPath: /cilium-values.yaml
+                  subPath: cilium-values.yaml
               image: alpine/helm:3.13.0
               env:
                 - name: KUBERNETES_SERVICE_HOST
@@ -80,11 +123,6 @@ data:
                   helm upgrade --install cilium cilium/cilium \
                     --namespace kube-system \
                     --create-namespace \
-                    --set ipam.mode=kubernetes \
-                    --set kubeProxyReplacement=false \
                     --set k8sServiceHost=${KUBERNETES_SERVICE_HOST} \
                     --set k8sServicePort=${KUBERNETES_SERVICE_PORT} \
-                    --set securityContext.capabilities.ciliumAgent="{CHOWN,KILL,NET_ADMIN,NET_RAW,IPC_LOCK,SYS_ADMIN,SYS_RESOURCE,DAC_OVERRIDE,FOWNER,SETGID,SETUID}" \
-                    --set securityContext.capabilities.cleanCiliumState="{NET_ADMIN,SYS_ADMIN,SYS_RESOURCE}" \
-                    --set cgroup.autoMount.enabled=false \
-                    --set cgroup.hostRoot=/sys/fs/cgroup
+                    --values /cilium-values.yaml
