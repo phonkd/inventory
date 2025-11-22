@@ -28,4 +28,5 @@ spec:
                 secretKeyRef:
                   name: capmox-manager-credentials-2
           livenessProbe:
-            initialDelaySeconds: 90
+            initialDelaySeconds: 500
+            failureThreshold: 15
