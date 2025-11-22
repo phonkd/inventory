@@ -30,6 +30,7 @@ data:
 kind: ConfigMap
 metadata:
   name: cilium-config
+  namespace: kube-system
 ---
 # ClusterResourceSet to automatically install Cilium
 apiVersion: addons.cluster.x-k8s.io/v1beta1
