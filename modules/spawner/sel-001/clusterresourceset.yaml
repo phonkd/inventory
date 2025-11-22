@@ -1,0 +1,83 @@
+# ClusterResourceSet to automatically install Cilium
+apiVersion: addons.cluster.x-k8s.io/v1beta1
+kind: ClusterResourceSet
+metadata:
+  name: cilium-crs
+  namespace: capi-system
+spec:
+  clusterSelector:
+    matchLabels:
+      cni: cilium
+  resources:
+    - kind: ConfigMap
+      name: cilium-install
+  strategy: ApplyOnce
+---
+# ConfigMap with SA + RBAC + Job that installs Cilium via Helm
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cilium-install
+  namespace: capi-system
+data:
+  install-cilium.yaml: |
+    apiVersion: v1
+    kind: ServiceAccount
+    metadata:
+      name: cilium-installer
+      namespace: kube-system
+    ---
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRoleBinding
+    metadata:
+      name: cilium-installer-admin
+    roleRef:
+      apiGroup: rbac.authorization.k8s.io
+      kind: ClusterRole
+      name: cluster-admin
+    subjects:
+      - kind: ServiceAccount
+        name: cilium-installer
+        namespace: kube-system
+    ---
+    apiVersion: batch/v1
+    kind: Job
+    metadata:
+      name: install-cilium
+      namespace: kube-system
+    spec:
+      template:
+        spec:
+          serviceAccountName: cilium-installer
+          restartPolicy: OnFailure
+          hostNetwork: true
+          tolerations:
+            - effect: NoSchedule
+              operator: Exists
+          containers:
+            - name: install-cilium
+              image: alpine/helm:3.13.0
+              env:
+                - name: KUBERNETES_SERVICE_HOST
+                  valueFrom:
+                    fieldRef:
+                      fieldPath: status.hostIP
+                - name: KUBERNETES_SERVICE_PORT
+                  value: "6443"
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  helm repo add cilium https://helm.cilium.io
+                  helm repo update
+                  helm upgrade --install cilium cilium/cilium \
+                    --namespace kube-system \
+                    --create-namespace \
+                    --set ipam.mode=kubernetes \
+                    --set kubeProxyReplacement=false \
+                    --set k8sServiceHost=${KUBERNETES_SERVICE_HOST} \
+                    --set k8sServicePort=${KUBERNETES_SERVICE_PORT} \
+                    --set securityContext.capabilities.ciliumAgent="{CHOWN,KILL,NET_ADMIN,NET_RAW,IPC_LOCK,SYS_ADMIN,SYS_RESOURCE,DAC_OVERRIDE,FOWNER,SETGID,SETUID}" \
+                    --set securityContext.capabilities.cleanCiliumState="{NET_ADMIN,SYS_ADMIN,SYS_RESOURCE}" \
+                    --set cgroup.autoMount.enabled=false \
+                    --set cgroup.hostRoot=/sys/fs/cgroup
