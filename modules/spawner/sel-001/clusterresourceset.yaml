@@ -1,4 +1,27 @@
-# cilium values
+# ClusterResourceSet to automatically install Cilium
+apiVersion: addons.cluster.x-k8s.io/v1beta1
+kind: ClusterResourceSet
+metadata:
+  name: cilium-crs
+  namespace: kube-system
+spec:
+  clusterSelector:
+    matchLabels:
+      cni: cilium
+  resources:
+    - kind: ConfigMap
+      name: cilium-install
+  strategy: Reconcile
+---
+# ConfigMap with SA + RBAC + Job that installs Cilium via Helm
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cilium-install
+  namespace: kube-system
+data:
+  install-cilium.yaml: |
+    # cilium values
 apiVersion: v1
 data:
   cilium-values.yaml: |
@@ -27,34 +50,12 @@ data:
       autoMount:
         enabled: false
       hostRoot: /sys/fs/cgroup
-kind: ConfigMap
-metadata:
-  name: cilium-config
-  namespace: kube-system
----
-# ClusterResourceSet to automatically install Cilium
-apiVersion: addons.cluster.x-k8s.io/v1beta1
-kind: ClusterResourceSet
-metadata:
-  name: cilium-crs
-  namespace: kube-system
-spec:
-  clusterSelector:
-    matchLabels:
-      cni: cilium
-  resources:
-    - kind: ConfigMap
-      name: cilium-install
-  strategy: Reconcile
----
-# ConfigMap with SA + RBAC + Job that installs Cilium via Helm
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: cilium-install
-  namespace: kube-system
-data:
-  install-cilium.yaml: |
+    kind: ConfigMap
+    metadata:
+      name: cilium-values
+      namespace: kube-system
+    apiVersion: v1
+    ---
     apiVersion: v1
     kind: ServiceAccount
     metadata:
@@ -85,7 +86,7 @@ data:
           volumes:
             - name: cilium-values
               configMap:
-                name: cilium-config
+                name: cilium-values
                 namespace: kube-system
                 items:
                   - key: cilium-values.yaml
