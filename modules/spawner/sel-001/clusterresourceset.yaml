@@ -51,6 +51,13 @@ data:
           serviceAccountName: cilium-installer
           restartPolicy: OnFailure
           hostNetwork: true
+          nodeSelector:
+            node-role.kubernetes.io/control-plane: ""
+          tolerations:
+            - effect: NoSchedule
+              key: node-role.kubernetes.io/control-plane
+            - effect: NoSchedule
+              key: node.kubernetes.io/not-ready
           tolerations:
             - effect: NoSchedule
               operator: Exists
