@@ -22,6 +22,6 @@ spec:
     timeout: 300
     syncOptions:
       - CreateNamespace=true
-      - SkipDryRunOnMissingResource=true
+      - SkipDryRunOnMissingResource=true # without this argo's dry run will fail because the customresources cant be created since the customresourcedefinitions arent there yet (first providers which will create customresourcedefinitions must be created)
   retry:
     limit: 10

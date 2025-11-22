@@ -8,10 +8,9 @@
 {
   networking.firewall.allowedTCPPorts = [
     6443 # k3s: required so that pods can reach the API server (running on port 6443 by default)
-    # 2379 # k3s, etcd clients: required if using a "High Availability Embedded etcd" configuration
-    # 2380 # k3s, etcd peers: required if using a "High Availability Embedded etcd" configuration
   ];
   sops.secrets = {
+    # load the nix sops secret
     "data/keys.txt" = {
       sopsFile = ./ksops-secret.enc.yaml;
       format = "yaml";
@@ -20,6 +19,7 @@
     };
   };
   sops.templates = {
+    # template exists as placeholder so secret is only decrypted after runtime
     "juan" = {
       content = ''
         apiVersion: v1
@@ -33,30 +33,28 @@
       '';
     };
   };
-
   services.k3s = {
     enable = true;
     role = "server";
-
     extraFlags = toString [
       "--disable=traefik" # Disable built-in Traefik to avoid conflicts with system Traefik
-      # "--debug" # Optionally add additional args to k3s
     ];
 
     autoDeployCharts = {
+      # to apply changes here you need to restart k3s (ssh 192.168.1.123 sudo systemctl restart k3s)
       cluster-api-operator = {
         name = "cluster-api-operator";
         repo = "https://kubernetes-sigs.github.io/cluster-api-operator";
         version = "0.24.0";
         hash = "sha256-7pYY0Y/gaJH50YVdBU36uYCf0N0eOXKRyxsoFZdVp74";
-        # hash = lib.fakeHash;
+        # hash = lib.fakeHash; # use this to optain hash
         createNamespace = true;
         targetNamespace = "capi-operator-system";
 
         values = {
           configSecret = {
             name = "cluster-api-operator-config";
-            namespace = "capi-operator-system2";
+            namespace = "capi-operator-system2"; # # dont know how it works with this
           };
         };
       };
@@ -71,7 +69,6 @@
         values = {
           installCRDs = true;
         };
-
         createNamespace = true;
         targetNamespace = "cert-manager";
       };
@@ -87,7 +84,7 @@
         values = {
           server = {
             service = {
-              type = "NodePort";
+              type = "NodePort"; # node port is used for a consistent backend for the teleport agent (outside k8s). The management cluster is only accessible via teleport or directly via the vm...
               nodePortHttp = 30080;
             };
             insecure = true;
@@ -95,7 +92,7 @@
 
           configs = {
             cm = {
-              url = "https://spawner-argo.teleport.phonkd.net";
+              url = "https://spawner-argo.teleport.phonkd.net"; # set teleport url
               "kustomize.buildOptions" = "--enable-alpha-plugins --enable-exec";
               "exec.enabled" = true;
             };
@@ -177,33 +174,20 @@
             ];
           };
         };
-        # extraDeploy = [
-        #   config.sops.templates."sops-age-secret.yaml".path
-        # ];
       };
     };
     manifests = {
       ksops-secret-manifest = {
+        # populates the template responsible for creating the kubernetes secret for ksops. has to be done with above template so that the secret is accessed after build time.
         enable = true;
         source = config.sops.templates."juan".path;
       };
       cluster-01-app = {
+        # deploy argo app which will create the cluster under "./sel-001/" (including ugly cilium clusterresourceset job)
         enable = true;
         source = ./sel-001/argoapp.yaml;
       };
     };
-
-    # must rebuild twice for this to work
-    # manifests =
-    #   let
-    #     secretPath = config.sops.secrets.ksops-secret.path;
-    #   in
-    #   if builtins.pathExists secretPath then {
-    #     ksops-secret = {
-    #       manifest = secretPath;
-    #     };
-    #   } else {};
-
   };
 
   services.teleport.settings = {

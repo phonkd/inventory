@@ -14,7 +14,7 @@ spec:
   strategy: Reconcile
 ---
 # ConfigMap containing files applied by CRS (Cilium values + installer Job)
-apiVersion: v1
+apiVersion: v1 # this configmap contains all resources which will be created on the created talos cluster
 kind: ConfigMap
 metadata:
   name: cilium-install

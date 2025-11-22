@@ -1,3 +1,4 @@
+# these provider manifests will deploy the corresponding crds via the cluster-api-operator
 apiVersion: v1
 kind: Namespace
 metadata:

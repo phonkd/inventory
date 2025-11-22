@@ -1,4 +1,4 @@
-customization:
+customization: # talos image factory selected extensions
   systemExtensions:
     officialExtensions:
       - siderolabs/iscsi-tools

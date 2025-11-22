@@ -6,3 +6,4 @@ creation_rules:
       - age:
           - *primary
     encrypted_regex: ^(keys.txt)$
+# edit the secret using sops -i ksops-secret.enc.yaml
