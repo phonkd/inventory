@@ -86,6 +86,7 @@ data:
             - name: cilium-values
               configMap:
                 name: cilium-config
+                namespace: kube-system
                 items:
                   - key: cilium-values.yaml
           serviceAccountName: cilium-installer
