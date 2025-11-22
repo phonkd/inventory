@@ -13,7 +13,7 @@ spec:
       name: cilium-install
   strategy: Reconcile
 ---
-# ConfigMap with SA + RBAC + Job that installs Cilium via Helm
+# ConfigMap containing files applied by CRS (Cilium values + installer Job)
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -21,44 +21,47 @@ metadata:
   namespace: kube-system
 data:
   install-cilium.yaml: |
-    # cilium values
+    ---
     apiVersion: v1
     kind: ConfigMap
     metadata:
       name: cilium-values
       namespace: kube-system
     data:
-      ipam:
-        mode: kubernetes
-      kubeProxyReplacement: false
-      securityContext:
-        capabilities:
-          ciliumAgent:
-            - CHOWN
-            - KILL
-            - NET_ADMIN
-            - NET_RAW
-            - IPC_LOCK
-            - SYS_ADMIN
-            - SYS_RESOURCE
-            - DAC_OVERRIDE
-            - FOWNER
-            - SETGID
-            - SETUID
-          cleanCilumState:
-            - NET_ADMIN
-            - SYS_ADMIN
-            - SYS_RESOURCE
-      cgroup:
-        autoMount:
-          enabled: false
-        hostRoot: /sys/fs/cgroup
+      cilium-values.yaml: |
+        ipam:
+          mode: kubernetes
+        kubeProxyReplacement: false
+        securityContext:
+          capabilities:
+            ciliumAgent:
+              - CHOWN
+              - KILL
+              - NET_ADMIN
+              - NET_RAW
+              - IPC_LOCK
+              - SYS_ADMIN
+              - SYS_RESOURCE
+              - DAC_OVERRIDE
+              - FOWNER
+              - SETGID
+              - SETUID
+            cleanCilumState:
+              - NET_ADMIN
+              - SYS_ADMIN
+              - SYS_RESOURCE
+        cgroup:
+          autoMount:
+            enabled: false
+          hostRoot: /sys/fs/cgroup
+
     ---
     apiVersion: v1
     kind: ServiceAccount
     metadata:
       name: cilium-installer
       namespace: kube-system
+
     ---
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRoleBinding
@@ -72,6 +75,7 @@ data:
       - kind: ServiceAccount
         name: cilium-installer
         namespace: kube-system
+
     ---
     apiVersion: batch/v1
     kind: Job
@@ -81,11 +85,6 @@ data:
     spec:
       template:
         spec:
-          volumes:
-            - name: cilium-values
-              configMap:
-                name: cilium-values
-                namespace: kube-system
           serviceAccountName: cilium-installer
           restartPolicy: OnFailure
           hostNetwork: true
@@ -94,18 +93,21 @@ data:
           tolerations:
             - effect: NoSchedule
               key: node-role.kubernetes.io/control-plane
-            - effect: NoSchedule
-              key: node.kubernetes.io/not-ready
-          tolerations:
-            - effect: NoSchedule
-              operator: Exists
+            - operator: Exists
+          volumes:
+            - name: cilium-values
+              configMap:
+                name: cilium-values
+                items:
+                  - key: cilium-values.yaml
+                    path: cilium-values.yaml
           containers:
             - name: install-cilium
+              image: alpine/helm:3.13.0
               volumeMounts:
                 - name: cilium-values
                   mountPath: /cilium-values.yaml
                   subPath: cilium-values.yaml
-              image: alpine/helm:3.13.0
               env:
                 - name: KUBERNETES_SERVICE_HOST
                   valueFrom:
