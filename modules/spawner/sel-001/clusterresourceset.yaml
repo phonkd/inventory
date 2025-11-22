@@ -89,6 +89,7 @@ data:
                 namespace: kube-system
                 items:
                   - key: cilium-values.yaml
+                    path: cilium-values.yaml
           serviceAccountName: cilium-installer
           restartPolicy: OnFailure
           hostNetwork: true
