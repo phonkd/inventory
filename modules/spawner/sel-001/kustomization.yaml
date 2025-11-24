@@ -5,7 +5,6 @@ resources:
   - providers.yaml # the providers required for the cluster to spawn except capmox since its unsupported by operator because of missing metadata (capi core, talos, ipam ...)
   - clu-01.yaml # the talos cluster to spawn
   - clusterresourceset.yaml # deploys cilium using a clusterresourceset which is the ugliest component of this entire repo
-  - ./kubemox/
 patches:
   - path: patch-capmox-deployment.yaml # see comments there
     target:
