@@ -177,8 +177,8 @@
       kubemox = {
         name = "kubemox";
         repo = "https://alperencelik.github.io/helm-charts";
-        version = "0.4.1";
-        hash = "sha256-i/iWQSgJNHQVaUVgeO5CAAQbdr4hY2VQPkWq8hdknVk=";
+        version = "0.5.2";
+        hash = "sha256-DgRXToJajZsjKFekJzhGs4mg8qGfqP/ybPl00cPjZH4=";
         #hash = lib.fakeHash;
 
         createNamespace = true;
