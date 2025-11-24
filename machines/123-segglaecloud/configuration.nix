@@ -14,5 +14,6 @@
     #./keycloak.nix
     ./traefik.nix
     ../../modules/spawner/spawner-k3s.nix
+    ../../modules/renovate.nix
   ];
 }
