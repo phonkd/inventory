@@ -1,0 +1,24 @@
+apiVersion: proxmox.alperen.cloud/v1alpha1
+kind: ProxmoxConnection
+metadata:
+    name: wamluck
+spec:
+    endpoint: https://pve.segglaecloud.phonkd.net/api2/json
+    tokenID: capmox@pam!capi
+    secret: ENC[AES256_GCM,data:l/w60s31MzMlht8+jcfM1p5WRnYyUrBO7TRaAb0Jhy00Svfq,iv:nfkwCU0pWErMVM8hBFREygwVM3QQH1snk/Jtf+jhtAw=,tag:+pt5ZcpWfdq+3uUUhvAH9A==,type:str]
+    insecureSkipVerify: false
+sops:
+    age:
+        - recipient: age1jsnygd7gl62hzt06khdqkkjwa66v3snttmkep4wa5kl33luelfksdzytc6
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBSYWJ1YTZzdmw0RXpqc3BF
+            Y09MSHBRT3NFMThraU12VjhyTWxnTDFVb3lNCjZuS0JYWk9aY1hacTRMWDU3M0pB
+            R3luQmhubkNzYStyLzliSHkza0pYN0kKLS0tIGkya3VXUnEyVDJEWVdvR0lLbWl6
+            UGFKaVdReVFOUGhFUlpGbEV1TjJ2c3MKuZq/JNaWR+QSsHTwTTtFFFKP9Qxhb8EG
+            H56lobis9EXSv6Bjvc+eOuERF+9p+sLbyVrPd5Pljc3zg8d3bm+Djg==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2025-11-24T20:47:58Z"
+    mac: ENC[AES256_GCM,data:LYoxKCjNisvRkwDhLke/3+QOS0jpZfVX1yD3t5Kqri4t1b5zLd2GdeiMi6p2YV53dUO1qclV/aSSlj9Q0QXySSgbzKU/2YHLp0M62oOcluTvj+Zm6nFYetAMUUWH2wfz0qfJ8Sisb8DoTl28G+Qd5psSOevsAkw3/bbWVHLkykc=,iv:iY053YAsZ6Tm9s3qtiKz/qsttxbn4MR0X2NEbg7OINk=,tag:MLr1rK+AoRGbkQcf9vO4+A==,type:str]
+    encrypted_regex: ^(secret)$
+    version: 3.11.0

@@ -58,7 +58,15 @@
           };
         };
       };
+      kubemox = {
+        name = "kubemox";
+        repo = "https://alperencelik.github.io/helm-charts";
+        version = "0.4.1";
+        #hash = "sha256-3f6f6cfb2f3e4e1e4b1e4c8e4f6f7e8e9e0f1f2f3f4f5f6f7f8f9fa0b1c2d3e4";
+        hash = lib.fakeHash;
 
+        createNamespace = true;
+      };
       cert-manager = {
         name = "cert-manager";
         repo = "oci://quay.io/jetstack/charts/cert-manager";

@@ -17,7 +17,6 @@
     ../../modules/paperless.nix
     ../../modules/syncthing.nix
     ../../modules/glances.nix
-    ../../modules/kuma.nix
     ../../modules/shares.nix
     ../../modules/dns.nix
   ];
