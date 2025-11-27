@@ -1,0 +1,104 @@
+#!/usr/bin/env bash
+
+# rofi-ykman
+# YubiKey OATH utility
+
+#2019 nukeop
+
+print_usage() {
+    echo "Usage: rofi-ykman [command]"
+    echo
+    echo "Commands:"
+    echo "  clipboard   Copy the code to the clipboard. (default)"
+    echo "  type        Type the code."
+    echo
+}
+
+choose_yubikey() {
+    yubikeys=$(ykman list)
+
+    if [[ "$yubikeys" = "" ]]
+    then
+        if hash notify-send 2>/dev/null
+        then
+            notify-send "rofi-ykman" "YubiKey not detected." -a "rofi-ykman"
+        fi
+        return 1
+    fi
+
+    if [[ $(wc -l <<< "$yubikeys") > 1 ]]
+    then
+        yubikey=$(echo "$yubikeys" | rofi -dmenu -i -p "Select YubiKey")
+        if [ $? -eq 1 ]
+        then
+            return 2
+        fi
+    else
+        yubikey=$yubikeys
+    fi
+    serial=$(echo $yubikey | grep -oP 'Serial: \K\d+')
+    echo $serial
+}
+
+clipboard () {
+    if [ $XDG_SESSION_TYPE == "wayland" ]
+    then
+        wl-copy
+    else
+        xclip -selection clipboard
+    fi
+}
+
+type () {
+    if [ $XDG_SESSION_TYPE == "wayland" ]
+    then
+        wtype -
+    else
+        xargs xdotool type
+    fi
+}
+
+# shortcuts
+type="Alt+1"
+clipboard="Alt+2"
+
+main() {
+    serial=$1
+    accounts=$(ykman --device $serial oath accounts list)
+
+    shortcuts=(
+        -kb-custom-1 "$type"
+        -kb-custom-2 "$clipboard"
+    )
+    prompt="YubiKey OATH"
+    
+    account=$(echo "${accounts/, TOTP/\n}" | rofi -dmenu -i -p "$prompt" ${shortcuts[@]})
+    case $? in
+        1) exit ;;
+        10) command=type ;;
+        11) command=clipboard ;;
+        *) command=$default_command ;;
+    esac
+
+    code=$(ykman --device $serial oath accounts code "$account")
+    IFS=', ' read -r -a code <<< "$code"
+
+    case $command in
+        clipboard) echo -n "${code[-1]}" | clipboard;;
+        type) echo -n "${code[-1]}" | type;;
+    esac
+}
+
+default_command="${1:-clipboard}"
+
+case $default_command in
+    clipboard|type) ;;
+    *) print_usage; exit 1;;
+esac
+
+serial=$(choose_yubikey)
+case $? in
+    1) exit 1 ;;
+    2) exit ;;
+esac
+main $serial
