@@ -20,6 +20,9 @@
     ../../modules/client/android.nix
     ../options.nix
   ];
+  sops.age = {
+    keyFile = "/home/phonkd/.config/sops/age/keys.txt";
+  };
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
