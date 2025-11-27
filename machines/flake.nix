@@ -141,6 +141,7 @@
           inherit system;
           modules = [
             ./g14/configuration.nix
+            sops-nix.nixosModules.sops
           ];
         };
         hp = nixpkgs.lib.nixosSystem {
