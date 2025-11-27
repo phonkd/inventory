@@ -137,6 +137,12 @@
             )
           ];
         };
+        g14 = nixpkgs-unstable.lib.nixosSystem {
+          inherit system;
+          modules = [
+            ./g14/configuration.nix
+          ];
+        };
         hp = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [

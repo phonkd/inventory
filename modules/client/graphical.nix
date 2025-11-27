@@ -100,7 +100,12 @@
     kustomize-sops
     k9s
     stern
+    winbox4
   ];
+  programs.winbox = {
+    enable = true;
+    openFirewall = true;
+  };
   programs.steam.enable = true;
   services.flatpak.enable = true;
   # Install firefox.
@@ -154,4 +159,6 @@
   programs.zsh.ohMyZsh.plugins = [
     "kube-ps1"
   ];
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
 }

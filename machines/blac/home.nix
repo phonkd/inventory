@@ -12,7 +12,7 @@ in
     stateVersion = "25.05";
 
     file.".config" = {
-      source = ./dotconfig;
+      source = ../../modules/dotconfig;
       recursive = true;
       force = true;
     };
