@@ -102,6 +102,8 @@
     stern
     winbox4
   ];
+  programs.light.enable = true;
+  users.extraGroups.video.members = [ "phonkd" ];
   programs.winbox = {
     enable = true;
     openFirewall = true;
@@ -116,7 +118,7 @@
   services.gnome.sushi.enable = true;
   #services.gnome.gnome-keyring.enable = true;
 
-  # List packages installed in system profile. To search, run:
+  # List packages installed inff system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     lxqt.lxqt-policykit
