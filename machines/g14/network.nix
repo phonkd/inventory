@@ -15,4 +15,9 @@
 
   # Disable IPv6
   networking.enableIPv6 = false;
+  environment.systemPackages = with pkgs; [
+    iwd
+    iwgtk
+  ];
+  networking.wireless.iwd.enable = true;
 }

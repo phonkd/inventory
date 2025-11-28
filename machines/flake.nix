@@ -2,7 +2,7 @@
   description = "A very basic flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-25.05";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-25.11";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
     sops-nix.url = "github:Mic92/sops-nix";
     home-manager = {
@@ -85,7 +85,7 @@
             { label.labels = [ "vm" ]; }
           ];
         };
-        "123-segglaecloud" =  nixpkgs-unstable.lib.nixosSystem {
+        "123-segglaecloud" = nixpkgs-unstable.lib.nixosSystem {
           inherit system;
           modules = [
             (
