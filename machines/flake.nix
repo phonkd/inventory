@@ -169,6 +169,20 @@
             sops-nix.nixosModules.sops
           ];
         };
+        ext-mail = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            (
+              { config, pkgs, ... }:
+              {
+                nixpkgs.overlays = [ overlay-unstable ];
+              }
+            )
+            ./ext-mail/configuration.nix
+            ./options.nix
+            { label.labels = [ "vm" ]; }
+          ];
+        };
       };
     };
 }
