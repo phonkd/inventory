@@ -1,15 +1,13 @@
 { config, pkgs, ... }:
 
-let
-  unstable = import (fetchTarball {
-    url = "https://github.com/nixos/nixpkgs/archive/nixos-unstable.tar.gz";
-  }) { };
-in
 {
   home = {
     username = "phonkd";
     homeDirectory = "/home/phonkd";
     stateVersion = "25.05";
+
+    # Disable the nixpkgs release check warning
+    enableNixpkgsReleaseCheck = false;
 
     file.".config" = {
       source = ../../modules/dotconfig;
@@ -21,11 +19,11 @@ in
       # EDITOR = "emacs";
     };
 
-    packages = [
+    packages = with pkgs; [
       # (pkgs.writeShellScriptBin "my-hello" ''
       #   echo "Hello, ${config.home.username}!"
       # '')
-      unstable.waybar-lyric
+      waybar-lyric
     ];
   };
 
@@ -51,6 +49,9 @@ in
       name = "kora-pgrey";
     };
   };
+
+  # Disable news notifications to avoid build-news.nix error in flakes
+  news.display = "silent";
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

@@ -12,7 +12,7 @@
 {
   imports = [
     # Include the results of the hardware scan.
-    ./hardware-configuration.nix
+    /etc/nixos/hardware-configuration.nix
     ./network.nix
     ../../modules/client/graphical.nix
     ../../modules/00-global-config.nix
@@ -29,12 +29,12 @@
     "nix-command"
     "flakes"
   ];
-
+  services.hardware.bolt.enable = true;
   # Network configuration moved to network.nix
   time.timeZone = "Europe/Zurich";
   i18n.defaultLocale = "en_US.UTF-8";
   services.xserver.enable = true;
-  services.displayManager.sddm.enable = true;
+  services.displayManager.gdm.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -59,6 +59,10 @@
     # no need to redefine it in your config for now)
     #media-session.enable = true;
   };
+  boot.kernelParams = [
+    #"pcie_aspm=off"
+    "pci=noaer"
+  ];
 
   users.users.phonkd = {
     isNormalUser = true;
@@ -88,20 +92,32 @@
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.graphics = {
     enable = true;
-    extraPackages = with pkgs; [
-      nvidia-vaapi-driver
-      libvdpau-va-gl
-      libvdpau
-    ];
+    # extraPackages = with pkgs; [
+    #   nvidia-vaapi-driver
+    #   libvdpau-va-gl
+    #   libvdpau
+    # ];
   };
   programs.hyprland.enable = true;
-  hardware.nvidia.open = false;
+  hardware.nvidia = {
+    open = true;
+    modesetting.enable = true;
+    #package = config.boot.kernelPackages.nvidiaPackages.beta;
+  };
+
   environment.systemPackages = with pkgs; [
-    nvidia-vaapi-driver
+    #  nvidia-vaapi-driver
     sbctl
   ];
-  environment.variables = {
-    LIBVA_DRIVER_NAME = "nvidia";
+  # environment.variables = {
+  #   LIBVA_DRIVER_NAME = "nvidia";
+  # };
+
+  services.sunshine = {
+    enable = true;
+    autoStart = true;
+    capSysAdmin = true;
+    openFirewall = true;
   };
 
 }

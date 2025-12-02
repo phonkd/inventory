@@ -101,7 +101,12 @@
     k9s
     stern
     winbox4
+    betaflight-configurator
+    netbird
+    moonlight-qt
+    ookla-speedtest
   ];
+  services.netbird.enable = true;
   programs.light.enable = true;
   users.extraGroups.video.members = [ "phonkd" ];
   programs.winbox = {

@@ -43,6 +43,18 @@
       };
     in
     {
+      homeConfigurations = {
+        "phonkd@blac" = home-manager.lib.homeManagerConfiguration {
+          pkgs = import nixpkgs-unstable {
+            inherit system;
+            config.allowUnfree = true;
+          };
+          modules = [
+            ./blac/home.nix
+          ];
+        };
+      };
+
       nixosConfigurations = {
         nixos-int = nixpkgs-unstable.lib.nixosSystem {
           inherit system;
@@ -114,27 +126,27 @@
                 ];
               }
             )
-            lanzaboote.nixosModules.lanzaboote
-            (
-              { pkgs, lib, ... }:
-              {
-                environment.systemPackages = [
-                  # For debugging and troubleshooting Secure Boot.
-                  pkgs.sbctl
-                ];
-
-                # Lanzaboote currently replaces the systemd-boot module.
-                # This setting is usually set to true in configuration.nix
-                # generated at installation time. So we force it to false
-                # for now.
-                boot.loader.systemd-boot.enable = lib.mkForce false;
-
-                boot.lanzaboote = {
-                  enable = true;
-                  pkiBundle = "/var/lib/sbctl";
-                };
-              }
-            )
+            #            lanzaboote.nixosModules.lanzaboote
+            #            (
+            #              { pkgs, lib, ... }:
+            #              {
+            #                environment.systemPackages = [
+            #                  # For debugging and troubleshooting Secure Boot.
+            #                  pkgs.sbctl
+            #                ];
+            #
+            #                # Lanzaboote currently replaces the systemd-boot module.
+            #                # This setting is usually set to true in configuration.nix
+            #                # generated at installation time. So we force it to false
+            #                # for now.
+            #                boot.loader.systemd-boot.enable = lib.mkForce false;
+            #
+            #                boot.lanzaboote = {
+            #                  enable = true;
+            #                  pkiBundle = "/var/lib/sbctl";
+            #                };
+            #              }
+            #            )
           ];
         };
         g14 = nixpkgs-unstable.lib.nixosSystem {
