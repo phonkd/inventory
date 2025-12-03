@@ -4,6 +4,7 @@
     #/etc/nixos/configuration.nix
     ./sops.nix
     ./mail.nix
+    ./hardware-configuration.nix
   ];
 
   # Boot loader configuration (GRUB for legacy BIOS)
@@ -41,7 +42,7 @@
     ];
   };
   security.sudo.wheelNeedsPassword = false;
-  sops.age.keyFile = /home/phonkd/.config/sops/age/keys.txt;
+  sops.age.keyFile = "/home/phonkd/.config/sops/age/keys.txt";
   sops.defaultSopsFile = ./secrets/secret.yaml;
   virtualisation.docker.enable = true;
   system.stateVersion = lib.mkForce "25.11";

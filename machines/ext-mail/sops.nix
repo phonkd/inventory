@@ -1,4 +1,4 @@
-{ config, inputs, pkgs, ... }:
+{ config, lib, inputs, pkgs, ... }:
 {
   imports = let
       # replace this with an actual commit id or tag
@@ -7,7 +7,7 @@
       "${builtins.fetchTarball {
         url = "https://github.com/Mic92/sops-nix/archive/${commit}.tar.gz";
         # replace this with an actual hash
-        # cant get this to work sha256 = "365b87d848a57c12ffcfdc71da7a2b55f";
+        sha256 = "1z9xccx2wpfk0sv8990fvlqgn4py4yspxkfja4sy38ck1ifa0wya";
       }}/modules/sops"
     ];
   sops.defaultSopsFormat = "yaml";
