@@ -101,6 +101,19 @@
             entryPoints = [ "websecure" ];
             service = "immich-service";
           };
+          auth = {
+            rule = "Host(`auth.segglaecloud.phonkd.net`)";
+            entryPoints = [ "websecure" ];
+            service = "keycloak-service";
+            tls = {
+              certResolver = "cloudflare";
+              domains = [
+                {
+                  main = "vw.w.phonkd.net";
+                }
+              ];
+            };
+          };
         };
 
         serversTransports = {
@@ -130,6 +143,13 @@
             loadBalancer = {
               servers = [
                 { url = "http://192.168.1.121:2283"; }
+              ];
+            };
+          };
+          keycloak-service = {
+            loadBalancer = {
+              servers = [
+                { url = "http://192.168.1.123:8123"; }
               ];
             };
           };
