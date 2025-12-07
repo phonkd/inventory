@@ -105,6 +105,7 @@
     netbird
     moonlight-qt
     ookla-speedtest
+    iperf3
   ];
   services.netbird.enable = true;
   programs.light.enable = true;
