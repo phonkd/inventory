@@ -12,7 +12,7 @@
   sops.secrets = {
     # load the nix sops secret
     "data/keys.txt" = {
-      sopsFile = ./ksops-secret.enc.yaml;
+      sopsFile = ./sel-001/platform/ksops-secret.enc.yaml;
       format = "yaml";
       owner = "root";
       #key = "data";
@@ -193,7 +193,7 @@
       cluster-01-app = {
         # deploy argo app which will create the cluster under "./sel-001/" (including ugly cilium clusterresourceset job)
         enable = true;
-        source = ./sel-001/argoapp.yaml;
+        source = sel-001/platform/root/root-app.yaml;
       };
     };
   };

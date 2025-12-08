@@ -8,4 +8,4 @@ metadata:
       exec:
         path: ksops
 files:
-  - ./kubemox-creds.enc.yaml
+  - ./wamluck-kubemox.enc.yaml
