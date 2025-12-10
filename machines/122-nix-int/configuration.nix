@@ -25,8 +25,8 @@
       enabled = true;
       apps = [
         {
-          name = "wg";
-          uri = "http://localhost:51821";
+          name = "zyxel";
+          uri = "https://192.168.1.1";
           insecure_skip_verify = true;
         }
       ];
