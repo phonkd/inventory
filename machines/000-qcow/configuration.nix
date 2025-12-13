@@ -9,12 +9,23 @@
     # Include the results of the hardware scan.
     ./network.nix
     ../../modules/02-global-ssh.nix
-    ../../modules/00-global-config.nix
-    ../../modules/01-vm-config.nix
+    # ../../modules/00-global-config.nix
+    #../../modules/01-vm-config.nix
     #./keycloak.nix
     #./traefik.nix
     #../../modules/spawner/spawner-k3s.nix
-    ../../modules/renovate.nix
+    #../../modules/renovate.nix
   ];
-
+  users.groups.phonkd = { };
+  users.users.phonkd = {
+    isNormalUser = true;
+    description = "phonkd";
+    group = "phonkd";
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
+    password = "sml12345";
+  };
+  services.qemuGuest.enable = true;
 }

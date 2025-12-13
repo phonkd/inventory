@@ -5,3 +5,11 @@
 **.secret.yaml
 **flake.lock
 **work-setup.nix
+
+# Terraform / OpenTofu
+**.terraform/
+**.terraform.lock.hcl
+**terraform.tfstate
+**terraform.tfstate.backup
+**terraform.tfvars
+**.tfvars

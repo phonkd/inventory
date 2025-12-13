@@ -18,12 +18,12 @@
     # note: ssh-copy-id will add user@your-machine after the public key
     # but we can remove the "@your-machine" part
   ];
-  programs.ssh.extraConfig = ''
-    Host 192.168.1.121 192.168.1.122 192.168.1.123 192.168.1.3
-      HostName server.example.com
-      User myuser
-      ControlMaster auto
-      ControlPath ~/.ssh/cm-%r@%h:%p
-      ControlPersist yes
-  '';
+  # programs.ssh.extraConfig = ''
+  #   Host 192.168.1.121 192.168.1.122 192.168.1.123 192.168.1.3
+  #     HostName server.example.com
+  #     User myuser
+  #     ControlMaster auto
+  #     ControlPath ~/.ssh/cm-%r@%h:%p
+  #     ControlPersist yes
+  # '';
 }

@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - nodes.yaml
   - cni-job.yaml
+  - ../../platform/

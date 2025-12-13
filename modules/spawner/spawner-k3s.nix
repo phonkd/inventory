@@ -193,7 +193,7 @@
       cluster-01-app = {
         # deploy argo app which will create the cluster under "./sel-001/" (including ugly cilium clusterresourceset job)
         enable = true;
-        source = sel-001/platform/root/root-app.yaml;
+        source = sel-001/platform/root-app.yaml;
       };
     };
   };

@@ -12,9 +12,13 @@
     ../../modules/00-global-config.nix
     ../../modules/01-vm-config.nix
     #./keycloak.nix
-    #./traefik.nix
-    #../../modules/spawner/spawner-k3s.nix
-    ../../modules/renovate.nix
+    ./traefik.nix
+    ../../modules/spawner/spawner-k3s.nix
+    #../../modules/renovate.nix
   ];
-
+  fileSystems."/" = {
+    device = "/dev/disk/by-path/pci-0000:00:0a.0-part3";
+    fsType = "ext4"; # or whatever filesystem type you're using
+  };
+  boot.loader.grub.device = "/dev/vda";
 }

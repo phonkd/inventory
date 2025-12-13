@@ -9,3 +9,5 @@
 - tidy flake
 - setup kuma on pong with cloudflare tunnel
 - try cloudflare tunnel ingresscontroller
+# closedtofu/
+- make sure local-lvm has snippets enabled

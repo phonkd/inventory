@@ -82,6 +82,20 @@
               ];
             };
           };
+          oldblac-pve-router = {
+            rule = "Host(`oldblac.int.phonkd.net`)";
+            service = "oldblac-pve-service";
+            entryPoints = [ "websecure" ];
+            middlewares = [ "pve-headers" ];
+            tls = {
+              certResolver = "cloudflare";
+              domains = [
+                {
+                  main = "oldblac.int.phonkd.net";
+                }
+              ];
+            };
+          };
           vaultwarden-https = {
             rule = "Host(`vw.w.phonkd.net`)";
             entryPoints = [ "websecure" ];
@@ -154,6 +168,15 @@
               serversTransport = "insecureTransport";
               servers = [
                 { url = "https://192.168.1.46:8006"; }
+              ];
+              passHostHeader = true;
+            };
+          };
+          oldblac-pve-service = {
+            loadBalancer = {
+              serversTransport = "insecureTransport";
+              servers = [
+                { url = "https://192.168.1.47:8006"; }
               ];
               passHostHeader = true;
             };

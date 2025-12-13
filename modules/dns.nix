@@ -12,11 +12,11 @@
     settings = {
       # wildcard DNS
       address = [
-        "/.int.phonkd.net/192.168.1.122"
+        "/.int.phonkd.net/192.168.1.200"
         "/.int.phonkd.net/::"
         "/.segglaecloud.phonkd.net/192.168.1.123"
         "/.segglaecloud.phonkd.net/::"
-        "/.w.phonkd.net/192.168.1.123"
+        "/.w.phonkd.net/192.168.1.200"
         "/.w.phonkd.net/::"
       ];
       #filter-aaaa = true;

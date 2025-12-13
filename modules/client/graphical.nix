@@ -107,8 +107,10 @@
     ookla-speedtest
     iperf3
     terraform
+    minio-client
+    iftop
   ];
-  services.netbird.enable = true;
+  #services.netbird.enable = true;
   programs.light.enable = true;
   users.extraGroups.video.members = [ "phonkd" ];
   programs.winbox = {
