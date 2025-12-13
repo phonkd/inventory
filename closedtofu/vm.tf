@@ -20,6 +20,7 @@ resource "proxmox_virtual_environment_vm" "root-vm" {
 
   cpu {
     cores = 2
+    type  = "x86-64-v2-AES"
   }
 
   agent {
@@ -82,6 +83,7 @@ resource "proxmox_virtual_environment_vm" "talos-template" {
 
   cpu {
     cores = 2
+    type  = "x86-64-v2-AES"
   }
 
   agent {
