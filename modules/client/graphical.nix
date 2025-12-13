@@ -106,6 +106,7 @@
     moonlight-qt
     ookla-speedtest
     iperf3
+    terraform
   ];
   services.netbird.enable = true;
   programs.light.enable = true;
