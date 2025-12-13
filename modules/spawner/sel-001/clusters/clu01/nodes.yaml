@@ -31,6 +31,7 @@ metadata:
 spec:
   allowedNodes:
     - wamluck
+    - oldblac
   controlPlaneEndpoint:
     host: 192.168.1.201
     port: 6443
@@ -123,7 +124,7 @@ spec:
           model: virtio
       numCores: 4
       numSockets: 1
-      sourceNode: wamluck
+      sourceNode: oldblac
       templateID: 210
 ---
 apiVersion: cluster.x-k8s.io/v1beta1
@@ -182,7 +183,7 @@ spec:
           model: virtio
       numCores: 6
       numSockets: 1
-      sourceNode: wamluck
+      sourceNode: oldblac
       templateID: 210
 ---
 apiVersion: bootstrap.cluster.x-k8s.io/v1alpha3
