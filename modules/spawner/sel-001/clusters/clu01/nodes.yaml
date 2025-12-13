@@ -30,7 +30,6 @@ metadata:
   namespace: kube-system
 spec:
   allowedNodes:
-    - wamluck
     - oldblac
   controlPlaneEndpoint:
     host: 192.168.1.201
