@@ -119,9 +119,9 @@ spec:
       memoryMiB: 16384
       network:
         default:
-          bridge: vmbr1
+          bridge: vmbr0
           model: virtio
-      numCores: 4
+      numCores: 1
       numSockets: 1
       sourceNode: oldblac
       templateID: 210
@@ -178,9 +178,9 @@ spec:
       memoryMiB: 16384
       network:
         default:
-          bridge: vmbr1
+          bridge: vmbr0
           model: virtio
-      numCores: 6
+      numCores: 4
       numSockets: 1
       sourceNode: oldblac
       templateID: 210
