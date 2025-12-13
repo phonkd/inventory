@@ -114,6 +114,32 @@
               ];
             };
           };
+          filestash = {
+            rule = "Host(`files.int.phonkd.net`)";
+            entryPoints = [ "websecure" ];
+            service = "filestash-service";
+            tls = {
+              certResolver = "cloudflare";
+              domains = [
+                {
+                  main = "files.int.phonkd.net";
+                }
+              ];
+            };
+          };
+          collabora = {
+            rule = "Host(`collabora.int.phonkd.net`)";
+            entryPoints = [ "websecure" ];
+            service = "collabora-service";
+            tls = {
+              certResolver = "cloudflare";
+              domains = [
+                {
+                  main = "collabora.int.phonkd.net";
+                }
+              ];
+            };
+          };
         };
 
         serversTransports = {
@@ -150,6 +176,20 @@
             loadBalancer = {
               servers = [
                 { url = "http://192.168.1.123:8123"; }
+              ];
+            };
+          };
+          filestash-service = {
+            loadBalancer = {
+              servers = [
+                { url = "http://192.168.1.122:8334"; }
+              ];
+            };
+          };
+          collabora-service = {
+            loadBalancer = {
+              servers = [
+                { url = "http://192.168.1.122:9980"; }
               ];
             };
           };
