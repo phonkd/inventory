@@ -16,7 +16,9 @@
     ./network.nix
     ../../modules/client/graphical.nix
     ../../modules/00-global-config.nix
+    ../../modules/02-global-ssh.nix
     ../../modules/client/android.nix
+    /tmp/work-setup.nix
     ../options.nix
   ];
   sops.age = {
@@ -102,12 +104,13 @@
   hardware.nvidia = {
     open = true;
     modesetting.enable = true;
-    #package = config.boot.kernelPackages.nvidiaPackages.beta;
+    package = config.boot.kernelPackages.nvidiaPackages.latest;
   };
 
   environment.systemPackages = with pkgs; [
     #  nvidia-vaapi-driver
     sbctl
+    cudatoolkit
   ];
   # environment.variables = {
   #   LIBVA_DRIVER_NAME = "nvidia";
@@ -118,6 +121,10 @@
     autoStart = true;
     capSysAdmin = true;
     openFirewall = true;
+  };
+  services.ollama = {
+    enable = true;
+    #acceleration = "cuda";
   };
 
 }

@@ -4,3 +4,4 @@
 **cilium
 **.secret.yaml
 **flake.lock
+**work-setup.nix
