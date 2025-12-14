@@ -61,7 +61,7 @@ spec:
           value:
             interfaces:
               - interface: eth0
-                #dhcp: true
+                dhcp: true
                 vip:
                   ip: 192.168.1.209
             nameservers:
