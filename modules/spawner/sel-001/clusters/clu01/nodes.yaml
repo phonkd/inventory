@@ -41,7 +41,7 @@ spec:
     addresses:
       - 192.168.1.210-192.168.1.225
     gateway: 192.168.1.1
-    prefix: 25
+    prefix: 24
   schedulerHints:
     memoryAdjustment: 0
 ---
