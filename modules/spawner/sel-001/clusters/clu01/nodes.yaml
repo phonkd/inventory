@@ -32,7 +32,7 @@ spec:
   allowedNodes:
     - oldblac
   controlPlaneEndpoint:
-    host: 192.168.1.201
+    host: 192.168.1.210
     port: 6443
   dnsServers:
     - 8.8.8.8
@@ -63,7 +63,7 @@ spec:
               - interface: eth0
                 dhcp: true
                 vip:
-                  ip: 192.168.1.201
+                  ip: 192.168.1.210
             nameservers:
               - 8.8.8.8
               - 8.8.4.4

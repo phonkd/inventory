@@ -54,6 +54,46 @@ resource "proxmox_virtual_environment_vm" "root-vm" {
   }
 }
 
+resource "proxmox_virtual_environment_vm" "core-vm" {
+  node_name = "oldblac"
+  vm_id     = 202
+
+  memory {
+    dedicated = 8192
+  }
+
+  cpu {
+    cores = 6
+    type  = "x86-64-v2-AES"
+  }
+
+  agent {
+    enabled = true
+  }
+
+  disk {
+    datastore_id = "nvme1"
+    import_from  = proxmox_virtual_environment_download_file.nixos_cloud_image.id
+    interface    = "virtio0"
+    size         = 1000
+  }
+
+  initialization {
+    datastore_id = "local-lvm"
+
+    ip_config {
+      ipv4 {
+        address = "dhcp"
+      }
+    }
+  }
+
+  network_device {
+    bridge = "vmbr0"
+  }
+}
+
+
 # Download Talos cloud image from remote URL
 # Note: You need to convert .raw.xz to .qcow2 first:
 # 1. wget https://factory.talos.dev/image/3531bf15c8738b4bc46f2cdd7c5cd68fea388796b291117f0ee38b51a335fc47/v1.11.5/nocloud-amd64.raw.xz

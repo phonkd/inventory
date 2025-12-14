@@ -7,6 +7,7 @@
 {
   imports = [
     # Include the results of the hardware scan.
+    ./hardware-configuration.nix
     ./network.nix
     ../../modules/02-global-ssh.nix
     ../../modules/00-global-config.nix
@@ -16,9 +17,5 @@
     ../../modules/spawner/spawner-k3s.nix
     #../../modules/renovate.nix
   ];
-  fileSystems."/" = {
-    device = "/dev/disk/by-path/pci-0000:00:0a.0-part3";
-    fsType = "ext4"; # or whatever filesystem type you're using
-  };
   boot.loader.grub.device = "/dev/vda";
 }
