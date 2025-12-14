@@ -64,6 +64,9 @@ spec:
                 dhcp: true
                 vip:
                   ip: 192.168.1.209
+                # Add this to ensure VIP can bind:
+                addresses:
+                  - 192.168.1.209/32 # Secondary address for VIP
             nameservers:
               - 8.8.8.8
               - 8.8.4.4
