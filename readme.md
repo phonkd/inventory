@@ -1,4 +1,5 @@
 # todo / grübler
+
 - jürgen clustergebährer
   - move away from talos because of poor cloudinit support with capmox
   - fix k3s autodeploy charts for mgmt cluster
@@ -9,5 +10,13 @@
 - tidy flake
 - setup kuma on pong with cloudflare tunnel
 - try cloudflare tunnel ingresscontroller
+
 # closedtofu/
+
 - make sure local-lvm has snippets enabled
+
+# jürgen löscher
+
+```bash
+k delete taloscontrolplanes,clusters,proxmoxclusters,machinedeployments,machinesets,proxmoxmachines --all
+```
