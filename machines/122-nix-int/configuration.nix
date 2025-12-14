@@ -30,8 +30,8 @@
           insecure_skip_verify = true;
         }
         {
-          name = "oldblac"
-          uri = "https://192.168.1.47:8006"
+          name = "oldblac";
+          uri = "https://192.168.1.47:8006";
           insecure_skip_verify = true;
         }
       ];
