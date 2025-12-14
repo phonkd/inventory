@@ -115,7 +115,7 @@ spec:
         end: 899
       disks:
         bootVolume:
-          disk: scsi0
+          disk: virtio0
           sizeGb: 100
       format: qcow2
       full: true
@@ -174,7 +174,7 @@ spec:
         end: 999
       disks:
         bootVolume:
-          disk: scsi0
+          disk: virtio0
           sizeGb: 80
       format: qcow2
       full: true
