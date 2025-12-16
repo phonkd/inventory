@@ -33,6 +33,7 @@ data:
           mode: kubernetes
         kubeProxyReplacement: true
         securityContext:
+          privileged: true
           capabilities:
             ciliumAgent:
               - CHOWN
