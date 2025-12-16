@@ -100,7 +100,6 @@
     #   libvdpau
     # ];
   };
-  programs.hyprland.enable = true;
   hardware.nvidia = {
     open = true;
     modesetting.enable = true;
@@ -126,5 +125,4 @@
     enable = true;
     #acceleration = "cuda";
   };
-
 }

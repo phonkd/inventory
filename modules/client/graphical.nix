@@ -43,6 +43,7 @@
     wdisplays
     cliphist
     hyprcursor
+    hyprlandPlugins.hy3
     xdg-desktop-portal-hyprland
     xdg-desktop-portal
     xdg-desktop-portal-wlr
@@ -119,6 +120,8 @@
   };
   programs.steam.enable = true;
   services.flatpak.enable = true;
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   # Install firefox.
   programs.firefox.enable = true;
   programs.zoxide.enable = true;
