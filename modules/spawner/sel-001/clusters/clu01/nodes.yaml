@@ -76,14 +76,14 @@ spec:
               - os:reader
             allowedKubernetesNamespaces:
               - kube-system
-        # - op: add
-        #   path: /machine/network
-        #   value:
-        #     interfaces:
-        #       - interface: eth0
-        #         dhcp: true
-        #         vip:
-        #           ip: 192.168.1.209
+        - op: add
+          path: /machine/network
+          value:
+            interfaces:
+              - interface: eth0
+                dhcp: false
+                vip:
+                  ip: 192.168.1.209
 
         #     nameservers:
         #       - 8.8.8.8
