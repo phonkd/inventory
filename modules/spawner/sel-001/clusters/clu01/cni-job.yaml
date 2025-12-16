@@ -88,6 +88,10 @@ data:
           serviceAccountName: cilium-installer
           restartPolicy: OnFailure
           hostNetwork: true
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0
+            fsGroup: 0
           nodeSelector:
             node-role.kubernetes.io/control-plane: ""
           tolerations:
@@ -104,6 +108,8 @@ data:
           containers:
             - name: install-cilium
               image: alpine/helm:3.13.0
+              securityContext:
+                privileged: true
               volumeMounts:
                 - name: cilium-values
                   mountPath: /cilium-values.yaml
