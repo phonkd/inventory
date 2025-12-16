@@ -31,7 +31,7 @@ data:
       cilium-values.yaml: |
         ipam:
           mode: kubernetes
-        kubeProxyReplacement: false
+        kubeProxyReplacement: true
         securityContext:
           capabilities:
             ciliumAgent:
