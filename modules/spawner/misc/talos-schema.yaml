@@ -8,3 +8,4 @@ customization: # talos image factory selected extensions
       - siderolabs/util-linux-tools
 # obtain id: curl -X POST --data-binary @talos-schema.yaml https://factory.talos.dev/schematics
 # wget https://factory.talos.dev/image/5a8837a3ae3b85ccac89e784947cd1c397f954095cc3f673a56d6409a0264020/v1.11.6/metal-amd64.qcow2
+# "qemu-img convert -f raw -O qcow2 nocloud-amd64.raw talos-v1.11.6.qcow2"

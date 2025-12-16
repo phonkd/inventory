@@ -56,6 +56,26 @@ spec:
       generateType: controlplane
       talosVersion: v1.8
       configPatches:
+        - op: add
+          path: /machine/kubelet/extraArgs
+          value:
+            cloud-provider: external
+            rotate-server-certificates: "true"
+        - op: add
+          path: /cluster/externalCloudProvider
+          value:
+            enabled: true
+            manifests:
+              - https://raw.githubusercontent.com/siderolabs/talos-cloud-controller-manager/main/docs/deploy/cloud-controller-manager.yml
+              - https://raw.githubusercontent.com/alex1989hu/kubelet-serving-cert-approver/main/deploy/standalone-install.yaml
+        - op: add
+          path: /machine/features/kubernetesTalosAPIAccess
+          value:
+            enabled: true
+            allowedRoles:
+              - os:reader
+            allowedKubernetesNamespaces:
+              - kube-system
         # - op: add
         #   path: /machine/network
         #   value:
@@ -108,6 +128,8 @@ spec:
     spec:
       checks:
         skipCloudInitStatus: true
+      metadataSettings:
+        providerIDInjection: true
       vmIDRange:
         start: 800
         end: 899
@@ -167,6 +189,8 @@ spec:
     spec:
       checks:
         skipCloudInitStatus: true
+      metadataSettings:
+        providerIDInjection: true
       vmIDRange:
         start: 900
         end: 999
@@ -212,3 +236,8 @@ spec:
             disabled: false
             servers:
               - time.cloudflare.com
+        - op: add
+          path: /machine/kubelet/extraArgs
+          value:
+            cloud-provider: external
+            rotate-server-certificates: "true"

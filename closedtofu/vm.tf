@@ -3,7 +3,7 @@ resource "proxmox_virtual_environment_download_file" "nixos_cloud_image" {
   content_type        = "import"
   datastore_id        = "local"
   node_name           = "oldblac"
-  url                 = "https://hel1.your-objectstorage.com/phonkd/nixos.qcow2"
+  url                 = "https://api.s3.arnsi.ch/public/bennixos.qcow2"
   file_name           = "nixos.qcow2"
   overwrite           = true
   overwrite_unmanaged = true
@@ -104,8 +104,8 @@ resource "proxmox_virtual_environment_download_file" "talos_cloud_image" {
   content_type        = "import"
   datastore_id        = "local"
   node_name           = "oldblac"
-  url                 = "https://api.s3.arnsi.ch/public/metal-amd64.qcow2"
-  file_name           = "metal-v1.11.6.qcow2"
+  url                 = "https://api.s3.arnsi.ch/public/talos-v1.11.6.qcow2"
+  file_name           = "talos-nocloud-v1.11.6.qcow2"
   overwrite           = true
   overwrite_unmanaged = true
 }
