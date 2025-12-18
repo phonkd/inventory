@@ -1,6 +1,6 @@
 # Cluster-specific values for clu01
 # This file contains the control plane endpoint for Cilium bootstrap
-
+# blabla
 # API server endpoint - must match the controlPlaneEndpoint in clu-01-nodes.yaml
 k8sServiceHost: 192.168.1.209
 k8sServicePort: 6443
