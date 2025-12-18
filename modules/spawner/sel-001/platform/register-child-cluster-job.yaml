@@ -94,12 +94,12 @@ spec:
               apiVersion: v1
               kind: Secret
               metadata:
-                name: cluster-\${CHILD_CLUSTER_NAME}
+                name: cluster-${CHILD_CLUSTER_NAME}
                 labels:
                   argocd.argoproj.io/secret-type: cluster
               stringData:
-                name: \${CHILD_CLUSTER_NAME}
-                server: \${server}
+                name: ${CHILD_CLUSTER_NAME}
+                server: ${server}
                 config: |
                   {
                     "tlsClientConfig": {
