@@ -7,3 +7,13 @@ resources:
 
 generators:
   - cilium-generator.yaml
+helmCharts:
+  - name: argo-cd
+    releaseName: argocd
+    namespace: argocd
+    createNamespace: true
+    repo: https://argoproj.github.io/argo-helm
+    version: 9.1.3
+    valuesFile: ../../../k8s/argocd-child/argocd-values.yaml
+    additionalValuesFiles:
+      - argocd-extra-values.yaml

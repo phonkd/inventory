@@ -3,4 +3,3 @@ kind: Kustomization
 resources:
   - cluster-api
   - clu-01-nodes.yaml
-  - argocd-child-cluster.yaml
