@@ -3,7 +3,7 @@ resource "proxmox_virtual_environment_download_file" "nixos_cloud_image" {
   content_type        = "import"
   datastore_id        = "local"
   node_name           = "oldblac"
-  url                 = "https://api.s3.arnsi.ch/public/bennixos.qcow2"
+  url                 = "https://api.s3.arnsi.ch/public/nixos.qcow2"
   file_name           = "nixos.qcow2"
   overwrite           = true
   overwrite_unmanaged = true
