@@ -84,7 +84,7 @@ spec:
       restartPolicy: OnFailure
       containers:
         - name: register-cluster
-          image: rancher/kubectl:1.34.3
+          image: rancher/kubectl:v1.34.3
           command:
             - /bin/bash
             - -c
