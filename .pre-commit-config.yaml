@@ -1,0 +1,9 @@
+repos:
+  - repo: local
+    hooks:
+      - id: render-cilium-crs
+        name: Render Cilium ClusterResourceSet
+        entry: ./scripts/render-cilium-crs.sh
+        language: script
+        files: ^modules/spawner/sel-001/clusters/clu01/cilium/
+        pass_filenames: false

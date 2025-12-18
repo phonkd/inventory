@@ -110,6 +110,7 @@
     terraform
     minio-client
     iftop
+    prek
   ];
   #services.netbird.enable = true;
   programs.light.enable = true;

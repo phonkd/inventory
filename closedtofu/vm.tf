@@ -113,7 +113,7 @@ resource "proxmox_virtual_environment_download_file" "talos_cloud_image" {
 # Talos template VM
 resource "proxmox_virtual_environment_vm" "talos-template" {
   node_name = "oldblac"
-  vm_id     = 210
+  vm_id     = 1000
   name      = "talos-template"
   template  = true
 
