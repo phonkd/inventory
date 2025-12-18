@@ -1,0 +1,99 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: argocd-cluster-register
+  namespace: argocd
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: argocd-cluster-register
+rules:
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["get"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: argocd-cluster-register
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: argocd-cluster-register
+subjects:
+  - kind: ServiceAccount
+    name: argocd-cluster-register
+    namespace: argocd
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: register-phonkd-test-01-in-argocd
+  namespace: argocd
+spec:
+  backoffLimit: 1
+  template:
+    spec:
+      serviceAccountName: argocd-cluster-register
+      restartPolicy: Never
+      containers:
+        - name: register
+          image: registry.k8s.io/kubectl/kubectl:v1.31.0
+          imagePullPolicy: IfNotPresent
+          env:
+            # Adjust these if your CAPI cluster/namespace differ.
+            - name: CHILD_CLUSTER_NAME
+              value: phonkd-test-01
+            - name: CHILD_CLUSTER_NAMESPACE
+              value: kube-system
+          command:
+            - /bin/sh
+            - -c
+          args:
+            - |
+              set -euo pipefail
+
+              # CAPI usually creates <cluster-name>-kubeconfig in the same namespace as the Cluster.
+              secret_name="${CHILD_CLUSTER_NAME}-kubeconfig"
+
+              echo "Fetching kubeconfig from secret ${secret_name} in namespace ${CHILD_CLUSTER_NAMESPACE}..."
+              kubeconfig_b64="$(kubectl get secret "${secret_name}" -n "${CHILD_CLUSTER_NAMESPACE}" -o jsonpath='{.data.value}')"
+
+              if [ -z "${kubeconfig_b64}" ]; then
+                echo "No kubeconfig data found in secret ${secret_name}" >&2
+                exit 1
+              fi
+
+              echo "${kubeconfig_b64}" | base64 -d > /tmp/child-kubeconfig
+
+              # Extract server from kubeconfig using POSIX tools only.
+              # We just take the first `server:` entry.
+              server="$(grep 'server:' /tmp/child-kubeconfig | head -n1 | awk '{print $2}')"
+
+              if [ -z "${server}" ]; then
+                echo "Could not determine child cluster API server URL from kubeconfig" >&2
+                exit 1
+              fi
+
+              echo "Creating Argo CD cluster Secret for ${CHILD_CLUSTER_NAME} (${server})..."
+
+              cat <<EOF | kubectl apply -n argocd -f -
+              apiVersion: v1
+              kind: Secret
+              metadata:
+                name: cluster-\${CHILD_CLUSTER_NAME}
+                labels:
+                  argocd.argoproj.io/secret-type: cluster
+              stringData:
+                name: \${CHILD_CLUSTER_NAME}
+                server: \${server}
+                config: |
+                  {
+                    "tlsClientConfig": {
+                      "insecure": true
+                    }
+                  }
+              EOF
+
+              echo "Cluster Secret created. You can now delete this Job if desired."
