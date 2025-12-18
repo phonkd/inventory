@@ -222,15 +222,6 @@ spec:
       talosVersion: v1.8
       configPatches:
         - op: add
-          path: /machine/network
-          value:
-            interfaces:
-              - interface: eth0
-                dhcp: true
-            nameservers:
-              - 8.8.8.8
-              - 8.8.4.4
-        - op: add
           path: /machine/time
           value:
             disabled: false

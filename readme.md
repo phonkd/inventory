@@ -34,6 +34,7 @@ I believe that the terraform provider is more future proof / similar to other me
 - shit but nothing better
   - traefik (used caddy but has no keycloak middleware)
   - keycloak (absolute horrible configuration) want a working setup but dont want to put in the effort
+  - talos + proxmox (let me explain): nocloud image from talos is only available as .raw.xz therefore cant be imported directly into proxmox via terraform so for each update of talos we must manually pull image, convert it and upload it to some s3... just give us nocloud qcow2 like for everything but nocloud talos ????
 # jürgen löscher
 
 ```bash
