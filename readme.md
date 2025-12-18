@@ -1,5 +1,7 @@
 This is a monorepo containing about 95% of all my configs (from macbook to talos cluster on proxmox). I do almost everything declaritively for fun while being fully aware that its overkill for a homelab...
 
+The 5% consist of my phone, a nothing phone with docker on it and windows for gaming.
+
 # stuff i use here
 - Proxmox (as hypervisor)
 - hetzner (for teleport)
@@ -20,7 +22,18 @@ i have seen the project and do find it very cool however dont want to build my i
 I believe that the terraform provider is more future proof / similar to other methods of creating vms declaratively. I know that the capi k8s setup might not be very reliable or maintainable as the image has to be manually downloaded, converted to qcow and so on. I use k8s primarily for tinkering with stuff i find on github trends. The things i actually use on a day to day basis are on my nixos vms.
 
 
-
+# personal opinions of things i use:
+- nice:
+  - teleport
+  - vaultwarden
+  - syncthing
+  - paperless
+- annoying but has to be:
+  - nix-sops
+  - ddns.nix (had to write this myself because all other solutions are genuine ragebait)
+- shit but nothing better
+  - traefik (used caddy but has no keycloak middleware)
+  - keycloak (absolute horrible configuration) want a working setup but dont want to put in the effort
 # jürgen löscher
 
 ```bash
