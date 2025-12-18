@@ -6,22 +6,4 @@ resources:
   - ../../platform/
 
 generators:
-  - cilium-generator.yaml
-helmCharts:
-  - name: argo-cd
-    releaseName: argocd
-    namespace: argocd
-    repo: https://argoproj.github.io/argo-helm
-    version: 9.1.3
-    valuesFile: ../../../../k8s/argocd-child/values.yaml
-    additionalValuesFiles:
-      - argo-values.yaml
-helmCharts:
-  - name: cilium
-    repo: https://helm.cilium.io
-    version: 1.18.5
-    releaseName: cilium
-    namespace: kube-system
-    valuesFile: ../../../../k8s/cilium/values.yaml
-    additionalValuesFiles:
-      - cilium-values.yaml
+  - bootstrap-generator.yaml
