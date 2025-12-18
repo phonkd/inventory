@@ -111,6 +111,7 @@
     minio-client
     iftop
     prek
+    argocd
   ];
   #services.netbird.enable = true;
   programs.light.enable = true;
