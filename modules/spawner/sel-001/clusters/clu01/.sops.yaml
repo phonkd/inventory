@@ -1,0 +1,8 @@
+keys:
+  - &primary age1jsnygd7gl62hzt06khdqkkjwa66v3snttmkep4wa5kl33luelfksdzytc6
+creation_rules:
+  - path_regex: cilium-install\.enc\.yaml$
+    key_groups:
+      - age:
+          - *primary
+    encrypted_regex: ^(data)$

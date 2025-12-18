@@ -3,6 +3,10 @@ ipam:
 
 kubeProxyReplacement: true
 
+# API server endpoint for bootstrap connectivity
+# Must point to the control plane VIP before CNI is ready
+# Set in cluster-specific values file (e.g., values-clu01.yaml) ok
+
 securityContext:
   privileged: true
   capabilities:
@@ -27,7 +31,3 @@ cgroup:
   autoMount:
     enabled: false
   hostRoot: /sys/fs/cgroup
-
-# k8sServiceHost and k8sServicePort will be set dynamically...
-# based on the cluster's control plane endpoint
-# test comment
