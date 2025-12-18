@@ -8,4 +8,3 @@ metadata:
         path: ksops
 files:
   - ./cilium-install.enc.yaml
-  - ./argo-install.enc.yaml
