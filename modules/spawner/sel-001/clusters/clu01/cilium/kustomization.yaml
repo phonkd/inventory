@@ -9,6 +9,6 @@ helmCharts:
     version: 1.18.5
     releaseName: cilium
     namespace: kube-system
-    valuesFile: values.yaml
+    valuesFile: ../../../../../k8s/cilium/values.yaml
     additionalValuesFiles:
       - values-clu01.yaml

@@ -1,10 +1,11 @@
 apiVersion: viaduct.ai/v1
 kind: ksops
 metadata:
-  name: cilium-install-generator
+  name: bootstrap-install-generator
   annotations:
     config.kubernetes.io/function: |
       exec:
         path: ksops
 files:
   - ./cilium-install.enc.yaml
+  - ./argo-install.enc.yaml

@@ -92,7 +92,8 @@
           configs = {
             cm = {
               url = "https://spawner-argo.teleport.phonkd.net"; # set teleport url
-              "kustomize.buildOptions" = "--enable-alpha-plugins --enable-exec";
+              "kustomize.buildOptions" =
+                "--enable-alpha-plugins --enable-exec --load-restrictor LoadRestrictionsNone --enable-helm";
               "exec.enabled" = true;
             };
             params = {
