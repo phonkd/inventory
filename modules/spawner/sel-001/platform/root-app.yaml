@@ -8,7 +8,7 @@ spec:
     #namespace: kube-system
     server: https://kubernetes.default.svc
   source:
-    path: modules/spawner/sel-001/clusters/01
+    path: modules/spawner/sel-001/platform/clusters/01
     repoURL: https://github.com/phonkd/inventory.git
     targetRevision: main
   sources: []
