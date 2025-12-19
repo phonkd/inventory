@@ -1,7 +1,6 @@
 **result
 **.DS_Store
 **clusterctl.yaml
-**cilium
 !modules/spawner/sel-001/clusters/
 **.secret.yaml
 **flake.lock
@@ -14,4 +13,4 @@
 **terraform.tfstate.backup
 **terraform.tfvars
 **.tfvars
-**.harts
+**charts
