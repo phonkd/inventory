@@ -1,7 +1,8 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: argocd-cluster-register-phonkd-test-01
+  name: argocd-cluster-register
+  # unfortunately name isnt changed cuz this dont work with this patch
 spec:
   template:
     spec:

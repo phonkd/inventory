@@ -8,5 +8,5 @@ resources:
 patches:
   - path: register-argo-patch.yaml
     target:
-      kind: job
-      name: replaceme
+      kind: Job
+      name: argocd-cluster-register
