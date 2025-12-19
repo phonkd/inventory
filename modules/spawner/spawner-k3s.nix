@@ -213,16 +213,6 @@
             ];
           };
         }
-        {
-          name = "clu01-argo";
-          uri = "http://192.168.1.200:30080";
-          insecure_skip_verify = true;
-          rewrite = {
-            headers = [
-              "Host: clu01-argo.teleport.phonkd.net"
-            ];
-          };
-        }
       ];
     };
   };

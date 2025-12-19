@@ -2,7 +2,7 @@
 **.DS_Store
 **clusterctl.yaml
 **cilium
-!modules/spawner/sel-001/clusters/clu01/cilium/
+!modules/spawner/sel-001/clusters/
 **.secret.yaml
 **flake.lock
 **work-setup.nix
