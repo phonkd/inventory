@@ -15,7 +15,7 @@ resource "proxmox_virtual_environment_vm" "root-vm" {
   vm_id     = 200
 
   memory {
-    dedicated = 4096
+    dedicated = 5120
   }
 
   cpu {
