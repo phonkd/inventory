@@ -4,7 +4,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 
-CLUSTERS_DIR_DEFAULT="$REPO_ROOT/modules/spawner/sel-001/clusters"
+CLUSTERS_DIR_DEFAULT="$REPO_ROOT/modules/spawner/sel-001/platform/clusters"
 
 CLUSTERS_DIR="${CLUSTERS_DIR:-$CLUSTERS_DIR_DEFAULT}"
 TARGET_CLUSTER="${TARGET_CLUSTER:-}"
@@ -19,12 +19,12 @@ usage() {
 Usage:
   ./scripts/render-cilium-crs.sh [--clusters-dir PATH] [--cluster NAME] [--addon NAME]
 
-Renders ClusterResourceSet + SOPS-encrypted ConfigMaps for every addon directory
-under each cluster directory. An addon directory is any immediate child directory
-of a cluster that contains a kustomization.yaml.
+Renders ClusterResourceSet + SOPS-encrypted ConfigMaps for the cilium addon in
+each cluster directory, placing output under the corresponding cilium-crs
+directory.
 
 Env overrides:
-  CLUSTERS_DIR, TARGET_CLUSTER, TARGET_ADDON
+  CLUSTERS_DIR, TARGET_CLUSTER, TARGET_ADDON (default: cilium)
   CRS_NAMESPACE, CRS_SELECTOR_KEY, CRS_SELECTOR_VALUE
 EOF
 }
@@ -57,13 +57,14 @@ done
 
 render_addon() {
   local cluster_dir="$1"
-  local addon_dir="$2"
-  local cluster_name addon_name
+  local addon_name="$2"
+  local cluster_name addon_dir output_dir
   cluster_name="$(basename "$cluster_dir")"
-  addon_name="$(basename "$addon_dir")"
+  addon_dir="$cluster_dir/$addon_name"
+  output_dir="$cluster_dir/${addon_name}-crs"
 
-  local crs_output="$cluster_dir/${addon_name}-crs.yaml"
-  local configmap_output="$cluster_dir/${addon_name}-install.enc.yaml"
+  local crs_output="$output_dir/bootstrap-crs.yaml"
+  local configmap_output="$output_dir/${addon_name}-install.enc.yaml"
 
   local tmp_manifests
   tmp_manifests="$(mktemp)"
@@ -124,7 +125,7 @@ EOF
 
   echo "🔐 [$cluster_name] Encrypting $addon_name ConfigMap with SOPS..."
   if command -v sops &> /dev/null; then
-    if ! (cd "$cluster_dir" && sops -e -i "$(basename "$configmap_output")"); then
+    if ! (cd "$output_dir" && sops -e -i "$(basename "$configmap_output")"); then
       echo "⚠️  [$cluster_name] SOPS encryption failed for $(basename "$configmap_output") (check ${cluster_dir#"$REPO_ROOT"/}/.sops.yaml)" >&2
     else
       echo "✓ [$cluster_name] Encrypted ${configmap_output#"$REPO_ROOT"/}"
@@ -158,28 +159,24 @@ did_any=false
 
 for cluster_dir in "${clusters[@]}"; do
   [[ -d "$cluster_dir" ]] || continue
+  cluster_name="$(basename "$cluster_dir")"
 
-  addons=()
-  for addon_dir in "$cluster_dir"/*; do
-    [[ -d "$addon_dir" ]] || continue
-    [[ -f "$addon_dir/kustomization.yaml" ]] || continue
-    addon_name="$(basename "$addon_dir")"
-    if [[ -n "$TARGET_ADDON" && "$addon_name" != "$TARGET_ADDON" ]]; then
-      continue
-    fi
-    addons+=("$addon_dir")
-  done
+  addon_name="${TARGET_ADDON:-cilium}"
+  addon_dir="$cluster_dir/$addon_name"
+  output_dir="$cluster_dir/${addon_name}-crs"
 
-  if [[ ${#addons[@]} -eq 0 ]]; then
+  if [[ ! -d "$addon_dir" || ! -f "$addon_dir/kustomization.yaml" ]]; then
+    continue
+  fi
+  if [[ ! -d "$output_dir" ]]; then
+    echo "⚠️  [$cluster_name] Missing output directory: ${output_dir#"$REPO_ROOT"/}" >&2
     continue
   fi
 
-  for addon_dir in "${addons[@]}"; do
-    did_any=true
-    render_addon "$cluster_dir" "$addon_dir"
-  done
+  did_any=true
+  render_addon "$cluster_dir" "$addon_name"
 done
 
 if [[ "$did_any" != "true" ]]; then
-  echo "No addon kustomizations found under: $CLUSTERS_DIR" >&2
+  echo "No cilium kustomizations found under: $CLUSTERS_DIR" >&2
 fi

@@ -1,0 +1,13 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: argocd-cluster-register-phonkd-test-01
+spec:
+  template:
+    spec:
+      containers:
+        - name: register
+          env:
+            # Adjust these if your CAPI cluster/namespace differ.
+            - name: CHILD_CLUSTER_NAME
+              value: phonkd-test-01
