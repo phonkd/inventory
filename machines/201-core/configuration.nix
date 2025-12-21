@@ -13,6 +13,7 @@
     ../../modules/00-global-config.nix
     ../../modules/01-vm-config.nix
     ../../modules/filestash.nix
+    ../../modules/shares.nix
     #../../modules/renovate.nix
   ];
   boot.loader.grub.device = "/dev/vda";

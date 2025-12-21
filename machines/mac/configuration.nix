@@ -6,6 +6,7 @@
     vim
     devbox
     kconf
+    compose2nix
   ];
   imports = [
     ./builder.nix

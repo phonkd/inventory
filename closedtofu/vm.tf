@@ -75,6 +75,12 @@ resource "proxmox_virtual_environment_vm" "core-vm" {
     datastore_id = "nvme1"
     import_from  = proxmox_virtual_environment_download_file.nixos_cloud_image.id
     interface    = "virtio0"
+    size         = 500
+  }
+
+  disk {
+    datastore_id = "nvme1"
+    interface    = "virtio1"
     size         = 1000
   }
 
