@@ -1,0 +1,4 @@
+{ ... }:
+{
+  services.filestash.enable = true;
+}

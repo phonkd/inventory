@@ -10,6 +10,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     rofi-zed-recent.url = "github:phonkd/rofi-zed-editor-projects";
+    filestash-nix.url = "github:matthewcroughan/filestash-nix";
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v0.4.3";
 
@@ -26,6 +27,7 @@
       sops-nix,
       home-manager,
       rofi-zed-recent,
+      filestash-nix,
       lanzaboote,
       ...
     }:
@@ -194,6 +196,21 @@
               }
             )
             ./200-root/configuration.nix
+            sops-nix.nixosModules.sops
+            ./options.nix
+            { label.labels = [ "vm" ]; }
+          ];
+        };
+        "202-core" = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            (
+              { config, pkgs, ... }:
+              {
+                nixpkgs.overlays = [ overlay-unstable ];
+              }
+            )
+            ./200-core/configuration.nix
             sops-nix.nixosModules.sops
             ./options.nix
             { label.labels = [ "vm" ]; }
