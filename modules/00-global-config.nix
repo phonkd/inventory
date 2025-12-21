@@ -38,7 +38,7 @@ in
       "networkmanager"
       "wheel"
     ];
-    password = "sml12345";
+    #password = "sml12345";
   };
   users.mutableUsers = true;
   security.sudo.wheelNeedsPassword = false;

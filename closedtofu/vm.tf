@@ -37,10 +37,10 @@ resource "proxmox_virtual_environment_vm" "root-vm" {
   initialization {
     datastore_id = "local-lvm"
 
-    user_account {
-      username = "root"
-      password = "changeme"
-    }
+    # user_account {
+    #   username = "root"
+    #   password = "changeme"
+    # }
 
     ip_config {
       ipv4 {
@@ -56,7 +56,7 @@ resource "proxmox_virtual_environment_vm" "root-vm" {
 
 resource "proxmox_virtual_environment_vm" "core-vm" {
   node_name = "oldblac"
-  vm_id     = 202
+  vm_id     = 201
 
   memory {
     dedicated = 8192

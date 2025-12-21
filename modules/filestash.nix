@@ -1,4 +1,9 @@
-{ config,pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   services.teleport.settings = {
     app_service = {
@@ -7,8 +12,14 @@
         {
           name = "filestash";
           uri = "http://localhost:8334";
-          insecure_skip_verify = true;
+          public_addr = "filestash.teleport.phonkd.net";
+          rewrite = {
+            headers = [
+              "Host: filestash.teleport.phonkd.net"
+            ];
+          };
         }
+
       ];
     };
   };
@@ -34,6 +45,7 @@
     image = "machines/filestash:latest";
     environment = {
       "APPLICATION_URL" = "filestash.teleport.phonkd.net";
+      #"FORCE_HTTPS" = "true";
       "CANARY" = "true";
       "OFFICE_FILESTASH_URL" = "http://app:8334";
       "OFFICE_REWRITE_URL" = "http://127.0.0.1:9980";
@@ -79,9 +91,13 @@
     ports = [
       "9980:9980/tcp"
     ];
-    cmd = [ "/bin/bash" "-c" "curl -o /usr/share/coolwsd/browser/dist/branding-desktop.css https://gist.githubusercontent.com/mickael-kerjean/bc1f57cd312cf04731d30185cc4e7ba2/raw/d706dcdf23c21441e5af289d871b33defc2770ea/destop.css
+    cmd = [
+      "/bin/bash"
+      "-c"
+      "curl -o /usr/share/coolwsd/browser/dist/branding-desktop.css https://gist.githubusercontent.com/mickael-kerjean/bc1f57cd312cf04731d30185cc4e7ba2/raw/d706dcdf23c21441e5af289d871b33defc2770ea/destop.css
   /bin/su -s /bin/bash -c '/start-collabora-online.sh' cool
-  " ];
+  "
+    ];
     user = "root";
     log-driver = "journald";
     extraOptions = [
