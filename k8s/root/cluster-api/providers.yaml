@@ -45,3 +45,10 @@ metadata:
 spec:
   fetchConfig:
     url: "https://github.com/siderolabs/cluster-api-bootstrap-provider-talos/releases/latest/bootstrap-components.yaml"
+---
+apiVersion: operator.cluster.x-k8s.io/v1alpha2
+kind: AddonProvider
+metadata:
+  name: helm
+spec:
+  version: v0.5.3

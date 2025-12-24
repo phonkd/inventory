@@ -4,9 +4,11 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 
-CLUSTERS_DIR_DEFAULT="$REPO_ROOT/modules/spawner/sel-001/platform/clusters"
+CLUSTERS_DIR_DEFAULT="$REPO_ROOT/k8s/root/child-clusters"
+ADDONS_DIR_DEFAULT="$REPO_ROOT/k8s/modules"
 
 CLUSTERS_DIR="${CLUSTERS_DIR:-$CLUSTERS_DIR_DEFAULT}"
+ADDONS_DIR="${ADDONS_DIR:-$ADDONS_DIR_DEFAULT}"
 TARGET_CLUSTER="${TARGET_CLUSTER:-}"
 TARGET_ADDON="${TARGET_ADDON:-}"
 
@@ -17,14 +19,13 @@ CRS_SELECTOR_VALUE="${CRS_SELECTOR_VALUE:-cilium}"
 usage() {
   cat <<'EOF'
 Usage:
-  ./scripts/render-cilium-crs.sh [--clusters-dir PATH] [--cluster NAME] [--addon NAME]
+  ./scripts/render-cilium-crs.sh [--clusters-dir PATH] [--addons-dir PATH] [--cluster NAME] [--addon NAME]
 
-Renders ClusterResourceSet + SOPS-encrypted ConfigMaps for the cilium addon in
-each cluster directory, placing output under the corresponding cilium-crs
-directory.
+Renders ClusterResourceSet + SOPS-encrypted ConfigMaps for addons in each
+cluster directory, placing output under the corresponding <addon>-crs directory.
 
 Env overrides:
-  CLUSTERS_DIR, TARGET_CLUSTER, TARGET_ADDON (default: cilium)
+  CLUSTERS_DIR, ADDONS_DIR, TARGET_CLUSTER, TARGET_ADDON
   CRS_NAMESPACE, CRS_SELECTOR_KEY, CRS_SELECTOR_VALUE
 EOF
 }
@@ -33,6 +34,10 @@ while [[ $# -gt 0 ]]; do
   case "$1" in
     --clusters-dir)
       CLUSTERS_DIR="$2"
+      shift 2
+      ;;
+    --addons-dir)
+      ADDONS_DIR="$2"
       shift 2
       ;;
     --cluster)
@@ -58,31 +63,84 @@ done
 render_addon() {
   local cluster_dir="$1"
   local addon_name="$2"
-  local cluster_name addon_dir output_dir
+  local cluster_name addon_module_dir addon_cluster_dir output_dir
   cluster_name="$(basename "$cluster_dir")"
-  addon_dir="$cluster_dir/$addon_name"
+  addon_module_dir="$ADDONS_DIR/$addon_name"
+  addon_cluster_dir="$cluster_dir/$addon_name"
   output_dir="$cluster_dir/${addon_name}-crs"
 
   local crs_output="$output_dir/bootstrap-crs.yaml"
   local configmap_output="$output_dir/${addon_name}-install.enc.yaml"
 
+  # Read required values from the source kustomization.yaml
+  # This is a bit brittle, but avoids hardcoding helm values in the script.
+  # We use yq (or a grep fallback) to extract repo, chart name, and version.
+  local source_kustomization="$addon_cluster_dir/kustomization.yaml"
+  local helm_repo helm_chart helm_version
+  if command -v yq &>/dev/null; then
+    helm_repo=$(yq '.helmCharts[0].repo' "$source_kustomization")
+    helm_chart=$(yq '.helmCharts[0].name' "$source_kustomization")
+    helm_version=$(yq '.helmCharts[0].version' "$source_kustomization")
+  else # POSIX fallback
+    echo "⚠️ yq not found, using grep fallback to parse kustomization.yaml. This may be unreliable." >&2
+    helm_repo=$(grep -A1 'name: cilium' "$source_kustomization" | grep 'repo:' | awk '{print $2}')
+    helm_chart=$(grep 'name: cilium' "$source_kustomization" | awk '{print $2}')
+    helm_version=$(grep -A2 'name: cilium' "$source_kustomization" | grep 'version:' | awk '{print $2}')
+  fi
+
+  # Define absolute paths for values files
+  local base_values_file="$addon_module_dir/values.yaml"
+  local cluster_values_file="$addon_cluster_dir/values-${cluster_name}.yaml"
+  if [[ ! -f "$cluster_values_file" ]]; then
+      # Fallback to the old naming convention for the cluster values file
+      cluster_values_file="$addon_cluster_dir/values-clu01.yaml"
+  fi
+
+
+  if [[ ! -f "$base_values_file" ]]; then
+    echo "⚠️ [$cluster_name] Skipping addon '$addon_name': base values file not found at $base_values_file" >&2
+    return
+  fi
+  if [[ ! -f "$cluster_values_file" ]]; then
+    echo "⚠️ [$cluster_name] Skipping addon '$addon_name': cluster values file not found at $cluster_values_file" >&2
+    return
+  fi
+
+  # Create a temporary directory for our generated kustomization
+  local tmp_kustomize_dir
+  tmp_kustomize_dir="$(mktemp -d)"
+  trap 'rm -rf "$tmp_kustomize_dir"' RETURN
+
+  echo "📝 [$cluster_name] Generating temporary kustomization for $addon_name..."
+  cat > "$tmp_kustomize_dir/kustomization.yaml" <<EOF
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+helmCharts:
+  - name: $helm_chart
+    repo: $helm_repo
+    version: $helm_version
+    releaseName: $helm_chart
+    namespace: kube-system
+    valuesFile: $base_values_file
+    additionalValuesFiles:
+      - $cluster_values_file
+EOF
+
   local tmp_manifests
   tmp_manifests="$(mktemp)"
-  trap 'rm -f "$tmp_manifests"' RETURN
+  trap 'rm -f "$tmp_manifests"; rm -rf "$tmp_kustomize_dir"' RETURN
 
-  echo "🔨 [$cluster_name] Building $addon_name manifests..."
+  echo "🔨 [$cluster_name] Building $addon_name manifests from generated kustomization..."
   kustomize build \
     --enable-helm \
     --load-restrictor LoadRestrictionsNone \
-    --enable-alpha-plugins \
-    --enable-exec \
-    "$addon_dir" > "$tmp_manifests"
+    "$tmp_kustomize_dir" > "$tmp_manifests"
 
   echo "📝 [$cluster_name] Generating $addon_name ClusterResourceSet..."
   cat > "$crs_output" <<EOF
 # AUTO-GENERATED FILE - DO NOT EDIT
-# Generated by: scripts/render-cilium-crs.sh
-# Source: ${addon_dir#"$REPO_ROOT"/}
+# Generated by: $(basename "${BASH_SOURCE[0]}")
+# Source: ${addon_cluster_dir#"$REPO_ROOT"/}
 #
 # To regenerate: ./scripts/render-cilium-crs.sh
 
@@ -105,8 +163,8 @@ EOF
   {
     cat <<EOF
 # AUTO-GENERATED FILE - DO NOT EDIT
-# Generated by: scripts/render-cilium-crs.sh
-# Source: ${addon_dir#"$REPO_ROOT"/}
+# Generated by: $(basename "${BASH_SOURCE[0]}")
+# Source: ${addon_cluster_dir#"$REPO_ROOT"/}
 #
 # This file is encrypted with SOPS and decrypted by KSOPS on the cluster
 # To regenerate: ./scripts/render-cilium-crs.sh
@@ -145,38 +203,58 @@ if [[ ! -d "$CLUSTERS_DIR" ]]; then
   echo "Clusters dir not found: $CLUSTERS_DIR" >&2
   exit 1
 fi
+if [[ ! -d "$ADDONS_DIR" ]]; then
+  echo "Addons dir not found: $ADDONS_DIR" >&2
+  exit 1
+fi
 
 clusters=()
 if [[ -n "$TARGET_CLUSTER" ]]; then
+  if [[ ! -d "$CLUSTERS_DIR/$TARGET_CLUSTER" ]]; then
+    echo "Target cluster not found: $CLUSTERS_DIR/$TARGET_CLUSTER" >&2
+    exit 1
+  fi
   clusters+=("$CLUSTERS_DIR/$TARGET_CLUSTER")
 else
   for d in "$CLUSTERS_DIR"/*; do
-    clusters+=("$d")
+    [[ -d "$d" ]] && clusters+=("$d")
   done
 fi
 
 did_any=false
 
 for cluster_dir in "${clusters[@]}"; do
-  [[ -d "$cluster_dir" ]] || continue
   cluster_name="$(basename "$cluster_dir")"
 
-  addon_name="${TARGET_ADDON:-cilium}"
-  addon_dir="$cluster_dir/$addon_name"
-  output_dir="$cluster_dir/${addon_name}-crs"
-
-  if [[ ! -d "$addon_dir" || ! -f "$addon_dir/kustomization.yaml" ]]; then
-    continue
+  addons_to_render=()
+  if [[ -n "$TARGET_ADDON" ]]; then
+      addons_to_render+=("$TARGET_ADDON")
+  else
+      # Detect addons by finding kustomization.yaml files in subdirs
+      for addon_kustomization in "$cluster_dir"/*/kustomization.yaml; do
+          [[ -f "$addon_kustomization" ]] || continue
+          addons_to_render+=( "$(basename "$(dirname "$addon_kustomization")")" )
+      done
   fi
-  if [[ ! -d "$output_dir" ]]; then
-    echo "⚠️  [$cluster_name] Missing output directory: ${output_dir#"$REPO_ROOT"/}" >&2
-    continue
-  fi
 
-  did_any=true
-  render_addon "$cluster_dir" "$addon_name"
+  for addon_name in "${addons_to_render[@]}"; do
+    addon_cluster_dir="$cluster_dir/$addon_name"
+    output_dir="$cluster_dir/${addon_name}"
+
+    if [[ ! -d "$addon_cluster_dir" || ! -f "$addon_cluster_dir/kustomization.yaml" ]]; then
+      echo "🤔 [$cluster_name] Skipping addon '$addon_name': no kustomization.yaml found in $addon_cluster_dir"
+      continue
+    fi
+    if [[ ! -d "$output_dir" ]]; then
+      echo "⚠️  [$cluster_name] Missing output directory for addon '$addon_name': ${output_dir#"$REPO_ROOT"/}" >&2
+      continue
+    fi
+
+    did_any=true
+    render_addon "$cluster_dir" "$addon_name"
+  done
 done
 
 if [[ "$did_any" != "true" ]]; then
-  echo "No cilium kustomizations found under: $CLUSTERS_DIR" >&2
+  echo "No addon kustomizations found to render under: $CLUSTERS_DIR" >&2
 fi

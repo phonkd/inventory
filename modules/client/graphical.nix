@@ -114,6 +114,7 @@
     argocd
     gemini-cli-bin
     comma
+    yq
   ];
   #services.netbird.enable = true;
   programs.light.enable = true;

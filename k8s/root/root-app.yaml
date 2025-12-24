@@ -8,7 +8,7 @@ spec:
     #namespace: kube-system
     server: https://kubernetes.default.svc
   source:
-    path: modules/spawner/sel-001/platform/
+    path: k8s/root
     repoURL: https://github.com/phonkd/inventory.git
     targetRevision: main
   sources: []

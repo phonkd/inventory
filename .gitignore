@@ -1,7 +1,7 @@
 **result
 **.DS_Store
 **clusterctl.yaml
-!modules/spawner/sel-001/clusters/
+!k8s/root/child-clusters/
 **.secret.yaml
 **flake.lock
 **work-setup.nix
