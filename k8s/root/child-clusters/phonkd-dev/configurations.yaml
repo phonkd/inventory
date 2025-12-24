@@ -5,6 +5,10 @@ nameReference:
     kind: MachineDeployment
   - path: spec/template/spec/clusterName
     kind: MachineDeployment
+  - path: spec/selector/matchLabels/cluster.x-k8s.io\/cluster-name
+    kind: MachineDeployment
+  - path: spec/template/metadata/labels/cluster.x-k8s.io\/cluster-name
+    kind: MachineDeployment
 - kind: ProxmoxCluster
   fieldSpecs:
   - path: spec/infrastructureRef/name
