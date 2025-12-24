@@ -11,3 +11,10 @@ configurations:
 
 patches:
   - path: patch.yaml
+    target:
+      kind: ProxmoxCluster
+      name: cluster
+  - path: patch.yaml
+    target:
+      kind: TalosControlPlane
+      name: control-plane
