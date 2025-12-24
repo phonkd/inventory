@@ -95,6 +95,7 @@
               "kustomize.buildOptions" =
                 "--enable-alpha-plugins --enable-exec --load-restrictor LoadRestrictionsNone --enable-helm";
               "exec.enabled" = true;
+              "application.namespaces" = "*";
             };
             params = {
               "server.insecure" = "true";
