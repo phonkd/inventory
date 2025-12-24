@@ -43,9 +43,9 @@ patches:
         selector:
           matchLabels:
             cluster.x-k8s.io/cluster-name: cluster
-            cluster.x-k8s.io/deployment-name: workers
+            cluster.x-k8s.io/deployment-name: phonkd-dev-workers
         template:
           metadata:
             labels:
               cluster.x-k8s.io/cluster-name: cluster
-              cluster.x-k8s.io/deployment-name: workers
+              cluster.x-k8s.io/deployment-name: phonkd-dev-workers
