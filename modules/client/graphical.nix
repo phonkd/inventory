@@ -115,6 +115,7 @@
     gemini-cli-bin
     comma
     yq
+    alacritty-graphics
   ];
   #services.netbird.enable = true;
   programs.light.enable = true;

@@ -4,6 +4,12 @@ kind: Kustomization
 resources:
   - ../template-cluster.yaml
 
+helmCharts:
+  - repo: https://charts.longhorn.io
+    name: longhorn
+    version: 1.10.1
+    valuesFile: ../../../child/storage/longhorn/values.yaml
+
 configurations:
   - configurations.yaml
 

@@ -1,0 +1,23 @@
+persistence:
+  # Sets the default storage class to write only 1 copy of the data
+  defaultClassReplicaCount: 1
+
+defaultSettings:
+  # Ensures any volume created via UI also defaults to 1 replica
+  defaultReplicaCount: 1
+  # Allows scheduling replicas on the same node (essential for single-node clusters
+  # if you ever accidentally increase replica count)
+  replicaSoftAntiAffinity: true
+  # Auto-balance is useless on a single node, disable to save CPU cycles
+  replicaAutoBalance: false
+
+# Reduce system component overhead (Default is usually 3 for HA)
+csi:
+  attacherReplicaCount: 1
+  provisionerReplicaCount: 1
+  resizerReplicaCount: 1
+  snapshotterReplicaCount: 1
+
+# No need for High Availability on the Dashboard for a single node
+longhornUI:
+  replicas: 1
