@@ -112,6 +112,8 @@
     iftop
     prek
     argocd
+    gemini-cli-bin
+    comma
   ];
   #services.netbird.enable = true;
   programs.light.enable = true;
