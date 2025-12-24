@@ -1,0 +1,52 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ../template-cluster.yaml
+  - ../../../phonkd-dev/app.yaml
+
+configurations:
+  - configurations.yaml
+
+namePrefix: phonkd-dev-
+patches:
+  - target:
+      kind: ProxmoxCluster
+    patch: |
+      apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
+      kind: ProxmoxCluster
+      metadata:
+        name: cluster
+      spec:
+        controlPlaneEndpoint:
+          host: 192.168.1.226
+        ipv4Config:
+          addresses:
+            - 192.168.1.227-192.168.1.237
+  - target:
+      kind: TalosControlPlane
+    patch: |-
+      - op: add
+        path: /spec/controlPlaneConfig/controlplane/configPatches/-
+        value:
+          op: replace
+          path: /machine/network/interfaces/0/vip/ip
+          value: 192.168.1.226
+  - target:
+      kind: MachineDeployment
+      name: workers
+    patch: |
+      apiVersion: cluster.x-k8s.io/v1beta1
+      kind: MachineDeployment
+      metadata:
+        name: workers
+      spec:
+        selector:
+          matchLabels:
+            cluster.x-k8s.io/cluster-name: phonkd-dev-cluster
+            cluster.x-k8s.io/deployment-name: phonkd-dev-workers
+        template:
+          metadata:
+            labels:
+              cluster.x-k8s.io/cluster-name: phonkd-dev-cluster
+              cluster.x-k8s.io/deployment-name: phonkd-dev-workers

@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: capmox-manager-credentials-2
+    namespace: capmox-system
+type: Opaque
+stringData:
+    secret: ENC[AES256_GCM,data:nt9YHPTZRSYmzoCa56RTKKAR9gwpOV8fgzGOKhgBWYYb2Ydr,iv:CJxf0FvidNRou24gOYXXLNrX7ZR2fkK2XIcAybIE5R8=,tag:joNv60YjfUOKPzTci7hQQA==,type:str]
+    url: https://oldblac.int.phonkd.net
+    # The Proxmox VE TokenID for authentication
+    token: root@pam!capi
+    # The secret associated with the TokenID
+    # generate using:
+    # root@oldblac:~# pveum user token add root@pam capi --privsep=0
+    # root@oldblac:~# pveum acl modify / --tokens 'root@pam!capi' --roles Administrator
+sops:
+    age:
+        - recipient: age1jsnygd7gl62hzt06khdqkkjwa66v3snttmkep4wa5kl33luelfksdzytc6
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBFNDlWVEhBMFFiZkgvb3p1
+            L1FXVUI0aldWT3V6eFhMUTZ4bTRvYkFhWXdZCmM2SjFrdnd4UFFtWDBaMjNaOGNa
+            MngzM0t1Q1IydGw2WVdHRjVHYmVreVkKLS0tIGN6UVJCUmx2ZWRTQ24rUldsQkYw
+            VllNRWp6a216RmErUU9ReVMwbnNhT3MK7x8ZzacbmCUk8KYi5/7Yyi6qZd8h4XHe
+            Qgenq7xhqLCAcf6v/VrHt0iMn/6fDnHezS1PrsKwnsZnX1BuuW7YQA==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2025-12-13T21:23:05Z"
+    mac: ENC[AES256_GCM,data:M9s+8kL88EkuYWWXG7xmUmlLaNdqblPaeEuat363RaPpvGMR1usHELf+2RxoYFtTs644YlhLT+RaVpdtUtSnX1vKR8SADCQqERaB/meFeVt3FVnF6AqLhgVfGKDPfltOECTCCtq5vcfyWEpwAJdFc8RFZdrBuJyyMzCTztaz8aA=,iv:cFhR7KPyZX4jI/vXAQHyvwuGqHTs1aFvbAUmZ34gNT0=,tag:qRv7TGVPDlY2Ql911oLQsA==,type:str]
+    encrypted_regex: ^(secret)$
+    version: 3.11.0

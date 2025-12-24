@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: phonkd-dev
+spec:
+  destination:
+    namespace: default
+    server: https://192.168.1.226:6443
+  source:
+    path: k8s/clusters/phonkd-dev
+    repoURL: https://github.com/phonkd/inventory
+    targetRevision: HEAD
+  sources: []
+  project: default
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
+      enabled: true

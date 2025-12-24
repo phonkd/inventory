@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+# this patch fixes:
+# - start issues
+# - aggressive liveness probe.
+# - use an alternative secret for proxmox credentials (necessary because its impossible to patch the automatically created (by capmox) secret with kustomize if its created by a ksops generator.)
+
+kind: Deployment
+metadata:
+  name: capmox-controller-manager
+  namespace: capmox-system
+spec:
+  template:
+    spec:
+      containers:
+        - name: manager
+          args:
+            - --leader-elect
+            - --feature-gates=ClusterTopology=false
+            - --diagnostics-address=:8443
+            - --insecure-diagnostics=false
+            - --v=0
+          env:
+            - name: PROXMOX_URL
+              valueFrom:
+                secretKeyRef:
+                  name: capmox-manager-credentials-2
+            - name: PROXMOX_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: capmox-manager-credentials-2
+            - name: PROXMOX_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: capmox-manager-credentials-2
+          livenessProbe:
+            initialDelaySeconds: 500
+            failureThreshold: 15

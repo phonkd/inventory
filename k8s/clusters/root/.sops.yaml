@@ -1,0 +1,9 @@
+keys:
+  - &primary age1jsnygd7gl62hzt06khdqkkjwa66v3snttmkep4wa5kl33luelfksdzytc6
+creation_rules:
+  - path_regex: ksops-secret.enc.yaml$
+    key_groups:
+      - age:
+          - *primary
+    encrypted_regex: ^(keys.txt)$
+# edit the secret using sops -i ksops-secret.enc.yaml
