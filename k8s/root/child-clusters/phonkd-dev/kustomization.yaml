@@ -6,15 +6,31 @@ resources:
 
 namePrefix: phonkd-dev-
 
-configurations:
-  - ../kustomize-config.yaml
-
 patches:
-  - path: patch.yaml
-    target:
+  - target:
       kind: ProxmoxCluster
-      name: cluster
-  - path: patch.yaml
-    target:
+    patch: |
+      apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
+      kind: ProxmoxCluster
+      metadata:
+        name: kek
+      spec:
+        controlPlaneEndpoint:
+          host: 192.168.1.226
+        ipv4Config:
+          addresses:
+            - 192.168.1.227-192.168.1.237
+  - target:
       kind: TalosControlPlane
-      name: control-plane
+    patch: |
+      apiVersion: controlplane.cluster.x-k8s.io/v1alpha3
+      kind: TalosControlPlane
+      metadata:
+        name: irrelevantname
+      spec:
+        controlPlaneConfig:
+          controlplane:
+            configPatches:
+              - op: add
+                path: /machine/network/interfaces/0/vip/ip
+                value: 192.168.1.226
