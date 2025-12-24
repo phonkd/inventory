@@ -91,6 +91,7 @@ button:hover {
 #mpd,
 #user,
 #bluetooth,
+#custom-hottest-cpu,
 #custom-spotify-metadata {
     padding: 0 10px;
     color: #f3d08c;
@@ -199,6 +200,10 @@ label:focus {
 }
 
 #custom-media.custom-vlc {
+}
+
+#custom-hottest-cpu.critical {
+    color: #ff5555;
 }
 
 #temperature {

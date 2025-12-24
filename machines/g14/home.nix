@@ -26,6 +26,52 @@ in
       #   echo "Hello, ${config.home.username}!"
       # '')
       unstable.waybar-lyric
+      (pkgs.writeShellScriptBin "waybar-hottest-cpu" ''
+        #!/usr/bin/env bash
+        set -euo pipefail
+
+        sensors_bin="${pkgs.lm_sensors}/bin/sensors"
+        jq_bin="${pkgs.jq}/bin/jq"
+
+        json="$("$sensors_bin" -j 2>/dev/null || true)"
+
+        if [[ -z "$json" ]]; then
+          echo '{"text":"--","tooltip":"No sensor data","class":["sensor-missing"]}'
+          exit 0
+        fi
+
+        temp="$(printf '%s\n' "$json" | "$jq_bin" -r '
+          ([
+             to_entries[]
+             | select(.key | test("(?i)(coretemp|k10temp|zenpower|amdtemp)"))
+             | .value
+             | .. | objects
+             | to_entries[]
+             | select(.key | test("^temp[0-9]+_input$"))
+             | .value
+           ] | max) // empty
+        ')"
+
+        if [[ -z "$temp" || "$temp" == "null" ]]; then
+          echo '{"text":"--","tooltip":"CPU temperature unavailable","class":["sensor-missing"]}'
+          exit 0
+        fi
+
+        temp_int="$(printf '%.0f' "$temp")"
+
+        if (( temp_int >= 90 )); then
+          cls="critical"
+          icon=""
+        elif (( temp_int >= 85 )); then
+          cls="warning"
+          icon=""
+        else
+          cls="normal"
+          icon=""
+        fi
+
+        printf '{"text":"%s %s°C","tooltip":"Hottest CPU sensor %s°C","class":["%s"]}\n' "$icon" "$temp_int" "$temp_int" "$cls"
+      '')
     ];
   };
 

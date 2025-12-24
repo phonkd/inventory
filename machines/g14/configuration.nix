@@ -23,6 +23,8 @@
   sops.age = {
     keyFile = "/home/phonkd/.config/sops/age/keys.txt";
   };
+  #boot.kernelParams = [ "maxcpus=8" ];
+
   # Bootloader.
   boot.loader.limine.enable = true;
   #boot.loader.systemd-boot.enable = true;

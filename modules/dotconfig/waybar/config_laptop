@@ -5,7 +5,7 @@
     "spacing": 4, // Gaps between modules (4px)
     "modules-left": ["network", "bluetooth", "pulseaudio", "backlight"],
     "modules-center": ["custom/lyrics"],
-    "modules-right": ["custom/spotify-metadata", "cpu", "memory", "battery", "clock"],
+    "modules-right": ["custom/spotify-metadata", "custom/hottest-cpu", "cpu", "memory", "battery", "clock"],
     "margin-top": 6,
     "margin-left": 12,
     "margin-right": 12,
@@ -97,6 +97,13 @@
     "cpu": {
         "format": "{usage}% ",
         "tooltip": false
+    },
+    "custom/hottest-cpu": {
+        "format": "{text}",
+        "return-type": "json",
+        "exec-if": "command -v waybar-hottest-cpu >/dev/null 2>&1",
+        "exec": "waybar-hottest-cpu",
+        "interval": 5
     },
     "memory": {
         "format": "{}% ",
