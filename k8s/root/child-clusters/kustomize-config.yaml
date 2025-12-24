@@ -1,0 +1,19 @@
+nameReference:
+- kind: TalosControlPlane
+  fieldSpecs:
+  - path: spec/controlPlaneRef/name
+    kind: Cluster
+- kind: ProxmoxCluster
+  fieldSpecs:
+  - path: spec/infrastructureRef/name
+    kind: Cluster
+- kind: ProxmoxMachineTemplate
+  fieldSpecs:
+  - path: spec/infrastructureTemplate/name
+    kind: TalosControlPlane
+  - path: spec/template/spec/infrastructureRef/name
+    kind: MachineDeployment
+- kind: TalosConfigTemplate
+  fieldSpecs:
+  - path: spec/template/spec/bootstrap/configRef/name
+    kind: MachineDeployment
