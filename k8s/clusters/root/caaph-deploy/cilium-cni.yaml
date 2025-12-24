@@ -2,7 +2,6 @@ apiVersion: addons.cluster.x-k8s.io/v1alpha1
 kind: HelmChartProxy
 metadata:
   name: cilium
-  namespace: capi-system
 spec:
   clusterSelector:
     # Target workload clusters with specific labels.

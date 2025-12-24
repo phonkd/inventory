@@ -4,4 +4,3 @@ resources:
   - cluster-api
   - child-clusters
   - capi2argo-operator
-  - caaph-deploy
