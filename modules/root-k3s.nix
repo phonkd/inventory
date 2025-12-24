@@ -100,6 +100,26 @@
             params = {
               "server.insecure" = "true";
             };
+            projects = {
+              default = {
+                sourceNamespaces = [ "*" ]; # <--- ADD THIS
+                # When defining projects via Helm, you must explicitely re-declare the standard permissions
+                # otherwise they might default to empty/restricted.
+                destinations = [
+                  {
+                    server = "*";
+                    namespace = "*";
+                  }
+                ];
+                clusterResourceWhitelist = [
+                  {
+                    group = "*";
+                    kind = "*";
+                  }
+                ];
+                sourceRepos = [ "*" ];
+              };
+            };
           };
 
           repoServer = {
