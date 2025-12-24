@@ -42,10 +42,10 @@ patches:
       spec:
         selector:
           matchLabels:
-            cluster.x-k8s.io/cluster-name: phonkd-dev-cluster
-            cluster.x-k8s.io/deployment-name: phonkd-dev-workers
+            cluster.x-k8s.io/cluster-name: cluster
+            cluster.x-k8s.io/deployment-name: workers
         template:
           metadata:
             labels:
-              cluster.x-k8s.io/cluster-name: phonkd-dev-cluster
-              cluster.x-k8s.io/deployment-name: phonkd-dev-workers
+              cluster.x-k8s.io/cluster-name: cluster
+              cluster.x-k8s.io/deployment-name: workers
