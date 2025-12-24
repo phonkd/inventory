@@ -14,7 +14,7 @@
     ../../modules/01-vm-config.nix
     #./keycloak.nix
     ./traefik.nix
-    ../../modules/spawner/spawner-k3s.nix
+    ../../modules/root-k3s.nix
     #../../modules/renovate.nix
   ];
   boot.loader.grub.device = "/dev/vda";

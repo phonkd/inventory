@@ -4,7 +4,6 @@ kind: Kustomization
 resources:
   - clu-01-nodes.yaml
   - cilium-crs
-  - ../../modules/register-argo-cluser/register-child-cluster-job.yaml
 patches:
   - path: register-argo-patch.yaml
     target:
