@@ -16,16 +16,11 @@ spec:
   valuesTemplate: |
     ipam:
       mode: kubernetes
-
-    routingMode: native
-    autoDirectNodeRoutes: true
-    ipv4NativeRoutingCIDR: "10.244.0.0/16"
-    bpf:
-      hostLegacyRouting: true
-
     kubeProxyReplacement: true
-    k8sServiceHost: {{ .Cluster.spec.controlPlaneEndpoint.host }}
-    k8sServicePort: {{ .Cluster.spec.controlPlaneEndpoint.port }}
+    # k8sServiceHost: {{ .Cluster.spec.controlPlaneEndpoint.host }}
+    # k8sServicePort: {{ .Cluster.spec.controlPlaneEndpoint.port }}
+    k8sServiceHost: localhost
+    k8sServicePort: 7445
 
     # API server endpoint for bootstrap connectivity
     # Must point to the control plane VIP before CNI is ready
