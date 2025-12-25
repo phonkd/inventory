@@ -5,4 +5,4 @@ helmCharts:
   - repo: https://charts.longhorn.io
     name: longhorn
     version: 1.10.1
-    valuesFile: ../../../child/storage/longhorn/values.yaml
+    valuesFile: ../../chlid/storage/longhorn/values.yaml

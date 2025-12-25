@@ -99,6 +99,7 @@
             };
             params = {
               "server.insecure" = "true";
+              "application.namespaces" = "*";
             };
             projects = {
               default = {
