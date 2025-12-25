@@ -8,3 +8,11 @@ helmCharts:
     version: 1.10.1
     valuesFile: ../../chlid/storage/longhorn/values.yaml
 namespace: longhorn-system
+patches:
+  - target:
+      group: batch
+      kind: Job
+      name: longhorn-pre-upgrade
+    patch: |-
+      - op: remove
+        path: /metadata/annotations/helm.sh~1hook
