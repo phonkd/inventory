@@ -6,3 +6,4 @@ helmCharts:
     name: longhorn
     version: 1.10.1
     valuesFile: ../../chlid/storage/longhorn/values.yaml
+namespace: longhorn-system
