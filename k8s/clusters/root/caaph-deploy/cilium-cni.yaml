@@ -17,6 +17,11 @@ spec:
     ipam:
       mode: kubernetes
 
+    routingMode: native
+    tunnelProtocol: disabled
+    autoDirectNodeRoutes: true
+    ipv4NativeRoutingCIDR: "10.244.0.0/16"
+
     kubeProxyReplacement: true
     k8sServiceHost: {{ .Cluster.spec.controlPlaneEndpoint.host }}
     k8sServicePort: {{ .Cluster.spec.controlPlaneEndpoint.port }}
