@@ -17,10 +17,10 @@ spec:
     ipam:
       mode: kubernetes
     kubeProxyReplacement: true
-    # k8sServiceHost: {{ .Cluster.spec.controlPlaneEndpoint.host }}
-    # k8sServicePort: {{ .Cluster.spec.controlPlaneEndpoint.port }}
-    k8sServiceHost: localhost
-    k8sServicePort: 7445
+    k8sServiceHost: {{ .Cluster.spec.controlPlaneEndpoint.host }}
+    k8sServicePort: {{ .Cluster.spec.controlPlaneEndpoint.port }}
+    # k8sServiceHost: localhost
+    # k8sServicePort: 7445
 
     # API server endpoint for bootstrap connectivity
     # Must point to the control plane VIP before CNI is ready
