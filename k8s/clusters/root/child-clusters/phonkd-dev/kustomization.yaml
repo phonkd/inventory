@@ -55,14 +55,13 @@ patches:
               cluster.x-k8s.io/deployment-name: phonkd-dev-workers
   - target:
       kind: TalosConfigTemplate
-      name: worker
+      name: phonkd-dev-workers
     patch: |-
       - op: add
         path: /spec/template/spec/configPatches/-
         value:
           op: add
-          path: /machine/node
+          path: /machine/nodeLabels
           value:
-            labels:
-              topology.kubernetes.io/region: Region1
-              topology.kubernetes.io/zone: pve-1
+            topology.kubernetes.io/region: Region1
+            topology.kubernetes.io/zone: pve-1
