@@ -222,3 +222,8 @@ spec:
                 - bind
                 - rshared
                 - rw
+        - op: add
+          path: /machine/nodeLabels
+          value:
+            topology.kubernetes.io/region: Region1
+            topology.kubernetes.io/zone: pve-1
