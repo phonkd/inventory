@@ -1,18 +1,4 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - namespace.yaml
-helmCharts:
-  - repo: https://charts.longhorn.io
-    name: longhorn
-    version: 1.10.1
-    valuesFile: ../../chlid/storage/longhorn/values.yaml
-namespace: longhorn-system
-patches:
-  - target:
-      group: batch
-      kind: Job
-      name: longhorn-pre-upgrade
-    patch: |-
-      - op: remove
-        path: /metadata/annotations/helm.sh~1hook
+  - ../../child/storage/proxmox-csi/envs/phonkd-dev
