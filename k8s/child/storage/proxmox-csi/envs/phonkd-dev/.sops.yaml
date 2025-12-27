@@ -5,5 +5,5 @@ creation_rules:
     key_groups:
       - age:
           - *primary
-    encrypted_regex: ^(token_secret)$
+    encrypted_regex: ^(config\.yaml)$
 # edit the secret using sops -i ksops-secret.enc.yaml
