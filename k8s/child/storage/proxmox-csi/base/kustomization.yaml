@@ -3,7 +3,7 @@ kind: Kustomization
 helmCharts:
   - name: proxmox-csi-plugin
     repo: oci://ghcr.io/sergelogvinov/charts
-    version: v0.17.0
+    version: 0.5.3
     releaseName: proxmox-csi-plugin
     namespace: csi-proxmox
     valuesFile: ./values.yaml
