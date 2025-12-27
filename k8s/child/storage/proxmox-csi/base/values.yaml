@@ -1,1 +1,2 @@
-existingConfigSecret: csi-config
+existingConfigSecret: proxmox-csi-plugin
+existingConfigSecretKey: config.yaml
