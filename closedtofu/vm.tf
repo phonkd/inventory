@@ -71,11 +71,28 @@ resource "proxmox_virtual_environment_vm" "core-vm" {
     enabled = true
   }
 
+  boot_order = ["virtio0"]
+
   disk {
     datastore_id = "nvme1"
     import_from  = proxmox_virtual_environment_download_file.nixos_cloud_image.id
     interface    = "virtio0"
-    size         = 1000
+    serial       = "vm-202-disk-0"
+    size         = 120
+  }
+  disk {
+    # disk for samba shares
+    datastore_id = "nvme1"
+    interface    = "virtio1"
+    serial       = "vm-202-disk-1"
+    size         = 500
+  }
+  disk {
+    # disk for s3
+    datastore_id = "nvme1"
+    interface    = "virtio2"
+    serial       = "vm-202-disk-2"
+    size         = 500
   }
 
   initialization {

@@ -43,8 +43,8 @@
 
       # Standard data directories
       # Garage will be happy because sops is no longer messing with these folders.
-      metadata_dir = "/var/lib/garage/meta";
-      data_dir = "/var/lib/garage/data";
+      metadata_dir = "/mnt/s3/meta";
+      data_dir = "/mnt/s3/data";
 
       rpc_bind_addr = "[::]:3901";
       bootstrap_peers = [ ];
@@ -56,7 +56,7 @@
       s3_api = {
         api_bind_addr = "127.0.0.1:3900";
         s3_region = "us-east-1";
-        root_domain = "s3.w.phonkd.net";
+        root_domain = ".api.s3.w.phonkd.net";
       };
 
       admin = {
@@ -131,5 +131,18 @@
         }
       ];
     };
+  };
+  fileSystems."/mnt/s3" = {
+    device = "/dev/disk/by-id/virtio-vm-202-disk-2";
+    fsType = "xfs";
+    options = [
+      # If you don't have this options attribute, it'll default to "defaults"
+      # boot options for fstab. Search up fstab mount options you can use
+      "users" # Allows any user to mount and unmount
+      "nofail" # Prevent system from failing if this drive doesn't mount
+
+    ];
+    autoFormat = true;
+    autoResize = true;
   };
 }

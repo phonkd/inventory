@@ -1,5 +1,17 @@
 # Auto-generated using compose2nix v0.3.1.
 { config, pkgs, lib, ... }:
+let
+  servicesList = import ./services-list.nix;
+
+  toSite = svc: {
+    title = svc.title or svc.name;
+    url = if svc ? host then "https://${svc.host}" else (if svc ? publicHost then "https://${svc.publicHost}" else svc.uri);
+    icon = svc.icon or "si:server";
+  };
+
+  publicSites = map toSite (lib.filter (s: s.category == "Public") (servicesList.traefik ++ servicesList.teleport ++ servicesList.external));
+  privateSites = map toSite (lib.filter (s: s.category == "Private") (servicesList.traefik ++ servicesList.teleport ++ servicesList.external));
+in
 {
   services.glance = {
     enable = true;
@@ -21,28 +33,13 @@
                     type = "monitor";
                     cache = "1m";
                     title = "Public";
-                    sites = [
-                      { title = "Bitwarden"; url = "https://vw.w.phonkd.net/"; icon = "si:vaultwarden"; }
-                      { title = "Grafana"; url = "https://teleport.phonkd.net/web/launch/kube-prom-stack-grafana-monit-nix-k8s.teleport.phonkd.net/teleport.phonkd.net/kube-prom-stack-grafana-monit-nix-k8s.teleport.phonkd.net"; icon = "si:grafana"; }
-                      { title = "Cloudflare";url = "https://dash.cloudflare.com/"; icon = "si:cloudflare"; }
-                      { title = "hetzner"; url = "https://accounts.hetzner.com/login/"; icon = "si:hetzner"; }
-                      { title = "Clips";   url = "https://share.w.phonkd.net/"; icon = "si:airplayvideo"; }
-                      { title = "Photos";   url = "https://immich.w.phonkd.net/"; icon = "si:immich"; }
-                    ];
+                    sites = publicSites;
                   }
                   {
                     type = "monitor";
                     cache = "1m";
                     title = "Private";
-                    sites = [
-                      { title = "Proxmox";    url = "https://pve.int.phonkd.net/"; icon = "si:proxmox"; }
-                      { title = "OpenWrt";       url = "http://192.168.1.3"; icon = "si:openwrt"; }
-                      { title = "Paperless";      url = "https://paperless.teleport.phonkd.net"; icon = "si:paperlessngx"; }
-                      { title = "ArgoCD"; url = "https://teleport.phonkd.net/web/launch/argocd-server-http-argocd-nix-k8s.teleport.phonkd.net/teleport.phonkd.net/argocd-server-http-argocd-nix-k8s.teleport.phonkd.net"; icon = "si:argo"; }
-                      { title = "Grafana"; url = "https://teleport.phonkd.net/web/launch/kube-prom-stack-grafana-monit-nix-k8s.teleport.phonkd.net/teleport.phonkd.net/kube-prom-stack-grafana-monit-nix-k8s.teleport.phonkd.net"; icon = "si:grafana"; }
-                      { title = "Syncthing"; url = "https://teleport.phonkd.net/web/launch/syncthing.teleport.phonkd.net/teleport.phonkd.net/syncthing.teleport.phonkd.net"; icon = "si:syncthing"; }
-                      { title = "Kuma"; url = "https://teleport.phonkd.net/web/launch/kuma.teleport.phonkd.net/teleport.phonkd.net/kuma.teleport.phonkd.net"; icon = "si:kuma"; }
-                    ];
+                    sites = privateSites;
                   }
                   {
                     type = "bookmarks";

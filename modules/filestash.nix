@@ -10,8 +10,11 @@
   # 1. SOPS TEMPLATE (Auto-configure Filestash S3)
   # ============================================================================
   # This generates the config.json file securely so you don't need to use the Web UI setup wizard.
+  sops.secrets.filestash_s3_key = { };
+  sops.secrets.filestash_s3_secret = { };
   sops.templates."filestash_config.json" = {
     owner = "root";
+    mode = "0444";
     content = ''
       {
         "system": {
@@ -19,8 +22,8 @@
         },
         "backends": [
           {
-            "type": "s3",
-            "name": "My Garage S3",
+            "type": "samba",
+            "name": "Samba Public,
             "endpoint": "s3.phonkd.net",
             "region": "us-east-1",
             "access_key": "${config.sops.placeholder.filestash_s3_key}",
@@ -59,7 +62,7 @@
   virtualisation.oci-containers.containers."filestash" = {
     image = "machines/filestash:latest";
     environment = {
-      "APPLICATION_URL" = "https://filestash.w.phonkd.net";
+      "APPLICATION_URL" = "filestash.w.phonkd.net";
       "CANARY" = "true";
       # Internal networking URLs
       "OFFICE_FILESTASH_URL" = "http://app:8334";
@@ -70,7 +73,7 @@
     volumes = [
       "filestash_filestash:/app/data/state:rw"
       # Mount the generated config file over the default location
-      "${config.sops.templates."filestash_config.json".path}:/app/data/state/config/config.json:ro"
+      # "${config.sops.templates."filestash_config.json".path}:/app/data/state/config/config.json:ro"
     ];
     ports = [
       "8334:8334/tcp"
