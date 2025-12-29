@@ -20,10 +20,12 @@
     ../../modules/client/android.nix
     /tmp/work-setup.nix
     ../options.nix
+    ./hyprland-session.nix
   ];
   sops.age = {
     keyFile = "/home/phonkd/.config/sops/age/keys.txt";
   };
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -64,6 +66,7 @@
   boot.kernelParams = [
     #"pcie_aspm=off"
     "pci=noaer"
+    "btusb.enable_autosuspend=n"
   ];
 
   users.users.phonkd = {

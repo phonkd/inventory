@@ -20,22 +20,5 @@
     ../../modules/shares.nix
     ../../modules/dns.nix
   ];
-  services.teleport.settings = {
-    app_service = {
-      enabled = true;
-      apps = [
-        {
-          name = "zyxel";
-          uri = "https://192.168.1.1";
-          insecure_skip_verify = true;
-        }
-        {
-          name = "oldblac";
-          uri = "https://192.168.1.47:8006";
-          insecure_skip_verify = true;
-        }
-      ];
-    };
-  };
   programs.fzf.fuzzyCompletion = true;
 }

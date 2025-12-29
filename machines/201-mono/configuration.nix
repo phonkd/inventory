@@ -13,8 +13,10 @@
     ../../modules/00-global-config.nix
     ../../modules/01-vm-config.nix
     #./keycloak.nix
-    ../../modules/root-k3s.nix
+    ./traefik.nix
     #../../modules/renovate.nix
+    ../../modules/s3-garage.nix
+    #../../modules/filestash.nix
   ];
   boot.loader.grub.device = "/dev/vda";
 }

@@ -199,6 +199,21 @@
             { label.labels = [ "vm" ]; }
           ];
         };
+        "201-mono" = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            (
+              { config, pkgs, ... }:
+              {
+                nixpkgs.overlays = [ overlay-unstable ];
+              }
+            )
+            ./201-mono/configuration.nix
+            sops-nix.nixosModules.sops
+            ./options.nix
+            { label.labels = [ "vm" ]; }
+          ];
+        };
         "000-qcow" = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [

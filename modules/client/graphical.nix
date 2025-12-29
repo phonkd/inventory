@@ -116,6 +116,8 @@
     comma
     yq
     alacritty-graphics
+    lunar-client
+    prism
   ];
   #services.netbird.enable = true;
   programs.light.enable = true;
