@@ -145,4 +145,13 @@
     autoFormat = true;
     autoResize = true;
   };
+  systemd.tmpfiles.rules = [
+    "d /mnt/s3      0755 garage garage - -"
+    "d /mnt/s3/data 0700 garage garage - -"
+    "d /mnt/s3/meta 0700 garage garage - -"
+  ];
+  systemd.services.garage = {
+    after = [ "mnt-s3.mount" ];
+    requires = [ "mnt-s3.mount" ];
+  };
 }

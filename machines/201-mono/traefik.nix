@@ -71,31 +71,14 @@
       http = {
         routers = {
           # Optional HTTP -> HTTPS redirect for pve
-          pve-http = {
-            rule = "Host(`pve.segglaecloud.phonkd.net`)";
-            entryPoints = [ "web" ];
-            middlewares = [ "pve-redirect-https" ];
-            service = "pve-service";
-          };
-          pve-router = {
-            rule = "Host(`pve.segglaecloud.phonkd.net`)";
-            service = "pve-service";
-            entryPoints = [ "websecure" ];
-            middlewares = [ "pve-headers" ];
-            tls = {
-              certResolver = "cloudflare";
-              domains = [
-                {
-                  main = "pve.segglaecloud.phonkd.net";
-                }
-              ];
-            };
-          };
           oldblac-pve-router = {
             rule = "Host(`oldblac.int.phonkd.net`)";
             service = "oldblac-pve-service";
             entryPoints = [ "websecure" ];
-            middlewares = [ "pve-headers" ];
+            middlewares = [
+              "pve-headers"
+              "ip-filter"
+            ];
             tls = {
               certResolver = "cloudflare";
               domains = [
@@ -123,46 +106,27 @@
             tls.certResolver = "cloudflare";
             entryPoints = [ "websecure" ];
             service = "immich-service";
+            middlewares = [
+              "ip-filter"
+            ];
           };
           auth = {
-            rule = "Host(`auth.segglaecloud.phonkd.net`)";
+            rule = "Host(`auth.w.phonkd.net`)";
             entryPoints = [ "websecure" ];
             service = "keycloak-service";
             tls = {
               certResolver = "cloudflare";
               domains = [
                 {
-                  main = "vw.w.phonkd.net";
+                  main = "auth.w.phonkd.net";
                 }
               ];
             };
+            middlewares = [
+              "ip-filter"
+            ];
           };
-          filestash = {
-            rule = "Host(`filestash.w.phonkd.net`)";
-            entryPoints = [ "websecure" ];
-            service = "filestash-service";
-            tls = {
-              certResolver = "cloudflare";
-              domains = [
-                {
-                  main = "filestash.w.phonkd.net";
-                }
-              ];
-            };
-          };
-          collabora = {
-            rule = "Host(`collabora.int.phonkd.net`)";
-            entryPoints = [ "websecure" ];
-            service = "collabora-service";
-            tls = {
-              certResolver = "cloudflare";
-              domains = [
-                {
-                  main = "collabora.int.phonkd.net";
-                }
-              ];
-            };
-          };
+
           s3 = {
             rule = "Host(`public.s3.w.phonkd.net`)";
             tls.certResolver = "cloudflare";
@@ -173,11 +137,14 @@
             service = "s3-service";
           };
           s3-api = {
-            rule = "HostRegexp(`^.+\.api\.s3\.w\.phonkd\.net$`)";
+            rule = "Host(`public.api.s3.w.phonkd.net`)";
             tls.certResolver = "cloudflare";
             entryPoints = [
               "websecure"
               "web"
+            ];
+            middlewares = [
+              "ip-filter"
             ];
             service = "s3-api";
           };
@@ -190,15 +157,6 @@
         };
 
         services = {
-          pve-service = {
-            loadBalancer = {
-              serversTransport = "insecureTransport";
-              servers = [
-                { url = "https://192.168.1.46:8006"; }
-              ];
-              passHostHeader = true;
-            };
-          };
           oldblac-pve-service = {
             loadBalancer = {
               serversTransport = "insecureTransport";
@@ -229,20 +187,6 @@
               ];
             };
           };
-          filestash-service = {
-            loadBalancer = {
-              servers = [
-                { url = "http://localhost:8334"; }
-              ];
-            };
-          };
-          collabora-service = {
-            loadBalancer = {
-              servers = [
-                { url = "http://localhost:9980"; }
-              ];
-            };
-          };
           s3-service = {
             loadBalancer = {
               servers = [
@@ -262,19 +206,17 @@
 
         # Middlewares live HERE, not at top level
         middlewares = {
-          pve-redirect-https = {
-            redirectScheme = {
-              scheme = "https";
-              permanent = true;
-            };
-          };
-
           pve-headers = {
             headers = {
               customRequestHeaders = {
                 "X-Forwarded-Proto" = "https";
               };
             };
+          };
+          ip-filter = {
+            ipAllowList.sourceRange = [
+              "192.168.1.0/24"
+            ];
           };
         };
       };

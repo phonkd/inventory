@@ -17,7 +17,6 @@
     #../../modules/renovate.nix
     ../../modules/s3-garage.nix
     ../../modules/shares.nix
-    ../../modules/filestash.nix
   ];
   boot.loader.grub.device = "/dev/vda";
 }
