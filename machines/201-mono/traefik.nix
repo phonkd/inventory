@@ -136,6 +136,15 @@
             ];
             service = "s3-service";
           };
+          s3-priv = {
+            rule = "Host(`priv.s3.w.phonkd.net`)";
+            tls.certResolver = "cloudflare";
+            entryPoints = [
+              "websecure"
+              "web"
+            ];
+            service = "s3-service";
+          };
           s3-api = {
             rule = "Host(`api.s3.w.phonkd.net`)";
             tls.certResolver = "cloudflare";
