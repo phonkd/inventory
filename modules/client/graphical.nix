@@ -13,6 +13,12 @@
 
   users.users.phonkd.packages = with pkgs; [
     #  thunderbird
+    gst_all_1.gstreamer
+    gst_all_1.gst-plugins-base
+    gst_all_1.gst-plugins-good
+    gst_all_1.gst-plugins-bad
+    gst_all_1.gst-plugins-ugly
+    gst_all_1.gst-libav
     kitty
     neovim
     zed-editor-fhs
@@ -44,9 +50,7 @@
     cliphist
     hyprcursor
     hyprlandPlugins.hy3
-    xdg-desktop-portal-hyprland
     xdg-desktop-portal
-    xdg-desktop-portal-wlr
     xdg-desktop-portal-gtk
     obs-studio
     vlc
@@ -129,7 +133,10 @@
   programs.steam.enable = true;
   services.flatpak.enable = true;
   xdg.portal.enable = true;
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  xdg.portal.extraPortals = [
+    pkgs.xdg-desktop-portal-gtk
+    pkgs.xdg-desktop-portal-hyprland
+  ];
   # Install firefox.
   programs.firefox.enable = true;
   programs.zoxide.enable = true;
