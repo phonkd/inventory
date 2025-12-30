@@ -137,7 +137,7 @@
             service = "s3-service";
           };
           s3-api = {
-            rule = "Host(`public.api.s3.w.phonkd.net`)";
+            rule = "Host(`api.s3.w.phonkd.net`)";
             tls.certResolver = "cloudflare";
             entryPoints = [
               "websecure"
@@ -198,7 +198,7 @@
             loadBalancer = {
               passHostHeader = true;
               servers = [
-                { url = "http://127.0.0.1:3903"; }
+                { url = "http://127.0.0.1:3900"; }
               ];
             };
           };
