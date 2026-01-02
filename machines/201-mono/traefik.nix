@@ -238,4 +238,16 @@
     # CF_DNS_API_TOKEN=supersecrettoken
     EnvironmentFile = [ config.sops.secrets.CF_DNS_API_TOKEN.path ];
   };
+  services.teleport.settings = {
+    app_service = {
+      enabled = true;
+      apps = [
+        {
+          name = "traefik";
+          uri = "http://localhost:8080/dashboard/";
+          insecure_skip_verify = true;
+        }
+      ];
+    };
+  };
 }

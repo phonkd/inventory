@@ -4,7 +4,16 @@
   networking.wireguard.interfaces = {
     wg0 = {
       # Server private key (generate with: wg genkey)
-      privateKeyFile = "/etc/wireguard/wg0.key";
+      # # 1. Move into the directory
+      # cd /etc/wireguard/
+
+      # # 2. Set umask to 077 (makes files readable only by the owner)
+      # # and generate the key in one go
+      # (umask 077; wg genkey > private.key)
+
+      # # 3. Generate the public key from that private key
+      # wg pubkey < private.key > public.key
+      privateKeyFile = "/etc/wireguard/private.key";
       listenPort = 51820;
 
       ips = [ "10.8.0.1/24" ];
