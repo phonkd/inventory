@@ -85,7 +85,7 @@ resource "proxmox_virtual_environment_vm" "core-vm" {
     datastore_id = "nvme1"
     interface    = "virtio1"
     serial       = "vm-202-disk-1"
-    size         = 500
+    size         = 1000
   }
   disk {
     # disk for s3

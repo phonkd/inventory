@@ -88,7 +88,6 @@
     wget
     nautilus
     compose2nix
-    protonvpn-gui
     codex
     kubectl
     kubectx
@@ -120,9 +119,15 @@
     comma
     yq
     alacritty-graphics
-    lunar-client
-    prism
+    hyprviz
+    virt-viewer
   ];
+  environment.systemPackages = with pkgs; [
+    unstable.proton-vpn-cli
+    unstable.protonvpn-gui
+    lxqt.lxqt-policykit
+  ];
+  networking.firewall.checkReversePath = false;
   #services.netbird.enable = true;
   programs.light.enable = true;
   users.extraGroups.video.members = [ "phonkd" ];
@@ -130,26 +135,28 @@
     enable = true;
     openFirewall = true;
   };
-  programs.steam.enable = true;
   services.flatpak.enable = true;
-  xdg.portal.enable = true;
-  xdg.portal.extraPortals = [
-    pkgs.xdg-desktop-portal-gtk
-    pkgs.xdg-desktop-portal-hyprland
-  ];
+  xdg.portal = {
+    enable = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-hyprland
+    ];
+    config.common.default = [
+      "hyprland"
+      "gtk"
+    ];
+  };
   # Install firefox.
   programs.firefox.enable = true;
   programs.zoxide.enable = true;
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   services.gnome.sushi.enable = true;
-  #services.gnome.gnome-keyring.enable = true;
+  services.gnome.gnome-keyring.enable = true;
 
   # List packages installed inff system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    lxqt.lxqt-policykit
-  ];
 
   ## file manager and usb mount
 

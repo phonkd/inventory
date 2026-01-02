@@ -18,7 +18,9 @@
     ../../modules/00-global-config.nix
     ../../modules/02-global-ssh.nix
     ../../modules/client/android.nix
-    /tmp/work-setup.nix
+    ../../modules/client/drone.nix
+    ../../modules/client/games.nix
+    #/tmp/work-setup.nix
     ../options.nix
     ./hyprland-session.nix
   ];
@@ -89,7 +91,7 @@
         IdentityFile ~/.ssh/id_ed25519
     '';
   };
-  programs.ssh.startAgent = true; # ssh-agent
+  #programs.ssh.startAgent = false; # ssh-agent
   security.polkit.enable = true;
   environment.variables = {
     NIXOS_OZONE_WL = 1;
@@ -128,4 +130,10 @@
     enable = true;
     #acceleration = "cuda";
   };
+
+  environment.etc."libinput/local-overrides.quirks".text = ''
+    [Company Mouse Debounce Override]
+    MatchName=*COMPANY*USB*Device*
+    ModelBouncingKeys=1
+  '';
 }

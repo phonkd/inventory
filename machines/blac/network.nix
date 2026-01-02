@@ -6,8 +6,9 @@
 }:
 
 {
+  networking.networkmanager.enable = true;
   # Use declarative networking with secondary IP
-  networking.useDHCP = true;
+  #networking.useDHCP = true;
   networking.hostName = "blac";
   networking.nameservers = [
     "192.168.1.122"

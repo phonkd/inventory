@@ -45,7 +45,7 @@
     {
       homeConfigurations = {
         "phonkd@blac" = home-manager.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs-unstable {
+          pkgs = import nixpkgs {
             inherit system;
             config.allowUnfree = true;
           };
@@ -113,7 +113,7 @@
           ];
         };
 
-        blac = nixpkgs-unstable.lib.nixosSystem {
+        blac = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
             ./blac/configuration.nix
@@ -124,6 +124,12 @@
                 environment.systemPackages = [
                   rofi-zed-recent.packages.x86_64-linux.default
                 ];
+              }
+            )
+            (
+              { config, pkgs, ... }:
+              {
+                nixpkgs.overlays = [ overlay-unstable ];
               }
             )
             #            lanzaboote.nixosModules.lanzaboote
