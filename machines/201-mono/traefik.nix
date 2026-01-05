@@ -157,6 +157,23 @@
             ];
             service = "s3-api";
           };
+          jellyfin-https = {
+            rule = "Host(`jellyfin.w.phonkd.net`)";
+            entryPoints = [ "websecure" ];
+            service = "jellyfin-service";
+            tls = {
+              certResolver = "cloudflare";
+              domains = [
+                {
+                  main = "jellyfin.w.phonkd.net";
+                }
+              ];
+            };
+            # Remove this middleware if you want to stream remotely (outside 192.168.1.0/24)
+            middlewares = [
+              "ip-filter"
+            ];
+          };
         };
 
         serversTransports = {
@@ -208,6 +225,13 @@
               passHostHeader = true;
               servers = [
                 { url = "http://127.0.0.1:3900"; }
+              ];
+            };
+          };
+          jellyfin-service = {
+            loadBalancer = {
+              servers = [
+                { url = "http://127.0.0.1:8096"; }
               ];
             };
           };
