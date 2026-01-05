@@ -30,7 +30,7 @@
         #"use sendfile" = "yes";
         #"max protocol" = "smb2";
         # note: localhost is the ipv6 localhost ::1
-        "hosts allow" = "192.168.1.0/24 10.89.0.0/24 127.0.0.1 localhost";
+        "hosts allow" = "192.168.1.0/24 10.89.0.0/24 127.0.0.1 localhost 10.8.0.1/24";
         "hosts deny" = "0.0.0.0/0";
         "guest account" = "smbpublic";
         "map to guest" = "bad user";
