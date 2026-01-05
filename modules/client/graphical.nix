@@ -26,12 +26,10 @@
     nixd
     nil
     grimblast
-    easyeffects
     cool-retro-term
     waybar
     #unstable.waybar-lyric
     btop
-    cava
     waypaper
     swaybg
     scrcpy
@@ -42,10 +40,8 @@
     rofi
     rofi-obsidian
     rofi-systemd
-    rofi-pulse-select
     rofi-rbw
     sqlite
-    ponymix
     wdisplays
     cliphist
     hyprcursor
@@ -71,11 +67,9 @@
     virt-viewer
     home-manager
     sops
-    pulseaudio
     dnsutils
     bibata-cursors
     nordic
-    ulauncher
     discord
     zsh
     fzf

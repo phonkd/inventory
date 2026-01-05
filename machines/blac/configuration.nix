@@ -20,6 +20,7 @@
     ../../modules/client/android.nix
     ../../modules/client/drone.nix
     ../../modules/client/games.nix
+    ../../modules/client/audio.nix
     #/tmp/work-setup.nix
     ../options.nix
     ./hyprland-session.nix

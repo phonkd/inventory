@@ -1,0 +1,32 @@
+Filter Settings file
+
+Room EQ V5.31.3
+Dated: Jan 4, 2026 2:51:58 PM
+
+Notes:logizbasboost
+
+Equaliser: Generic
+R Jan 4
+Filter  1: ON  None   
+Filter  2: ON  None   
+Filter  3: ON  None   
+Filter  4: ON  None   
+Filter  5: ON  None   
+Filter  6: ON  None   
+Filter  7: ON  None   
+Filter  8: ON  None   
+Filter  9: ON  None   
+Filter 10: ON  None   
+Filter 11: ON  None   
+Filter 12: ON  None   
+Filter 13: ON  None   
+Filter 14: ON  None   
+Filter 15: ON  None   
+Filter 16: ON  None   
+Filter 17: ON  None   
+Filter 18: ON  None   
+Filter 19: ON  None   
+Filter 20: ON  None   
+Filter  1: ON  None      
+Filter  2: ON  None      
+

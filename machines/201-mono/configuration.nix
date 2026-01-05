@@ -17,7 +17,7 @@
     #../../modules/renovate.nix
     ../../modules/s3-garage.nix
     ../../modules/shares.nix
-    ../../modules/wgnotez.nix
+    ./wgnotez.nix
   ];
   boot.loader.grub.device = "/dev/vda";
 }
