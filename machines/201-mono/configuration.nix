@@ -18,6 +18,7 @@
     ../../modules/s3-garage.nix
     ../../modules/shares.nix
     ../../modules/arr.nix
+    ../../modules/dns.nix
     ./wgnotez.nix
   ];
   boot.loader.grub.device = "/dev/vda";
