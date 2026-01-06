@@ -2,16 +2,22 @@
 
 {
   services.jellyfin.enable = true;
-  boot.kernelParams = [ "i915.enable_guc=2" ];
+  boot.kernelParams = [ "i915.enable_guc=3" ];
 
   # Ensure the i915 driver is loaded early
   boot.initrd.kernelModules = [ "i915" ];
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
-      intel-media-driver # LIBVA_DRIVER_NAME=iHD (The QSV Driver)
-      intel-compute-runtime # OpenCL (Required for HDR Tone Mapping)
-      vpl-gpu-rt # New VPL runtime for 12th Gen+
+      intel-media-driver # The "iHD" driver (Required for 10th Gen+)
+      intel-vaapi-driver # Fallback (good to keep)
+      libva-vdpau-driver
+      libvdpau-va-gl
+
+      # ### THE CRITICAL FIX FOR 10TH GEN+ ###
+      intel-compute-runtime # OpenCL/NEO - Required for iHD stability
+      vpl-gpu-rt
+
     ];
   };
   # FIX: Grant the Jellyfin user access to the GPU

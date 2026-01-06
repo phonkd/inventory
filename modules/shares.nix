@@ -5,14 +5,7 @@
     "d /mnt/Shares 0755 root root -"
     "d /mnt/Shares/Public 2775 smbpublic smbpublic -"
     "d /mnt/Shares/SemiPublic 2770 phonkd phonkd -"
-    "d /mnt/Shares/this-is-my-own-private-property-and-you-are-not-welcome-here 0700 phonkd phonkd -"
-    # ### NEW: Grant Jellyfin read/execute (r-x) access via ACL
-    # "A+" adds to the list without wiping existing perms.
-    # "u:jellyfin:r-x" gives the user 'jellyfin' read (r) and enter (x) rights.
-    "A+ /mnt/Shares/this-is-my-own-private-property-and-you-are-not-welcome-here - - - - u:jellyfin:r-x"
-
-    # Optional: "Default" ACL so new files created inside automatically let Jellyfin read them
-    "A+ /mnt/Shares/this-is-my-own-private-property-and-you-are-not-welcome-here - - - - d:u:jellyfin:r-x"
+    "d /mnt/Shares/this-is-my-own-private-property-and-you-are-not-welcome-here 0750 phonkd phonkd -" # give group phonkd execute access so jellyfin which is in this group can play videos
   ];
 
   users.users.smbpublic = {
