@@ -33,21 +33,5 @@
     allowedUDPPorts = [ 53 ];
   };
   networking.networkmanager.dns = "none";
-  services.teleport.settings = {
-    app_service = {
-      enabled = true;
-      apps = [
-        {
-          name = "zyxel";
-          uri = "https://192.168.1.1";
-          insecure_skip_verify = true;
-        }
-        {
-          name = "oldblac";
-          uri = "https://192.168.1.47:8006";
-          insecure_skip_verify = true;
-        }
-      ];
-    };
-  };
+
 }

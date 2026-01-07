@@ -9,6 +9,7 @@
   ];
   imports = [
     ./builder.nix
+    ../../modules/dns-darwin.nix
     #../../modules/secret-fix.nix
   ];
   # Necessary for using flakes on this system

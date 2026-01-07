@@ -31,7 +31,8 @@
   # 4. ENVIRONMENT VARIABLES
   # ------------------------
   # Force the correct driver (iHD) instead of the legacy one (i965)
-  environment.sessionVariables = {
+  systemd.services.jellyfin.environment = {
     LIBVA_DRIVER_NAME = "iHD";
   };
+  hardware.enableRedistributableFirmware = true;
 }
