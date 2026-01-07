@@ -19,6 +19,7 @@
     ../../modules/shares.nix
     ../../modules/arr.nix
     ../../modules/dns.nix
+    ../../modules/syncthing.nix
     ./wgnotez.nix
   ];
   boot.loader.grub.device = "/dev/vda";

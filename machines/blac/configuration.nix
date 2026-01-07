@@ -79,7 +79,6 @@
       "wheel"
     ];
   };
-  programs.firefox.enable = true;
   nixpkgs.config.allowUnfree = true;
   system.stateVersion = "25.05"; # Did you read the comment?
   systemd.tmpfiles.rules = [

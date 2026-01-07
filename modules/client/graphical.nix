@@ -115,6 +115,7 @@
     alacritty-graphics
     hyprviz
     virt-viewer
+    librewolf
   ];
   environment.systemPackages = with pkgs; [
     unstable.proton-vpn-cli
@@ -141,8 +142,6 @@
       "gtk"
     ];
   };
-  # Install firefox.
-  programs.firefox.enable = true;
   programs.zoxide.enable = true;
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;

@@ -14,7 +14,7 @@
     #../../modules/reverseproxy.nix
     ./caddy-int.nix
     ../../modules/paperless.nix
-    ../../modules/syncthing.nix
+    #../../modules/syncthing.nix
     #../../modules/glances.nix
     ../../modules/dns.nix
   ];

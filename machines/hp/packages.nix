@@ -2,71 +2,74 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
 
   users.users.phonkd.packages = with pkgs; [
     #  thunderbird
-      kitty
-      neovim
-      git
-      zed-editor
-      grimblast
-      easyeffects
-      cool-retro-term
-      waybar
-      btop
-      cava
-      waypaper
-      swaybg
-      scrcpy
-      google-chrome
-      bat
-      syncthing
-      obsidian
-      rofi-obsidian
-      wdisplayd
-      cliphist
-      hyprcursor
-      xdg-desktop-portal-hyprland
-      xdg-desktop-portal
-      xdg-desktop-portal-wlr
-      xdg-desktop-portal-gtk
-      obs-studio
-      vlc
-      wireguard-tools
-      exfat
-      dracula-theme
-      swappy
-      slurp
-      wl-clipboard
-      jq
-      nwg-look
-      yubikey-manager
-      sshpass
-      hyprlock
-      spotify
-      tree
-      ipcalc
-      virt-viewer
-      home-manager
-      sops
-      pulseaudio
-      dnsutils
-      bibata-cursors
-      nordic
-      ulauncher
-      discord
-      zsh
-      fzf
-      playerctl
-      vesktop
-      pavucontrol
-    ];
+    kitty
+    neovim
+    git
+    zed-editor
+    grimblast
+    easyeffects
+    cool-retro-term
+    waybar
+    btop
+    cava
+    waypaper
+    swaybg
+    scrcpy
+    google-chrome
+    bat
+    syncthing
+    obsidian
+    rofi-obsidian
+    wdisplayd
+    cliphist
+    hyprcursor
+    xdg-desktop-portal-hyprland
+    xdg-desktop-portal
+    xdg-desktop-portal-wlr
+    xdg-desktop-portal-gtk
+    obs-studio
+    vlc
+    wireguard-tools
+    exfat
+    dracula-theme
+    swappy
+    slurp
+    wl-clipboard
+    jq
+    nwg-look
+    yubikey-manager
+    sshpass
+    hyprlock
+    spotify
+    tree
+    ipcalc
+    virt-viewer
+    home-manager
+    sops
+    pulseaudio
+    dnsutils
+    bibata-cursors
+    nordic
+    ulauncher
+    discord
+    zsh
+    fzf
+    playerctl
+    vesktop
+    pavucontrol
+  ];
   #services.flatpak.enable = true;
-  # Install firefox.
-  programs.firefox.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -92,8 +95,8 @@
   programs.xfconf.enable = true;
   programs.thunar.enable = true;
   programs.thunar.plugins = with pkgs.xfce; [
-      thunar-archive-plugin
-      thunar-volman
+    thunar-archive-plugin
+    thunar-volman
   ];
   services.syncthing = {
     enable = true;
@@ -104,10 +107,10 @@
   security.polkit.enable = true;
   virtualisation.podman.enable = true;
   programs.git = {
-     enable = true;
-     config = {
-       user.name  = "Elis";
-       user.email = "enst18.12@gmail.com";
-     };
+    enable = true;
+    config = {
+      user.name = "Elis";
+      user.email = "enst18.12@gmail.com";
+    };
   };
 }

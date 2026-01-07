@@ -13,6 +13,7 @@ resource "proxmox_virtual_environment_download_file" "nixos_cloud_image" {
 resource "proxmox_virtual_environment_vm" "root-vm" {
   node_name = "oldblac"
   vm_id     = 200
+  on_boot   = false
 
   memory {
     dedicated = 5120
@@ -64,7 +65,8 @@ resource "proxmox_virtual_environment_vm" "core-vm" {
 
   cpu {
     cores = 6
-    type  = "x86-64-v2-AES"
+    type  = "host"
+    numa  = true
   }
 
   agent {
@@ -72,6 +74,14 @@ resource "proxmox_virtual_environment_vm" "core-vm" {
   }
 
   boot_order = ["virtio0"]
+
+  hostpci {
+    device = "hostpci0"
+    id     = "0000:00:02"
+    pcie   = false
+    rombar = true
+    xvga   = true
+  }
 
   disk {
     datastore_id = "nvme1"
@@ -93,6 +103,13 @@ resource "proxmox_virtual_environment_vm" "core-vm" {
     interface    = "virtio2"
     serial       = "vm-202-disk-2"
     size         = 500
+  }
+  disk {
+    # disk for syncthing
+    datastore_id = "nvme1"
+    interface    = "virtio3"
+    serial       = "vm-202-disk-3"
+    size         = 200
   }
 
   initialization {
@@ -133,6 +150,7 @@ resource "proxmox_virtual_environment_vm" "talos-template" {
   vm_id     = 1000
   name      = "talos-template"
   template  = true
+  on_boot   = false
 
   memory {
     dedicated = 2048
