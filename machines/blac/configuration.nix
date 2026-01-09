@@ -77,6 +77,7 @@
     description = "phonkd";
     extraGroups = [
       "wheel"
+      "dialout"
     ];
   };
   nixpkgs.config.allowUnfree = true;
