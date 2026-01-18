@@ -87,7 +87,7 @@
         x11vnc -display :5 -forever -shared -nopw -bg -q
         
         # 3. Start WebSockify (Background)
-        ${pkgs.python3Packages.websockify}/bin/websockify -D --web ${pkgs.novnc}/share/novnc 8085 localhost:5900
+        ${pkgs.python3Packages.websockify}/bin/websockify -D --web ${pkgs.novnc}/share/webapps/novnc 8085 localhost:5900
         
         # 4. Start EasyEffects (Blocking)
         exec easyeffects
@@ -99,6 +99,7 @@
       Group = "easyeffects";
       Restart = "always";
       RuntimeDirectory = "easyeffects";
+      RuntimeDirectoryMode = "0700";
     };
   };
 
