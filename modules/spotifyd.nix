@@ -37,22 +37,28 @@
   # 3. EasyEffects Web GUI (X11 + VNC + noVNC)
   # Broadway failed due to Qt dependencies in EasyEffects.
   # We switch to a robust Xvfb -> x11vnc -> noVNC stack.
-  
+
   users.users.easyeffects = {
     isSystemUser = true;
     group = "easyeffects";
-    extraGroups = [ "audio" "pipewire" ];
+    extraGroups = [
+      "audio"
+      "pipewire"
+    ];
     home = "/var/lib/easyeffects";
     createHome = true;
   };
-  users.groups.easyeffects = {};
+  users.groups.easyeffects = { };
 
   systemd.services.headless-gui = {
     description = "EasyEffects Headless Session (noVNC)";
     wantedBy = [ "multi-user.target" ];
-    after = [ "network.target" "pipewire.service" ];
+    after = [
+      "network.target"
+      "pipewire.service"
+    ];
     requires = [ "pipewire.service" ];
-    
+
     environment = {
       "DISPLAY" = ":5";
       "PIPEWIRE_RUNTIME_DIR" = "/run/pipewire";
@@ -64,7 +70,7 @@
       "QT_QUICK_BACKEND" = "software";
       "QMLSCENE_DEVICE" = "softwarecontext";
     };
-    
+
     path = with pkgs; [
       bash
       xorg.xorgserver
@@ -74,26 +80,26 @@
       dbus
       pkgs.unstable.easyeffects
     ];
-    
+
     script = ''
       rm -f /tmp/.X5-lock /tmp/.X11-unix/X5
-      
+
       ${pkgs.dbus}/bin/dbus-run-session -- bash -c '
         # 1. Start Xvfb
         Xvfb :5 -screen 0 1920x1080x24 &
         sleep 2
-        
+
         # 2. Start VNC Server
         x11vnc -display :5 -forever -shared -nopw -bg -q
-        
+
         # 3. Start WebSockify (Background)
         ${pkgs.python3Packages.websockify}/bin/websockify -D --web ${pkgs.novnc}/share/webapps/novnc 8085 localhost:5900
-        
+
         # 4. Start EasyEffects (Blocking)
         exec easyeffects
       '
     '';
-    
+
     serviceConfig = {
       User = "easyeffects";
       Group = "easyeffects";
@@ -106,17 +112,20 @@
   # 4. Networking & Firewall
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 
+    allowedTCPPorts = [
       57621 # Spotify Connect
-      4713  # PulseAudio Network
-      8085  # noVNC Web Interface
+      4713 # PulseAudio Network
+      8085 # noVNC Web Interface
     ];
     allowedUDPPorts = [ 5353 ];
   };
 
   # 5. User Permissions
   users.users.spotifyd = {
-    extraGroups = [ "audio" "pipewire" ];
+    extraGroups = [
+      "audio"
+      "pipewire"
+    ];
     isSystemUser = true;
     group = "spotifyd";
   };

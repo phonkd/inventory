@@ -21,6 +21,9 @@
     "192.168.1.122"
     "192.168.1.1"
   ];
+  networking.extraHosts = ''
+    135.181.44.108 teleport.phonkd.net
+  '';
   networking.hostName = "203-spot"; # Define your hostname.
   networking.networkmanager.dhcp = "internal";
   # Groups:
