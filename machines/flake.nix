@@ -1,5 +1,5 @@
 {
-  description = "A very basic flake";
+  description = "Flake for some vms and more";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-25.11";
@@ -56,63 +56,6 @@
       };
 
       nixosConfigurations = {
-        nixos-int = nixpkgs-unstable.lib.nixosSystem {
-          inherit system;
-          modules = [
-            ./122-nix-int/configuration.nix
-            sops-nix.nixosModules.sops
-            ./options.nix
-            { label.labels = [ "vm" ]; }
-          ];
-        };
-
-        nixos-services = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [
-            (
-              { config, pkgs, ... }:
-              {
-                nixpkgs.overlays = [ overlay-unstable ];
-              }
-            )
-            ./121-nix-services/configuration.nix
-            sops-nix.nixosModules.sops
-            ./options.nix
-            { label.labels = [ "vm" ]; }
-          ];
-        };
-
-        dev-vm = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [
-            (
-              { config, pkgs, ... }:
-              {
-                nixpkgs.overlays = [ overlay-unstable ];
-              }
-            )
-            ./10112-dev-vm/configuration.nix
-            sops-nix.nixosModules.sops
-            ./options.nix
-            { label.labels = [ "vm" ]; }
-          ];
-        };
-        "123-segglaecloud" = nixpkgs-unstable.lib.nixosSystem {
-          inherit system;
-          modules = [
-            (
-              { config, pkgs, ... }:
-              {
-                nixpkgs.overlays = [ overlay-unstable ];
-              }
-            )
-            ./123-segglaecloud/configuration.nix
-            sops-nix.nixosModules.sops
-            ./options.nix
-            { label.labels = [ "vm" ]; }
-          ];
-        };
-
         blac = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
@@ -162,19 +105,6 @@
             sops-nix.nixosModules.sops
           ];
         };
-        hp = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [
-            (
-              { config, pkgs, ... }:
-              {
-                nixpkgs.overlays = [ overlay-unstable ];
-              }
-            )
-            ./hp/configuration.nix
-            sops-nix.nixosModules.sops
-          ];
-        };
         ext-mail = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
@@ -215,6 +145,21 @@
               }
             )
             ./201-mono/configuration.nix
+            sops-nix.nixosModules.sops
+            ./options.nix
+            { label.labels = [ "vm" ]; }
+          ];
+        };
+        "203-spot" = nixpkgs-unstable.lib.nixosSystem {
+          inherit system;
+          modules = [
+            (
+              { config, pkgs, ... }:
+              {
+                nixpkgs.overlays = [ overlay-unstable ];
+              }
+            )
+            ./203-spot/configuration.nix
             sops-nix.nixosModules.sops
             ./options.nix
             { label.labels = [ "vm" ]; }

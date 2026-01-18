@@ -12,7 +12,7 @@
 {
   networking.interfaces.ens18.ipv4.addresses = [
     {
-      address = "192.168.1.123";
+      address = "192.168.1.203";
       prefixLength = 24;
     }
   ];
@@ -21,7 +21,7 @@
     "192.168.1.122"
     "192.168.1.1"
   ];
-  networking.hostName = "123-segglaecloud"; # Define your hostname.
+  networking.hostName = "203-spot"; # Define your hostname.
   networking.networkmanager.dhcp = "internal";
   # Groups:
   #programs.ssh.startAgent = true; #ssh-agent

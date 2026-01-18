@@ -127,6 +127,54 @@ resource "proxmox_virtual_environment_vm" "core-vm" {
   }
 }
 
+resource "proxmox_virtual_environment_vm" "spot-vm" {
+  node_name = "oldblac"
+  vm_id     = 203
+
+  memory {
+    dedicated = 2048
+  }
+
+  cpu {
+    cores = 1
+    type  = "host"
+    numa  = true
+  }
+
+  agent {
+    enabled = true
+  }
+
+  boot_order = ["virtio0"]
+
+  # hostpci {
+  #   device = "hostpci0"
+  #   id     = "0000:00:1f.3" # TODO: Replace with your Audio Controller PCI ID (e.g. 00:1f.3)
+  #   #pcie   = true
+  # }
+
+  disk {
+    datastore_id = "nvme1"
+    import_from  = proxmox_virtual_environment_download_file.nixos_cloud_image.id
+    interface    = "virtio0"
+    serial       = "vm-203-disk-0"
+    size         = 20
+  }
+
+  initialization {
+    datastore_id = "local-lvm"
+
+    ip_config {
+      ipv4 {
+        address = "dhcp"
+      }
+    }
+  }
+
+  network_device {
+    bridge = "vmbr0"
+  }
+}
 
 # Download Talos cloud image from remote URL
 # Note: You need to convert .raw.xz to .qcow2 first:

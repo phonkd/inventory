@@ -10,7 +10,7 @@ in
 {
   imports = [
     #../machines-nok8s/apps/sops.nix
-    ./o11y/alloy.nix
+    #./o11y/alloy.nix
     #(modulesPath + "/profiles/qemu-guest.nix")
   ];
   boot.loader.grub.enable = true;
@@ -18,7 +18,7 @@ in
   boot.loader.grub.useOSProber = true;
   nixpkgs.config.allowUnfree = true;
   networking.firewall.enable = true;
-  system.stateVersion = "25.05"; # Did you read the comment?
+  system.stateVersion = "25.11"; # Did you read the comment?
   services.qemuGuest.enable = true;
   sops.age = lib.mkIf isVM {
     keyFile = "/home/phonkd/.config/sops/age/keys.txt";
