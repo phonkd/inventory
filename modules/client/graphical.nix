@@ -188,6 +188,8 @@
   programs.zsh.ohMyZsh.plugins = [
     "kube-ps1"
   ];
-  hardware.bluetooth.enable = true;
+  hardware.bluetooth = {
+    enable = true;
+  };
   services.blueman.enable = true;
 }

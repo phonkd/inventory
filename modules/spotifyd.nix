@@ -110,14 +110,21 @@
   };
 
   # 4. Networking & Firewall
-  networking.firewall = {
-    enable = true;
-    allowedTCPPorts = [
-      57621 # Spotify Connect
-      4713 # PulseAudio Network
-      8085 # noVNC Web Interface
-    ];
-    allowedUDPPorts = [ 5353 ];
+  networking = {
+    nftables.enable = true;
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [
+        57621 # Spotify Connect
+        4713 # PulseAudio Network
+        #8085 # noVNC Web Interface
+      ];
+      allowedUDPPorts = [ 5353 ];
+      extraInputRules = ''
+        # Allow noVNC (8085) only from the Traefik VM
+        ip saddr 192.168.1.201 tcp dport 8085 accept
+      '';
+    };
   };
 
   # 5. User Permissions

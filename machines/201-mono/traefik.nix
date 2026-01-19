@@ -67,6 +67,13 @@
       };
     };
 
+    # services.traefik.dynamicConfigOptions.http = {
+    #   routers = {
+
+    #   };
+    #   services = { };
+    # };
+
     dynamicConfigOptions = {
       http = {
         routers = {
@@ -88,32 +95,10 @@
               ];
             };
           };
-          vaultwarden-https = {
-            rule = "Host(`vw.w.phonkd.net`)";
-            entryPoints = [ "websecure" ];
-            service = "vaultwarden";
-            tls = {
-              certResolver = "cloudflare";
-              domains = [
-                {
-                  main = "vw.w.phonkd.net";
-                }
-              ];
-            };
-          };
-          immich-https = {
-            rule = "Host(`immich.w.phonkd.net`)";
-            tls.certResolver = "cloudflare";
-            entryPoints = [ "websecure" ];
-            service = "immich-service";
-            middlewares = [
-              "ip-filter"
-            ];
-          };
-          auth = {
+          authelia = {
             rule = "Host(`auth.w.phonkd.net`)";
             entryPoints = [ "websecure" ];
-            service = "keycloak-service";
+            service = "authelia-service";
             tls = {
               certResolver = "cloudflare";
               domains = [
@@ -126,52 +111,13 @@
               "ip-filter"
             ];
           };
-
-          s3 = {
-            rule = "Host(`public.s3.w.phonkd.net`)";
-            tls.certResolver = "cloudflare";
-            entryPoints = [
-              "websecure"
-              "web"
-            ];
-            service = "s3-service";
-          };
-          s3-priv = {
-            rule = "Host(`priv.s3.w.phonkd.net`)";
-            tls.certResolver = "cloudflare";
-            entryPoints = [
-              "websecure"
-              "web"
-            ];
-            service = "s3-service";
-          };
-          s3-api = {
-            rule = "Host(`api.s3.w.phonkd.net`)";
-            tls.certResolver = "cloudflare";
-            entryPoints = [
-              "websecure"
-              "web"
-            ];
-            middlewares = [
-              "ip-filter"
-            ];
-            service = "s3-api";
-          };
-          jellyfin-https = {
-            rule = "Host(`jellyfin.w.phonkd.net`)";
+          easyeffects-router = {
+            rule = "Host(`easyeffects.w.phonkd.net`)";
+            service = "easyeffects-service";
             entryPoints = [ "websecure" ];
-            service = "jellyfin-service";
-            tls = {
-              certResolver = "cloudflare";
-              domains = [
-                {
-                  main = "jellyfin.w.phonkd.net";
-                }
-              ];
-            };
-            # Remove this middleware if you want to stream remotely (outside 192.168.1.0/24)
             middlewares = [
               "ip-filter"
+              "vnc-root-rewrite"
             ];
           };
         };
@@ -192,46 +138,19 @@
               passHostHeader = true;
             };
           };
-          vaultwarden = {
+          easyeffects-service = {
             loadBalancer = {
+              serversTransport = "insecureTransport";
               servers = [
-                { url = "http://127.0.0.1:8000"; }
+                { url = "http://192.168.1.203:8085"; }
               ];
             };
           };
-          immich-service = {
+
+          authelia-service = {
             loadBalancer = {
               servers = [
-                { url = "http://192.168.1.121:2283"; }
-              ];
-            };
-          };
-          keycloak-service = {
-            loadBalancer = {
-              servers = [
-                { url = "http://192.168.1.123:8123"; }
-              ];
-            };
-          };
-          s3-service = {
-            loadBalancer = {
-              servers = [
-                { url = "http://127.0.0.1:3902"; }
-              ];
-            };
-          };
-          s3-api = {
-            loadBalancer = {
-              passHostHeader = true;
-              servers = [
-                { url = "http://127.0.0.1:3900"; }
-              ];
-            };
-          };
-          jellyfin-service = {
-            loadBalancer = {
-              servers = [
-                { url = "http://127.0.0.1:8096"; }
+                { url = "http://127.0.0.1:9091"; }
               ];
             };
           };
@@ -251,6 +170,24 @@
               "192.168.1.0/24"
               "10.8.0.0/16"
             ];
+          };
+          forward-auth = {
+            forwardAuth = {
+              address = "http://127.0.0.1:9091/api/verify?rd=https://auth.w.phonkd.net/";
+              trustForwardHeader = true;
+              authResponseHeaders = [
+                "Remote-User"
+                "Remote-Groups"
+                "Remote-Name"
+                "Remote-Email"
+              ];
+            };
+          };
+          vnc-root-rewrite = {
+            replacePathRegex = {
+              regex = "^/$";
+              replacement = "/vnc.html";
+            };
           };
         };
       };

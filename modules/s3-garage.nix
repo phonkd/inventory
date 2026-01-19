@@ -6,6 +6,58 @@
 }:
 
 {
+  services.traefik.dynamicConfigOptions.http = {
+    routers = {
+      s3 = {
+        rule = "Host(`public.s3.w.phonkd.net`)";
+        tls.certResolver = "cloudflare";
+        entryPoints = [
+          "websecure"
+          "web"
+        ];
+        service = "s3-service";
+      };
+      s3-priv = {
+        rule = "Host(`priv.s3.w.phonkd.net`)";
+        tls.certResolver = "cloudflare";
+        entryPoints = [
+          "websecure"
+          "web"
+        ];
+        service = "s3-service";
+      };
+      s3-api = {
+        rule = "Host(`api.s3.w.phonkd.net`)";
+        tls.certResolver = "cloudflare";
+        entryPoints = [
+          "websecure"
+          "web"
+        ];
+        middlewares = [
+          "ip-filter"
+        ];
+        service = "s3-api";
+      };
+    };
+    services = {
+      s3-service = {
+        loadBalancer = {
+          servers = [
+            { url = "http://127.0.0.1:3902"; }
+          ];
+        };
+      };
+      s3-api = {
+        loadBalancer = {
+          passHostHeader = true;
+          servers = [
+            { url = "http://127.0.0.1:3900"; }
+          ];
+        };
+      };
+    };
+  };
+
   # 1. Create a static system user and group
   #    This ensures the user exists BEFORE the service starts, so sops can assign ownership.
   users.users.garage = {

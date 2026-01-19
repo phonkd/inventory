@@ -12,13 +12,14 @@
     ../../modules/02-global-ssh.nix
     ../../modules/00-global-config.nix
     ../../modules/01-vm-config.nix
-    #./keycloak.nix
+    ../../modules/authelia.nix
     ./traefik.nix
     #../../modules/renovate.nix
     ../../modules/s3-garage.nix
     ../../modules/shares.nix
     ../../modules/arr.nix
     ../../modules/dns.nix
+    ../../modules/ddns.nix
     ../../modules/syncthing.nix
     ../../modules/vaultwarden.nix
     ./wgnotez.nix
