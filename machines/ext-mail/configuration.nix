@@ -6,6 +6,7 @@
     ./mail.nix
     ./hardware-configuration.nix
     ../../modules/auto-update.nix
+    test
   ];
 
   users.users."phonkd".openssh.authorizedKeys.keys = [
