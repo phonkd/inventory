@@ -1,1 +1,22 @@
-{\n  config,\n  pkgs,\n  lib,\n  ...\}:\nlet\n  isVM = lib.elem "vm" config.label.labels;\nin\n{\n  config = lib.mkIf isVM {\n    system.autoUpgrade = {\n      enable = true;\n      flake = "github:phonkd/inventory?dir=machines#${config.networking.hostName}";\n      dates = "daily";\n      randomizedDelaySec = "1h";\n      allowReboot = false;\n      flags = [\n        "--refresh"\n      ];\n    };\n  };\n}
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+
+let
+  isVM = lib.elem "vm" config.label.labels;
+in
+{
+  config = lib.mkIf isVM {
+    system.autoUpgrade = {
+      enable = true;
+      flake = "github:phonkd/inventory?dir=machines#${config.networking.hostName}";
+      dates = "daily";
+      randomizedDelaySec = "1h";
+      allowReboot = false;
+      flags = [ "--refresh" ];
+    };
+  };
+}
