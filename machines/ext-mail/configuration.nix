@@ -46,4 +46,11 @@
   sops.defaultSopsFile = ./secrets/secret.yaml;
   virtualisation.docker.enable = true;
   system.stateVersion = lib.mkForce "25.11";
+  system.autoUpgrade = {
+    flake = lib.mkForce "github:phonkd/inventory?dir=machines#ext-mail";
+  };
+  sops.secrets.discord_webhook_url = {
+    sopsFile = ./secrets/secret.yaml;
+  };
+
 }
