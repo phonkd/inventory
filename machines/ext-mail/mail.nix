@@ -15,7 +15,7 @@
       url = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/nixos-25.11/nixos-mailserver-nixos-25.11.tar.gz";
       # To get the sha256 of the nixos-mailserver tarball, we can use the nix-prefetch-url command:
       # release="nixos-25.11"; nix-prefetch-url "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/${release}/nixos-mailserver-${release}.tar.gz" --unpack
-      sha256 = "sha256:16kanlk74xnj7xgmjsj7pahy31hlxqcbv76xnsg8qbh54b0hwxgq";
+      sha256 = "sha256:0pqc7bay9v360x2b7irqaz4ly63gp4z859cgg5c04imknv0pwjqw";
     })
   ];
 
