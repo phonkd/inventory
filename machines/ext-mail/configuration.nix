@@ -51,7 +51,7 @@
     flake = lib.mkForce "github:phonkd/inventory?dir=machines#ext-mail";
     dates = "weekly";
   };
-  sops.secrets.discord_webhook_url = {
+  sops.secrets.discord_webhook_url = lib.mkForce {
     sopsFile = ./secrets/secret.yaml;
   };
 
