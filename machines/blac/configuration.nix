@@ -65,6 +65,23 @@
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
     #media-session.enable = true;
+
+    extraConfig.pipewire."99-network-sink" = {
+      "context.modules" = [
+        {
+          name = "libpipewire-module-pulse-tunnel";
+          args = {
+            "tunnel.mode" = "sink";
+            "server.address" = "tcp:192.168.1.203:4713";
+            "audio.rate" = 48000;
+            "stream.props" = {
+              "node.name" = "spot-203";
+              "node.description" = "Spot 203";
+            };
+          };
+        }
+      ];
+    };
   };
   boot.kernelParams = [
     #"pcie_aspm=off"

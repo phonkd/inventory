@@ -15,6 +15,14 @@
     alsa.support32Bit = true;
     pulse.enable = true;
     systemWide = true;
+    extraConfig.pipewire-pulse."99-network" = {
+      "pulse.cmd" = [
+        {
+          cmd = "load-module";
+          args = "module-native-protocol-tcp port=4713 listen=0.0.0.0 auth-anonymous=1";
+        }
+      ];
+    };
   };
 
   # 2. Spotifyd Service (Unstable)
