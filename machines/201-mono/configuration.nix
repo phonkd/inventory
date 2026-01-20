@@ -12,6 +12,7 @@
     ../../modules/02-global-ssh.nix
     ../../modules/00-global-config.nix
     ../../modules/01-vm-config.nix
+    ../../modules/applist.nix
     ../../modules/authelia.nix
     ./traefik.nix
     #../../modules/renovate.nix

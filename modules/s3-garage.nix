@@ -6,69 +6,37 @@
 }:
 
 {
-  services.traefik.dynamicConfigOptions.http = {
-    routers = {
-      s3 = {
-        rule = "Host(`public.s3.w.phonkd.net`)";
-        tls.certResolver = "cloudflare";
-        entryPoints = [
-          "websecure"
-          "web"
-        ];
-        service = "s3-service";
-      };
-      s3-priv = {
-        rule = "Host(`priv.s3.w.phonkd.net`)";
-        tls.certResolver = "cloudflare";
-        entryPoints = [
-          "websecure"
-          "web"
-        ];
-        service = "s3-service";
-      };
-      s3-api = {
-        rule = "Host(`api.s3.w.phonkd.net`)";
-        tls.certResolver = "cloudflare";
-        entryPoints = [
-          "websecure"
-          "web"
-        ];
-        middlewares = [
-          "ip-filter"
-        ];
-        service = "s3-api";
-      };
+  phonkds.modules = {
+    s3-public.traefik = {
+      enable = true;
+      ip = "127.0.0.1";
+      port = 3902;
+      domain = "public.s3.w.phonkd.net";
+      ipfilter = false;
     };
-    services = {
-      s3-service = {
-        loadBalancer = {
-          servers = [
-            { url = "http://127.0.0.1:3902"; }
-          ];
-        };
-      };
-      s3-api = {
-        loadBalancer = {
-          passHostHeader = true;
-          servers = [
-            { url = "http://127.0.0.1:3900"; }
-          ];
-        };
-      };
+    s3-priv.traefik = {
+      enable = true;
+      ip = "127.0.0.1";
+      port = 3902;
+      domain = "priv.s3.w.phonkd.net";
+      ipfilter = false;
+      auth = true;
+    };
+    s3-api.traefik = {
+      enable = true;
+      ip = "127.0.0.1";
+      port = 3900;
+      domain = "api.s3.w.phonkd.net";
+      ipfilter = true;
     };
   };
 
-  # 1. Create a static system user and group
-  #    This ensures the user exists BEFORE the service starts, so sops can assign ownership.
   users.users.garage = {
     group = "garage";
     isSystemUser = true;
   };
   users.groups.garage = { };
 
-  # 2. Configure SOPS
-  #    We remove 'path', so sops stores secrets in /run/secrets/garage-* (RAM).
-  #    We set 'owner' to 'garage' so the static user can read them.
   sops.secrets."garage-rpc" = {
     owner = "garage";
     mode = "0400";
@@ -93,16 +61,12 @@
       consistency_mode = "consistent";
       db_engine = "lmdb";
 
-      # Standard data directories
-      # Garage will be happy because sops is no longer messing with these folders.
       metadata_dir = "/mnt/s3/meta";
       data_dir = "/mnt/s3/data";
 
       rpc_bind_addr = "[::]:3901";
       bootstrap_peers = [ ];
 
-      # POINT TO THE SOPS PATHS (in /run/secrets/)
-      # config.sops.secrets.<name>.path automatically resolves to /run/secrets/<name>
       rpc_secret_file = config.sops.secrets."garage-rpc".path;
 
       s3_api = {
@@ -117,7 +81,7 @@
         admin_token_file = config.sops.secrets."garage-admin".path;
       };
       s3_web = {
-        # 1. Bind to localhost (let your reverse proxy handle SSL/public access)
+
         bind_addr = "127.0.0.1:3902";
 
         # 2. Define the suffix for your websites

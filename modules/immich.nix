@@ -5,27 +5,16 @@
   ...
 }:
 {
+  # phonkds.modules.immich.traefik = {
+  #   enable = true;
+  #   ip = "127.0.0.1";
+  #   port = 2283;
+  #   domain = "immich.w.phonkd.net";
+  #   ipfilter = true;
+  # };
   services.immich.enable = true;
   services.immich.port = 2283;
   networking.firewall.allowedTCPPorts = [ 2283 ];
   networking.firewall.allowedUDPPorts = [ 2283 ];
   services.immich.host = "0.0.0.0";
-  services.traefik.dynamicConfigOptions.http = {
-    routers.immich-https = {
-      rule = "Host(`immich.w.phonkd.net`)";
-      tls.certResolver = "cloudflare";
-      entryPoints = [ "websecure" ];
-      service = "immich-service";
-      middlewares = [
-        "ip-filter"
-      ];
-    };
-    services.immich-service = {
-      loadBalancer = {
-        servers = [
-          { url = "http://192.168.1.121:2283"; }
-        ];
-      };
-    };
-  };
 }

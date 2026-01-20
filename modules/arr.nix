@@ -1,30 +1,13 @@
 { config, pkgs, ... }:
 
 {
-  services.traefik.dynamicConfigOptions.http = {
-    services.jellyfin-service = {
-      loadBalancer = {
-        servers = [
-          { url = "http://127.0.0.1:8096"; }
-        ];
-      };
-    };
-    routers.jellyfin-https = {
-      rule = "Host(`jellyfin.w.phonkd.net`)";
-      entryPoints = [ "websecure" ];
-      service = "jellyfin-service";
-      tls = {
-        certResolver = "cloudflare";
-        domains = [
-          {
-            main = "jellyfin.w.phonkd.net";
-          }
-        ];
-      };
-      # Remove this middleware if you want to stream remotely (outside 192.168.1.0/24)
-      middlewares = [
-        "forward-auth"
-      ];
+  phonkds.modules.jellyfin = {
+    traefik = {
+      ip = "127.0.0.1";
+      port = 8096;
+      domain = "jellyfin.w.phonkd.net";
+      auth = true;
+      ipfilter = false;
     };
   };
   services.jellyfin.enable = true;

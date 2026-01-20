@@ -6,6 +6,13 @@
 }:
 
 {
+  phonkds.modules.authelia.traefik = {
+    enable = true;
+    ip = "127.0.0.1";
+    port = 9091;
+    domain = "auth.w.phonkd.net";
+    ipfilter = false;
+  };
   sops.secrets.authelia_jwt_secret = {
     sopsFile = ./global-secrets/authelia-secret.yaml;
     owner = "authelia-main";
@@ -33,11 +40,11 @@
     settings = {
       theme = "dark";
       default_2fa_method = "totp";
-
-      server = {
-        host = "127.0.0.1";
-        port = 9091;
-      };
+      server.address = "127.0.0.1:9091";
+      # server = {
+      #   host = "127.0.0.1";
+      #   port = 9091;
+      # };
 
       log = {
         level = "debug";
@@ -64,7 +71,7 @@
           # Example rule: Allow everyone (who is authenticated) to access everything else
           {
             domain = "*.w.phonkd.net";
-            policy = "one_factor";
+            policy = "two_factor";
           }
         ];
       };

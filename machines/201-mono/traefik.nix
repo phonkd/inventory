@@ -4,6 +4,91 @@
   lib,
   ...
 }:
+let
+  # apps are sourced across all nixos modules containing phonkds.modules configs
+  # the definition of the module is in applist.nix
+  traefikservices = config.phonkds.modules;
+  autoTraefikConfig = {
+    http = {
+      services = lib.mapAttrs (name: svc: {
+        loadBalancer = {
+          servers = [
+            # Use svc.traefik.scheme instead of hardcoded "http"
+            { url = "${svc.traefik.scheme}://${svc.traefik.ip}:${toString svc.traefik.port}"; }
+          ];
+          # Only add serversTransport if one is defined
+          passHostHeader = true; # Generally safe to default to true
+        }
+        // (lib.optionalAttrs (svc.traefik.transport != null) {
+          serversTransport = svc.traefik.transport;
+        });
+      }) traefikservices;
+
+      # ERROR WAS HERE: "middlewares" removed from here.
+      # You cannot assign a list here, and 'traefikservices' doesn't have an .auth property.
+
+      routers = lib.mapAttrs (name: svc: {
+        entryPoints = [ "websecure" ];
+        rule = "Host(`${svc.traefik.domain}`)";
+        service = name;
+        tls.certResolver = "cloudflare";
+
+        # CORRECT LOCATION: Apply middlewares dynamically to this specific router
+        middlewares =
+          [ ]
+          ++ (lib.optionals (svc.traefik.auth or false) [ "forward-auth" ])
+          ++ (lib.optionals (svc.traefik.ipfilter or false) [ "ip-filter" ])
+          ++ svc.traefik.extraMiddlewares;
+
+      }) traefikservices;
+    };
+  };
+
+  # middleware
+  manualTraefikConfig = {
+    http = {
+      middlewares = {
+        pve-headers = {
+          headers = {
+            customRequestHeaders = {
+              "X-Forwarded-Proto" = "https";
+            };
+          };
+        };
+        ip-filter = {
+          ipAllowList.sourceRange = [
+            "192.168.1.0/24"
+            "10.8.0.0/16"
+          ];
+        };
+        forward-auth = {
+          forwardAuth = {
+            address = "http://127.0.0.1:9091/api/verify?rd=https://auth.w.phonkd.net/";
+            trustForwardHeader = true;
+            authResponseHeaders = [
+              "Remote-User"
+              "Remote-Groups"
+              "Remote-Name"
+              "Remote-Email"
+            ];
+          };
+        };
+        vnc-root-rewrite = {
+          replacePathRegex = {
+            regex = "^/$";
+            replacement = "/vnc.html";
+          };
+        };
+      };
+      serversTransports = {
+        insecureTransport = {
+          insecureSkipVerify = true;
+        };
+      };
+    };
+
+  };
+in
 {
   sops.secrets.CF_DNS_API_TOKEN = {
     sopsFile = ../../modules/global-secrets/traefik-secret.txt;
@@ -16,18 +101,6 @@
     environmentFiles = [ "${config.sops.secrets.CF_DNS_API_TOKEN.path}" ];
     staticConfigOptions = {
       entryPoints = {
-        web = {
-          address = ":80";
-          # GLOBAL REDIRECT: Redirect everything on :80 to websecure (:443)
-          http = {
-            redirections = {
-              entryPoint = {
-                to = "websecure";
-                scheme = "https";
-              };
-            };
-          };
-        };
         websecure = {
           address = ":443";
           # We keep TLS generic here; router will say which certResolver to use
@@ -54,144 +127,16 @@
                 "1.1.1.1:53"
                 "1.0.0.1:53"
               ];
-              # your "propagation" thing will just be ignored anyway,
-              # so I’m leaving it out for clarity
             };
           };
         };
       };
-
       api = {
         dashboard = true;
         insecure = true; # turn off once it's all working
       };
     };
-
-    # services.traefik.dynamicConfigOptions.http = {
-    #   routers = {
-
-    #   };
-    #   services = { };
-    # };
-
-    dynamicConfigOptions = {
-      http = {
-        routers = {
-          # Optional HTTP -> HTTPS redirect for pve
-          oldblac-pve-router = {
-            rule = "Host(`oldblac.int.phonkd.net`)";
-            service = "oldblac-pve-service";
-            entryPoints = [ "websecure" ];
-            middlewares = [
-              "pve-headers"
-              "ip-filter"
-            ];
-            tls = {
-              certResolver = "cloudflare";
-              domains = [
-                {
-                  main = "oldblac.int.phonkd.net";
-                }
-              ];
-            };
-          };
-          authelia = {
-            rule = "Host(`auth.w.phonkd.net`)";
-            entryPoints = [ "websecure" ];
-            service = "authelia-service";
-            tls = {
-              certResolver = "cloudflare";
-              domains = [
-                {
-                  main = "auth.w.phonkd.net";
-                }
-              ];
-            };
-            middlewares = [
-              "ip-filter"
-            ];
-          };
-          easyeffects-router = {
-            rule = "Host(`easyeffects.w.phonkd.net`)";
-            service = "easyeffects-service";
-            entryPoints = [ "websecure" ];
-            middlewares = [
-              "ip-filter"
-              "vnc-root-rewrite"
-            ];
-          };
-        };
-
-        serversTransports = {
-          insecureTransport = {
-            insecureSkipVerify = true;
-          };
-        };
-
-        services = {
-          oldblac-pve-service = {
-            loadBalancer = {
-              serversTransport = "insecureTransport";
-              servers = [
-                { url = "https://192.168.1.47:8006"; }
-              ];
-              passHostHeader = true;
-            };
-          };
-          easyeffects-service = {
-            loadBalancer = {
-              serversTransport = "insecureTransport";
-              servers = [
-                { url = "http://192.168.1.203:8085"; }
-              ];
-            };
-          };
-
-          authelia-service = {
-            loadBalancer = {
-              servers = [
-                { url = "http://127.0.0.1:9091"; }
-              ];
-            };
-          };
-        };
-
-        # Middlewares live HERE, not at top level
-        middlewares = {
-          pve-headers = {
-            headers = {
-              customRequestHeaders = {
-                "X-Forwarded-Proto" = "https";
-              };
-            };
-          };
-          ip-filter = {
-            ipAllowList.sourceRange = [
-              "192.168.1.0/24"
-              "10.8.0.0/16"
-            ];
-          };
-          forward-auth = {
-            forwardAuth = {
-              address = "http://127.0.0.1:9091/api/verify?rd=https://auth.w.phonkd.net/";
-              trustForwardHeader = true;
-              authResponseHeaders = [
-                "Remote-User"
-                "Remote-Groups"
-                "Remote-Name"
-                "Remote-Email"
-              ];
-            };
-          };
-          vnc-root-rewrite = {
-            replacePathRegex = {
-              regex = "^/$";
-              replacement = "/vnc.html";
-            };
-          };
-        };
-      };
-    };
+    dynamicConfigOptions = lib.recursiveUpdate autoTraefikConfig manualTraefikConfig;
   };
 
   # systemd: load CF token env file correctly
@@ -210,6 +155,31 @@
           insecure_skip_verify = true;
         }
       ];
+    };
+  };
+  phonkds.modules = {
+    easyeffects = {
+      traefik = {
+        enable = true;
+        ip = "192.168.1.203";
+        port = 8085;
+        domain = "easyeffects.w.phonkd.net";
+        ipfilter = true;
+        extraMiddlewares = [ "vnc-root-rewrite" ];
+        transport = "insecureTransport"; # Requires the update above
+      };
+    };
+    oldblac = {
+      traefik = {
+        enable = true;
+        ip = "192.168.1.47";
+        port = 8006;
+        domain = "oldblac.int.phonkd.net";
+        scheme = "https"; # Requires the update above
+        transport = "insecureTransport"; # Requires the update above
+        ipfilter = true;
+        extraMiddlewares = [ "pve-headers" ];
+      };
     };
   };
 }

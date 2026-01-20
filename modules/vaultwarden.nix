@@ -5,36 +5,22 @@
   ...
 }:
 {
+  phonkds.modules.vaultwarden.traefik = {
+    ip = "127.0.0.1";
+    port = 8000;
+    domain = "vw.w.phonkd.net";
+    auth = false;
+    ipfilter = false;
+  };
+  # --------------------------------------- #
   services.vaultwarden = {
     enable = true;
     config = {
-      DOMAIN = "https://vw.w.phonkd.net/";
-      ROCKET_ADDRESS = "0.0.0.0";
+      DOMAIN = "https://${config.phonkds.modules.vaultwarden.traefik.domain}";
+      ROCKET_ADDRESS = "127.0.0.1";
       ROCKET_PORT = 8000;
       #SIGNUPS_ALLOWED = false;
     };
   };
   networking.firewall.allowedTCPPorts = [ 8000 ];
-  services.traefik.dynamicConfigOptions.http = {
-    routers.vaultwarden-https = {
-      rule = "Host(`vw.w.phonkd.net`)";
-      entryPoints = [ "websecure" ];
-      service = "vaultwarden";
-      tls = {
-        certResolver = "cloudflare";
-        domains = [
-          {
-            main = "vw.w.phonkd.net";
-          }
-        ];
-      };
-    };
-    services.vaultwarden = {
-      loadBalancer = {
-        servers = [
-          { url = "http://127.0.0.1:8000"; }
-        ];
-      };
-    };
-  };
 }
