@@ -49,7 +49,7 @@
   system.stateVersion = lib.mkForce "25.11";
   system.autoUpgrade = {
     flake = lib.mkForce "github:phonkd/inventory?dir=machines#ext-mail";
-    dates = "weekly";
+    dates = lib.mkForce "weekly";
   };
   sops.secrets.discord_webhook_url = lib.mkForce {
     sopsFile = ./secrets/secret.yaml;
