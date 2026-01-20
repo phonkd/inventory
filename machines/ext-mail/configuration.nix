@@ -5,6 +5,7 @@
     ./sops.nix
     ./mail.nix
     ./hardware-configuration.nix
+    ../../modules/auto-update.nix
   ];
 
   users.users."phonkd".openssh.authorizedKeys.keys = [
@@ -48,6 +49,7 @@
   system.stateVersion = lib.mkForce "25.11";
   system.autoUpgrade = {
     flake = lib.mkForce "github:phonkd/inventory?dir=machines#ext-mail";
+    dates = "weekly";
   };
   sops.secrets.discord_webhook_url = {
     sopsFile = ./secrets/secret.yaml;
