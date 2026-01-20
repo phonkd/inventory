@@ -13,7 +13,6 @@ in
     #./o11y/alloy.nix
     #(modulesPath + "/profiles/qemu-guest.nix")
     ./auto-update.nix
-    ./fake.nix
   ];
   boot.loader.grub.enable = true;
   boot.loader.grub.device = lib.mkDefault "/dev/sda";
