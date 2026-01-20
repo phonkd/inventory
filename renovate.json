@@ -1,14 +1,23 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:base"],
-  "nix": { "enabled": true },
+  "extends": [
+    "config:recommended"
+  ],
+  "nix": {
+    "enabled": true
+  },
   "lockFileMaintenance": {
     "enabled": true,
-    "schedule": ["before 3am on Monday"]
+    "schedule": [
+      "before 3am on Monday"
+    ]
   },
   "packageRules": [
     {
-      "matchPaths": ["machines/flake.nix", "machines/flake.lock"],
+      "matchFileNames": [
+        "machines/flake.nix",
+        "machines/flake.lock"
+      ],
       "groupName": "nix flake inputs"
     }
   ]
