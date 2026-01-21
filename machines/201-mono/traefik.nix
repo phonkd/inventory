@@ -161,9 +161,10 @@ in
     easyeffects = {
       traefik = {
         enable = true;
+        auth = true;
         ip = "192.168.1.203";
         port = 8085;
-        domain = "easyeffects.w.phonkd.net";
+        domain = "easyeffects.int.w.phonkd.net";
         ipfilter = true;
         extraMiddlewares = [ "vnc-root-rewrite" ];
         transport = "insecureTransport"; # Requires the update above

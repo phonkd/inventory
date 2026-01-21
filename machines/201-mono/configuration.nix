@@ -23,6 +23,7 @@
     ../../modules/ddns.nix
     ../../modules/syncthing.nix
     ../../modules/vaultwarden.nix
+    ../../modules/dashbaord.nix
     ./wgnotez.nix
   ];
   boot.loader.grub.device = "/dev/vda";

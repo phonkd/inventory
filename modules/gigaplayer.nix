@@ -52,6 +52,7 @@
       allowedTCPPorts = [
         57621 # Spotify Connect
         4713 # PulseAudio Network
+        12345
         #8085 # noVNC Web Interface
       ];
       allowedUDPPorts = [ 5353 ];

@@ -59,6 +59,7 @@
           path = config.sops.secrets.authelia_users_database.path;
         };
       };
+      definitions.network.internal = [ "192.168.1.0/24" ];
 
       access_control = {
         default_policy = "deny";
@@ -67,6 +68,16 @@
           {
             domain = "auth.w.phonkd.net";
             policy = "bypass";
+          }
+          {
+            domain = "*.int.w.phonkd.net";
+            policy = "one_factor";
+            networks = [ "internal" ];
+          }
+          {
+            domain = "*.w.phonkd.net";
+            policy = "bypass";
+            networks = [ "internal" ];
           }
           # Example rule: Allow everyone (who is authenticated) to access everything else
           {
