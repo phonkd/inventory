@@ -8,13 +8,13 @@
 {
   # 1. Audio Setup (PipeWire System-Wide)
   security.rtkit.enable = true;
-
   services.pipewire = {
     enable = lib.mkForce true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
     systemWide = true;
+    raopOpenFirewall = true;
     extraConfig.pipewire-pulse."99-network" = {
       "pulse.cmd" = [
         {
@@ -23,8 +23,8 @@
         }
       ];
     };
-  };
 
+  };
   systemd.services.pipewire-pulse.wantedBy = [ "multi-user.target" ];
 
   # 2. Spotifyd Service (Unstable)
