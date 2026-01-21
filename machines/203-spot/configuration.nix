@@ -12,7 +12,7 @@
     ../../modules/02-global-ssh.nix
     ../../modules/00-global-config.nix
     ../../modules/01-vm-config.nix
-    ../../modules/spotifyd.nix
+    ../../modules/gigaplayer.nix
   ];
   boot.loader.grub.device = "/dev/vda";
 }

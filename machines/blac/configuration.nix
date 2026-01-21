@@ -21,6 +21,7 @@
     ../../modules/client/drone.nix
     ../../modules/client/games.nix
     ../../modules/client/audio.nix
+    ../../modules/client/pulseaudio-client.nix
     #/tmp/work-setup.nix
     ../options.nix
     ./hyprland-session.nix
@@ -66,23 +67,8 @@
     # no need to redefine it in your config for now)
     #media-session.enable = true;
 
-    extraConfig.pipewire."99-network-sink" = {
-      "context.modules" = [
-        {
-          name = "libpipewire-module-pulse-tunnel";
-          args = {
-            "tunnel.mode" = "sink";
-            "server.address" = "tcp:192.168.1.203:4713";
-            "audio.rate" = 48000;
-            "stream.props" = {
-              "node.name" = "spot-203";
-              "node.description" = "Spot 203";
-            };
-          };
-        }
-      ];
-    };
   };
+
   boot.kernelParams = [
     #"pcie_aspm=off"
     "pci=noaer"

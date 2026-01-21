@@ -25,6 +25,8 @@
     };
   };
 
+  systemd.services.pipewire-pulse.wantedBy = [ "multi-user.target" ];
+
   # 2. Spotifyd Service (Unstable)
   services.spotifyd = {
     enable = true;
@@ -41,6 +43,35 @@
       };
     };
   };
+
+  # 4. Networking & Firewall
+  networking = {
+    nftables.enable = true;
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [
+        57621 # Spotify Connect
+        4713 # PulseAudio Network
+        #8085 # noVNC Web Interface
+      ];
+      allowedUDPPorts = [ 5353 ];
+      extraInputRules = ''
+        # Allow noVNC (8085) only from the Traefik VM
+        ip saddr 192.168.1.201 tcp dport 8085 accept
+      '';
+    };
+  };
+
+  # 5. User Permissions
+  users.users.spotifyd = {
+    extraGroups = [
+      "audio"
+      "pipewire"
+    ];
+    isSystemUser = true;
+    group = "spotifyd";
+  };
+  users.groups.spotifyd = { };
 
   # 3. EasyEffects Web GUI (X11 + VNC + noVNC)
   # Broadway failed due to Qt dependencies in EasyEffects.
@@ -116,33 +147,4 @@
       RuntimeDirectoryMode = "0700";
     };
   };
-
-  # 4. Networking & Firewall
-  networking = {
-    nftables.enable = true;
-    firewall = {
-      enable = true;
-      allowedTCPPorts = [
-        57621 # Spotify Connect
-        4713 # PulseAudio Network
-        #8085 # noVNC Web Interface
-      ];
-      allowedUDPPorts = [ 5353 ];
-      extraInputRules = ''
-        # Allow noVNC (8085) only from the Traefik VM
-        ip saddr 192.168.1.201 tcp dport 8085 accept
-      '';
-    };
-  };
-
-  # 5. User Permissions
-  users.users.spotifyd = {
-    extraGroups = [
-      "audio"
-      "pipewire"
-    ];
-    isSystemUser = true;
-    group = "spotifyd";
-  };
-  users.groups.spotifyd = { };
 }
