@@ -1,9 +1,32 @@
 # Auto-generated using compose2nix v0.3.1.
-{ config, pkgs, lib, ... }:
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
+  phonkds.modules = {
+    paperless = {
+      ip = "127.0.0.1";
+      port = 28981;
+      dashboard = {
+        enable = true;
+        icon = "paperless";
+      };
+      teleport = {
+        enable = true;
+        name = "paperless";
+        rewriteHeaders = [
+          "Host: paperless.teleport.phonkd.net"
+        ];
+      };
+    };
+  };
+
   services.paperless = {
     enable = true;
-    address= "0.0.0.0";
+    address = "0.0.0.0";
     settings = {
       PAPERLESS_CSRF_TRUSTED_ORIGINS = "https://paperless.teleport.phonkd.net,https://paperless.int.phonkd.net";
       ALLOWED_HOSTS = [
@@ -22,22 +45,5 @@
         header_up Host "paperless.int.phonkd.net"
       }
     '';
-  };
-  services.teleport.settings = {
-    app_service = {
-      enabled = true;
-      apps = [
-        {
-          name = "paperless";
-          uri = "http://localhost:28981";
-          insecure_skip_verify = true;
-          rewrite = {
-            headers = [
-              "Host: paperless.teleport.phonkd.net"
-            ];
-          };
-        }
-      ];
-    };
   };
 }

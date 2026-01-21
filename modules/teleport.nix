@@ -4,6 +4,52 @@
   lib,
   ...
 }:
+let
+  # Filter apps that have teleport enabled
+  teleportApps = lib.filterAttrs (name: app: app.teleport.enable or false) config.phonkds.modules;
+
+  # Generate teleport app configurations dynamically
+  autoTeleportApps = lib.mapAttrsToList (
+    name: app:
+    {
+      name = if app.teleport.name != null then app.teleport.name else name;
+      uri = "http://${app.ip}:${toString app.port}";
+      insecure_skip_verify = true;
+    }
+    // (lib.optionalAttrs (app.teleport.rewriteHeaders != [ ]) {
+      rewrite = {
+        headers = app.teleport.rewriteHeaders;
+      };
+    })
+  ) teleportApps;
+
+  # Manual teleport apps that don't fit the standard pattern
+  manualTeleportApps = [
+    {
+      name = "pve";
+      uri = "https://192.168.1.46:8006";
+      insecure_skip_verify = true;
+      rewrite = {
+        headers = [
+          "Host: pve.teleport.phonkd.net"
+        ];
+      };
+    }
+    {
+      name = "zyxel";
+      uri = "https://192.168.1.1:443";
+      insecure_skip_verify = true;
+    }
+    {
+      name = "oldblac";
+      uri = "https://192.168.1.47:8006";
+      insecure_skip_verify = true;
+    }
+  ];
+
+  # Combine auto-generated and manual apps
+  allTeleportApps = autoTeleportApps ++ manualTeleportApps;
+in
 {
   services.teleport.enable = true;
   sops.secrets.teleport_authkey = {
@@ -32,18 +78,7 @@
     ## sops key cant  be used with remote build atm
     app_service = {
       enabled = true;
-      apps = [
-        {
-          name = "pve";
-          uri = "https://192.168.1.46:8006";
-          insecure_skip_verify = true;
-          rewrite = {
-            headers = [
-              "Host: pve.teleport.phonkd.net"
-            ];
-          };
-        }
-      ];
+      apps = allTeleportApps;
     };
   };
 

@@ -7,14 +7,17 @@
 let
   # apps are sourced across all nixos modules containing phonkds.modules configs
   # the definition of the module is in applist.nix
-  traefikservices = config.phonkds.modules;
+  # Filter apps that have traefik enabled and a domain configured
+  traefikservices = lib.filterAttrs (
+    name: app: app.traefik.enable && app.traefik.domain != null
+  ) config.phonkds.modules;
   autoTraefikConfig = {
     http = {
       services = lib.mapAttrs (name: svc: {
         loadBalancer = {
           servers = [
             # Use svc.traefik.scheme instead of hardcoded "http"
-            { url = "${svc.traefik.scheme}://${svc.traefik.ip}:${toString svc.traefik.port}"; }
+            { url = "${svc.traefik.scheme}://${svc.ip}:${toString svc.port}"; }
           ];
           # Only add serversTransport if one is defined
           passHostHeader = true; # Generally safe to default to true
@@ -145,25 +148,29 @@ in
     # CF_DNS_API_TOKEN=supersecrettoken
     EnvironmentFile = [ config.sops.secrets.CF_DNS_API_TOKEN.path ];
   };
-  services.teleport.settings = {
-    app_service = {
-      enabled = true;
-      apps = [
-        {
-          name = "traefik";
-          uri = "http://localhost:8080/dashboard/";
-          insecure_skip_verify = true;
-        }
-      ];
-    };
-  };
   phonkds.modules = {
+    traefik = {
+      ip = "127.0.0.1";
+      port = 8080;
+      dashboard = {
+        enable = true;
+        icon = "traefik";
+      };
+      teleport = {
+        enable = true;
+        name = "traefik";
+      };
+    };
     easyeffects = {
+      ip = "192.168.1.203";
+      port = 8085;
+      dashboard = {
+        enable = true;
+        icon = "https://public.s3.w.phonkd.net/icons/ezfx.svg";
+      };
       traefik = {
         enable = true;
         auth = true;
-        ip = "192.168.1.203";
-        port = 8085;
         domain = "easyeffects.int.w.phonkd.net";
         ipfilter = true;
         extraMiddlewares = [ "vnc-root-rewrite" ];
@@ -171,10 +178,11 @@ in
       };
     };
     oldblac = {
+      dashboard.icon = "sh-proxmox";
+      ip = "192.168.1.47";
+      port = 8006;
       traefik = {
         enable = true;
-        ip = "192.168.1.47";
-        port = 8006;
         domain = "oldblac.int.phonkd.net";
         scheme = "https"; # Requires the update above
         transport = "insecureTransport"; # Requires the update above

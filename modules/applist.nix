@@ -13,12 +13,19 @@ in
         {
           options = {
             # We group all traefik settings here
+            ip = lib.mkOption { type = t.str; };
+            port = lib.mkOption { type = t.int; };
             traefik = {
-              enable = lib.mkEnableOption "Traefik Integration"; # Good practice to have a toggle!
+              enable = lib.mkOption {
+                type = t.bool;
+                default = false;
+                description = "Enable Traefik Integration";
+              };
 
-              ip = lib.mkOption { type = t.str; };
-              port = lib.mkOption { type = t.int; };
-              domain = lib.mkOption { type = t.str; };
+              domain = lib.mkOption {
+                type = t.nullOr t.str;
+                default = null;
+              };
 
               auth = lib.mkOption {
                 type = t.bool;
@@ -44,6 +51,40 @@ in
                 type = t.nullOr t.str;
                 default = null;
                 description = "Custom server transport to use";
+              };
+            };
+            teleport = {
+              enable = lib.mkOption {
+                type = t.bool;
+                default = false;
+                description = "Enable teleport app service for this app";
+              };
+              name = lib.mkOption {
+                type = t.nullOr t.str;
+                default = null;
+                description = "Name for the app that will spawn in teleport";
+              };
+              rewriteHeaders = lib.mkOption {
+                type = t.listOf t.str;
+                default = [ ];
+                description = "List of rewrite headers for the teleport app (e.g. ['Host: myapp.teleport.phonkd.net'])";
+              };
+            };
+            dashboard = {
+              enable = lib.mkOption {
+                type = t.bool;
+                default = false;
+                description = "Whether to show this service on the dashboard";
+              };
+              icon = lib.mkOption {
+                type = t.nullOr t.str;
+                default = null;
+                description = "Custom icon for the dashboard (e.g. 'my-icon.png'). Defaults to '<app-name>.png' if null.";
+              };
+              link = lib.mkOption {
+                type = t.nullOr t.str;
+                default = null;
+                description = "Custom link for the dashboard. Defaults to 'https://<traefik.domain>' if null.";
               };
             };
           };

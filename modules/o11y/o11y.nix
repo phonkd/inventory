@@ -6,23 +6,24 @@
   ...
 }:
 {
-  services.teleport.settings = {
-    app_service = {
-      enabled = true;
-      apps = [
-        {
-          name = "grafana";
-          uri = "http://localhost:3000";
-          insecure_skip_verify = true;
-          rewrite = {
-            headers = [
-              "Host: grafana.teleport.phonkd.net"
-            ];
-          };
-        }
-      ];
+  phonkds.modules = {
+    grafana = {
+      ip = "127.0.0.1";
+      port = 3000;
+      dashboard = {
+        enable = true;
+        icon = "grafana";
+      };
+      teleport = {
+        enable = true;
+        name = "grafana";
+        rewriteHeaders = [
+          "Host: grafana.teleport.phonkd.net"
+        ];
+      };
     };
   };
+
   services.grafana = {
     enable = true;
     package = pkgs.unstable.grafana;

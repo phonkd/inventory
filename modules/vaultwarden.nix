@@ -5,12 +5,16 @@
   ...
 }:
 {
-  phonkds.modules.vaultwarden.traefik = {
+  phonkds.modules.vaultwarden = {
     ip = "127.0.0.1";
     port = 8000;
-    domain = "vw.w.phonkd.net";
-    auth = false;
-    ipfilter = false;
+    dashboard.enable = true;
+    traefik = {
+      enable = true;
+      domain = "vw.w.phonkd.net";
+      auth = false;
+      ipfilter = false;
+    };
   };
   # --------------------------------------- #
   services.vaultwarden = {

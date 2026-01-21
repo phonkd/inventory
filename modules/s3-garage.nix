@@ -7,27 +7,48 @@
 
 {
   phonkds.modules = {
-    s3-public.traefik = {
-      enable = true;
+    s3-public = {
       ip = "127.0.0.1";
       port = 3902;
-      domain = "public.s3.w.phonkd.net";
-      ipfilter = false;
+      traefik = {
+        enable = true;
+        domain = "public.s3.w.phonkd.net";
+        ipfilter = false;
+      };
     };
-    s3-priv.traefik = {
-      enable = true;
+    s3-priv = {
       ip = "127.0.0.1";
       port = 3902;
-      domain = "priv.s3.w.phonkd.net";
-      ipfilter = false;
-      auth = true;
+      dashboard.enable = false;
+      traefik = {
+        enable = true;
+        domain = "priv.s3.w.phonkd.net";
+        ipfilter = false;
+        auth = true;
+      };
     };
-    s3-api.traefik = {
-      enable = true;
+    s3-api = {
       ip = "127.0.0.1";
       port = 3900;
-      domain = "api.s3.w.phonkd.net";
-      ipfilter = true;
+      dashboard.enable = false;
+      traefik = {
+        enable = true;
+        domain = "api.s3.w.phonkd.net";
+        ipfilter = true;
+      };
+    };
+    s3-webui = {
+      ip = "127.0.0.1";
+      port = 3909;
+      teleport = {
+        enable = true;
+        name = "s3";
+      };
+      dashboard = {
+        enable = true;
+        #link = "https://s3.teleport.phonkd.net";
+        icon = "sh-garage";
+      };
     };
   };
 
@@ -136,18 +157,6 @@
     };
   };
 
-  services.teleport.settings = {
-    app_service = {
-      enabled = true;
-      apps = [
-        {
-          name = "s3";
-          uri = "http://localhost:3909";
-          insecure_skip_verify = true;
-        }
-      ];
-    };
-  };
   fileSystems."/mnt/s3" = {
     device = "/dev/disk/by-id/virtio-vm-202-disk-2";
     fsType = "xfs";

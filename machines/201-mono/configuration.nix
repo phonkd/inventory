@@ -23,25 +23,25 @@
     ../../modules/ddns.nix
     ../../modules/syncthing.nix
     ../../modules/vaultwarden.nix
-    ../../modules/dashbaord.nix
+    ../../modules/dashboard.nix
     ./wgnotez.nix
   ];
   boot.loader.grub.device = "/dev/vda";
-  services.teleport.settings = {
-    app_service = {
-      enabled = true;
-      apps = [
-        {
-          name = "zyxel";
-          uri = "https://192.168.1.1";
-          insecure_skip_verify = true;
-        }
-        {
-          name = "oldblac";
-          uri = "https://192.168.1.47:8006";
-          insecure_skip_verify = true;
-        }
-      ];
-    };
-  };
+  # services.teleport.settings = {
+  #   app_service = {
+  #     enabled = true;
+  #     apps = [
+  #       {
+  #         name = "zyxel";
+  #         uri = "https://192.168.1.1";
+  #         insecure_skip_verify = true;
+  #       }
+  #       {
+  #         name = "oldblac";
+  #         uri = "https://192.168.1.47:8006";
+  #         insecure_skip_verify = true;
+  #       }
+  #     ];
+  #   };
+  # };
 }

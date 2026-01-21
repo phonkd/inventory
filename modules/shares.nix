@@ -114,16 +114,5 @@
 
     ];
   };
-  services.teleport.settings = {
-    app_service = {
-      enabled = true;
-      apps = [
-        {
-          name = "samba";
-          uri = "tcp://localhost:445";
-        }
-      ];
-    };
-  };
 
 }

@@ -6,24 +6,27 @@
   ...
 }:
 {
+  phonkds.modules = {
+    syncthing = {
+      ip = "127.0.0.1";
+      port = 8384;
+      dashboard = {
+        enable = true;
+        icon = "syncthing";
+      };
+      teleport = {
+        enable = true;
+        name = "syncthing";
+      };
+    };
+  };
+
   services.syncthing.enable = true;
   services.syncthing.dataDir = "/mnt/syncthing/data";
   systemd.tmpfiles.rules = [
     "d /mnt/syncthing/data 0755 syncthing syncthing -"
   ];
   #services.syncthing.guiAddress = "syncthing.teleport.phonkd.net";
-  services.teleport.settings = {
-    app_service = {
-      enabled = true;
-      apps = [
-        {
-          name = "syncthing";
-          uri = "http://localhost:8384";
-          insecure_skip_verify = true;
-        }
-      ];
-    };
-  };
   fileSystems."/mnt/syncthing" = {
     device = "/dev/disk/by-id/virtio-vm-202-disk-3";
     fsType = "ext4";

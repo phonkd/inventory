@@ -6,12 +6,15 @@
 }:
 
 {
-  phonkds.modules.authelia.traefik = {
-    enable = true;
+  phonkds.modules.authelia = {
     ip = "127.0.0.1";
     port = 9091;
-    domain = "auth.w.phonkd.net";
-    ipfilter = false;
+    dashboard.enable = true;
+    traefik = {
+      enable = true;
+      domain = "auth.w.phonkd.net";
+      ipfilter = false;
+    };
   };
   sops.secrets.authelia_jwt_secret = {
     sopsFile = ./global-secrets/authelia-secret.yaml;

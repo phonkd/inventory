@@ -6,6 +6,24 @@
   ...
 }:
 {
+  phonkds.modules = {
+    spawner-argo = {
+      ip = "127.0.0.1";
+      port = 30080;
+      dashboard = {
+        enable = true;
+        icon = "argocd";
+      };
+      teleport = {
+        enable = true;
+        name = "spawner-argo";
+        rewriteHeaders = [
+          "Host: spawner-argo.teleport.phonkd.net"
+        ];
+      };
+    };
+  };
+
   networking.firewall.allowedTCPPorts = [
     6443 # k3s: required so that pods can reach the API server (running on port 6443 by default)
   ];
@@ -218,24 +236,6 @@
         enable = true;
         source = ../k8s/clusters/root/root-app.yaml;
       };
-    };
-  };
-
-  services.teleport.settings = {
-    app_service = {
-      enabled = true;
-      apps = [
-        {
-          name = "spawner-argo";
-          uri = "http://localhost:30080";
-          insecure_skip_verify = true;
-          rewrite = {
-            headers = [
-              "Host: spawner-argo.teleport.phonkd.net"
-            ];
-          };
-        }
-      ];
     };
   };
 }

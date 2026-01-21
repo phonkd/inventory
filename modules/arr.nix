@@ -2,9 +2,11 @@
 
 {
   phonkds.modules.jellyfin = {
+    ip = "127.0.0.1";
+    port = 8096;
+    dashboard.enable = true;
     traefik = {
-      ip = "127.0.0.1";
-      port = 8096;
+      enable = true;
       domain = "jellyfin.w.phonkd.net";
       auth = true;
       ipfilter = false;
