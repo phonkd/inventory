@@ -17,7 +17,7 @@ let
         loadBalancer = {
           servers = [
             # Use svc.traefik.scheme instead of hardcoded "http"
-            { url = "${svc.traefik.scheme}://${svc.ip}:${toString svc.port}"; }
+            { url = "${svc.traefik.scheme}://${svc.ip}:${toString svc.port}${toString svc.path}"; }
           ];
           # Only add serversTransport if one is defined
           passHostHeader = true; # Generally safe to default to true
@@ -147,48 +147,5 @@ in
     # the secret file itself must contain lines like:
     # CF_DNS_API_TOKEN=supersecrettoken
     EnvironmentFile = [ config.sops.secrets.CF_DNS_API_TOKEN.path ];
-  };
-  phonkds.modules = {
-    traefik = {
-      ip = "127.0.0.1";
-      port = 8080;
-      dashboard = {
-        enable = true;
-        icon = "traefik";
-      };
-      teleport = {
-        enable = true;
-        name = "traefik";
-      };
-    };
-    easyeffects = {
-      ip = "192.168.1.203";
-      port = 8085;
-      dashboard = {
-        enable = true;
-        icon = "https://public.s3.w.phonkd.net/icons/ezfx.svg";
-      };
-      traefik = {
-        enable = true;
-        auth = true;
-        domain = "easyeffects.int.w.phonkd.net";
-        ipfilter = true;
-        extraMiddlewares = [ "vnc-root-rewrite" ];
-        transport = "insecureTransport"; # Requires the update above
-      };
-    };
-    oldblac = {
-      dashboard.icon = "sh-proxmox";
-      ip = "192.168.1.47";
-      port = 8006;
-      traefik = {
-        enable = true;
-        domain = "oldblac.int.phonkd.net";
-        scheme = "https"; # Requires the update above
-        transport = "insecureTransport"; # Requires the update above
-        ipfilter = true;
-        extraMiddlewares = [ "pve-headers" ];
-      };
-    };
   };
 }

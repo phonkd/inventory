@@ -53,6 +53,11 @@ in
                 description = "Custom server transport to use";
               };
             };
+            path = lib.mkOption {
+              type = t.nullOr t.str;
+              default = null;
+              description = "Http path";
+            };
             teleport = {
               enable = lib.mkOption {
                 type = t.bool;
@@ -68,6 +73,16 @@ in
                 type = t.listOf t.str;
                 default = [ ];
                 description = "List of rewrite headers for the teleport app (e.g. ['Host: myapp.teleport.phonkd.net'])";
+              };
+              insecure = lib.mkOption {
+                type = t.bool;
+                default = false;
+                description = "Enables insecure";
+              };
+              scheme = lib.mkOption {
+                type = t.str;
+                default = "http";
+                description = "Protocol scheme (http, https)";
               };
             };
             dashboard = {

@@ -85,10 +85,10 @@ in
     ];
     services = [
       {
-        "ReverseProxied" = serviceList;
+        "Reverse proxied" = serviceList;
       }
       {
-        "Teleport Apps" = teleportServiceList;
+        "Teleported" = teleportServiceList;
       }
     ];
     allowedHosts = config.phonkds.modules.homepage.traefik.domain;

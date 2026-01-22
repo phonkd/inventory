@@ -24,6 +24,7 @@
     ../../modules/syncthing.nix
     ../../modules/vaultwarden.nix
     ../../modules/dashboard.nix
+    ../../modules/orphans.nix
     ./wgnotez.nix
   ];
   boot.loader.grub.device = "/dev/vda";
