@@ -55,11 +55,6 @@
 
       server.endpoints.authz.forward-auth.implementation = "ForwardAuth";
 
-      server.trusted_proxies = [
-        "127.0.0.1/32"
-        "::1/128"
-      ];
-
       totp = {
         issuer = "auth.w.phonkd.net";
       };
