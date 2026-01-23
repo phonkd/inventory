@@ -66,7 +66,7 @@ let
         };
         forward-auth = {
           forwardAuth = {
-            address = "http://127.0.0.1:9091/api/verify?rd=https://auth.w.phonkd.net/";
+            address = "http://127.0.0.1:9091/api/authz/forward-auth?rd=https://auth.w.phonkd.net/";
             trustForwardHeader = true;
             authResponseHeaders = [
               "Remote-User"

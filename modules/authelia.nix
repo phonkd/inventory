@@ -95,7 +95,12 @@
       };
 
       session = {
-        domain = "w.phonkd.net";
+        cookies = [
+          {
+            domain = "w.phonkd.net";
+            authelia_url = "https://auth.w.phonkd.net";
+          }
+        ];
       };
 
       storage = {
