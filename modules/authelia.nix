@@ -53,6 +53,13 @@
         level = "debug";
       };
 
+      server.endpoints.authz.forward-auth.implementation = "ForwardAuth";
+
+      server.trusted_proxies = [
+        "127.0.0.1/32"
+        "::1/128"
+      ];
+
       totp = {
         issuer = "auth.w.phonkd.net";
       };
@@ -72,17 +79,19 @@
             domain = "auth.w.phonkd.net";
             policy = "bypass";
           }
+          # Internal subdomain - one factor from internal network
           {
             domain = "*.int.w.phonkd.net";
             policy = "one_factor";
             networks = [ "internal" ];
           }
+          # All other subdomains - bypass from internal network
           {
             domain = "*.w.phonkd.net";
             policy = "bypass";
             networks = [ "internal" ];
           }
-          # Example rule: Allow everyone (who is authenticated) to access everything else
+          # All other subdomains - two factor from external
           {
             domain = "*.w.phonkd.net";
             policy = "two_factor";
