@@ -64,7 +64,9 @@
           path = config.sops.secrets.authelia_users_database.path;
         };
       };
-      definitions.network.internal = [ "192.168.1.0/24" ];
+      definitions.network.internal = [
+        "192.168.1.0/24"
+      ];
 
       access_control = {
         default_policy = "deny";

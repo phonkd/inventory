@@ -110,6 +110,13 @@ in
           http = {
             tls = { };
           };
+          # Trust forwarded headers from local network
+          forwardedHeaders = {
+            trustedIPs = [
+              "192.168.1.0/24"
+              "127.0.0.1/32"
+            ];
+          };
         };
       };
 
