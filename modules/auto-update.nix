@@ -7,13 +7,15 @@
 let
   isVM = lib.elem "vm" config.label.labels;
 
+  hostname = config.networking.hostName;
+
   # Discord notification script for failures
   notifyFailure = pkgs.writeShellScript "notify-upgrade-failure" ''
-    HOSTNAME="${config.networking.hostName}"
     WEBHOOK_URL=$(cat ${config.sops.secrets.discord_webhook_url.path})
+    TIMESTAMP=$(${pkgs.coreutils}/bin/date '+%Y-%m-%d %H:%M:%S')
 
     ${pkgs.curl}/bin/curl -H "Content-Type: application/json" \
-      -d "{\"embeds\":[{\"title\":\"❌ NixOS Update Failed\",\"description\":\"Auto-upgrade failed on **$HOSTNAME**\",\"color\":15158332,\"fields\":[{\"name\":\"Hostname\",\"value\":\"$HOSTNAME\",\"inline\":true},{\"name\":\"Time\",\"value\":\"$(${pkgs.coreutils}/bin/date '+%Y-%m-%d %H:%M:%S')\",\"inline\":true}],\"footer\":{\"text\":\"NixOS Auto-Update\"}}]}" \
+      -d "{\"embeds\":[{\"title\":\"❌ NixOS Update Failed\",\"description\":\"Auto-upgrade failed on **${hostname}**\",\"color\":15158332,\"fields\":[{\"name\":\"Hostname\",\"value\":\"${hostname}\",\"inline\":true},{\"name\":\"Time\",\"value\":\"$TIMESTAMP\",\"inline\":true}],\"footer\":{\"text\":\"NixOS Auto-Update\"}}]}" \
       "$WEBHOOK_URL"
   '';
 in
