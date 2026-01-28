@@ -13,6 +13,7 @@
     ../../modules/00-global-config.nix
     ../../modules/01-vm-config.nix
     ../../modules/gigaplayer.nix
+    ../../modules/applist.nix
   ];
   boot.loader.grub.device = "/dev/vda";
 }
