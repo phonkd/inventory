@@ -14,7 +14,6 @@
     ../../modules/01-vm-config.nix
     ../../modules/gigaplayer.nix
     ../../modules/applist.nix
-    testtt.nix
   ];
   boot.loader.grub.device = "/dev/vda";
 }
