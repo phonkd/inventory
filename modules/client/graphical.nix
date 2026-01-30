@@ -192,4 +192,14 @@
     enable = true;
   };
   services.blueman.enable = true;
+
+  programs.virt-manager.enable = true;
+
+  users.groups.libvirtd.members = [ "phonkd" ];
+
+  users.users.phonkd.extraGroups = [ "libvirtd" ];
+
+  virtualisation.libvirtd.enable = true;
+
+  virtualisation.spiceUSBRedirection.enable = true;
 }

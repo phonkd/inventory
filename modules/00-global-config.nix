@@ -11,6 +11,7 @@ in
   imports = [
     #../machines-nok8s/apps/sops.nix
     ./teleport.nix
+    ./applist.nix
     ./sops.nix
     #(modulesPath + "/profiles/qemu-guest.nix")
   ];
