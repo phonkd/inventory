@@ -103,6 +103,12 @@
           modules = [
             ./g14/configuration.nix
             sops-nix.nixosModules.sops
+            (
+              { config, pkgs, ... }:
+              {
+                nixpkgs.overlays = [ overlay-unstable ];
+              }
+            )
           ];
         };
         ext-mail = nixpkgs.lib.nixosSystem {
