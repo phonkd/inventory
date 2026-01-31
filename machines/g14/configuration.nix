@@ -83,7 +83,7 @@
         IdentityFile ~/.ssh/id_ed25519
     '';
   };
-  programs.ssh.startAgent = true; # ssh-agent
+  #programs.ssh.startAgent = true; # ssh-agent
   security.polkit.enable = true;
   environment.variables = {
     NIXOS_OZONE_WL = 1;

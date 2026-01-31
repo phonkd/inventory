@@ -6,7 +6,6 @@
   ...
 }:
 {
-  programs.adb.enable = true;
   environment.systemPackages = with pkgs; [
     payload-dumper-go
     unzip
