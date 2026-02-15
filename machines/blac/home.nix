@@ -25,7 +25,7 @@
     };
 
     # Copy hypr files except hyprland.conf (managed by wayland.windowManager.hyprland)
-    file.".config/hypr/monitors.conf".source = ../../modules/dotconfig/hypr/monitors.conf;
+    # file.".config/hypr/monitors.conf".source = ../../modules/dotconfig/hypr/monitors.conf;
     file.".config/hypr/hyprlock.conf".source = ../../modules/dotconfig/hypr/hyprlock.conf;
     file.".config/hypr/workspaces.conf".source = ../../modules/dotconfig/hypr/workspaces.conf;
 
@@ -33,6 +33,7 @@
       # EDITOR = "emacs";
       GSK_RENDERER = "gl";
       GDK_GL = "gles";
+      SSH_AUTH_SOCK = "/run/user/1000/gnupg/S.gpg-agent.ssh";
     };
 
     packages = with pkgs; [
@@ -80,6 +81,12 @@
     # Use the config file from dotconfig directly
     sourceFirst = false;
     extraConfig = builtins.readFile ../../modules/dotconfig/hypr/hyprland.conf;
+  };
+
+  services.gpg-agent = {
+    enable = true;
+    enableSshSupport = true;
+    pinentry.package = pkgs.pinentry-gnome3;
   };
 
   # Let Home Manager install and manage itself.

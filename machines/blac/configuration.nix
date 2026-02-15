@@ -12,7 +12,7 @@
 {
   imports = [
     # Include the results of the hardware scan.
-    /etc/nixos/hardware-configuration.nix
+    ./hardware-configuration.nix
     ./network.nix
     ../../modules/client/graphical.nix
     ../../modules/00-global-config.nix
@@ -22,7 +22,6 @@
     ../../modules/client/games.nix
     ../../modules/client/audio.nix
     ../../modules/client/pulseaudio-client.nix
-    #/tmp/work-setup.nix
     ../options.nix
     ./hyprland-session.nix
   ];
@@ -38,6 +37,7 @@
     "flakes"
   ];
   services.hardware.bolt.enable = true;
+
   # Network configuration moved to network.nix
   time.timeZone = "Europe/Zurich";
   i18n.defaultLocale = "en_US.UTF-8";

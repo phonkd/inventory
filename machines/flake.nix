@@ -16,6 +16,7 @@
       # Optional but recommended to limit the size of your system closure.
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    work-setup.url = "git+file:///home/phonkd/git/bedag-setup";
   };
 
   outputs =
@@ -27,6 +28,7 @@
       home-manager,
       rofi-zed-recent,
       lanzaboote,
+      work-setup,
       ...
     }:
     let
@@ -75,6 +77,7 @@
                 nixpkgs.overlays = [ overlay-unstable ];
               }
             )
+            work-setup.nixosModules.default
             #            lanzaboote.nixosModules.lanzaboote
             #            (
             #              { pkgs, lib, ... }:

@@ -116,6 +116,7 @@
     hyprviz
     virt-viewer
     librewolf
+    usbutils
   ];
   environment.systemPackages = with pkgs; [
     unstable.proton-vpn-cli
