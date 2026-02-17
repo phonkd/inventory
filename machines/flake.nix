@@ -106,6 +106,7 @@
           modules = [
             ./g14/configuration.nix
             sops-nix.nixosModules.sops
+            work-setup.nixosModules.default
             (
               { config, pkgs, ... }:
               {
