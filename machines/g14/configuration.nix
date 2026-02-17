@@ -17,7 +17,7 @@
     ./network.nix
     ../../modules/client/graphical.nix
     ../../modules/00-global-config.nix
-    ../../modules/client/android.nix
+    #../../modules/client/android.nix
     ../options.nix
   ];
   sops.age = {
