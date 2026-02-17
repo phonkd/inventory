@@ -97,7 +97,7 @@
       libvdpau
     ];
   };
-  programs.hyprland.enable = true;
+  #programs.hyprland.enable = true;
   hardware.nvidia.open = false;
   environment.systemPackages = with pkgs; [
     nvidia-vaapi-driver

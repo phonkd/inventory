@@ -106,4 +106,15 @@ in
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+  wayland.windowManager.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+    systemd.enable = true;
+    plugins = [
+      pkgs.hyprlandPlugins.hy3
+    ];
+    # Use the config file from dotconfig directly
+    sourceFirst = false;
+    extraConfig = builtins.readFile ../../modules/dotconfig/hypr/hyprland.conf;
+  };
 }
