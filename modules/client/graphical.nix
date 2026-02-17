@@ -108,7 +108,7 @@
     minio-client
     iftop
     prek
-    argocd
+    # argocd
     gemini-cli-bin
     comma
     yq

@@ -150,7 +150,9 @@ resource "proxmox_virtual_environment_vm" "spot-vm" {
   # hostpci {
   #   device = "hostpci0"
   #   id     = "0000:00:1f.3" # TODO: Replace with your Audio Controller PCI ID (e.g. 00:1f.3)
-  #   #pcie   = true
+  #   pcie   = true
+  #   xvga   = false
+  #   rombar = true
   # }
 
   disk {
@@ -158,7 +160,7 @@ resource "proxmox_virtual_environment_vm" "spot-vm" {
     import_from  = proxmox_virtual_environment_download_file.nixos_cloud_image.id
     interface    = "virtio0"
     serial       = "vm-203-disk-0"
-    size         = 20
+    size         = 40
   }
 
   initialization {
