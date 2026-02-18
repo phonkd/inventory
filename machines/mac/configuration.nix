@@ -6,6 +6,7 @@
     vim
     devbox
     kconf
+    nix-search-tv
   ];
   imports = [
     ./builder.nix
