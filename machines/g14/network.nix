@@ -10,7 +10,6 @@
   networking.useDHCP = true;
   networking.hostName = "g14";
   networking.nameservers = [
-    "192.168.1.122"
     "1.1.1.1"
   ];
 
@@ -21,4 +20,5 @@
     iwgtk
   ];
   networking.wireless.iwd.enable = true;
+  networking.nat.externalInterface = lib.mkForce "wlan0";
 }
