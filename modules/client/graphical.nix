@@ -187,7 +187,7 @@
     nerd-fonts.droid-sans-mono
   ];
   programs.zsh.ohMyZsh.plugins = [
-    "kube-ps1"
+    # "kube-ps1" # Disabling to improve shell startup time
   ];
   hardware.bluetooth = {
     enable = true;
