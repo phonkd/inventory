@@ -26,6 +26,7 @@
     nixd
     nil
     grimblast
+    grim
     cool-retro-term
     waybar
     #unstable.waybar-lyric
