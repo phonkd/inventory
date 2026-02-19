@@ -18,6 +18,7 @@
     ../common-gui.nix
     ../blac/hyprland-session.nix
     ../../modules/client/audio.nix
+    ../../modules/client/pulseaudio-client.nix
   ];
 
   # Bootloader.
