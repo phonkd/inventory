@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 let
   unstable = import (fetchTarball {
@@ -9,6 +9,13 @@ in
   imports = [
     ../common-home.nix
   ];
+
+  home.activation.createMonitorsConf = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    if [ ! -f $HOME/.config/hypr/monitors.conf ]; then
+      touch $HOME/.config/hypr/monitors.conf
+      echo "monitor=,preferred,auto,1.25" > $HOME/.config/hypr/monitors.conf
+    fi
+  '';
 
   home.packages = [
     unstable.waybar-lyric
@@ -60,7 +67,5 @@ in
     '')
   ];
 
-  xdg.configFile."hypr/monitors.conf".text = ''
-    monitor=,preferred,auto,auto
-  '';
+
 }
