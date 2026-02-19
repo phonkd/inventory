@@ -16,6 +16,10 @@
     waybar-lyric
   ];
 
+  xdg.configFile."hypr/monitors.conf".text = ''
+    monitor=,preferred,auto,1
+  '';
+
   services.gpg-agent = {
     enable = true;
     enableSshSupport = true;

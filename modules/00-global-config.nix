@@ -19,6 +19,7 @@ in
     keyFile = "/home/phonkd/.config/sops/age/keys.txt";
   };
   sops.defaultSopsFile = ./global-secrets/secret.yaml;
+  environment.pathsToLink = [ "/share/zsh" ];
   environment.systemPackages = [
     pkgs.git
     pkgs.killall
@@ -52,12 +53,13 @@ in
   };
   programs.zsh = {
     enable = true;
+    enableCompletion = false; # Disable NixOS generated compinit to avoid double initialization with Oh My Zsh
     ohMyZsh = {
       # "ohMyZsh" without Home Manager
       enable = true;
       plugins = [
         "git"
-        "kubectl"
+        # "kubectl" # Disabling to improve shell startup time
         "fzf"
       ];
       theme = "robbyrussell";

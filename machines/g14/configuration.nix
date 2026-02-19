@@ -17,6 +17,7 @@
     ./network.nix
     ../common-gui.nix
     ../blac/hyprland-session.nix
+    ../../modules/client/audio.nix
   ];
 
   # Bootloader.

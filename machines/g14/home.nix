@@ -59,4 +59,8 @@ in
       printf '{"text":"%s %s°C","tooltip":"Hottest CPU sensor %s°C","class":["%s"]}\n' "$icon" "$temp_int" "$temp_int" "$cls"
     '')
   ];
+
+  xdg.configFile."hypr/monitors.conf".text = ''
+    monitor=,preferred,auto,auto
+  '';
 }
