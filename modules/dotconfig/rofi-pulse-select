@@ -1,0 +1,72 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# rofi sink/source switcher using pactl (replaces rofi-pulse-select)
+# Fixes issue with tunnel sinks whose descriptions contain colons (IP:port)
+
+type="${1:-sink}"
+
+if [[ ! "$type" =~ ^(sink|source)$ ]]; then
+    echo "Usage: $0 sink|source" >&2
+    exit 1
+fi
+
+# Build list: "ID\tDescription"
+sink_list=$(pactl list "${type}s" | awk '
+    /^(Sink|Source) #/ { id = $2; gsub(/#/, "", id) }
+    /Description:/ { desc = $0; sub(/^[[:space:]]*Description: /, "", desc); print id "\t" desc }
+')
+
+if [[ -z "$sink_list" ]]; then
+    echo "No ${type}s found" >&2
+    exit 1
+fi
+
+# Get current default
+default_name=$(pactl get-default-"$type" 2>/dev/null || true)
+default_id=""
+if [[ -n "$default_name" ]]; then
+    default_id=$(pactl list "${type}s" | awk -v name="$default_name" '
+        /^(Sink|Source) #/ { id = $2; gsub(/#/, "", id) }
+        /Name:/ { n = $0; sub(/^[[:space:]]*Name: /, "", n); if (n == name) print id }
+    ')
+fi
+
+# Find selected row index for rofi
+default_row=0
+if [[ -n "$default_id" ]]; then
+    row=0
+    while IFS=$'\t' read -r id desc; do
+        if [[ "$id" == "$default_id" ]]; then
+            default_row=$row
+            break
+        fi
+        ((row++)) || true
+    done <<< "$sink_list"
+fi
+
+# Show rofi menu with descriptions only
+display_list=$(echo "$sink_list" | cut -f2)
+chosen_desc=$(echo "$display_list" | rofi -dmenu -p "audio $type:" -selected-row "$default_row") || exit 0
+
+# Map chosen description back to ID
+chosen_id=$(echo "$sink_list" | awk -F'\t' -v desc="$chosen_desc" '$2 == desc { print $1; exit }')
+
+if [[ -z "$chosen_id" ]]; then
+    echo "Could not find selected $type" >&2
+    exit 1
+fi
+
+# Set default
+pactl set-default-"$type" "$chosen_id"
+
+# Move all current streams to the new device
+if [[ "$type" == "sink" ]]; then
+    pactl list short sink-inputs 2>/dev/null | while read -r input_id rest; do
+        pactl move-sink-input "$input_id" "$chosen_id" 2>/dev/null || true
+    done
+else
+    pactl list short source-outputs 2>/dev/null | while read -r output_id rest; do
+        pactl move-source-output "$output_id" "$chosen_id" 2>/dev/null || true
+    done
+fi

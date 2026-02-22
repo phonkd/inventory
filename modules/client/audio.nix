@@ -13,8 +13,6 @@
 
   users.users.phonkd.packages = with pkgs; [
     cava
-    rofi-pulse-select
-    ponymix
     pulseaudio
     easyeffects
     roomeqwizard

@@ -111,6 +111,7 @@
     prek
     # argocd
     gemini-cli-bin
+    claude-code
     comma
     yq
     alacritty-graphics

@@ -19,6 +19,7 @@
     ../blac/hyprland-session.nix
     ../../modules/client/audio.nix
     ../../modules/client/pulseaudio-client.nix
+    ../../modules/dns.nix
   ];
 
   # Bootloader.
@@ -30,5 +31,5 @@
   services.xserver.enable = true;
 
   hardware.nvidia.open = false;
-  programs.ssh.startAgent = true; #ssh-agent
+
 }
