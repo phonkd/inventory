@@ -31,5 +31,6 @@
   services.xserver.enable = true;
 
   hardware.nvidia.open = false;
+  programs.rog-control-center.enable = true;
 
 }
