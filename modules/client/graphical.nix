@@ -27,6 +27,7 @@
     nil
     grimblast
     grim
+    hyprshot
     cool-retro-term
     waybar
     #unstable.waybar-lyric

@@ -22,5 +22,5 @@
   ];
   networking.wireless.iwd.enable = true;
   networking.nat.externalInterface = lib.mkForce "wlan0";
-   programs.ssh.startAgent = lib.mkForce false; #ssh-agent
+  programs.ssh.startAgent = lib.mkForce false; # ssh-agent
 }
