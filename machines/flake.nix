@@ -16,7 +16,11 @@
       # Optional but recommended to limit the size of your system closure.
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    work-setup.url = "git+file:///home/phonkd/git/bedag-setup";
+    #work-setup.url = "git+file:///home/phonkd/git/bedag-setup";
+    ambxst = {
+      url = "git+https://github.com/Axenide/Ambxst/";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -28,7 +32,8 @@
       home-manager,
       rofi-zed-recent,
       lanzaboote,
-      work-setup,
+      ambxst,
+      #work-setup,
       ...
     }:
     let
@@ -55,6 +60,15 @@
             ./blac/home.nix
           ];
         };
+        "phonkd@g14" = home-manager.lib.homeManagerConfiguration {
+          pkgs = import nixpkgs-unstable {
+            inherit system;
+            config.allowUnfree = true;
+          };
+          modules = [
+            ./g14/home.nix
+          ];
+        };
       };
 
       nixosConfigurations = {
@@ -77,7 +91,7 @@
                 nixpkgs.overlays = [ overlay-unstable ];
               }
             )
-            work-setup.nixosModules.default
+            #work-setup.nixosModules.default
             #            lanzaboote.nixosModules.lanzaboote
             #            (
             #              { pkgs, lib, ... }:
@@ -106,7 +120,8 @@
           modules = [
             ./g14/configuration.nix
             sops-nix.nixosModules.sops
-            work-setup.nixosModules.default
+            #work-setup.nixosModules.default
+            ambxst.nixosModules.default
             (
               { config, pkgs, ... }:
               {

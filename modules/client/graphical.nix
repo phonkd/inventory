@@ -151,7 +151,7 @@
   nixpkgs.config.allowUnfree = true;
   services.gnome.sushi.enable = true;
   services.gnome.gnome-keyring.enable = true;
-
+  programs.gpu-screen-recorder.enable = true;
   # List packages installed inff system profile. To search, run:
   # $ nix search wget
 
