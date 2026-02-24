@@ -21,6 +21,7 @@
     iwgtk
   ];
   # networking.wireless.iwd.enable = true;
-  #networking.nat.externalInterface = lib.mkForce "wlan0";
+  networking.nat.externalInterface = lib.mkForce "wlp2s0";
   programs.ssh.startAgent = lib.mkForce false; # ssh-agent
+  #options.bedag.oath_accounts_string = lib.mkForce "LinOTP:LSGO05952AD7";
 }
