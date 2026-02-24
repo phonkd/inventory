@@ -332,11 +332,11 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1771789462,
-        "narHash": "sha256-hDQb6QETAEsbt7OETjYwt56SrQaWKlbbEgewWWDD4bc=",
+        "lastModified": 1771792324,
+        "narHash": "sha256-ek+jnSPkQYaExqj0di0GuylHUjCfgFDcerOxPamm6a8=",
         "ref": "refs/heads/main",
-        "rev": "4836ae4f0ba20f6f3402bd4019e1bb743a5de323",
-        "revCount": 15,
+        "rev": "751d9739b06bd00c98e9f27cba8e9f0c2bf93ef8",
+        "revCount": 16,
         "type": "git",
         "url": "file:///home/phonkd/git/bedag-setup"
       },

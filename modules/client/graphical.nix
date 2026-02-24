@@ -39,10 +39,7 @@
     bat
     syncthing
     obsidian
-    rofi
-    rofi-obsidian
-    rofi-systemd
-    rofi-rbw
+    quickshell
     sqlite
     wdisplays
     cliphist
