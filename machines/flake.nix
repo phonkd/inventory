@@ -16,10 +16,13 @@
       # Optional but recommended to limit the size of your system closure.
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    work-setup.url = "git+file:///home/phonkd/git/bedag-setup";
+    work-setup = {
+      url = "git+file:///home/phonkd/git/bedag-setup";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     ambxst = {
       url = "git+https://github.com/Axenide/Ambxst/";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
   };
 
