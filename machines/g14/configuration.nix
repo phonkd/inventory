@@ -32,5 +32,34 @@
 
   hardware.nvidia.open = false;
   programs.rog-control-center.enable = true;
-
+  environment.systemPackages = with pkgs; [
+    displaylink
+  ];
+  boot = {
+    extraModulePackages = [ config.boot.kernelPackages.evdi ];
+    kernelModules = [
+      "typec_ucsi"
+      "ucsi_acpi"
+    ];
+    initrd = {
+      # List of modules that are always loaded by the initrd.
+      kernelModules = [
+        "evdi"
+      ];
+    };
+  };
+  systemd.services.displaylink-server = {
+    enable = true;
+    requires = [ "systemd-udevd.service" ];
+    after = [ "systemd-udevd.service" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${pkgs.displaylink}/bin/DisplayLinkManager";
+      User = "root";
+      Group = "root";
+      Restart = "on-failure";
+      RestartSec = 5; # Wait 5 seconds before restarting
+    };
+  };
 }
