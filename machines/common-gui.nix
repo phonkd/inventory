@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   imports = [
@@ -11,7 +16,7 @@
     keyFile = "/home/phonkd/.config/sops/age/keys.txt";
   };
 
-  # Network configuration should be imported in the host config usually, 
+  # Network configuration should be imported in the host config usually,
   # but since it's common 'network.nix' in the local dir, we leave it to the host.
 
   time.timeZone = "Europe/Zurich";
@@ -40,7 +45,7 @@
   };
 
   nixpkgs.config.allowUnfree = true;
-  system.stateVersion = "25.05"; 
+  system.stateVersion = "25.05";
 
   systemd.tmpfiles.rules = [
     "d /home/phonkd/tmp 0755 phonkd phonkd -"
@@ -55,14 +60,14 @@
   };
 
   security.polkit.enable = true;
-  
+
   environment.variables = {
     NIXOS_OZONE_WL = "1";
     LIBVA_DRIVER_NAME = "nvidia";
   };
 
   services.xserver.videoDrivers = [ "nvidia" ];
-  
+
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
@@ -75,5 +80,23 @@
   environment.systemPackages = with pkgs; [
     sbctl
     nvidia-vaapi-driver
+  ];
+  services.displayManager.sessionPackages = [
+    (pkgs.runCommand "hyprland-session"
+      {
+        passthru.providedSessions = [ "hyprland" ];
+      }
+      ''
+              mkdir -p $out/share/wayland-sessions
+              cat <<EOF > $out/share/wayland-sessions/hyprland.desktop
+        [Desktop Entry]
+        Name=Hyprland
+        Comment=An intelligent dynamic tiling Wayland compositor
+        Exec=Hyprland
+        Type=Application
+        DesktopNames=Hyprland
+        EOF
+      ''
+    )
   ];
 }

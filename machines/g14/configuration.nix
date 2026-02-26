@@ -16,7 +16,6 @@
     "${builtins.fetchGit { url = "https://github.com/NixOS/nixos-hardware.git"; }}/asus/zephyrus/ga401"
     ./network.nix
     ../common-gui.nix
-    ../blac/hyprland-session.nix
     ../../modules/client/audio.nix
     ../../modules/client/pulseaudio-client.nix
     ../../modules/dns.nix
@@ -31,22 +30,21 @@
   services.xserver.enable = true;
 
   hardware.nvidia.open = false;
+  hardware.nvidia.prime = {
+    offload.enable = lib.mkForce false;
+    reverseSync.enable = true;
+    allowExternalGpu = true;
+  };
   programs.rog-control-center.enable = true;
   environment.systemPackages = with pkgs; [
     displaylink
   ];
   boot = {
     extraModulePackages = [ config.boot.kernelPackages.evdi ];
-    kernelModules = [
-      "typec_ucsi"
-      "ucsi_acpi"
-    ];
-    initrd = {
-      # List of modules that are always loaded by the initrd.
-      kernelModules = [
-        "evdi"
-      ];
-    };
+    initrd.kernelModules = [ "evdi" ];
+    extraModprobeConfig = ''
+      options nvidia NVreg_EnableGpuFirmware=0
+    '';
   };
   systemd.services.displaylink-server = {
     enable = true;

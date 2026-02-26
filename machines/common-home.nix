@@ -74,4 +74,6 @@
   };
 
   programs.home-manager.enable = true;
+
+  services.easyeffects.enable = true;
 }
