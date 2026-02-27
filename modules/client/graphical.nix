@@ -171,9 +171,40 @@
   # ];
   services.syncthing = {
     enable = true;
+    #configDir = "/home/phonkd/.config/syncthing";
     user = "phonkd";
     dataDir = "/home/phonkd/";
-    configDir = "/home/phonkd/.config/syncthing";
+
+    settings.folders."browser-profiles" = {
+      path = "/home/phonkd/browser-profiles";
+      ignorePerms = false;
+    };
+  };
+
+  systemd.tmpfiles.rules = [
+    "d /home/phonkd/browser-profiles 0755 phonkd users -"
+  ];
+
+  system.activationScripts.browserProfilesStignore = {
+    text = ''
+            stignore="/home/phonkd/browser-profiles/.stignore"
+            if [ ! -f "$stignore" ]; then
+              cat > "$stignore" <<'EOF'
+      cache2/
+      startupCache/
+      crashes/
+      minidumps/
+      storage/temporary/
+      datareporting/
+      *.sqlite-wal
+      *.sqlite-shm
+      *.sqlite-journal
+      lock
+      EOF
+              chown phonkd:users "$stignore"
+            fi
+    '';
+    deps = [ ];
   };
   security.polkit.enable = true;
   virtualisation.podman.enable = true;

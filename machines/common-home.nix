@@ -13,7 +13,7 @@
       source = builtins.path {
         path = ../modules/dotconfig;
         name = "dotconfig";
-        filter = 
+        filter =
           path: type:
           let
             baseName = baseNameOf path;
@@ -76,6 +76,24 @@
   programs.home-manager.enable = true;
 
   services.easyeffects.enable = true;
+
+  xdg.desktopEntries."librewolf-work" = {
+    name = "Work LibreWolf";
+    exec = "librewolf -P work %u";
+    icon = "librewolf";
+    type = "Application";
+    categories = [
+      "Network"
+      "WebBrowser"
+    ];
+    mimeType = [
+      "text/html"
+      "x-scheme-handler/http"
+      "x-scheme-handler/https"
+      "x-scheme-handler/about"
+      "x-scheme-handler/unknown"
+    ];
+  };
 
   xdg.mimeApps = {
     enable = true;
