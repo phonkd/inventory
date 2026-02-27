@@ -3,6 +3,6 @@ kind: Kustomization
 helmCharts:
   - name: capi2argo-cluster-operator
     repo: https://dntosas.github.io/capi2argo-cluster-operator/
-    version: 1.4.2
+    version: 1.5.0
     releaseName: capi2argo
     namespace: capi-system
