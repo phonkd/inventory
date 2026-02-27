@@ -17,7 +17,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     work-setup = {
-      url = "git+https://github.com/phonkd/bedag-setup";
+      url = "git+ssh://git@github.com/phonkd/bedag-setup";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     ambxst = {
