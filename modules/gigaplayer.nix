@@ -119,6 +119,8 @@
       python3Packages.websockify
       dbus
       pkgs.unstable.easyeffects
+      bluez
+      bluez-tools
     ];
 
     script = ''
@@ -146,6 +148,20 @@
       Restart = "always";
       RuntimeDirectory = "easyeffects";
       RuntimeDirectoryMode = "0700";
+    };
+  };
+  ## bluetooth receiver
+  #
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings = {
+      General = {
+        # Explicitly enable A2DP Sink (receiver) and Source (transmitter) roles
+        Enable = "Source,Sink,Media,Socket";
+        # Experimental enables battery percentage reporting and other features
+        Experimental = false;
+      };
     };
   };
 }
