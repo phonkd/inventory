@@ -10,7 +10,7 @@
   environment.systemPackages = with pkgs; [
     #  nvidia-vaapi-driver
     betaflight-configurator
-    wineWowPackages.waylandFull
+    #wineWowPackages.waylandFull
   ];
   services.udev.packages = [ pkgs.betaflight-configurator ];
 }

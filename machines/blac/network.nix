@@ -17,4 +17,5 @@
 
   # Disable IPv6
   networking.enableIPv6 = false;
+  networking.nat.externalInterface = lib.mkForce "enp9s0";
 }

@@ -75,7 +75,7 @@
       };
 
       nixosConfigurations = {
-        blac = nixpkgs.lib.nixosSystem {
+        blac = nixpkgs-unstable.lib.nixosSystem {
           inherit system;
           modules = [
             ./blac/configuration.nix
