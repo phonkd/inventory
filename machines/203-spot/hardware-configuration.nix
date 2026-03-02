@@ -26,6 +26,7 @@
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/f222513b-ded1-49fa-b591-20ce86a2fe7f"; # /dev/disk/by-id/virtio-vm-203-disk-0
     fsType = "ext4";
+    autoResize = true;
   };
 
   fileSystems."/boot" = {
