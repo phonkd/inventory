@@ -186,7 +186,7 @@
     };
 
     serviceConfig = {
-      ExecStart = "${pkgs.uxplay}/bin/uxplay -n nixos-headless -no-video -p";
+      ExecStart = "${pkgs.uxplay}/bin/uxplay -n nixos-headless -vs 0 -as pulsesink -p";
       User = "uxplay";
       Group = "uxplay";
       Restart = "always";
