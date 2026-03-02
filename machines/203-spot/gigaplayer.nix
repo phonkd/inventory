@@ -53,9 +53,17 @@
         57621 # Spotify Connect
         4713 # PulseAudio Network
         12345
+        7000  # AirPlay
+        7100  # AirPlay
+        7011  # AirPlay
         #8085 # noVNC Web Interface
       ];
-      allowedUDPPorts = [ 5353 ];
+      allowedUDPPorts = [
+        5353 # mDNS (Avahi)
+        6000
+        6001
+        7011
+      ];
       extraInputRules = ''
         # Allow noVNC (8085) only from the Traefik VM
         ip saddr 192.168.1.201 tcp dport 8085 accept
@@ -150,6 +158,51 @@
       RuntimeDirectoryMode = "0700";
     };
   };
+  ## AirPlay receiver (uxplay)
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    publish = {
+      enable = true;
+      userServices = true;
+    };
+  };
+
+  systemd.services.uxplay = {
+    description = "UxPlay AirPlay Receiver";
+    wantedBy = [ "multi-user.target" ];
+    after = [
+      "network.target"
+      "pipewire.service"
+      "avahi-daemon.service"
+    ];
+    requires = [
+      "pipewire.service"
+      "avahi-daemon.service"
+    ];
+
+    environment = {
+      "PIPEWIRE_RUNTIME_DIR" = "/run/pipewire";
+    };
+
+    serviceConfig = {
+      ExecStart = "${pkgs.uxplay}/bin/uxplay -n nixos-headless -no-video -p";
+      User = "uxplay";
+      Group = "uxplay";
+      Restart = "always";
+      SupplementaryGroups = [
+        "audio"
+        "pipewire"
+      ];
+    };
+  };
+
+  users.users.uxplay = {
+    isSystemUser = true;
+    group = "uxplay";
+  };
+  users.groups.uxplay = { };
+
   ## bluetooth receiver
   #
   hardware.bluetooth = {

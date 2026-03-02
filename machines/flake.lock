@@ -361,17 +361,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1772136056,
-        "narHash": "sha256-FhxmpbNZGqnTGAb8/5PZd0w4DMSVsig3pcQRotHZLr4=",
+        "lastModified": 1772378036,
+        "narHash": "sha256-JgXdcjCO3shMhCq2pfz14GlV1SOZl9kCiyUiPdwnnpU=",
         "ref": "refs/heads/main",
-        "rev": "ab4ce16511a04b86bbafdaf53e953e6b98aa9328",
-        "revCount": 24,
+        "rev": "bb4545b99c9370fde4958da8351cb4ebc2334b5e",
+        "revCount": 25,
         "type": "git",
-        "url": "file:///home/phonkd/git/bedag-setup"
+        "url": "ssh://git@github.com/phonkd/bedag-setup"
       },
       "original": {
         "type": "git",
-        "url": "file:///home/phonkd/git/bedag-setup"
+        "url": "ssh://git@github.com/phonkd/bedag-setup"
       }
     }
   },
