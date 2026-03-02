@@ -27,6 +27,15 @@
   #boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  services.displayManager.sddm.enable = true;
   services.xserver.enable = true;
+
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --remember --cmd start-hyprland";
+        user = "greeter";
+      };
+    };
+  };
 }
