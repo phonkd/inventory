@@ -67,10 +67,15 @@
     xwayland.enable = true;
     systemd.enable = true;
     plugins = [
-      pkgs.hyprlandPlugins.hy3
     ];
     sourceFirst = false;
     extraConfig = builtins.readFile ../modules/dotconfig/hypr/hyprland.conf;
+  };
+
+  programs.git = {
+    enable = true;
+    userName = "Elis";
+    userEmail = "phonkd@phonkd.net";
   };
 
   programs.home-manager.enable = true;

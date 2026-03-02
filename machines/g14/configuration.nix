@@ -38,4 +38,8 @@
       };
     };
   };
+
+  programs.git = {
+    enable = false;
+  };
 }

@@ -45,7 +45,7 @@ in
   users.mutableUsers = true;
   security.sudo.wheelNeedsPassword = false;
   programs.git = {
-    enable = true;
+    enable = lib.mkDefault true;
     config = {
       user.name = "Elis";
       user.email = "enst18.12@gmail.com";

@@ -47,7 +47,6 @@
     wdisplays
     cliphist
     hyprcursor
-    hyprlandPlugins.hy3
     xdg-desktop-portal
     xdg-desktop-portal-gtk
     obs-studio
@@ -210,7 +209,7 @@
   virtualisation.podman.enable = true;
   #virtualisation.docker.enable = true;
   programs.git = {
-    enable = true;
+    enable = lib.mkDefault true;
     config = {
       user.name = "Elis";
       user.email = "enst18.12@gmail.com";

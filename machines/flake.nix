@@ -7,7 +7,7 @@
     sops-nix.url = "github:Mic92/sops-nix";
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     rofi-zed-recent.url = "github:phonkd/rofi-zed-editor-projects";
     lanzaboote = {
@@ -125,6 +125,12 @@
             sops-nix.nixosModules.sops
             work-setup.nixosModules.default
             ambxst.nixosModules.default
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.phonkd = import ./g14/home.nix;
+            }
             (
               { config, pkgs, ... }:
               {

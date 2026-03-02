@@ -1,10 +1,5 @@
 { config, pkgs, lib, ... }:
 
-let
-  unstable = import (fetchTarball {
-    url = "https://github.com/nixos/nixpkgs/archive/nixos-unstable.tar.gz";
-  }) { };
-in
 {
   imports = [
     ../common-home.nix
@@ -18,7 +13,7 @@ in
   '';
 
   home.packages = [
-    unstable.waybar-lyric
+    pkgs.waybar-lyric
     (pkgs.writeShellScriptBin "waybar-hottest-cpu" ''
       #!/usr/bin/env bash
       set -euo pipefail
