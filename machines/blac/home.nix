@@ -3,6 +3,7 @@
 {
   imports = [
     ../common-home.nix
+    ../linux-home.nix
   ];
 
   home.sessionVariables = {

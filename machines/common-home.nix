@@ -3,74 +3,11 @@
 {
   home = {
     username = "phonkd";
-    homeDirectory = "/home/phonkd";
     stateVersion = "25.05";
-
-    # Disable the nixpkgs release check warning
     enableNixpkgsReleaseCheck = false;
-
-    file.".config" = {
-      source = builtins.path {
-        path = ../modules/dotconfig;
-        name = "dotconfig";
-        filter =
-          path: type:
-          let
-            baseName = baseNameOf path;
-          in
-          baseName != "hypr";
-      };
-      recursive = true;
-      force = true;
-    };
-
-    # Copy hypr files except hyprland.conf
-    file.".config/hypr/hyprlock.conf".source = ../modules/dotconfig/hypr/hyprlock.conf;
-    file.".config/hypr/workspaces.conf".source = ../modules/dotconfig/hypr/workspaces.conf;
   };
 
-  # Qt configuration
-  qt = {
-    enable = false;
-    platformTheme.name = "gtk";
-    style = {
-      name = "Nordic-darker";
-      package = pkgs.nordic;
-    };
-  };
-
-  # GTK configuration
-  gtk = {
-    enable = true;
-    theme = {
-      package = pkgs.nordic;
-      name = "Nordic-darker";
-    };
-    iconTheme = {
-      package = pkgs.kora-icon-theme;
-      name = "kora-pgrey";
-    };
-    gtk3.extraConfig = {
-      "gtk-application-prefer-dark-theme" = 1;
-    };
-    gtk4.extraConfig = {
-      "gtk-application-prefer-dark-theme" = 1;
-    };
-  };
-
-  # Disable news notifications
   news.display = "silent";
-
-  # Hyprland configuration
-  wayland.windowManager.hyprland = {
-    enable = true;
-    xwayland.enable = true;
-    systemd.enable = true;
-    plugins = [
-    ];
-    sourceFirst = false;
-    extraConfig = builtins.readFile ../modules/dotconfig/hypr/hyprland.conf;
-  };
 
   programs.git = {
     enable = true;
@@ -80,34 +17,17 @@
 
   programs.home-manager.enable = true;
 
-  services.easyeffects.enable = true;
-
-  xdg.desktopEntries."librewolf-work" = {
-    name = "Work LibreWolf";
-    exec = "librewolf -P work %u";
-    icon = "librewolf";
-    type = "Application";
-    categories = [
-      "Network"
-      "WebBrowser"
-    ];
-    mimeType = [
-      "text/html"
-      "x-scheme-handler/http"
-      "x-scheme-handler/https"
-      "x-scheme-handler/about"
-      "x-scheme-handler/unknown"
-    ];
-  };
-
-  xdg.mimeApps = {
+  programs.ghostty = {
     enable = true;
-    defaultApplications = {
-      "text/html" = "librewolf.desktop";
-      "x-scheme-handler/http" = "librewolf.desktop";
-      "x-scheme-handler/https" = "librewolf.desktop";
-      "x-scheme-handler/about" = "librewolf.desktop";
-      "x-scheme-handler/unknown" = "librewolf.desktop";
+    package = pkgs.ghostty-bin;
+    settings = {
+      theme = "Adventure";
+      font-size = 16;
+      confirm-close-surface = false;
+      keybind = [ "super+enter=new_split:right" ];
     };
   };
+  home.packages = with pkgs; [
+    nil
+  ];
 }

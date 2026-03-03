@@ -24,6 +24,10 @@
       url = "git+https://github.com/Axenide/Ambxst/";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+    nix-darwin = {
+      url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -37,6 +41,7 @@
       lanzaboote,
       ambxst,
       work-setup,
+      nix-darwin,
       ...
     }:
     let
@@ -53,6 +58,20 @@
       };
     in
     {
+      darwinConfigurations = {
+        "Eliss-MacBook-Pro" = nix-darwin.lib.darwinSystem {
+          modules = [
+            ./mac/configuration.nix
+            home-manager.darwinModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.phonkd = import ./mac/home.nix;
+            }
+          ];
+        };
+      };
+
       homeConfigurations = {
         "phonkd@blac" = home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs {

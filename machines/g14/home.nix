@@ -3,6 +3,7 @@
 {
   imports = [
     ../common-home.nix
+    ../linux-home.nix
   ];
 
   home.activation.createMonitorsConf = lib.hm.dag.entryAfter ["writeBoundary"] ''
