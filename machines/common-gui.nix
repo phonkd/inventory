@@ -80,6 +80,7 @@
   environment.systemPackages = with pkgs; [
     sbctl
     nvidia-vaapi-driver
+    slskd
   ];
   services.displayManager.sessionPackages = [
     (pkgs.runCommand "hyprland-session"

@@ -33,5 +33,4 @@
   system.primaryUser = "phonkd";
 
   users.users.phonkd.home = "/Users/phonkd";
-
 }

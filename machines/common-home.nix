@@ -29,5 +29,19 @@
   };
   home.packages = with pkgs; [
     nil
+    nicotine-plus
+    kew
   ];
+  programs.neovim = {
+    enable = true;
+    # plugins = with pkgs.vimPlugins;
+    # [
+    #   yankring
+    #   vim-nix
+    #   markdown-nvim
+    #   markdown-preview-nvim
+    # ];
+
+  };
+
 }
