@@ -3,7 +3,6 @@
 **clusterctl.yaml
 !k8s/root/child-clusters/
 **.secret.yaml
-**flake.lock
 **work-setup.nix
 
 # Terraform / OpenTofu

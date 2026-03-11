@@ -32,6 +32,8 @@
     nicotine-plus
     localsend
     yaml-language-server
+    claude-code
+    sox
   ];
   programs.neovim = {
     enable = true;

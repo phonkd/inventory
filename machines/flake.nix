@@ -71,26 +71,6 @@
         };
       };
 
-      homeConfigurations = {
-        "phonkd@blac" = home-manager.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs-unstable {
-            inherit system;
-            config.allowUnfree = true;
-          };
-          modules = [
-            ./blac/home.nix
-          ];
-        };
-        "phonkd@g14" = home-manager.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs-unstable {
-            inherit system;
-            config.allowUnfree = true;
-          };
-          modules = [
-            ./g14/home.nix
-          ];
-        };
-      };
 
       nixosConfigurations = {
         blac = nixpkgs-unstable.lib.nixosSystem {
@@ -98,6 +78,12 @@
           modules = [
             ./blac/configuration.nix
             sops-nix.nixosModules.sops
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.phonkd = import ./blac/home.nix;
+            }
             (
               { config, pkgs, ... }:
               {
