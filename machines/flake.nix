@@ -73,7 +73,7 @@
 
       homeConfigurations = {
         "phonkd@blac" = home-manager.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs {
+          pkgs = import nixpkgs-unstable {
             inherit system;
             config.allowUnfree = true;
           };

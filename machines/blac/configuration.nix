@@ -28,8 +28,17 @@
   boot.loader.efi.canTouchEfiVariables = true;
   services.hardware.bolt.enable = true;
 
-  services.displayManager.gdm.enable = true;
-  services.xserver.enable = true; # Enabled here as gdm implies xserver often, though common-gui might not enforce it.
+  services.xserver.enable = true;
+
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --remember --cmd start-hyprland";
+        user = "greeter";
+      };
+    };
+  };
 
   boot.kernelParams = [
     #"pcie_aspm=off"

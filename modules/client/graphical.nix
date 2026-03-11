@@ -127,7 +127,7 @@
   ];
   networking.firewall.checkReversePath = false;
   #services.netbird.enable = true;
-  programs.light.enable = true;
+  hardware.acpilight.enable = true;
   users.extraGroups.video.members = [ "phonkd" ];
   programs.winbox = {
     enable = true;
