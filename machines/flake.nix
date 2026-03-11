@@ -40,7 +40,6 @@
       rofi-zed-recent,
       lanzaboote,
       ambxst,
-      work-setup,
       nix-darwin,
       ...
     }:
@@ -113,7 +112,7 @@
                 nixpkgs.overlays = [ overlay-unstable ];
               }
             )
-            work-setup.nixosModules.default
+            #work-setup.nixosModules.default
             #            lanzaboote.nixosModules.lanzaboote
             #            (
             #              { pkgs, lib, ... }:
@@ -142,7 +141,7 @@
           modules = [
             ./g14/configuration.nix
             sops-nix.nixosModules.sops
-            work-setup.nixosModules.default
+            #work-setup.nixosModules.default
             ambxst.nixosModules.default
             home-manager.nixosModules.home-manager
             {
