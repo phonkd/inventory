@@ -13,7 +13,7 @@
   networking.useDHCP = true;
   networking.hostName = "template";
   networking.nameservers = [
-    "192.168.1.122"
+    "192.168.1.201"
     "1.1.1.1"
   ];
 

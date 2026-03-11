@@ -18,7 +18,7 @@
   ];
   networking.defaultGateway = "192.168.1.1";
   networking.nameservers = [
-    "192.168.1.122"
+    "192.168.1.201"
     "192.168.1.1"
   ];
   networking.hostName = "200-root"; # Define your hostname.
