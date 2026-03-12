@@ -14,7 +14,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./network.nix
-    ../common-gui.nix
+    ../../modules/client/common-gui.nix
     ../../modules/02-global-ssh.nix
     ../../modules/client/android.nix
     ../../modules/client/drone.nix

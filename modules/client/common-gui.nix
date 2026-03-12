@@ -51,14 +51,6 @@
     "d /home/phonkd/tmp 0755 phonkd phonkd -"
   ];
 
-  programs.ssh = {
-    extraConfig = ''
-      AddKeysToAgent yes
-      Host *
-        IdentityFile ~/.ssh/id_ed25519
-    '';
-  };
-
   security.polkit.enable = true;
 
   environment.variables = {

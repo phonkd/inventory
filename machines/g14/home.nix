@@ -1,12 +1,17 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   imports = [
-    ../common-home.nix
+    ../../modules/home/common-home.nix
     ../linux-home.nix
   ];
 
-  home.activation.createMonitorsConf = lib.hm.dag.entryAfter ["writeBoundary"] ''
+  home.activation.createMonitorsConf = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     if [ ! -f $HOME/.config/hypr/monitors.conf ]; then
       touch $HOME/.config/hypr/monitors.conf
       echo "monitor=,preferred,auto,1.25" > $HOME/.config/hypr/monitors.conf
@@ -30,15 +35,15 @@
       fi
 
       temp="$(printf '%s\n' "$json" | "$jq_bin" -r '
-        ([ 
-           to_entries[] 
-           | select(.key | test("(?i)(coretemp|k10temp|zenpower|amdtemp)")) 
-           | .value 
-           | .. | objects 
-           | to_entries[] 
-           | select(.key | test("^temp[0-9]+_input$")) 
-           | .value 
-         ] | max) // empty 
+        ([
+           to_entries[]
+           | select(.key | test("(?i)(coretemp|k10temp|zenpower|amdtemp)"))
+           | .value
+           | .. | objects
+           | to_entries[]
+           | select(.key | test("^temp[0-9]+_input$"))
+           | .value
+         ] | max) // empty
       ')"
 
       if [[ -z "$temp" || "$temp" == "null" ]]; then
@@ -62,6 +67,5 @@
       printf '{"text":"%s %s°C","tooltip":"Hottest CPU sensor %s°C","class":["%s"]}\n' "$icon" "$temp_int" "$temp_int" "$cls"
     '')
   ];
-
 
 }

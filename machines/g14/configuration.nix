@@ -16,7 +16,7 @@
     "${builtins.fetchGit { url = "https://github.com/NixOS/nixos-hardware.git"; }}/asus/zephyrus/ga401"
     ./network.nix
     ./g14-fixes.nix
-    ../common-gui.nix
+    ../../modules/client/common-gui.nix
     ../../modules/client/audio.nix
     ../../modules/client/pulseaudio-client.nix
     ../../modules/dns.nix

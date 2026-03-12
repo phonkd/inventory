@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 
 {
+<<<<<<< HEAD:machines/common-home.nix
   home = {
     username = "phonkd";
     stateVersion = "25.05";
@@ -27,10 +28,10 @@
       keybind = [ "super+enter=new_split:right" ];
     };
   };
+=======
+>>>>>>> 20aa5b5 (refator):modules/home/editors.nix
   home.packages = with pkgs; [
     nil
-    nicotine-plus
-    localsend
     yaml-language-server
     claude-code
     sox
@@ -67,5 +68,4 @@
       plenary-nvim # telescope dependency
     ];
   };
-
 }
