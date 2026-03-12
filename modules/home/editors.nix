@@ -1,37 +1,9 @@
 { config, pkgs, ... }:
 
 {
-<<<<<<< HEAD:machines/common-home.nix
-  home = {
-    username = "phonkd";
-    stateVersion = "25.05";
-    enableNixpkgsReleaseCheck = false;
-  };
-
-  news.display = "silent";
-
-  programs.git = {
-    enable = true;
-    userName = "Elis";
-    userEmail = "phonkd@phonkd.net";
-  };
-
-  programs.home-manager.enable = true;
-
-  programs.ghostty = {
-    enable = true;
-    package = if pkgs.stdenv.isDarwin then pkgs.ghostty-bin else pkgs.ghostty;
-    settings = {
-      theme = "Adventure";
-      font-size = 16;
-      confirm-close-surface = false;
-      keybind = [ "super+enter=new_split:right" ];
-    };
-  };
-=======
->>>>>>> 20aa5b5 (refator):modules/home/editors.nix
   home.packages = with pkgs; [
     nil
+    nixd
     yaml-language-server
     claude-code
     sox

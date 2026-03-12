@@ -23,8 +23,6 @@
     neovim
     zed-editor-fhs
     zed-discord-presence
-    nixd
-    nil
     grimblast
     grim
     hyprshot
@@ -206,13 +204,6 @@
   security.polkit.enable = true;
   virtualisation.podman.enable = true;
   #virtualisation.docker.enable = true;
-  programs.git = {
-    enable = lib.mkDefault true;
-    config = {
-      user.name = "Elis";
-      user.email = "enst18.12@gmail.com";
-    };
-  };
   fonts.packages = with pkgs; [
     nerd-fonts.fira-code
     nerd-fonts.droid-sans-mono

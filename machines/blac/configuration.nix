@@ -74,7 +74,4 @@
     MatchName=*COMPANY*USB*Device*
     ModelBouncingKeys=1
   '';
-  programs.git = {
-    enable = false;
-  };
 }

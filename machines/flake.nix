@@ -16,10 +16,6 @@
       # Optional but recommended to limit the size of your system closure.
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # work-setup = {
-    #   url = "git+ssh://git@github.com/phonkd/bedag-setup";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
     ambxst = {
       url = "git+https://github.com/Axenide/Ambxst/";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -55,6 +51,30 @@
         inherit system;
         config.allowUnfree = true;
       };
+      # Path to the local work-setup repo — only loaded on machines that opt in.
+      # Requires `--impure` when rebuilding (e.g. darwin-rebuild switch --flake .# --impure)
+      work-setup-path =
+        if builtins.pathExists /Users/phonkd/git/bedag-setup
+        then /Users/phonkd/git/bedag-setup
+        else if builtins.pathExists /home/phonkd/git/bedag-setup
+        then /home/phonkd/git/bedag-setup
+        else null;
+      hasWorkSetup = work-setup-path != null;
+      # System-level modules (options + nixos-specific config)
+      workSetupSystemModules =
+        if hasWorkSetup then [
+          "${work-setup-path}/options.nix"
+          "${work-setup-path}/nixos/nixos-config.nix"
+        ] else [];
+      # Home-manager modules (tools, gitconfig, hm-level options)
+      workSetupHomeModules =
+        if hasWorkSetup then [
+          "${work-setup-path}/home-manager/home-manager.nix"
+        ] else [];
+      workSetupDarwinModules =
+        if hasWorkSetup then [
+          "${work-setup-path}/darwin/nix-darwin-config.nix"
+        ] else [];
     in
     {
       darwinConfigurations = {
@@ -65,9 +85,11 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.phonkd = import ./mac/home.nix;
+              home-manager.users.phonkd = {
+                imports = [ ./mac/home.nix ] ++ workSetupHomeModules;
+              };
             }
-          ];
+          ] ++ workSetupDarwinModules;
         };
       };
 
@@ -98,7 +120,6 @@
                 nixpkgs.overlays = [ overlay-unstable ];
               }
             )
-            #work-setup.nixosModules.default
             #            lanzaboote.nixosModules.lanzaboote
             #            (
             #              { pkgs, lib, ... }:
@@ -127,7 +148,6 @@
           modules = [
             ./g14/configuration.nix
             sops-nix.nixosModules.sops
-            #work-setup.nixosModules.default
             ambxst.nixosModules.default
             home-manager.nixosModules.home-manager
             {
