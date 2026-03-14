@@ -1,15 +1,22 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [
     ../../modules/home/common-home.nix
     ../../modules/home/linux-home.nix
   ];
+
+  home.sessionVariables = {
+    GSK_RENDERER = "gl";
+    GDK_GL = "gles";
+    SSH_AUTH_SOCK = "/run/user/1000/gnupg/S.gpg-agent.ssh";
+  };
+
+  services.gpg-agent = {
+    enable = true;
+    enableSshSupport = true;
+    pinentry.package = pkgs.pinentry-gnome3;
+  };
 
   home.activation.createMonitorsConf = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     if [ ! -f $HOME/.config/hypr/monitors.conf ]; then
@@ -18,8 +25,8 @@
     fi
   '';
 
-  home.packages = [
-    pkgs.waybar-lyric
+  home.packages = with pkgs; [
+    waybar-lyric
     (pkgs.writeShellScriptBin "waybar-hottest-cpu" ''
       #!/usr/bin/env bash
       set -euo pipefail
