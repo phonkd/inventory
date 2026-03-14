@@ -7,9 +7,9 @@
 
 {
   imports = [
-    ../modules/client/graphical.nix
-    ../modules/00-global-config.nix
-    ./options.nix
+    ./graphical.nix
+    ../00-global-config.nix
+    ../../machines/options.nix
   ];
 
   sops.age = {
