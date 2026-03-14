@@ -5,7 +5,7 @@
 
   home.file.".config" = {
     source = builtins.path {
-      path = ../modules/dotconfig;
+      path = ../dotconfig;
       name = "dotconfig";
       filter =
         path: type:
@@ -19,8 +19,8 @@
   };
 
   # Copy hypr files except hyprland.conf
-  home.file.".config/hypr/hyprlock.conf".source = ../modules/dotconfig/hypr/hyprlock.conf;
-  home.file.".config/hypr/workspaces.conf".source = ../modules/dotconfig/hypr/workspaces.conf;
+  home.file.".config/hypr/hyprlock.conf".source = ../dotconfig/hypr/hyprlock.conf;
+  home.file.".config/hypr/workspaces.conf".source = ../dotconfig/hypr/workspaces.conf;
 
   # Qt configuration
   qt = {
@@ -59,7 +59,7 @@
     plugins = [
     ];
     sourceFirst = false;
-    extraConfig = builtins.readFile ../modules/dotconfig/hypr/hyprland.conf;
+    extraConfig = builtins.readFile ../dotconfig/hypr/hyprland.conf;
   };
 
   services.easyeffects.enable = true;

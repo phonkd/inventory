@@ -8,7 +8,7 @@
 {
   imports = [
     ../../modules/home/common-home.nix
-    ../linux-home.nix
+    ../../modules/home/linux-home.nix
   ];
 
   home.activation.createMonitorsConf = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
