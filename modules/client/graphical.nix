@@ -113,7 +113,6 @@
     alacritty-graphics
     hyprviz
     virt-viewer
-    librewolf
     usbutils
   ];
   environment.systemPackages = with pkgs; [

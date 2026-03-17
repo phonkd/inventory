@@ -4,6 +4,7 @@
   imports = [
     ./terminal.nix
     ./editors.nix
+    ./browser.nix
   ];
   home = {
     username = "phonkd";
@@ -25,5 +26,13 @@
       email = "phonkd@phonkd.net";
       name = "Phonkd";
     };
+    includes = [
+      {
+        condition = "hasconfig:remote.*.url:*github.com*/**";
+        contents = {
+          core.sshCommand = "ssh -i ~/.ssh/id_ed25519_priv";
+        };
+      }
+    ];
   };
 }
