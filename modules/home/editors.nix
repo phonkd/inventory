@@ -15,6 +15,7 @@
       ripgrep
       fd
     ];
+    defaultEditor = true;
     plugins = with pkgs.vimPlugins; [
       {
         plugin = catppuccin-nvim;
