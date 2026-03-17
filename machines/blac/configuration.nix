@@ -12,7 +12,7 @@
 {
   imports = [
     # Include the results of the hardware scan.
-    ./hardware-configuration.nix
+    /etc/nixos/hardware-configuration.nix
     ./network.nix
     ../../modules/client/common-gui.nix
     ../../modules/02-global-ssh.nix
