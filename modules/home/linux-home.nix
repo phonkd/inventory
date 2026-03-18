@@ -22,6 +22,10 @@
   home.file.".config/hypr/hyprlock.conf".source = ../dotconfig/hypr/hyprlock.conf;
   home.file.".config/hypr/workspaces.conf".source = ../dotconfig/hypr/workspaces.conf;
 
+
+  sops.age = {
+    keyFile = "/home/phonkd/.config/sops/age/keys.txt";
+  };
   # Qt configuration
   qt = {
     enable = false;
