@@ -23,9 +23,12 @@
   ];
   programs.git = {
     enable = true;
-    settings.user = {
-      email = "phonkd@phonkd.net";
-      name = "Phonkd";
+    settings = {
+      user = {
+        email = "phonkd@phonkd.net";
+        name = "Phonkd";
+      };
+      pull.rebase = true;
     };
     includes = [
       {
