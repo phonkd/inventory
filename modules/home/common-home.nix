@@ -5,13 +5,20 @@
     ./terminal.nix
     ./editors.nix
     ./browser.nix
+    ./syncthing.nix
   ];
   home = {
     username = "phonkd";
     stateVersion = "25.05";
     enableNixpkgsReleaseCheck = false;
   };
-
+  sops.age = {
+    keyFile =
+      if pkgs.stdenv.isDarwin then
+        "/Users/phonkd/.config/sops/age/keys.txt"
+      else
+        "/home/phonkd/.config/sops/age/keys.txt";
+  };
   news.display = "silent";
 
   programs.home-manager.enable = true;

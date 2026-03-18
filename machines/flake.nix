@@ -104,6 +104,7 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
+              home-manager.sharedModules = [ sops-nix.homeManagerModules.sops ];
               home-manager.users.phonkd = import ./blac/home.nix;
             }
             (

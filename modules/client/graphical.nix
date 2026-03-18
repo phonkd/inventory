@@ -35,7 +35,6 @@
     scrcpy
     google-chrome
     bat
-    syncthing
     obsidian
     rofi
     rofi-obsidian
@@ -163,17 +162,17 @@
   #     thunar-archive-plugin
   #     thunar-volman
   # ];
-  services.syncthing = {
-    enable = true;
-    #configDir = "/home/phonkd/.config/syncthing";
-    user = "phonkd";
-    dataDir = "/home/phonkd/";
+  # services.syncthing = {
+  #   enable = true;
+  #   #configDir = "/home/phonkd/.config/syncthing";
+  #   user = "phonkd";
+  #   dataDir = "/home/phonkd/";
 
-    settings.folders."browser-profiles" = {
-      path = "/home/phonkd/browser-profiles";
-      ignorePerms = false;
-    };
-  };
+  #   settings.folders."browser-profiles" = {
+  #     path = "/home/phonkd/browser-profiles";
+  #     ignorePerms = false;
+  #   };
+  # };
 
   systemd.tmpfiles.rules = [
     "d /home/phonkd/browser-profiles 0755 phonkd users -"

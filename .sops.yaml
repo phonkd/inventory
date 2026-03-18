@@ -1,0 +1,20 @@
+keys:
+  - &primary age1jsnygd7gl62hzt06khdqkkjwa66v3snttmkep4wa5kl33luelfksdzytc6
+creation_rules:
+  - path_regex: modules/global-secrets/authelia-secret\.yaml$
+    key_groups:
+      - age:
+          - *primary
+
+  - path_regex: modules/global-secrets/secret\.yaml$
+    key_groups:
+      - age:
+          - *primary
+  - path_regex: modules/global-secrets/secret\.txt$
+    key_groups:
+      - age:
+          - *primary
+  - path_regex: modules/home/secret\.yaml$
+    key_groups:
+      - age:
+          - *primary
