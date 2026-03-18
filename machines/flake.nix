@@ -105,46 +105,46 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.sharedModules = [ sops-nix.homeManagerModules.sops ];
-              home-manager.users.phonkd = import ./blac/home.nix;
+            home-manager.users.phonkd = import ./blac/home.nix;
+          }
+          (
+            { config, pkgs, ... }:
+            {
+              environment.systemPackages = [
+                rofi-zed-recent.packages.x86_64-linux.default
+              ];
             }
-            (
-              { config, pkgs, ... }:
-              {
-                environment.systemPackages = [
-                  rofi-zed-recent.packages.x86_64-linux.default
-                ];
-              }
-            )
-            (
-              { config, pkgs, ... }:
-              {
-                nixpkgs.overlays = [ overlay-unstable ];
-              }
-            )
-            #            lanzaboote.nixosModules.lanzaboote
-            #            (
-            #              { pkgs, lib, ... }:
-            #              {
-            #                environment.systemPackages = [
-            #                  # For debugging and troubleshooting Secure Boot.
-            #                  pkgs.sbctl
-            #                ];
-            #
-            #                # Lanzaboote currently replaces the systemd-boot module.
-            #                # This setting is usually set to true in configuration.nix
-            #                # generated at installation time. So we force it to false
-            #                # for now.
-            #                boot.loader.systemd-boot.enable = lib.mkForce false;
-            #
-            #                boot.lanzaboote = {
-            #                  enable = true;
-            #                  pkiBundle = "/var/lib/sbctl";
-            #                };
-            #              }
-            #            )
-          ];
-        };
-        g14 = nixpkgs-unstable.lib.nixosSystem {
+          )
+          (
+            { config, pkgs, ... }:
+            {
+              nixpkgs.overlays = [ overlay-unstable ];
+            }
+          )
+          #            lanzaboote.nixosModules.lanzaboote
+          #            (
+          #              { pkgs, lib, ... }:
+          #              {
+          #                environment.systemPackages = [
+          #                  # For debugging and troubleshooting Secure Boot.
+          #                  pkgs.sbctl
+          #                ];
+          #
+          #                # Lanzaboote currently replaces the systemd-boot module.
+          #                # This setting is usually set to true in configuration.nix
+          #                # generated at installation time. So we force it to false
+          #                # for now.
+          #                boot.loader.systemd-boot.enable = lib.mkForce false;
+          #
+          #                boot.lanzaboote = {
+          #                  enable = true;
+          #                  pkiBundle = "/var/lib/sbctl";
+          #                };
+          #              }
+          #            )
+        ];
+      };
+      g14 = nixpkgs-unstable.lib.nixosSystem {
           inherit system;
           modules = [
             ./g14/configuration.nix
@@ -156,6 +156,7 @@
               home-manager.useUserPackages = true;
               home-manager.backupFileExtension = "bak";
               home-manager.users.phonkd = import ./g14/home.nix;
+              home-manager.sharedModules = [ sops-nix.homeManagerModules.sops ];
             }
             (
               { config, pkgs, ... }:
