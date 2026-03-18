@@ -174,9 +174,6 @@
   #   };
   # };
 
-  systemd.tmpfiles.rules = [
-    "d /home/phonkd/browser-profiles 0755 phonkd users -"
-  ];
 
   system.activationScripts.browserProfilesStignore = {
     text = ''

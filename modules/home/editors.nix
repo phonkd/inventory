@@ -7,6 +7,8 @@
     yaml-language-server
     claude-code
     sox
+    ripgrep
+    fd
   ];
   programs.neovim = {
     enable = true;
