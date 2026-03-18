@@ -39,6 +39,8 @@
         '';
       }
       plenary-nvim # telescope dependency
+      vim-nix
+      vim-smoothie
     ];
   };
 }
