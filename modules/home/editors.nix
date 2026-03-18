@@ -16,6 +16,8 @@
     extraPackages = with pkgs; [
       ripgrep
       fd
+      nil
+      nixd
     ];
     defaultEditor = true;
     plugins = with pkgs.vimPlugins; [
@@ -42,7 +44,55 @@
       }
       plenary-nvim # telescope dependency
       vim-nix
-      vim-smoothie
+      luasnip
+      cmp_luasnip
+      cmp-nvim-lsp
+      {
+        plugin = nvim-cmp;
+        type = "lua";
+        config = ''
+          local cmp = require('cmp')
+          cmp.setup({
+            snippet = {
+              expand = function(args)
+                require('luasnip').lsp_expand(args.body)
+              end,
+            },
+            mapping = cmp.mapping.preset.insert({
+              ['<C-Space>'] = cmp.mapping.complete(),
+              ['<C-e>'] = cmp.mapping.abort(),
+              ['<CR>'] = cmp.mapping.confirm({ select = true }),
+              ['<Tab>'] = cmp.mapping.select_next_item(),
+              ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+            }),
+            sources = cmp.config.sources({
+              { name = 'nvim_lsp' },
+              { name = 'luasnip' },
+            }),
+          })
+        '';
+      }
+      {
+        plugin = nvim-lspconfig;
+        type = "lua";
+        config = ''
+          local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+          vim.lsp.config('nixd', {
+            capabilities = capabilities,
+            cmd = { 'nixd' },
+            filetypes = { 'nix' },
+          })
+          vim.lsp.enable('nixd')
+        '';
+      }
+      {
+        plugin = neoscroll-nvim;
+        type = "lua";
+        config = ''
+          require('neoscroll').setup()
+        '';
+      }
     ];
   };
 }

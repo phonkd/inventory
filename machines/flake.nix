@@ -43,7 +43,7 @@
       system = "x86_64-linux";
       overlay-unstable = final: prev: {
         unstable = import nixpkgs-unstable {
-          inherit system;
+          system = prev.stdenv.hostPlatform.system;
           config.allowUnfree = true;
         };
       };
@@ -82,6 +82,12 @@
           modules = [
             ./mac/configuration.nix
             home-manager.darwinModules.home-manager
+            (
+              { config, pkgs, ... }:
+              {
+                nixpkgs.overlays = [ overlay-unstable ];
+              }
+            )
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;

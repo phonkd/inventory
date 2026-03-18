@@ -11,6 +11,14 @@
       keybind = [ "super+enter=new_split:auto" ];
     };
   };
+  programs.kitty = {
+    enable = true;
+    package = pkgs.unstable.kitty;
+    settings = {
+      pixel_scroll = "yes";
+#      momentum_scroll = 0.96;
+    };
+  };
   programs.zsh = {
     enable = true;
 
