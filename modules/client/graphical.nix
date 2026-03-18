@@ -175,27 +175,6 @@
   # };
 
 
-  system.activationScripts.browserProfilesStignore = {
-    text = ''
-            stignore="/home/phonkd/browser-profiles/.stignore"
-            if [ ! -f "$stignore" ]; then
-              cat > "$stignore" <<'EOF'
-      cache2/
-      startupCache/
-      crashes/
-      minidumps/
-      storage/temporary/
-      datareporting/
-      *.sqlite-wal
-      *.sqlite-shm
-      *.sqlite-journal
-      lock
-      EOF
-              chown phonkd:users "$stignore"
-            fi
-    '';
-    deps = [ ];
-  };
   security.polkit.enable = true;
   virtualisation.podman.enable = true;
   #virtualisation.docker.enable = true;
