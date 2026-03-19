@@ -30,6 +30,11 @@
         cat "$1" | pbcopy
       '';
     };
+    enableCompletion = true;
+    completionInit = ''
+      autoload -U compinit && compinit
+      zstyle ':completion:*' menu select
+    '';
     autosuggestion.enable = true;
     history.size = 1000000;
   };
@@ -65,5 +70,9 @@
   programs.atuin = {
     enable = true;
     enableZshIntegration = true;
+    flags = [
+      "--disable-up-arrow"
+      "--disable-ctrl-r"
+    ];
   };
 }
