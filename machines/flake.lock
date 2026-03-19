@@ -155,6 +155,24 @@
         "type": "github"
       }
     },
+    "kubierend": {
+      "inputs": {
+        "microvm": "microvm",
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1773879121,
+        "narHash": "sha256-YPNxF/QvBJf/Wgpx4BxmuaLCIoE5EZRWLAO+ru3Bpm8=",
+        "path": "/home/phonkd/git/kubierend",
+        "type": "path"
+      },
+      "original": {
+        "path": "/home/phonkd/git/kubierend",
+        "type": "path"
+      }
+    },
     "lanzaboote": {
       "inputs": {
         "crane": "crane",
@@ -178,6 +196,28 @@
         "owner": "nix-community",
         "ref": "v0.4.3",
         "repo": "lanzaboote",
+        "type": "github"
+      }
+    },
+    "microvm": {
+      "inputs": {
+        "nixpkgs": [
+          "kubierend",
+          "nixpkgs"
+        ],
+        "spectrum": "spectrum"
+      },
+      "locked": {
+        "lastModified": 1773747746,
+        "narHash": "sha256-1kOsh67S1UtfAI9+7npz1KLZWDN7lRzXMFsSg7+i7GA=",
+        "owner": "astro",
+        "repo": "microvm.nix",
+        "rev": "7a50c6e60ed1f3f931759ddf7002a2886bdcedd9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "astro",
+        "repo": "microvm.nix",
         "type": "github"
       }
     },
@@ -335,6 +375,7 @@
       "inputs": {
         "ambxst": "ambxst",
         "home-manager": "home-manager",
+        "kubierend": "kubierend",
         "lanzaboote": "lanzaboote",
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs",
@@ -380,6 +421,22 @@
         "owner": "Mic92",
         "repo": "sops-nix",
         "type": "github"
+      }
+    },
+    "spectrum": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1772189877,
+        "narHash": "sha256-i1p90Rgssb//aNiTDFq46ZG/fk3LmyRLChtp/9lddyA=",
+        "ref": "refs/heads/main",
+        "rev": "fe39e122d898f66e89ffa17d4f4209989ccb5358",
+        "revCount": 1255,
+        "type": "git",
+        "url": "https://spectrum-os.org/git/spectrum"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://spectrum-os.org/git/spectrum"
       }
     },
     "systems": {

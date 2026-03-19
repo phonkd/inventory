@@ -24,6 +24,10 @@
       url = "github:nix-darwin/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+    kubierend = {
+      url = "path:/home/phonkd/git/kubierend";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs =
@@ -37,6 +41,7 @@
       lanzaboote,
       ambxst,
       nix-darwin,
+      kubierend,
       ...
     }:
     let
@@ -54,27 +59,37 @@
       # Path to the local work-setup repo — only loaded on machines that opt in.
       # Requires `--impure` when rebuilding (e.g. darwin-rebuild switch --flake .# --impure)
       work-setup-path =
-        if builtins.pathExists /Users/phonkd/git/bedag-setup
-        then /Users/phonkd/git/bedag-setup
-        else if builtins.pathExists /home/phonkd/git/bedag-setup
-        then /home/phonkd/git/bedag-setup
-        else null;
+        if builtins.pathExists /Users/phonkd/git/bedag-setup then
+          /Users/phonkd/git/bedag-setup
+        else if builtins.pathExists /home/phonkd/git/bedag-setup then
+          /home/phonkd/git/bedag-setup
+        else
+          null;
       hasWorkSetup = work-setup-path != null;
       # System-level modules (options + nixos-specific config)
       workSetupSystemModules =
-        if hasWorkSetup then [
-          "${work-setup-path}/options.nix"
-          "${work-setup-path}/nixos/nixos-config.nix"
-        ] else [];
+        if hasWorkSetup then
+          [
+            "${work-setup-path}/options.nix"
+            "${work-setup-path}/nixos/nixos-config.nix"
+          ]
+        else
+          [ ];
       # Home-manager modules (tools, gitconfig, hm-level options)
       workSetupHomeModules =
-        if hasWorkSetup then [
-          "${work-setup-path}/home-manager/home-manager.nix"
-        ] else [];
+        if hasWorkSetup then
+          [
+            "${work-setup-path}/home-manager/home-manager.nix"
+          ]
+        else
+          [ ];
       workSetupDarwinModules =
-        if hasWorkSetup then [
-          "${work-setup-path}/darwin/nix-darwin-config.nix"
-        ] else [];
+        if hasWorkSetup then
+          [
+            "${work-setup-path}/darwin/nix-darwin-config.nix"
+          ]
+        else
+          [ ];
     in
     {
       darwinConfigurations = {
@@ -95,68 +110,70 @@
                 imports = [ ./mac/home.nix ] ++ workSetupHomeModules;
               };
             }
-          ] ++ workSetupDarwinModules;
+          ]
+          ++ workSetupDarwinModules;
         };
       };
-
 
       nixosConfigurations = {
         blac = nixpkgs-unstable.lib.nixosSystem {
           inherit system;
           modules = [
             ./blac/configuration.nix
+            kubierend.nixosModules.host
             sops-nix.nixosModules.sops
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.sharedModules = [ sops-nix.homeManagerModules.sops ];
-            home-manager.users.phonkd = import ./blac/home.nix;
-          }
-          (
-            { config, pkgs, ... }:
-            {
-              environment.systemPackages = [
-                rofi-zed-recent.packages.x86_64-linux.default
-              ];
+              home-manager.users.phonkd = import ./blac/home.nix;
             }
-          )
-          (
-            { config, pkgs, ... }:
-            {
-              nixpkgs.overlays = [ overlay-unstable ];
-            }
-          )
-          #            lanzaboote.nixosModules.lanzaboote
-          #            (
-          #              { pkgs, lib, ... }:
-          #              {
-          #                environment.systemPackages = [
-          #                  # For debugging and troubleshooting Secure Boot.
-          #                  pkgs.sbctl
-          #                ];
-          #
-          #                # Lanzaboote currently replaces the systemd-boot module.
-          #                # This setting is usually set to true in configuration.nix
-          #                # generated at installation time. So we force it to false
-          #                # for now.
-          #                boot.loader.systemd-boot.enable = lib.mkForce false;
-          #
-          #                boot.lanzaboote = {
-          #                  enable = true;
-          #                  pkiBundle = "/var/lib/sbctl";
-          #                };
-          #              }
-          #            )
-        ];
-      };
-      g14 = nixpkgs-unstable.lib.nixosSystem {
+            (
+              { config, pkgs, ... }:
+              {
+                environment.systemPackages = [
+                  rofi-zed-recent.packages.x86_64-linux.default
+                ];
+              }
+            )
+            (
+              { config, pkgs, ... }:
+              {
+                nixpkgs.overlays = [ overlay-unstable ];
+              }
+            )
+            #            lanzaboote.nixosModules.lanzaboote
+            #            (
+            #              { pkgs, lib, ... }:
+            #              {
+            #                environment.systemPackages = [
+            #                  # For debugging and troubleshooting Secure Boot.
+            #                  pkgs.sbctl
+            #                ];
+            #
+            #                # Lanzaboote currently replaces the systemd-boot module.
+            #                # This setting is usually set to true in configuration.nix
+            #                # generated at installation time. So we force it to false
+            #                # for now.
+            #                boot.loader.systemd-boot.enable = lib.mkForce false;
+            #
+            #                boot.lanzaboote = {
+            #                  enable = true;
+            #                  pkiBundle = "/var/lib/sbctl";
+            #                };
+            #              }
+            #            )
+          ];
+        };
+        g14 = nixpkgs-unstable.lib.nixosSystem {
           inherit system;
           modules = [
             ./g14/configuration.nix
             sops-nix.nixosModules.sops
             ambxst.nixosModules.default
             home-manager.nixosModules.home-manager
+            kubierend.nixosModules.host
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
