@@ -31,9 +31,7 @@
       '';
     };
     autosuggestion.enable = true;
-  };
-  programs.fish = {
-    enable = true;
+    history.size = 1000000;
   };
   programs.starship = {
     enable = true;
@@ -63,5 +61,9 @@
     enable = true;
     enableZshIntegration = true;
     enableFishIntegration = true;
+  };
+  programs.atuin = {
+    enable = true;
+    enableZshIntegration = true;
   };
 }
