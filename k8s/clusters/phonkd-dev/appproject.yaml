@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: phonkd-dev
+  namespace: argocd
+spec:
+  sourceNamespaces:
+    - phonkd-dev
+  sourceRepos:
+    - https://github.com/phonkd/inventory
+  destinations:
+    - namespace: phonkd-dev
+      server: https://192.168.1.226:6443
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
