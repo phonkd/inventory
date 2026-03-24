@@ -122,7 +122,7 @@ spec:
           sizeGb: 100
       format: qcow2
       full: true
-      memoryMiB: 16384
+      memoryMiB: 4096
       network:
         default:
           bridge: vmbr0
@@ -138,7 +138,7 @@ metadata:
   name: workers
 spec:
   clusterName: cluster
-  replicas: 5
+  replicas: 4
   selector:
     matchLabels:
       cluster.x-k8s.io/cluster-name: cluster
@@ -181,12 +181,12 @@ spec:
           sizeGb: 80
       format: qcow2
       full: true
-      memoryMiB: 16384
+      memoryMiB: 4096
       network:
         default:
           bridge: vmbr0
           model: virtio
-      numCores: 4
+      numCores: 2
       numSockets: 1
       sourceNode: oldblac
       templateID: 1000
