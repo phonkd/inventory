@@ -3,8 +3,7 @@ kind: Kustomization
 
 resources:
   - namespace.yaml
-  - appproject.yaml
-  - ../../caaph-deploy
+  - ../../apps/caaph-deploy
   - ../template-cluster.yaml
   - ../../../phonkd-dev/app.yaml
 
