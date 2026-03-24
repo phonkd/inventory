@@ -17,6 +17,7 @@ resource "proxmox_virtual_environment_vm" "root-vm" {
 
   memory {
     dedicated = 5120
+    shared    = 1
   }
 
   cpu {
@@ -61,6 +62,7 @@ resource "proxmox_virtual_environment_vm" "core-vm" {
 
   memory {
     dedicated = 8192
+    shared    = 0
   }
 
   cpu {
@@ -133,6 +135,7 @@ resource "proxmox_virtual_environment_vm" "spot-vm" {
 
   memory {
     dedicated = 2048
+    shared    = 1
   }
 
   cpu {
@@ -204,6 +207,7 @@ resource "proxmox_virtual_environment_vm" "talos-template" {
 
   memory {
     dedicated = 2048
+    shared    = 1
   }
 
   cpu {

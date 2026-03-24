@@ -28,6 +28,13 @@
       url = "path:/home/phonkd/git/kubierend";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+    microvm = {
+      url = "github:microvm-nix/microvm.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    dev = {
+      url = "git+file:///Users/phonkd/git/dev";
+    }; 
   };
 
   outputs =
@@ -42,6 +49,8 @@
       ambxst,
       nix-darwin,
       kubierend,
+      microvm,
+      dev,
       ...
     }:
     let
@@ -96,11 +105,15 @@
         "Eliss-MacBook-Pro" = nix-darwin.lib.darwinSystem {
           modules = [
             ./mac/configuration.nix
+            dev.darwinModules.my-microvm
             home-manager.darwinModules.home-manager
             (
               { config, pkgs, ... }:
               {
                 nixpkgs.overlays = [ overlay-unstable ];
+                environment.systemPackages = [
+                  microvm.packages.aarch64-darwin.microvm
+                ];
               }
             )
             {
