@@ -5,8 +5,8 @@ metadata:
   namespace: phonkd-dev
 spec:
   destination:
-    namespace: default
-    server: https://192.168.1.226:6443
+    namespace: "*"
+    server: "*"
   source:
     path: k8s/clusters/phonkd-dev
     repoURL: https://github.com/phonkd/inventory
