@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: phonkd-dev
+  name: project
   namespace: argocd
 spec:
   sourceNamespaces:
