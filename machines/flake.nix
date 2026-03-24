@@ -32,9 +32,9 @@
       url = "github:microvm-nix/microvm.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    dev = {
-      url = "git+file:///Users/phonkd/git/dev";
-    }; 
+    # dev = {
+    #   url = "git+file:///Users/phonkd/git/dev";
+    # };
   };
 
   outputs =
@@ -50,7 +50,7 @@
       nix-darwin,
       kubierend,
       microvm,
-      dev,
+      #dev,
       ...
     }:
     let
@@ -105,7 +105,7 @@
         "Eliss-MacBook-Pro" = nix-darwin.lib.darwinSystem {
           modules = [
             ./mac/configuration.nix
-            dev.darwinModules.my-microvm
+            #dev.darwinModules.my-microvm
             home-manager.darwinModules.home-manager
             (
               { config, pkgs, ... }:
