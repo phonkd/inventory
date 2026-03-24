@@ -2,17 +2,17 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: phonkd-dev
-  namespace: argocd
+  namespace: phonkd-dev
 spec:
   destination:
-    namespace: phonkd-dev-project
+    namespace: default
     server: https://192.168.1.226:6443
   source:
     path: k8s/clusters/phonkd-dev
     repoURL: https://github.com/phonkd/inventory
     targetRevision: HEAD
   sources: []
-  project: default
+  project: phonkd-dev-project
   syncPolicy:
     automated:
       prune: true
