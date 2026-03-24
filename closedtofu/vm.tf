@@ -157,6 +157,13 @@ resource "proxmox_virtual_environment_vm" "spot-vm" {
   #   xvga   = false
   #   rombar = true
   # }
+  hostpci {
+    device = "hostpci0"
+    id     = "0000:00:1f.3" # TODO: Replace with your Audio Controller PCI ID (e.g. 00:1f.3)
+    pcie   = false
+    xvga   = false
+    rombar = true
+  }
 
   disk {
     datastore_id = "nvme1"
