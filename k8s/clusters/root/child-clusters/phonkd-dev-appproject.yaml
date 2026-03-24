@@ -9,8 +9,8 @@ spec:
   sourceRepos:
     - https://github.com/phonkd/inventory
   destinations:
-    - namespace: phonkd-dev
-      server: https://192.168.1.226:6443
+    - namespace: "*"
+      server: "*"
   clusterResourceWhitelist:
     - group: "*"
       kind: "*"
