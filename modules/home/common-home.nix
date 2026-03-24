@@ -21,6 +21,7 @@
     nicotine-plus
     localsend
   ];
+
   programs.git = {
     enable = true;
     settings = {
@@ -38,5 +39,13 @@
         };
       }
     ];
+  };
+  programs.ssh = {
+    enable = true;
+    matchBlocks."homelab" = {
+      host = "192.168.1.*";
+      identityFile = "~/.ssh/id_rsa";
+      identitiesOnly = true;
+    };
   };
 }

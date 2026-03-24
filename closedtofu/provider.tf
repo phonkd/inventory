@@ -16,7 +16,8 @@ data "sops_file" "secrets" {
 }
 
 provider "proxmox" {
-  endpoint  = data.sops_file.secrets.data["proxmox_endpoint"]
-  api_token = data.sops_file.secrets.data["proxmox_api_token"]
-  insecure  = true
+  endpoint = data.sops_file.secrets.data["proxmox_endpoint"]
+  username = "root@pam"
+  password = data.sops_file.secrets.data["proxmox_password"]
+  insecure = true
 }
