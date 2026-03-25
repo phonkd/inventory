@@ -7,5 +7,11 @@ helmCharts:
     releaseName: proxmox-csi-plugin
     namespace: csi-proxmox
     valuesFile: ./values.yaml
-resources:
-  - namespace.yaml
+patches:
+  - target:
+      kind: Namespace
+      name: csi-proxmox
+    patch: |
+      - op: add
+        path: /metadata/labels/pod-security.kubernetes.io~1enforce
+        value: privileged
