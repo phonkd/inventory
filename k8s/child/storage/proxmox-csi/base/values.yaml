@@ -1,6 +1,6 @@
 existingConfigSecret: proxmox-csi-plugin
 existingConfigSecretKey: config.yaml
-
+createNamespace: true
 
 node:
   nodeSelector:
