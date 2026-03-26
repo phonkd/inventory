@@ -7,11 +7,3 @@ helmCharts:
     releaseName: proxmox-csi-plugin
     namespace: csi-proxmox
     valuesFile: ./values.yaml
-patches:
-  - target:
-      kind: CSIDriver
-      name: csi.proxmox.sinextra.dev
-    patch: |
-      - op: replace
-        path: /spec/storageCapacity
-        value: false
