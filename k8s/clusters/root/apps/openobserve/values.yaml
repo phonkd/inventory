@@ -1,0 +1,23 @@
+ingester:
+  persistence:
+    storageClass: "proxmox-data"
+
+querier:
+  persistence:
+    storageClass: "proxmox-data"
+
+alertmanager:
+  persistence:
+    storageClass: "proxmox-data"
+
+nats:
+  config:
+    jetstream:
+      fileStore:
+        pvc:
+          storageClassName: "proxmox-data"
+
+postgres:
+  spec:
+    storage:
+      storageClass: "proxmox-data"
