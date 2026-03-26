@@ -1,11 +1,6 @@
 existingConfigSecret: proxmox-csi-plugin
 existingConfigSecretKey: config.yaml
 createNamespace: true
-config:
-  features:
-    provider: proxmox
-options:
-  enableCapacity: false
 node:
   nodeSelector:
     node.cloudprovider.kubernetes.io/platform: nocloud

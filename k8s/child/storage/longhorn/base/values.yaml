@@ -1,0 +1,17 @@
+defaultSettings:
+  defaultDataPath: /var/lib/longhorn
+  defaultReplicaCount: 2
+  nodeDownPodDeletionPolicy: delete-both-statefulset-and-deployment-pod
+
+persistence:
+  defaultClassReplicaCount: 2
+
+longhornManager:
+  tolerations:
+    - key: node-role.kubernetes.io/control-plane
+      effect: NoSchedule
+
+longhornDriver:
+  tolerations:
+    - key: node-role.kubernetes.io/control-plane
+      effect: NoSchedule

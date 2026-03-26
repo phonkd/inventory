@@ -24,10 +24,10 @@
       url = "github:nix-darwin/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-    kubierend = {
-      url = "path:/home/phonkd/git/kubierend";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
+    #kubierend = {
+     # url = "path:/home/phonkd/git/kubierend";
+      #inputs.nixpkgs.follows = "nixpkgs-unstable";
+    #};
     microvm = {
       url = "github:microvm-nix/microvm.nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -48,7 +48,7 @@
       lanzaboote,
       ambxst,
       nix-darwin,
-      kubierend,
+      #kubierend,
       microvm,
       #dev,
       ...
@@ -133,7 +133,7 @@
           inherit system;
           modules = [
             ./blac/configuration.nix
-            kubierend.nixosModules.host
+            #kubierend.nixosModules.host
             sops-nix.nixosModules.sops
             home-manager.nixosModules.home-manager
             {
@@ -186,7 +186,7 @@
             sops-nix.nixosModules.sops
             ambxst.nixosModules.default
             home-manager.nixosModules.home-manager
-            kubierend.nixosModules.host
+            #kubierend.nixosModules.host
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
