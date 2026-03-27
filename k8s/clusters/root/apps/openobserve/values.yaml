@@ -17,7 +17,15 @@ nats:
         pvc:
           storageClassName: "proxmox-data"
 
+config:
+  ZO_S3_SERVER_URL: "https://api.s3.w.phonkd.net"
+  ZO_S3_BUCKET_NAME: "openobserve"
+  ZO_S3_FEATURE_FORCE_HOSTED_STYLE: "false"
+
 postgres:
   spec:
     storage:
       storageClass: "proxmox-data"
+externalSecret:
+  enabled: true
+  name: "openobserve-s3-creds"
