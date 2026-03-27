@@ -4,3 +4,6 @@ kubeClusterName: phonkd-dev
 joinTokenSecret:
   create: false
   name: teleport-kube-agent-join-token
+roles: kube,app,discovery
+labels:
+    teleport.internal/resource-id: 32695d97-43d9-4af5-ad0d-94067399ce9a
