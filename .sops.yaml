@@ -18,3 +18,8 @@ creation_rules:
     key_groups:
       - age:
           - *primary
+  - path_regex: k8s/child/teleport-agent/envs/phonkd-dev/secret\.enc\.yaml$
+    key_groups:
+      - age:
+          - *primary
+    encrypted_regex: ^(data|stringData)$
