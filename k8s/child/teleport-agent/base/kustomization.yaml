@@ -3,7 +3,7 @@ kind: Kustomization
 helmCharts:
   - name: teleport-kube-agent
     repo: https://charts.releases.teleport.dev
-    version: 16.4.12
+    version: 16.5.18
     releaseName: teleport-kube-agent
     namespace: teleport
     valuesFile: ./values.yaml
