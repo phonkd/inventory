@@ -7,3 +7,4 @@ helmCharts:
     releaseName: teleport-kube-agent
     namespace: teleport
     valuesFile: ./values.yaml
+    createNamespace: true
