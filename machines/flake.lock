@@ -9,11 +9,11 @@
         "quickshell": "quickshell"
       },
       "locked": {
-        "lastModified": 1774497817,
-        "narHash": "sha256-TciOsY84k9fdR5BB1bJv9b/QZdydcDI5+WDAJ3HEBUU=",
+        "lastModified": 1774551087,
+        "narHash": "sha256-cEV6vJdrbm3l/aATnldwxOQBInWVr5ZhQfX17Ke1buY=",
         "ref": "refs/heads/main",
-        "rev": "03d5d423730eac962f20acda468d519c3ebf6348",
-        "revCount": 2197,
+        "rev": "1d8b846ce7fc34d687204b36f7b197a0d550019e",
+        "revCount": 2201,
         "type": "git",
         "url": "https://github.com/Axenide/Ambxst/"
       },
@@ -142,11 +142,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1774539458,
-        "narHash": "sha256-H9GIOqdMfQZ6lFetsQhO9TCq53hYzpTHDWOt3PRh9V0=",
+        "lastModified": 1774584114,
+        "narHash": "sha256-uWR9fC+4NykFJVn4GN4Ini9LX+w8Llj7BnWKKp0N6bw=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "e2e5f512b33ed19a7a3271d0b73ed5eefcc0be5f",
+        "rev": "4b1be5c38be350ee9452a4847945ce71d950dc31",
         "type": "github"
       },
       "original": {
