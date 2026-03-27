@@ -21,6 +21,7 @@ config:
   ZO_S3_SERVER_URL: "https://api.s3.w.phonkd.net"
   ZO_S3_BUCKET_NAME: "openobserve"
   ZO_S3_FEATURE_FORCE_HOSTED_STYLE: "false"
+  ZO_S3_REGION_NAME: "us-east-1"
 
 postgres:
   spec:
