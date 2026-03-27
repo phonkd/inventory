@@ -2,3 +2,5 @@ proxyAddr: teleport.phonkd.net:443
 roles: kube
 kubeClusterName: phonkd-dev
 secretName: teleport-kube-agent-join-token
+joinTokenSecret:
+  create: false
