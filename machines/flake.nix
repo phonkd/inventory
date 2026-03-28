@@ -55,6 +55,7 @@
     }:
     let
       system = "x86_64-linux";
+      aarch64-system = "aarch64-linux";
       overlay-unstable = final: prev: {
         unstable = import nixpkgs-unstable {
           system = prev.stdenv.hostPlatform.system;
@@ -277,6 +278,43 @@
             { label.labels = [ "vm" ]; }
           ];
         };
+
+        "microvm-hypr" = nixpkgs-unstable.lib.nixosSystem {
+          system = aarch64-system;
+          modules = [
+            microvm.nixosModules.microvm
+            ./microvm-hypr/configuration.nix
+            sops-nix.nixosModules.sops
+            home-manager.nixosModules.home-manager
+            {
+              # Build runner tools (QEMU, etc.) for macOS, not linux
+              microvm.vmHostPackages = nixpkgs-unstable.legacyPackages.aarch64-darwin;
+            }
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.sharedModules = [ sops-nix.homeManagerModules.sops ];
+              home-manager.users.phonkd = import ./microvm-hypr/home.nix;
+            }
+            (
+              { config, pkgs, ... }:
+              {
+                nixpkgs.overlays = [ overlay-unstable ];
+              }
+            )
+          ];
+        };
       };
+
+      # Run with: nix run .#microvm-hypr
+      # Wrap the runner to inject SSH port forwarding into the microvm netdev
+      packages.aarch64-darwin.microvm-hypr =
+        let
+          runner = self.nixosConfigurations."microvm-hypr".config.microvm.declaredRunner;
+          darwinPkgs = nixpkgs-unstable.legacyPackages.aarch64-darwin;
+        in
+        darwinPkgs.writeShellScriptBin "microvm-qemu-microvm-hypr" ''
+          exec ${darwinPkgs.bash}/bin/bash <(${darwinPkgs.gnused}/bin/sed 's|user,id=usernet|user,id=usernet,hostfwd=tcp::2222-:22|' ${runner}/bin/microvm-run) "$@"
+        '';
     };
 }
