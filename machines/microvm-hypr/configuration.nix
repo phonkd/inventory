@@ -7,11 +7,8 @@
 
 {
   microvm = {
-    hypervisor = "qemu";
-    graphics = {
-      enable = true;
-      backend = "cocoa";
-    };
+    hypervisor = "vfkit";
+    graphics.enable = true;
     mem = 4096;
     vcpu = 4;
 
@@ -30,7 +27,7 @@
 
     shares = [
       {
-        proto = "9p";
+        proto = "virtiofs";
         tag = "ro-store";
         source = "/nix/store";
         mountPoint = "/nix/.ro-store";
@@ -45,10 +42,8 @@
       }
     ];
 
-    # Writable overlay on the shared nix store so nix-daemon + home-manager work
-    writableStoreOverlay = "/nix/.rw-store";
-
-    qemu.extraArgs = [];
+    # vfkit doesn't support writableStoreOverlay
+    # writableStoreOverlay = "/nix/.rw-store";
   };
 
   networking.hostName = "microvm-hypr";
@@ -81,14 +76,17 @@
     };
   };
 
-  # Display manager
-  services.greetd = {
-    enable = true;
-    settings = {
-      default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --remember --cmd Hyprland";
-        user = "greeter";
-      };
+  # No display manager - apps forwarded via waypipe + CocoaWay
+  services.greetd.enable = false;
+
+  # Bridge vsock port 22 to local SSH so host can connect via vsock
+  systemd.services.vsock-ssh = {
+    description = "vsock to SSH bridge";
+    after = [ "sshd.service" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.socat}/bin/socat VSOCK-LISTEN:22,reuseaddr,fork TCP:127.0.0.1:22";
+      Restart = "always";
     };
   };
 
@@ -119,6 +117,8 @@
 
   environment.systemPackages = with pkgs; [
     waypipe
+    foot
+    socat
     vim
     git
     killall

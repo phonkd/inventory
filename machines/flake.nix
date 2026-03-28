@@ -307,14 +307,17 @@
       };
 
       # Run with: nix run .#microvm-hypr
-      # Wrap the runner to inject SSH port forwarding into the microvm netdev
       packages.aarch64-darwin.microvm-hypr =
         let
           runner = self.nixosConfigurations."microvm-hypr".config.microvm.declaredRunner;
           darwinPkgs = nixpkgs-unstable.legacyPackages.aarch64-darwin;
         in
-        darwinPkgs.writeShellScriptBin "microvm-qemu-microvm-hypr" ''
-          exec ${darwinPkgs.bash}/bin/bash <(${darwinPkgs.gnused}/bin/sed 's|user,id=usernet|user,id=usernet,hostfwd=tcp::2222-:22|' ${runner}/bin/microvm-run) "$@"
+        darwinPkgs.writeShellScriptBin "microvm-vfkit-microvm-hypr" ''
+          mkdir -p /tmp/microvm-waypipe
+          exec ${darwinPkgs.bash}/bin/bash <(${darwinPkgs.gnused}/bin/sed \
+            -e 's|--device virtio-serial,stdio ||' \
+            -e 's|--restful-uri|--device virtio-vsock,port=22,socketURL=/tmp/microvm-waypipe/ssh.sock,connect --restful-uri|' \
+            ${runner}/bin/microvm-run) "$@"
         '';
     };
 }

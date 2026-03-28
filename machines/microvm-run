@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+# Launch a Wayland app in the microVM, displayed via CocoaWay
+set -euo pipefail
+
+SOCAT=/nix/store/yw02lvfvm42ncyxzvi70hg33l35xwj5m-socat-1.8.1.1/bin/socat
+SSH_SOCK=/tmp/microvm-waypipe/ssh.sock
+COCOA_WAY_DIR="${TMPDIR}cocoa-way"
+
+if [ $# -eq 0 ]; then
+  echo "Usage: microvm-run <app> [args...]"
+  echo "Example: microvm-run kitty"
+  echo "         microvm-run librewolf"
+  echo "         microvm-run nautilus"
+  exit 1
+fi
+
+if [ ! -d "$COCOA_WAY_DIR" ]; then
+  echo "Error: CocoaWay not running. Start it first with: cocoa-way"
+  exit 1
+fi
+
+if [ ! -S "$SSH_SOCK" ]; then
+  echo "Error: VM not running. Start it first with: nix run .#microvm-hypr"
+  exit 1
+fi
+
+XDG_RUNTIME_DIR="$COCOA_WAY_DIR" \
+WAYLAND_DISPLAY=wayland-1 \
+sshpass -p sml12345 waypipe ssh \
+  -o "ProxyCommand=$SOCAT - UNIX-CONNECT:$SSH_SOCK" \
+  -o StrictHostKeyChecking=no \
+  -o UserKnownHostsFile=/dev/null \
+  phonkd@localhost "$@"
