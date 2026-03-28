@@ -66,7 +66,6 @@
     dnsutils
     bibata-cursors
     nordic
-    discord
     zsh
     fzf
     playerctl
@@ -171,7 +170,6 @@
   #     ignorePerms = false;
   #   };
   # };
-
 
   security.polkit.enable = true;
   virtualisation.podman.enable = true;

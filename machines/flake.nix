@@ -25,8 +25,8 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     #kubierend = {
-     # url = "path:/home/phonkd/git/kubierend";
-      #inputs.nixpkgs.follows = "nixpkgs-unstable";
+    # url = "path:/home/phonkd/git/kubierend";
+    #inputs.nixpkgs.follows = "nixpkgs-unstable";
     #};
     microvm = {
       url = "github:microvm-nix/microvm.nix";
@@ -213,6 +213,20 @@
               }
             )
             ./ext-mail/configuration.nix
+            ./options.nix
+            { label.labels = [ "vm" ]; }
+          ];
+        };
+        ext-omni = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            (
+              { config, pkgs, ... }:
+              {
+                nixpkgs.overlays = [ overlay-unstable ];
+              }
+            )
+            ./ext-omni/configuration.nix
             ./options.nix
             { label.labels = [ "vm" ]; }
           ];

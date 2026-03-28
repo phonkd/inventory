@@ -1,0 +1,7 @@
+keys:
+  - &primary age1y5wxmp5vrzs95ck8fuyzllvrmmqpej46ag48wvlej3d4vtx8gavsv8dec3
+creation_rules:
+  - path_regex: .*
+    key_groups:
+      - age:
+          - *primary
