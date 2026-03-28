@@ -45,6 +45,8 @@
     #"pcie_aspm=off"
     "pci=noaer"
     "btusb.enable_autosuspend=n"
+    "amd_iommu=on"
+    "iommu=nopt"
   ];
 
   users.users.phonkd.extraGroups = [ "dialout" ];

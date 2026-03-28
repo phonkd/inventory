@@ -194,7 +194,10 @@
 
   users.users.phonkd.extraGroups = [ "libvirtd" ];
 
-  virtualisation.libvirtd.enable = true;
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu.swtpm.enable = true;
+  };
 
   virtualisation.spiceUSBRedirection.enable = true;
 }
