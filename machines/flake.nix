@@ -41,6 +41,7 @@
     # };
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    proxmox-nixos.url = "github:SaumonNet/proxmox-nixos";
   };
 
   outputs =
@@ -58,6 +59,7 @@
       microvm,
       omni-nix,
       nix-index-database,
+      proxmox-nixos,
       #dev,
       ...
     }:
@@ -257,6 +259,16 @@
         "001-wamluck" = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
+            proxmox-nixos.nixosModules.proxmox-ve
+            ({ pkgs, lib, ... }: {
+              services.proxmox-ve = {
+                enable = true;
+                ipAddress = "192.168.1.46";
+              };
+              nixpkgs.overlays = [
+                proxmox-nixos.overlays.${system}
+              ];
+            })
             (
               { config, pkgs, ... }:
               {
