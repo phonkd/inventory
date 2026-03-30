@@ -113,6 +113,24 @@
         "type": "github"
       }
     },
+    "flake-utils_2": {
+      "inputs": {
+        "systems": "systems_2"
+      },
+      "locked": {
+        "lastModified": 1731533236,
+        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "gitignore": {
       "inputs": {
         "nixpkgs": [
@@ -286,6 +304,41 @@
         "type": "github"
       }
     },
+    "omni-nix": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ],
+        "omni-src": "omni-src"
+      },
+      "locked": {
+        "lastModified": 1774741635,
+        "narHash": "sha256-axFgCNPYj0YIpoi2ifQqe4DIeWM/3RyAlrpbuHvSebA=",
+        "path": "/home/phonkd/git/omni.nix",
+        "type": "path"
+      },
+      "original": {
+        "path": "/home/phonkd/git/omni.nix",
+        "type": "path"
+      }
+    },
+    "omni-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1774637116,
+        "narHash": "sha256-TgkMgeI4C3Klb5c7UICpSaQK2bIaOydq86f9TLcQMRk=",
+        "owner": "siderolabs",
+        "repo": "omni",
+        "rev": "5edcef1fb2c5859614a6d267dde578851e9541eb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "siderolabs",
+        "repo": "omni",
+        "type": "github"
+      }
+    },
     "pre-commit-hooks-nix": {
       "inputs": {
         "flake-compat": [
@@ -335,7 +388,7 @@
     },
     "rofi-zed-recent": {
       "inputs": {
-        "flake-utils": "flake-utils",
+        "flake-utils": "flake-utils_2",
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
@@ -361,6 +414,7 @@
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
+        "omni-nix": "omni-nix",
         "rofi-zed-recent": "rofi-zed-recent",
         "sops-nix": "sops-nix"
       }
@@ -421,6 +475,21 @@
       }
     },
     "systems": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
+    "systems_2": {
       "locked": {
         "lastModified": 1681028828,
         "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",

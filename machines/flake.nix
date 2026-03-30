@@ -32,6 +32,10 @@
       url = "github:microvm-nix/microvm.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    omni-nix = {
+      url = "path:/home/phonkd/git/omni.nix";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
     # dev = {
     #   url = "git+file:///Users/phonkd/git/dev";
     # };
@@ -50,6 +54,7 @@
       nix-darwin,
       #kubierend,
       microvm,
+      omni-nix,
       #dev,
       ...
     }:
@@ -227,6 +232,8 @@
               }
             )
             ./ext-omni/configuration.nix
+            sops-nix.nixosModules.sops
+            omni-nix.nixosModules.omni
             ./options.nix
             { label.labels = [ "vm" ]; }
           ];
