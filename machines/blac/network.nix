@@ -18,4 +18,5 @@
   # Disable IPv6
   networking.enableIPv6 = false;
   networking.nat.externalInterface = lib.mkForce "enp9s0";
+  networking.extraHosts = "192.168.1.122 paperless.int.phonkd.net";
 }
