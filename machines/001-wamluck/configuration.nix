@@ -13,5 +13,5 @@
     ../../modules/00-global-config.nix
   ];
   boot.loader.grub.enable = true;
-  boot.loader.grub.devices = [ "/dev/sda" ];
+  boot.loader.grub.devices = [ "/dev/sdb" ];
 }
