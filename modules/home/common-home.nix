@@ -58,5 +58,11 @@
         identitiesOnly = true;
       };
     };
+    matchBlocks."*" = {
+      addKeysToAgent = "yes";
+    };
+  };
+  services.ssh-agent = {
+    enable = true;
   };
 }

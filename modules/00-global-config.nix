@@ -40,17 +40,17 @@ in
       "networkmanager"
       "wheel"
     ];
-    password = "sml12345";
+    #password = "sml12345";
   };
   users.mutableUsers = true;
   security.sudo.wheelNeedsPassword = false;
-  programs.git = {
-    enable = lib.mkDefault true;
-    config = {
-      user.name = "Elis";
-      user.email = "enst18.12@gmail.com";
-    };
-  };
+  # programs.git = {
+  #   enable = lib.mkDefault true;
+  #   config = {
+  #     user.name = "Elis";
+  #     user.email = "enst18.12@gmail.com";
+  #   };
+  # };
   programs.zsh = {
     enable = true;
     enableCompletion = false; # Disable NixOS generated compinit to avoid double initialization with Oh My Zsh

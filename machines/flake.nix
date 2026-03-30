@@ -254,7 +254,20 @@
             { label.labels = [ "vm" ]; }
           ];
         };
-
+        "001-wamluck" = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            (
+              { config, pkgs, ... }:
+              {
+                nixpkgs.overlays = [ overlay-unstable ];
+              }
+            )
+            ./001-wamluck/configuration.nix
+            sops-nix.nixosModules.sops
+            ./options.nix
+          ];
+        };
         "200-root" = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
