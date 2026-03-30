@@ -49,7 +49,7 @@
     matchBlocks = {
       "homelab" = {
         host = "192.168.1.*";
-        identityFile = "~/.ssh/id_rsa";
+        identityFile = "~/.ssh/id_ed25519_priv";
         identitiesOnly = true;
       };
       "github" = {
