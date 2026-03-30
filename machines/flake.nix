@@ -39,6 +39,8 @@
     # dev = {
     #   url = "git+file:///Users/phonkd/git/dev";
     # };
+    nix-index-database.url = "github:nix-community/nix-index-database";
+    nix-index-database.inputs.nixpkgs.follows = "nixpkgs-unstable";
   };
 
   outputs =
@@ -55,6 +57,7 @@
       #kubierend,
       microvm,
       omni-nix,
+      nix-index-database,
       #dev,
       ...
     }:
@@ -128,6 +131,9 @@
               home-manager.users.phonkd = {
                 imports = [ ./mac/home.nix ] ++ workSetupHomeModules;
               };
+              home-manager.sharedModules = [
+                nix-index-database.homeModules.default
+              ];
             }
           ]
           ++ workSetupDarwinModules;
@@ -145,9 +151,16 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.sharedModules = [ sops-nix.homeManagerModules.sops ];
-              home-manager.users.phonkd = import ./blac/home.nix;
+              home-manager.sharedModules = [
+                sops-nix.homeManagerModules.sops
+                nix-index-database.homeModules.default
+              ];
+              #home-manager.users.phonkd = import ./blac/home.nix;
+              home-manager.users.phonkd = {
+                imports = [ ./blac/home.nix ] ++ workSetupHomeModules;
+              };
             }
+
             (
               { config, pkgs, ... }:
               {
@@ -198,7 +211,10 @@
               home-manager.useUserPackages = true;
               home-manager.backupFileExtension = "bak";
               home-manager.users.phonkd = import ./g14/home.nix;
-              home-manager.sharedModules = [ sops-nix.homeManagerModules.sops ];
+              home-manager.sharedModules = [
+                sops-nix.homeManagerModules.sops
+                nix-index-database.homeModules.default
+              ];
             }
             (
               { config, pkgs, ... }:

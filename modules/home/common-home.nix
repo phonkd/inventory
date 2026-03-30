@@ -9,12 +9,12 @@
   ];
   home = {
     username = "phonkd";
-    stateVersion = "25.05";
-    enableNixpkgsReleaseCheck = false;
+    stateVersion = "26.05";
+    enableNixpkgsReleaseCheck = true;
   };
-
-  news.display = "silent";
-
+  xdg.enable = true;
+  #news.display = "silent";
+  programs.nix-index.enableZshIntegration = true;
   programs.home-manager.enable = true;
 
   home.packages = with pkgs; [
