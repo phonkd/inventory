@@ -22,6 +22,7 @@
     ../../modules/ddns.nix
     ../../modules/syncthing.nix
     ../../modules/vaultwarden.nix
+    ../../modules/paperless.nix
     ../../modules/dashboard.nix
     ../../modules/orphans.nix
     ./wgnotez.nix
