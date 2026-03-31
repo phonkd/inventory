@@ -33,7 +33,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     omni-nix = {
-      url = "path:/home/phonkd/git/omni.nix";
+      url = "github:phonkd/omni.nix";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     # dev = {
