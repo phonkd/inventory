@@ -23,6 +23,7 @@
     ../../modules/syncthing.nix
     ../../modules/vaultwarden.nix
     ../../modules/paperless.nix
+    ../../modules/memos.nix
     ../../modules/dashboard.nix
     ../../modules/orphans.nix
     ./wgnotez.nix
