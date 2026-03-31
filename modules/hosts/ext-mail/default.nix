@@ -4,7 +4,7 @@ let
   system = "x86_64-linux";
 in
 {
-  flake.nixosConfigurations."000-qcow" = inputs.nixpkgs.lib.nixosSystem {
+  flake.nixosConfigurations.ext-mail = inputs.nixpkgs.lib.nixosSystem {
     inherit system;
     modules = [
       (
@@ -13,9 +13,8 @@ in
           nixpkgs.overlays = [ shared.overlay-unstable ];
         }
       )
-      ../../000-qcow/configuration.nix
-      inputs.sops-nix.nixosModules.sops
-      ../../options.nix
+      ./configuration.nix
+      ../../../options.nix
       { label.labels = [ "vm" ]; }
     ];
   };

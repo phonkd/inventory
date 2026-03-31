@@ -7,7 +7,7 @@ in
   flake.nixosConfigurations.blac = inputs.nixpkgs-unstable.lib.nixosSystem {
     inherit system;
     modules = [
-      ../../blac/configuration.nix
+      ./configuration.nix
       #inputs.kubierend.nixosModules.host
       inputs.sops-nix.nixosModules.sops
       inputs.home-manager.nixosModules.home-manager
@@ -18,9 +18,9 @@ in
           inputs.sops-nix.homeManagerModules.sops
           inputs.nix-index-database.homeModules.default
         ];
-        #home-manager.users.phonkd = import ../../blac/home.nix;
+        #home-manager.users.phonkd = import ./home.nix;
         home-manager.users.phonkd = {
-          imports = [ ../../blac/home.nix ] ++ shared.workSetupHomeModules;
+          imports = [ ./home.nix ] ++ shared.workSetupHomeModules;
         };
       }
 

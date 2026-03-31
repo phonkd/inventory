@@ -13,9 +13,9 @@ in
           nixpkgs.overlays = [ shared.overlay-unstable ];
         }
       )
-      ../../000-qcow/configuration.nix
+      ./configuration.nix
       inputs.sops-nix.nixosModules.sops
-      ../../options.nix
+      ../../../options.nix
       { label.labels = [ "vm" ]; }
     ];
   };

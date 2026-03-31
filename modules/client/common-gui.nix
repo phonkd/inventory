@@ -9,7 +9,7 @@
   imports = [
     ./graphical.nix
     ../00-global-config.nix
-    ../../machines/options.nix
+    ../../options.nix
   ];
 
   sops.age = {

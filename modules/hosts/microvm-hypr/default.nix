@@ -8,7 +8,7 @@ in
     system = aarch64-system;
     modules = [
       inputs.microvm.nixosModules.microvm
-      ../../microvm-hypr/configuration.nix
+      ./configuration.nix
       inputs.sops-nix.nixosModules.sops
       inputs.home-manager.nixosModules.home-manager
       {
@@ -19,7 +19,7 @@ in
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
         home-manager.sharedModules = [ inputs.sops-nix.homeManagerModules.sops ];
-        home-manager.users.phonkd = import ../../microvm-hypr/home.nix;
+        home-manager.users.phonkd = import ./home.nix;
       }
       (
         { config, pkgs, ... }:

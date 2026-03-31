@@ -1,6 +1,6 @@
 { self, inputs, ... }:
 let
-  shared = import ../_lib.nix { inherit inputs; };
+  shared = import ../../modules/_lib.nix { inherit inputs; };
   system = "x86_64-linux";
 in
 {

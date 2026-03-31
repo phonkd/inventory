@@ -1,0 +1,22 @@
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+
+{
+  networking.networkmanager.enable = true;
+  # Use declarative networking with secondary IP
+  #networking.useDHCP = true;
+  networking.hostName = "blac";
+  networking.nameservers = [
+    "192.168.1.201"
+    "1.1.1.1"
+  ];
+
+  # Disable IPv6
+  networking.enableIPv6 = false;
+  networking.nat.externalInterface = lib.mkForce "enp9s0";
+  networking.extraHosts = "192.168.1.122 paperless.int.phonkd.net";
+}

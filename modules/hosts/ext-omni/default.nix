@@ -4,7 +4,7 @@ let
   system = "x86_64-linux";
 in
 {
-  flake.nixosConfigurations."000-qcow" = inputs.nixpkgs.lib.nixosSystem {
+  flake.nixosConfigurations.ext-omni = inputs.nixpkgs.lib.nixosSystem {
     inherit system;
     modules = [
       (
@@ -13,8 +13,9 @@ in
           nixpkgs.overlays = [ shared.overlay-unstable ];
         }
       )
-      ../../000-qcow/configuration.nix
+      ./configuration.nix
       inputs.sops-nix.nixosModules.sops
+      inputs.omni-nix.nixosModules.omni
       ../../options.nix
       { label.labels = [ "vm" ]; }
     ];

@@ -3,9 +3,9 @@ let
   shared = import ../../modules/_lib.nix { inherit inputs; };
 in
 {
-  flake.darwinConfigurations."Eliss-MacBook-Pro" = inputs.nix-darwin.lib.darwinSystem {
+  flake.darwinConfigurations."mac" = inputs.nix-darwin.lib.darwinSystem {
     modules = [
-      ../../mac/configuration.nix
+      ./configuration.nix
       #inputs.dev.darwinModules.my-microvm
       inputs.home-manager.darwinModules.home-manager
       (
@@ -21,7 +21,7 @@ in
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
         home-manager.users.phonkd = {
-          imports = [ ../../mac/home.nix ] ++ shared.workSetupHomeModules;
+          imports = [ ./home.nix ] ++ shared.workSetupHomeModules;
         };
         home-manager.sharedModules = [
           inputs.nix-index-database.homeModules.default
